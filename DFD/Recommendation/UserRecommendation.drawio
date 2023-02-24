@@ -1,48 +1,105 @@
-<mxfile host="app.diagrams.net" modified="2023-02-23T09:43:38.441Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Safari/605.1.15" etag="VbVS1ourHkTLmkpHGbnw" version="20.8.22" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-24T08:08:42.860Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.2 Safari/605.1.15" etag="hkW3AQegN1krkY1-n8mM" version="20.8.23" type="github">
   <diagram name="Page-1" id="NtDFv7lGtUkmornJkalE">
-    <mxGraphModel dx="838" dy="564" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="970" dy="507" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.295;exitY=1.154;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="0ELT1PF-z8wpWwdTeymS-3" target="0ELT1PF-z8wpWwdTeymS-4" edge="1">
+        <mxCell id="IxiErp4WCyrh75tMbToo-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-1" target="IxiErp4WCyrh75tMbToo-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-1" value="User recommendation system" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="314" y="405.5" width="104" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-2" target="IxiErp4WCyrh75tMbToo-1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="165" y="500" as="sourcePoint" />
             <Array as="points">
-              <mxPoint x="355" y="522" />
+              <mxPoint x="536" y="494" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="0ELT1PF-z8wpWwdTeymS-1" target="0ELT1PF-z8wpWwdTeymS-4" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-1" value="User entity (database)" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;rounded=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="1" vertex="1">
-          <mxGeometry x="140" y="690" width="160" height="25" as="geometry" />
-        </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-3" value="current user id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="230" y="492" width="95" height="26" as="geometry" />
-        </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="0ELT1PF-z8wpWwdTeymS-4" edge="1">
+        <mxCell id="IxiErp4WCyrh75tMbToo-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-2" target="IxiErp4WCyrh75tMbToo-7">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="540" y="595" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="536" y="697" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-4" value="Search users with common favourite" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
-          <mxGeometry x="300" y="540" width="110" height="110" as="geometry" />
+        <mxCell id="IxiErp4WCyrh75tMbToo-2" value="Browser" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="502" y="579" width="67.5" height="24" as="geometry" />
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-6" value="list of user id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="190" y="640" width="90" height="30" as="geometry" />
+        <mxCell id="IxiErp4WCyrh75tMbToo-4" value="current user id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="446" y="490" width="95" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="0ELT1PF-z8wpWwdTeymS-8" target="0ELT1PF-z8wpWwdTeymS-4" edge="1">
+        <mxCell id="IxiErp4WCyrh75tMbToo-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-7" target="IxiErp4WCyrh75tMbToo-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-8" value="Categories entity (database)" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;rounded=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="1" vertex="1">
-          <mxGeometry x="379" y="690" width="190" height="25" as="geometry" />
+        <mxCell id="IxiErp4WCyrh75tMbToo-7" value="Buzz recommendation system" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="314" y="682" width="104" height="104" as="geometry" />
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-10" value="list of categories, user id&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="390" y="640" width="160" height="30" as="geometry" />
+        <mxCell id="IxiErp4WCyrh75tMbToo-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-9" target="IxiErp4WCyrh75tMbToo-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="136" y="421" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="0ELT1PF-z8wpWwdTeymS-16" value="search user page" style="shape=card;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="540" y="560" width="105" height="70" as="geometry" />
+        <mxCell id="IxiErp4WCyrh75tMbToo-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-9" target="IxiErp4WCyrh75tMbToo-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="216" y="494" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-9" target="IxiErp4WCyrh75tMbToo-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-9" value="User entity (database)" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;rounded=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="96.25" y="579" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-11" value="current user&amp;nbsp;&lt;br&gt;favorite categories" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140.25" y="417" width="116" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-15" value="list of users&lt;br&gt;searched by user id" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="221" y="492" width="123" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-16" target="IxiErp4WCyrh75tMbToo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-16" target="IxiErp4WCyrh75tMbToo-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-16" value="Categories entity (database)" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;rounded=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="286" y="579" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-18" value="list of user id&amp;nbsp;with&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;&quot;&gt;same favorite&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="368" y="527" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-19" value="List of results preview" style="shape=card;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="588" y="565" width="110" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-21" value="list of user id, username and icon url" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="423" y="437" width="211" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-26" value="current user id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="446" y="676" width="95" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-31" value="list of buzz id&amp;nbsp;&lt;span style=&quot;text-align: left;&quot;&gt;matched&lt;br&gt;current user&#39;s favourite&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="359" y="602" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-35" value="current user&amp;nbsp;&lt;br&gt;favorite categories,&lt;br&gt;following list" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="138.75" y="679" width="119" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="IxiErp4WCyrh75tMbToo-36" target="IxiErp4WCyrh75tMbToo-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-36" value="Buzz entity (database)" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=none;rounded=0;strokeColor=default;fontFamily=Helvetica;fontSize=12;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="292.5" y="844" width="147" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-39" value="list of buzzes that &lt;br&gt;matched user&#39;s favorite or &lt;br&gt;posted by user&#39;s followers" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="368" y="793" width="156" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="IxiErp4WCyrh75tMbToo-41" value="list of buzz id, topic and content&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="451" y="713" width="189" height="26" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
