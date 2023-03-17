@@ -5,10 +5,6 @@
 - make sure you have already installed `yarn` and `vite`
     ```bash
     npm -g install yarn
-    yarn --version
-
-    npm -g install vite
-    vite --version
     ```
 
 - install modules
