@@ -1,6 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import { Button } from "@mui/material";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,6 +17,7 @@ function App() {
         </a>
       </div> */}
       <h1>Hello World 3</h1>
+      <Button></Button>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
