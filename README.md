@@ -11,6 +11,11 @@
     vite --version
     ```
 
+- install modules
+    ```bash
+    yarn
+    ```
+
 - run the project in local
     ```bash
     yarn dev
