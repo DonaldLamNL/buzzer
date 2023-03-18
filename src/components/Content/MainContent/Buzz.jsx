@@ -6,19 +6,9 @@ import { Box } from '@mui/system';
 
 import React, { useState } from 'react';
 
-export default function Buzz() {
-    // Demonstrate data
-    const data = {
-        pid: 123,
-        like: 123,
-        comment: 456,
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
-        image: 'https://p.ipic.vip/9j6cd6.png',
-        video: null,
-        uid: 'michaellyu123',
-        uname: 'Michael Lyu',
-    };
+export default function Buzz(props) {
+
+    const { pid, like, comment, icon, content, image, video, uid, uname } = props;
 
     return (<>
         {/* Post Block */}
@@ -40,7 +30,7 @@ export default function Buzz() {
                         width: 50,
                         height: 50,
                         borderRadius: 25,
-                        backgroundImage: `url(${data.icon})`,
+                        backgroundImage: `url(${icon})`,
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         margin: '20px',
@@ -54,29 +44,29 @@ export default function Buzz() {
 
                     {/* Poster Info */}
                     <Box sx={{ height: '90px'}}>
-                        <Typography sx={{ fontSize: '20px', lineHeight: '90px', display: 'inline-block' }}>{data.uname} </Typography>
-                        <Typography sx={{ fontSize: '16px', color: '#7e7e7e', marginLeft: '20px', display: 'inline-block' }}>@{data.uid}</Typography>
+                        <Typography sx={{ fontSize: '20px', lineHeight: '90px', display: 'inline-block' }}>{uname} </Typography>
+                        <Typography sx={{ fontSize: '16px', color: '#7e7e7e', marginLeft: '20px', display: 'inline-block' }}>@{uid}</Typography>
                     </Box>
 
                     {/* Content */}
                     <Box >
                         <Typography sx={{ fontSize: '14px', marginRight: '10px' }}>
-                            {data.content}
+                            {content}
                         </Typography>
                     </Box>
 
                     {/* Media Block */}
-                    {data.image !== null || data.video !== null ? (
+                    {image !== null || video !== null ? (
                     <Box sx={{ margin: '20px auto' }}>
-                        {data.image !== null && (
+                        {image !== null && (
                         <img
-                            src={data.image}
+                            src={image}
                             style={{ maxWidth: '95%', maxHeight: '300px', display: 'block' }}
                         />
                         )}
-                        {data.video !== null && (
+                        {video !== null && (
                         <video
-                            src={data.video}
+                            src={video}
                             controls
                             style={{ maxWidth: '95%', maxHeight: '300px', display: 'block' }}
                         />
@@ -95,7 +85,7 @@ export default function Buzz() {
                             <IconButton size="large">
                                 <ThumbUpAltRoundedIcon />
                             </IconButton>
-                            <div>{data.like}</div>
+                            <div>{like}</div>
                         </Box>
 
                         <Box sx={{ display: 'flex', alignItems: 'center', marginRight: '50px' }}>
