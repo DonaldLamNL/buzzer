@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useRoutes } from "react-router-dom";
-import Main from "./components/Main";
+import Main from "./components/Home";
 import Nav from "./components/Nav";
 import User from "./components/User";
 import Hive from "./components/Hive";
