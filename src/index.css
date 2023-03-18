@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	min-width: 1300px;
 }
 ol, ul {
 	list-style: none;
@@ -62,3 +63,4 @@ a:active,
 a{
 	color: black;
 }
+

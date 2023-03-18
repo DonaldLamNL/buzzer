@@ -7,10 +7,17 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import React from 'react'
 import { Link } from "react-router-dom";
+import { positions } from "@mui/system";
 
 export default function index() {
   return (
-    <div style={{height: '100vh', backgroundColor: '#f4aaff'}}>
+    <div 
+      style={{
+        height: '100%',
+        backgroundColor: '#f4aaff',
+        // position: 'fixed'
+      }}
+    >
       <ul>
         <li>
             <Link to="/">Home</Link>

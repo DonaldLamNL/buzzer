@@ -6,7 +6,6 @@ import SideContent from './Content/SideContent'
 
 export default function Main(){
     const mainStyle = {
-        height: '100vh',
         width: '100%',
         backgroundColor: '#87CEEB',
     }
