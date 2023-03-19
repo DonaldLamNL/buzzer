@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Buzz from './MainContent/Buzz'
-import PostBuzz from './MainContent/Post'
 import { LinearProgress } from '@mui/material'
 
-export default function MainContent() {
-    // Demonstrate buzz data
+export default function BuzzSearch() {
     const data = [
         {
             pid: 123,
@@ -42,7 +40,6 @@ export default function MainContent() {
     ]
     return (
         <div>
-            <PostBuzz />
             {data.map((post) => (
                 <Buzz key={post.pid} {...post} />
             ))}
@@ -50,4 +47,3 @@ export default function MainContent() {
         </div>
     )
 }
-

@@ -20,7 +20,7 @@ export default function index() {
     >
       <ul>
         <li>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
         </li>
         <li>
             <Link to="/user">User</Link>

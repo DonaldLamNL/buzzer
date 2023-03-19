@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import Searching from './SideContent/Searching';
 
-export default class SideContent extends Component {
-  render() {
-    return (
-      <div>
-        
-      </div>
-    )
-  }
+
+
+export default function SideContent() {
+    return (<>
+        <Searching />
+    </>)
 }

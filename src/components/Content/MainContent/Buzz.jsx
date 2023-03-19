@@ -1,5 +1,5 @@
 import { ChatBubbleOutlineOutlined } from '@mui/icons-material';
-import { Grid, IconButton, SvgIcon, Typography } from '@mui/material';
+import { Avatar, Grid, IconButton, SvgIcon, Typography } from '@mui/material';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import { Box } from '@mui/system';
@@ -25,17 +25,12 @@ export default function Buzz(props) {
         >
             {/* Poster Icon */}
             <Box sx={{ width: '90px' }}>
-                <Box
-                    sx={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 25,
-                        backgroundImage: `url(${icon})`,
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        margin: '20px',
-                    }}
-                />
+                <Avatar
+                    src={icon}
+                    sx={{ width: 50, height: 50, margin: '20px' }}
+                >
+                {uname[0]}
+                </Avatar>
             </Box>
 
             {/* Content Part */}
@@ -43,9 +38,9 @@ export default function Buzz(props) {
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
 
                     {/* Poster Info */}
-                    <Box sx={{ height: '90px'}}>
-                        <Typography sx={{ fontSize: '20px', lineHeight: '90px', display: 'inline-block' }}>{uname} </Typography>
-                        <Typography sx={{ fontSize: '16px', color: '#7e7e7e', marginLeft: '20px', display: 'inline-block' }}>@{uid}</Typography>
+                    <Box sx={{ height: '60px', lineHeight: '60px' }}>
+                        <Typography sx={{ fontSize: '18px', display: 'inline-block' }}>{uname} </Typography>
+                        <Typography sx={{ fontSize: '14px', color: '#7e7e7e', marginLeft: '20px', display: 'inline-block' }}>@{uid}</Typography>
                     </Box>
 
                     {/* Content */}
@@ -61,7 +56,7 @@ export default function Buzz(props) {
                         {image !== null && (
                         <img
                             src={image}
-                            style={{ maxWidth: '95%', maxHeight: '300px', display: 'block' }}
+                            style={{ maxWidth: '95%', maxHeight: '200px', display: 'block' }}
                         />
                         )}
                         {video !== null && (
