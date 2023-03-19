@@ -32,7 +32,7 @@ export default function Nav() {
           // alignItems: "center",
         }}
       >
-        <Stack justifyContent="center" alignItems="center" spacing={10}>
+        <Stack justifyContent="center" alignItems="center" spacing={35}>
           <Box>
             <IconButton
               size="large"
