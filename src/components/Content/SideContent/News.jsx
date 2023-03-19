@@ -62,13 +62,14 @@ export default function News() {
   return (
     <Box sx={{ height: "80vh", width: "100%" }}>
       <Card
+        elevation={5}
         sx={{
           width: "100%",
           height: "400px",
           borderRadius: 6,
-          boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          // boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
           margin: "20px 0",
-          backgroundColor: "#fffbfb",
+          // backgroundColor: "#fffbfb",
         }}
       >
         <h1
@@ -103,12 +104,14 @@ export default function News() {
         </Box>
       </Card>
       <Card
+        elevation={5}
+        // variant="outlined"
         sx={{
           width: "100%",
           height: "200px",
           borderRadius: 6,
-          boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-          backgroundColor: "#fffbfb",
+          // boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          // backgroundColor: "#fffbfb",
         }}
       >
         <h1
