@@ -1,18 +1,23 @@
-import { Box, Card, Container, IconButton, Stack } from "@mui/material";
+import { Box, Card, IconButton, Stack } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Nav() {
   const navigate = useNavigate();
+
   return (
     <Box
-      minHeight="100vh"
+      // minHeight="100vh"
       height="100%"
+      width="17%"
+      // marginLeft={30}
+      position="fixed"
       display="flex"
-      justifyContent="center"
-      alignItems="center"
+      // justifyContent="center"
+      // alignItems="center"
     >
       <Card
         elevation={5}
@@ -20,16 +25,14 @@ export default function Nav() {
           margin: "auto",
           backgroundColor: "#1ca1f0",
           borderRadius: 6,
-          height: "98%",
-          width: "35%",
+          height: "97%",
+          width: "30%",
+          display: "flex",
+          justifyContent: "center",
+          // alignItems: "center",
         }}
       >
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          marginY={10}
-          spacing={10}
-        >
+        <Stack justifyContent="center" alignItems="center" spacing={35}>
           <Box>
             <IconButton
               size="large"
