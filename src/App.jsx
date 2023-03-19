@@ -1,11 +1,15 @@
-import { Grid } from "@mui/material";
-import { useRoutes } from "react-router-dom";
-import Nav from "./components/Nav";
 import './index.css'
-import routerConfig from "./router";
+import routerConfig from "./router"
+
+// material-ui
+import { Grid } from "@mui/material"
+import { useRoutes } from "react-router-dom"
+
+// components
+import Nav from "./components/Nav"
     
 export default function App() {
-  const element = useRoutes(routerConfig);
+  const element = useRoutes(routerConfig)
   return (
     <>
       <Grid container>
@@ -17,5 +21,5 @@ export default function App() {
         </Grid>
       </Grid>
     </>
-  );
+  )
 }

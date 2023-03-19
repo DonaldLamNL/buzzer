@@ -1,6 +1,8 @@
+import React from 'react'
+
+// material-ui
 import { Avatar, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
 
 export default function UserItem(props) {
     const {uid, uname, icon} = props.userInfo
