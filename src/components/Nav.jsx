@@ -15,13 +15,13 @@ export default function Nav() {
       alignItems="center"
     >
       <Card
-        elevation={14}
+        // elevation={1}
         sx={{
-          marginY: 2,
-          backgroundColor: "#3666fa",
-          borderRadius: 4,
-          height: "97%",
-          width: "40%",
+          margin: "auto",
+          backgroundColor: "#1ca1f0",
+          borderRadius: 6,
+          height: "98%",
+          width: "35%",
         }}
       >
         <Stack
@@ -37,27 +37,27 @@ export default function Nav() {
                 navigate("../home");
               }}
             >
-              <HomeRoundedIcon sx={{ fontSize: 48 }} />
+              <HomeRoundedIcon sx={{ fontSize: 48, color: "#ffffff" }} />
             </IconButton>
           </Box>
           <Box>
-            <IconButton size="large">
-              <FaceIcon
-                sx={{ fontSize: 48 }}
-                onClick={() => {
-                  navigate("../user");
-                }}
-              />
+            <IconButton
+              size="large"
+              onClick={() => {
+                navigate("../user");
+              }}
+            >
+              <FaceIcon sx={{ fontSize: 48, color: "#ffffff" }} />
             </IconButton>
           </Box>
           <Box>
-            <IconButton size="large">
-              <HiveIcon
-                sx={{ fontSize: 48 }}
-                onClick={() => {
-                  navigate("../hive");
-                }}
-              />
+            <IconButton
+              size="large"
+              onClick={() => {
+                navigate("../hive");
+              }}
+            >
+              <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
             </IconButton>
           </Box>
         </Stack>
