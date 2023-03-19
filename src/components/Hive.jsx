@@ -1,4 +1,5 @@
 import React from "react";
+import HexGrids, { HexGridItem, HexGridList } from "react-hex-grids";
 
 export default function Hive() {
   const hiveStyle = {
@@ -7,5 +8,11 @@ export default function Hive() {
     backgroundColor: "#f5ffaa",
   };
 
-  return <div style={hiveStyle}></div>;
+  return (
+  <div style={hiveStyle}>
+    <HexGridList>
+        <HexGridItem>{"Hello"}</HexGridItem>
+    </HexGridList>
+  </div>
+  );
 }
