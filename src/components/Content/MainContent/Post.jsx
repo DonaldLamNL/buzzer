@@ -24,6 +24,7 @@ export default function Post() {
     <>
       {/* Post Block */}
       <Card
+        elevation={5}
         sx={{
           display: "flex",
           width: "90%",
@@ -31,7 +32,7 @@ export default function Post() {
           margin: "auto",
           position: "relative",
           marginTop: "20px",
-          borderRadius: "20px",
+          borderRadius: 6,
         }}
       >
         {/* Poster Icon */}

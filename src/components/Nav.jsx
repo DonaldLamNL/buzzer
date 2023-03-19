@@ -15,7 +15,7 @@ export default function Nav() {
       alignItems="center"
     >
       <Card
-        // elevation={1}
+        elevation={5}
         sx={{
           margin: "auto",
           backgroundColor: "#1ca1f0",

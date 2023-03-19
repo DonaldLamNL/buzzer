@@ -20,6 +20,7 @@ export default function Buzz(props) {
     <>
       {/* Post Block */}
       <Card
+        elevation={5}
         sx={{
           display: "flex",
           width: "90%",
@@ -27,7 +28,7 @@ export default function Buzz(props) {
           margin: "auto",
           position: "relative",
           margin: "20px auto",
-          borderRadius: "20px",
+          borderRadius: 6,
         }}
       >
         {/* Poster Icon */}
