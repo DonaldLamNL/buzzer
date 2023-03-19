@@ -14,7 +14,6 @@ export default function UserItem(props) {
                 display: 'flex', 
                 width: '90%',
                 backgroundColor: '#f9f9f9',
-                margin: 'auto',
                 position: 'relative',
                 margin: '20px auto',
                 borderRadius: '20px',
