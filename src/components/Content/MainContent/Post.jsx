@@ -96,7 +96,9 @@ export default function Post() {
               />
             </Box>
             {/* Submit Button */}
-            <Button sx={{ borderRadius: "20px" }}>Post</Button>
+            <Button variant="contained" sx={{ borderRadius: "20px" }}>
+              Post
+            </Button>
           </Box>
 
           {/* Image Preview */}
