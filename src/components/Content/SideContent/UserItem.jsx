@@ -1,6 +1,8 @@
+import React from 'react'
+
+// material-ui
 import { Avatar, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
 
 export default function UserItem(props) {
     const {uid, uname, icon} = props.userInfo
@@ -12,7 +14,6 @@ export default function UserItem(props) {
                 display: 'flex', 
                 width: '90%',
                 backgroundColor: '#f9f9f9',
-                margin: 'auto',
                 position: 'relative',
                 margin: '20px auto',
                 borderRadius: '20px',

@@ -1,9 +1,13 @@
-import { Grid } from '@mui/material'
 import React from 'react'
+import { useRoutes } from "react-router-dom"
+
+// material-ui
+import { Grid } from '@mui/material'
+
+// components
 import MainContent from './Content/MainContent'
 import BuzzSearch from './Content/BuzzSearch'
 import SideContent from './Content/SideContent'
-import { useRoutes } from "react-router-dom";
 
 const routerConfig = [
     {
@@ -25,12 +29,12 @@ const routerConfig = [
 ]
 
 export default function Home(){
-    const element = useRoutes(routerConfig);
+    const element = useRoutes(routerConfig)
 
     return (
         <div style={{width: '100%'}}>
             <Grid container>
-                <Grid item xs={9}>
+                <Grid item xs={8}>
                     {element}
                 </Grid>
                 <Grid item xs={3}>
