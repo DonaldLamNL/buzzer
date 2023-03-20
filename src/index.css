@@ -150,7 +150,8 @@ a {
 svg g {
   fill: #EC9706;
   fill-opacity: 0.6; 
-  stroke: black;
+  stroke:black;
+  stroke-width:0.01rem;
 }
 svg g:hover {
   fill-opacity: 1;
@@ -158,3 +159,22 @@ svg g:hover {
 svg g:hover text {
   fill-opacity: 1;
 }
+
+svg.grid{
+  height: 100%;
+  width: 100%;
+}
+
+g text{
+  font-size:25%;
+  fill: black;
+  stroke: none;
+}
+
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  color: black;
+} */
+
