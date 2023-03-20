@@ -9,7 +9,8 @@ export default function Nav() {
   const navigate = useNavigate();
 
   return (
-    <Box
+    <Box sx={{position: 'relative', width: '300px', height: '100%'}}>
+      <Box
       // minHeight="100vh"
       height="100%"
       width="17%"
@@ -65,6 +66,7 @@ export default function Nav() {
           </Box>
         </Stack>
       </Card>
+    </Box>
     </Box>
   );
 }

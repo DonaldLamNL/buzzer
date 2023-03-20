@@ -18,7 +18,7 @@ export default function Hive() {
 
   return (
   <div style={hiveStyle}>
-    <div>
+    <div style={{overflow:"auto", width:'80%', height: '80%'}}>
         <HexGrid width={1200} height={1000}>
           <Layout size={{ x: 7, y: 7 }}>
             { hexagons.map((hex, i) => <Hexagon key={i} q={hex.q} r={hex.r} s={hex.s}/>) }
