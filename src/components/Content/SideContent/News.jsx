@@ -90,6 +90,7 @@ export default function News() {
           {data.map((p) => {
             return (
               <Box
+                key={p.pid}
                 sx={{
                   width: "90%",
                   height: "100px",
@@ -129,9 +130,10 @@ export default function News() {
           }}
         >
           <Box sx={{ width: "90%", margin: "20px auto" }}>
-            {categories.map((c) => {
+            {categories.map(c => {
               return (
                 <Link
+                  key={c}
                   to={`/search?category=${c.toLowerCase()}`}
                   style={{
                     margin: "5px",
