@@ -28,11 +28,12 @@ export default function Nav() {
           height: "97%",
           width: "30%",
           display: "flex",
+          // position: "fixed",
           justifyContent: "center",
           // alignItems: "center",
         }}
       >
-        <Stack justifyContent="center" alignItems="center" spacing={35}>
+        <Stack justifyContent="space-around" alignItems="center">
           <Box>
             <IconButton
               size="large"
