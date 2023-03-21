@@ -3,7 +3,6 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -40,7 +39,7 @@ export default function Nav() {
         onMouseLeave={handleMouseLeave}
         elevation={5}
         sx={{
-          backgroundColor: "#1ca1f0",
+          backgroundColor: "#1babfe",
           borderRadius: 6,
           display: "flex",
           justifyContent: "center",
@@ -76,6 +75,9 @@ export default function Nav() {
               variant="text"
               sx={{ fontSize: 20, color: "#ffffff" }}
               startIcon={<HomeRoundedIcon />}
+              onClick={() => {
+                navigate("../home");
+              }}
             >
               Home
             </Button>
@@ -94,6 +96,9 @@ export default function Nav() {
               variant="text"
               sx={{ fontSize: 20, color: "#ffffff" }}
               startIcon={<FaceIcon />}
+              onClick={() => {
+                navigate("../user");
+              }}
             >
               User
             </Button>
@@ -113,6 +118,9 @@ export default function Nav() {
                 variant="text"
                 sx={{ fontSize: 20, color: "#ffffff" }}
                 startIcon={<HiveIcon />}
+                onClick={() => {
+                  navigate("../hive");
+                }}
               >
                 Hive
               </Button>
@@ -131,6 +139,9 @@ export default function Nav() {
                 variant="text"
                 sx={{ fontSize: 20, color: "#ffffff" }}
                 startIcon={<LogoutIcon />}
+                onClick={() => {
+                  navigate("../hive");
+                }}
               >
                 LOGOUT
               </Button>
