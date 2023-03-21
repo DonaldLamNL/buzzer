@@ -1,10 +1,11 @@
-import { Box, Card, IconButton, Stack } from "@mui/material";
+import { Box, Card, IconButton, Stack, Button } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Image = styled.img`
   width: 100%;
@@ -31,15 +32,26 @@ export default function Nav() {
           borderRadius: 6,
           display: "flex",
           justifyContent: "center",
+          // alignItems: "center",
           height: "96%",
           // width: "100%",
           position: "fixed",
         }}
       >
-        <Stack marginTop={3}>
-          <Box textAlign={"center"}>
+        <Stack
+          direction="column"
+          justifyContent="flex-start"
+          alignItems="center"
+          marginTop={3}
+        >
+          <IconButton
+            size="large"
+            onClick={() => {
+              navigate("../");
+            }}
+          >
             <Image src="../buzz.svg"></Image>
-          </Box>
+          </IconButton>
           <IconButton
             size="large"
             onClick={() => {
@@ -58,14 +70,25 @@ export default function Nav() {
             <FaceIcon sx={{ fontSize: 48, color: "#ffffff" }} />
           </IconButton>
 
-          <IconButton
-            size="large"
-            onClick={() => {
-              navigate("../hive");
-            }}
-          >
-            <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-          </IconButton>
+          <Stack direction="column" gap={15} justifyContent="center">
+            <IconButton
+              size="large"
+              onClick={() => {
+                navigate("../hive");
+              }}
+            >
+              <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
+            </IconButton>
+            <IconButton
+              size="large"
+              onClick={() => {
+                navigate("../hive");
+              }}
+            >
+              <LogoutIcon sx={{ fontSize: 48, color: "#ffffff" }} />
+            </IconButton>
+          </Stack>
+          {/* <Button startIcon={<LogoutIcon />}>LOGOUT</Button> */}
         </Stack>
       </Card>
     </Box>

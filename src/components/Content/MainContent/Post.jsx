@@ -25,6 +25,7 @@ export default function Post() {
       {/* Post Block */}
       <Card
         elevation={5}
+        // padding={100}
         sx={{
           display: "flex",
           width: "90%",
