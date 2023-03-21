@@ -25,7 +25,7 @@ export default function Buzz(props) {
           display: "flex",
           width: "90%",
           // backgroundColor: '#f9f9f9',
-          margin: "auto",
+          // margin: "auto",
           position: "relative",
           margin: "20px auto",
           borderRadius: 6,

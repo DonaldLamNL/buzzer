@@ -16,22 +16,29 @@ export default function Nav() {
   const navigate = useNavigate();
 
   return (
-    <Box display="flex" justifyContent="center">
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Card
         elevation={5}
         sx={{
           backgroundColor: "#1ca1f0",
           borderRadius: 6,
-          height: "97%",
-          // width: "100%",
           display: "flex",
-          position: "fixed",
           justifyContent: "center",
+          height: "96%",
+          // width: "100%",
+          position: "fixed",
         }}
       >
-        <Stack justifyContent="space-around">
+        <Stack marginTop={3}>
           <Box textAlign={"center"}>
-            <Image src="../bee_BG.svg"></Image>
+            <Image src="../buzz.svg"></Image>
           </Box>
           <IconButton
             size="large"
