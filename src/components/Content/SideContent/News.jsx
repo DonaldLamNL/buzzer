@@ -69,6 +69,7 @@ export default function News() {
           borderRadius: 6,
           // boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
           margin: "20px 0",
+          // margin: "auto",
           // backgroundColor: "#fffbfb",
         }}
       >
@@ -130,7 +131,7 @@ export default function News() {
           }}
         >
           <Box sx={{ width: "90%", margin: "20px auto" }}>
-            {categories.map(c => {
+            {categories.map((c) => {
               return (
                 <Link
                   key={c}

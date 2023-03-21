@@ -4,66 +4,61 @@ import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import styled from "@emotion/styled";
+
+const Image = styled.img`
+  width: 100%;
+  max-width: 50px;
+  height: auto;
+`;
 
 export default function Nav() {
   const navigate = useNavigate();
 
   return (
-    <Box
-      minHeight="100vh"
-      height="100vh"
-      width="17%"
-      // marginLeft={30}
-      position="fixed"
-      display="flex"
-      // justifyContent="center"
-      // alignItems="center"
-    >
+    <Box display="flex" justifyContent="center">
       <Card
         elevation={5}
         sx={{
-          margin: "auto",
           backgroundColor: "#1ca1f0",
           borderRadius: 6,
           height: "97%",
-          width: "30%",
+          // width: "100%",
           display: "flex",
-          // position: "fixed",
+          position: "fixed",
           justifyContent: "center",
-          // alignItems: "center",
         }}
       >
-        <Stack justifyContent="space-around" alignItems="center">
-          <Box>
-            <IconButton
-              size="large"
-              onClick={() => {
-                navigate("../home");
-              }}
-            >
-              <HomeRoundedIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-            </IconButton>
+        <Stack justifyContent="space-around">
+          <Box textAlign={"center"}>
+            <Image src="../bee_BG.svg"></Image>
           </Box>
-          <Box>
-            <IconButton
-              size="large"
-              onClick={() => {
-                navigate("../user");
-              }}
-            >
-              <FaceIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-            </IconButton>
-          </Box>
-          <Box>
-            <IconButton
-              size="large"
-              onClick={() => {
-                navigate("../hive");
-              }}
-            >
-              <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-            </IconButton>
-          </Box>
+          <IconButton
+            size="large"
+            onClick={() => {
+              navigate("../home");
+            }}
+          >
+            <HomeRoundedIcon sx={{ fontSize: 48, color: "#ffffff" }} />
+          </IconButton>
+
+          <IconButton
+            size="large"
+            onClick={() => {
+              navigate("../user");
+            }}
+          >
+            <FaceIcon sx={{ fontSize: 48, color: "#ffffff" }} />
+          </IconButton>
+
+          <IconButton
+            size="large"
+            onClick={() => {
+              navigate("../hive");
+            }}
+          >
+            <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
+          </IconButton>
         </Stack>
       </Card>
     </Box>
