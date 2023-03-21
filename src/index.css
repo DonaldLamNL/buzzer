@@ -147,6 +147,10 @@ a {
   color: black;
 }
 
+g{
+  overflow: scroll;
+}
+
 svg g {
   fill: #EC9706;
   fill-opacity: 0.6; 
@@ -169,6 +173,19 @@ g text{
   font-size:25%;
   fill: black;
   stroke: none;
+}
+
+.hex-grid__list{
+  --amount: 6 !important;
+  --counter: 2 !important;
+  grid-gap: 1.5rem 3rem;
+}
+
+.hex-grid__content{
+  padding: 1rem !important;
+  background-color:#EC9706 !important;
+  font-size: 3rem !important;
+  overflow: scroll;
 }
 
 /* .footer {
