@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function User() {
+export default function Login() {
   const userStyle = {
     height: '100vh',
     width: '100%',
@@ -56,7 +56,7 @@ export default function User() {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'black' }}>
+              <Avatar sx={{ m: 1, bgcolor: 'powderblue' }}>
                 <PersonOutlineOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
@@ -109,7 +109,7 @@ export default function User() {
                   <Typography variant="body2">
                     {"New to Buzzer?"} &nbsp;
                   </Typography>
-                  <Link href="#" variant="body2" color='secondary'>
+                  <Link href="/#/signup" variant="body2" color='secondary'>
                     {"Sign Up"}
                   </Link>
                 </Grid>

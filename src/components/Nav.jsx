@@ -97,7 +97,7 @@ export default function Nav() {
               sx={{ fontSize: 20, color: "#ffffff" }}
               startIcon={<FaceIcon />}
               onClick={() => {
-                navigate("../user");
+                navigate("../login");
               }}
             >
               User

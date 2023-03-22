@@ -1,5 +1,6 @@
 import Home from "./components/Home";
-import User from "./components/User";
+import Login from "./components/Content/User/Login";
+import Signup from "./components/Content/User/Signup";
 import Hive from "./components/Hive";
 import MainContent from "./components/Content/MainContent";
 import BuzzSearch from "./components/Content/BuzzSearch";
@@ -20,8 +21,12 @@ const routerConfig = [
     ],
   },
   {
-    path: "/user",
-    element: <User />,
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
   {
     path: "/hive",
