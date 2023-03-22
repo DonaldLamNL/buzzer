@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import MailLockIcon from '@mui/icons-material/MailLock';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function Signup() {
+export default function ForgotPassword() {
   // const userStyle = {
   //   height: '100vh',
   //   width: '100%',
@@ -17,7 +17,7 @@ export default function Signup() {
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
-      password: data.get('password'),
+      verificationCode: data.get('verificationCode'),
     });
   };
 
@@ -35,11 +35,10 @@ export default function Signup() {
         backgroundSize: 'cover',
       }}>
         <div style={{
-          display: 'flex',
           margin: 'auto',
           position: 'relative',
           width: '400px',
-          // height: '550px',
+          // height: '500px',
           paddingBottom: '30px',
           background: 'transparent',
           borderRadius: '20px',
@@ -59,37 +58,17 @@ export default function Signup() {
               }}
             >
               <Avatar sx={{ m: 1, bgcolor: '#1776d2' }}>
-                <PersonOutlineOutlinedIcon />
+                <MailLockIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign Up
+                Forgot Password
               </Typography>
+
+              <Typography variant="body3">
+                {"Please enter your email to receive a link to reset password"}
+              </Typography>
+
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      autoComplete="given-name"
-                      name="firstName"
-                      required
-                      fullWidth
-                      id="firstName"
-                      label="First Name"
-                      autoFocus
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="family-name"
-                    />
-                  </Grid>
-                </Grid>
                 <TextField
                   variant="standard"
                   margin="normal"
@@ -99,44 +78,46 @@ export default function Signup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                />
-                <TextField
-                  variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
+                  autoFocus
                 />
 
-                <TextField
-                  variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password confirm"
-                  label="Password Confirm"
-                  type="password"
-                  id="password"
-                />
+                {/* <Grid
+                  container
+                  spacing={2}
+                >
+                  <Grid item xs={6}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      sx={{ mt: 1, mb: 4 }}
+                    >
+                      Get Code
+                    </Button>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <TextField
+                      variant="standard"
+                      required
+                      name="verificationCode"
+                      label="Verification Code"
+                      id="verificationCode"
+                    />
+                  </Grid>
+                </Grid> */}
 
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 1, mb: 2, borderRadius: 6}}
+                  sx={{ mt: 1, mb: 2, borderRadius: 6 }}
                 >
-                  Sign Up
+                  Reset Password
                 </Button>
 
                 <Grid container style={{ alignItems: "center" }}>
-                  <Typography variant="body2">
-                    {"Already have an account?"} &nbsp;
-                  </Typography>
-                  <Link href="#/login" variant="body2" color="primary">
-                    {"Sign in"}
+                  <Link href="/#/login" variant="body2" color='secondary'>
+                    {"Back"}
                   </Link>
                 </Grid>
               </Box>

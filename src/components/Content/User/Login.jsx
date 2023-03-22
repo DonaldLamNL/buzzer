@@ -6,11 +6,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 export default function Login() {
-  const userStyle = {
-    height: '100vh',
-    width: '100%',
-    backgroundColor: '#bfa'
-  }
+  // const userStyle = {
+  //   height: '100vh',
+  //   width: '100%',
+  //   backgroundColor: '#bfa'
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -88,7 +88,7 @@ export default function Login() {
                 />
 
                 <Grid container justifyContent="flex-end">
-                  <Link href="#" variant="body2">
+                  <Link href="#/forgotpassword" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
