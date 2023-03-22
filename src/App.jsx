@@ -12,9 +12,9 @@ export default function App() {
       <Fab
         color="primary"
         sx={{
-          position: "absolute",
-          bottom: 16,
-          right: 16,
+          position: "fixed",
+          bottom: 30,
+          right: 30,
         }}
       >
         <ChatBubbleOutlineRoundedIcon />
