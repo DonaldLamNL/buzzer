@@ -35,10 +35,12 @@ export default function Signup() {
         backgroundSize: 'cover',
       }}>
         <div style={{
+          display: 'flex',
           margin: 'auto',
           position: 'relative',
           width: '400px',
-          height: '550px',
+          // height: '550px',
+          paddingBottom: '30px',
           background: 'transparent',
           borderRadius: '20px',
           border: '2px solid rgba(23, 118, 210, 0.5)',
@@ -107,7 +109,6 @@ export default function Signup() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="current-password"
                 />
 
                 <TextField
@@ -119,14 +120,13 @@ export default function Signup() {
                   label="Password Confirm"
                   type="password"
                   id="password"
-                  autoComplete="current-password"
                 />
 
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 1, mb: 2 }}
+                  sx={{ mt: 1, mb: 2, borderRadius: 6}}
                 >
                   Sign Up
                 </Button>
