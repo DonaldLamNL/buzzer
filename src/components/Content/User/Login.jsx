@@ -41,7 +41,7 @@ export default function Login() {
           height: '500px',
           background: 'transparent',
           borderRadius: '20px',
-          border: '2px solid rgba(255, 255, 255, 0.5)',
+          border: '2px solid rgba(23, 118, 210, 0.5)',
           backdropFilter: 'blur(15px)',
           justifyContent: 'center',
           alignItems: 'center',
