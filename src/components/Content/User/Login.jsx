@@ -101,7 +101,7 @@ export default function Login() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 1, mb: 2 }}
+                  sx={{ mt: 1, mb: 2, borderRadius: 6 }}
                 >
                   Sign In
                 </Button>
