@@ -56,7 +56,7 @@ export default function Signup() {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'powderblue' }}>
+              <Avatar sx={{ m: 1, bgcolor: '#1776d2' }}>
                 <PersonOutlineOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
