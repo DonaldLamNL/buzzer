@@ -115,7 +115,7 @@ export default function Signup() {
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
+                  name="password confirm"
                   label="Password Confirm"
                   type="password"
                   id="password"
