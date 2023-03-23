@@ -10,7 +10,6 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import ChatBubble from "./ChatBubble";
 
 export default function ChatBox() {
   return (
@@ -25,13 +24,13 @@ export default function ChatBox() {
             primaryTypographyProps={{ color: "white" }}
           />
         </ListItem>
-        <ListItem>
+        {/* <ListItem>
           <ChatBubble
             message={"i love u"}
             isSentByMe={true}
             timestamp="23.59"
           ></ChatBubble>
-        </ListItem>
+        </ListItem> */}
         <Divider />
       </Card>
     </>
