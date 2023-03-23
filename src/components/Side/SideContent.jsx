@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 
 // components
-import UserSearch from './SideContent/UserSearch'
-import News from './SideContent/News'
+import UserSearch from './UserSearch'
+import News from './News'
 
 export default function SideContent() {
     const [isFocused, setIsFocused] = useState(false)

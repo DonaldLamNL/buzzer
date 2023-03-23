@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { LinearProgress } from '@mui/material'
 
 // components
-import BuzzItem from './MainContent/BuzzItem'
-import Post from './MainContent/Post'
+import BuzzItem from '../Items/BuzzItem'
+import Post from './Post'
 
 // Demonstrate buzz data
 const data = [

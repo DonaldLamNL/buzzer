@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
-import NavItem from "./NavItem";
+import NavItem from "./Items/NavItem";
 
 const Image = styled.img`
   width: 100%;

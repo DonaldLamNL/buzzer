@@ -1,5 +1,5 @@
 import React from 'react'
-import BuzzItem from './MainContent/BuzzItem'
+import BuzzItem from '../Items/BuzzItem'
 
 const buzz = {
     pid: 124,

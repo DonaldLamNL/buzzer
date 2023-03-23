@@ -5,10 +5,10 @@ import { useRoutes } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 // components
-import MainContent from "./Content/MainContent";
-import BuzzSearch from "./Content/BuzzSearch";
-import SideContent from "./Content/SideContent";
-import Buzz from "./Content/Buzz";
+import MainContent from "./Home/Home";
+import BuzzSearch from "./Searching/BuzzSearch";
+import SideContent from "./Side/SideContent";
+import Buzz from "./BuzzPage/Buzz";
 
 const routerConfig = [
   {

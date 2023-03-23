@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 import React, { useState } from "react";
 
-import Comment from './Comment'
+import Comment from '../BuzzPage/Comment'
 
 export default function BuzzItem(props) {
     const navigate = useNavigate()

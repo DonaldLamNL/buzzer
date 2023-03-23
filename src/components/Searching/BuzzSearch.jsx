@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { LinearProgress } from '@mui/material'
 
 // components
-import Buzz from './MainContent/BuzzItem'
+import Buzz from '../Items/BuzzItem'
 
 const data = [
     {
