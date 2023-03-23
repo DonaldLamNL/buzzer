@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
+import NavItem from "./Items/NavItem";
 
 const Image = styled.img`
   width: 100%;
@@ -65,98 +66,21 @@ export default function Nav() {
           <IconButton
             size="large"
             onClick={() => {
-              navigate("../");
+              navigate("../home");
             }}
           >
             <Image src="../buzz.svg"></Image>
           </IconButton>
-          {hovering ? (
-            <Button
-              variant="text"
-              sx={{ fontSize: 20, color: "#ffffff" }}
-              startIcon={<HomeRoundedIcon />}
-              onClick={() => {
-                navigate("../home");
-              }}
-            >
-              Home
-            </Button>
-          ) : (
-            <IconButton
-              size="large"
-              onClick={() => {
-                navigate("../home");
-              }}
-            >
-              <HomeRoundedIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-            </IconButton>
-          )}
-          {hovering ? (
-            <Button
-              variant="text"
-              sx={{ fontSize: 20, color: "#ffffff" }}
-              startIcon={<FaceIcon />}
-              onClick={() => {
-                navigate("../login");
-              }}
-            >
-              User
-            </Button>
-          ) : (
-            <IconButton
-              size="large"
-              onClick={() => {
-                navigate("../user");
-              }}
-            >
-              <FaceIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-            </IconButton>
-          )}
+
+          <NavItem hovering={hovering} path="home" name="home" component={HomeRoundedIcon} />
+
+          <NavItem hovering={hovering} path="login" name="user" component={FaceIcon} />
+
           <Stack direction="column" gap={15} justifyContent="center">
-            {hovering ? (
-              <Button
-                variant="text"
-                sx={{ fontSize: 20, color: "#ffffff" }}
-                startIcon={<HiveIcon />}
-                onClick={() => {
-                  navigate("../hive");
-                }}
-              >
-                Hive
-              </Button>
-            ) : (
-              <IconButton
-                size="large"
-                onClick={() => {
-                  navigate("../hive");
-                }}
-              >
-                <HiveIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-              </IconButton>
-            )}
-            {hovering ? (
-              <Button
-                variant="text"
-                sx={{ fontSize: 20, color: "#ffffff" }}
-                startIcon={<LogoutIcon />}
-                onClick={() => {
-                  navigate("../hive");
-                }}
-              >
-                LOGOUT
-              </Button>
-            ) : (
-              <IconButton
-                size="large"
-                onClick={() => {
-                  navigate("../hive");
-                }}
-              >
-                <LogoutIcon sx={{ fontSize: 48, color: "#ffffff" }} />
-              </IconButton>
-            )}
+            <NavItem hovering={hovering} path="hive" name="hive" component={HiveIcon} />
+            <NavItem hovering={hovering} path="home" name="logout" component={LogoutIcon} />
           </Stack>
-          {/* <Button startIcon={<LogoutIcon />}>LOGOUT</Button> */}
+
         </Stack>
       </Card>
     </Box>
