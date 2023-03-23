@@ -5,6 +5,7 @@ import ForgotPassword from "./components/Content/User/ForgotPassword";
 import Hive from "./components/Hive";
 import MainContent from "./components/Content/MainContent";
 import BuzzSearch from "./components/Content/BuzzSearch";
+import Buzz from "./components/Content/Buzz";
 
 const routerConfig = [
   {
@@ -14,6 +15,10 @@ const routerConfig = [
       {
         path: "home",
         element: <MainContent />,
+      },
+      {
+        path: "buzz",
+        element: <Buzz />,
       },
       {
         path: "search",

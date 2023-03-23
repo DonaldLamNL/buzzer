@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { LinearProgress } from '@mui/material'
 
 // components
-import Buzz from './MainContent/Buzz'
+import BuzzItem from './MainContent/BuzzItem'
 import Post from './MainContent/Post'
 
 // Demonstrate buzz data
@@ -49,7 +49,7 @@ export default function MainContent() {
         <div>
             <Post />
             {data.map((post) => (
-                <Buzz key={post.pid} {...post} />
+                <BuzzItem key={post.pid} {...post} />
             ))}
             <LinearProgress />
         </div>

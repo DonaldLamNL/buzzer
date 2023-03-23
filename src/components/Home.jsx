@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import MainContent from "./Content/MainContent";
 import BuzzSearch from "./Content/BuzzSearch";
 import SideContent from "./Content/SideContent";
+import Buzz from "./Content/Buzz";
 
 const routerConfig = [
   {
@@ -23,6 +24,14 @@ const routerConfig = [
     element: (
       <>
         <BuzzSearch />
+      </>
+    ),
+  },
+  {
+    path: "/buzz",
+    element: (
+      <>
+        <Buzz />
       </>
     ),
   },
