@@ -7,7 +7,7 @@ import PhoneInTalkRoundedIcon from "@mui/icons-material/PhoneInTalkRounded";
 import Tooltip from "@mui/material/Tooltip";
 import Slide from "@mui/material/Slide";
 import { Fab, Button, Dialog, Card } from "@mui/material";
-import ChatBox from "./ChatRoom/ChatRoom";
+import ChatRoom from "./ChatRoom/ChatRoom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -41,13 +41,15 @@ export default function ChatButton() {
       </Tooltip>
       <Dialog
         open={open}
+        fullWidth={true}
+        maxWidth="md"
         TransitionComponent={Transition}
         hideBackdrop // Disable the backdrop color/image
         disableScrollLock
       >
-        <DialogTitle>Chat Room</DialogTitle>
+        <DialogTitle align="center">Chat Room</DialogTitle>
         <DialogContent>
-          <ChatBox></ChatBox>
+          <ChatRoom></ChatRoom>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>leave</Button>
