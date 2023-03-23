@@ -8,7 +8,8 @@ import {
   Typography,
 } from "@mui/material";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { Box } from "@mui/system";
 
 import React, { useState } from "react";
@@ -102,9 +103,12 @@ export default function Buzz(props) {
                 sx={{ display: "flex", alignItems: "center", margin: "auto" }}
               >
                 <IconButton size="large">
-                  <ThumbUpAltRoundedIcon />
+                  <ThumbUpIcon />
                 </IconButton>
                 <div>{like}</div>
+                <IconButton size="large">
+                  <ThumbDownIcon />
+                </IconButton>
               </Box>
 
               <Box

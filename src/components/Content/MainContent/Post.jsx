@@ -1,11 +1,27 @@
 import { Box } from "@mui/system";
-import { TextField, Button, Grid, Avatar, Card } from "@mui/material";
+import { TextField, Button, Grid, Avatar, Card, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { PhotoCamera, VideoCall } from "@mui/icons-material";
+import Select from '@mui/material/Select';
+
 import React, { useState } from "react";
+
+const categories = [
+  "Food",
+  "Music",
+  "Movie",
+  "News",
+  "Gaming",
+  "Business",
+  "Sport",
+  "Education",
+  "Social",
+  "Blog",
+];
 
 export default function Post() {
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
+  const [category, setCategory] = useState('');
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -18,6 +34,10 @@ export default function Post() {
     if (file) {
       setVideo(URL.createObjectURL(file));
     }
+  };
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
   };
 
   return (
@@ -96,6 +116,24 @@ export default function Post() {
                 onChange={handleVideoChange}
               />
             </Box>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Category</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={category}
+                onChange={handleChange}
+                label="Category"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                  {categories.map((c) => (
+                    <MenuItem key={c} value={c}>{c}</MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+
             {/* Submit Button */}
             <Button variant="contained" sx={{ borderRadius: "20px" }}>
               Post
