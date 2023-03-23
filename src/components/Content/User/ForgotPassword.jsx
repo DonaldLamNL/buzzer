@@ -37,7 +37,7 @@ export default function ForgotPassword() {
         <div style={{
           margin: 'auto',
           position: 'relative',
-          width: '400px',
+          width: '350px',
           // height: '500px',
           paddingBottom: '30px',
           background: 'transparent',

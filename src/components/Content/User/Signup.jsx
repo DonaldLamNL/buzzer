@@ -38,7 +38,7 @@ export default function Signup() {
           display: 'flex',
           margin: 'auto',
           position: 'relative',
-          width: '400px',
+          // width: '400px',
           // height: '550px',
           paddingBottom: '30px',
           background: 'transparent',

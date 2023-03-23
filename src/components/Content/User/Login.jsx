@@ -37,7 +37,7 @@ export default function Login() {
         <div style={{
           margin: 'auto',
           position: 'relative',
-          width: '400px',
+          // width: '400px',
           // height: '500px',
           paddingBottom: '30px',
           background: 'transparent',

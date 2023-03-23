@@ -90,6 +90,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -104,20 +105,24 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
   min-width: 1300px;
   background-color: #f9f9f9;
   font-family: "Roboto";
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -125,6 +130,7 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -147,43 +153,45 @@ a {
   color: #1776d2;
 }
 
-g{
+g {
   overflow: scroll;
 }
 
 svg g {
   fill: #EC9706;
-  fill-opacity: 0.6; 
-  stroke:black;
-  stroke-width:0.01rem;
+  fill-opacity: 0.6;
+  stroke: black;
+  stroke-width: 0.01rem;
 }
+
 svg g:hover {
   fill-opacity: 1;
 }
+
 svg g:hover text {
   fill-opacity: 1;
 }
 
-svg.grid{
+svg.grid {
   height: 100%;
   width: 100%;
 }
 
-g text{
-  font-size:25%;
+g text {
+  font-size: 25%;
   fill: black;
   stroke: none;
 }
 
-.hex-grid__list{
+.hex-grid__list {
   --amount: 6 !important;
   --counter: 2 !important;
   grid-gap: 1.5rem 3rem;
 }
 
-.hex-grid__content{
+.hex-grid__content {
   padding: 1rem !important;
-  background-color:#EC9706 !important;
+  background-color: #EC9706 !important;
   font-size: 3rem !important;
   overflow: scroll;
 }
@@ -195,3 +203,139 @@ g text{
   color: black;
 } */
 
+.side
+{
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #0051ff, #00eeff);
+}
+
+.card {
+  position: relative;
+  width: 330px;
+  height: 130px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
+}
+
+.card:hover
+{
+  height: 430px;
+}
+
+.imgBx
+{
+  position: absolute;
+  top: -50px;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  background: #FFF;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.imgBx img
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover .imgBx
+{
+  width: 250px;
+  height: 250px;
+}
+
+.card .content
+{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.card .content .details
+{
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+  transition: 0.5s;
+  transform: translateY(150px);
+}
+
+.card:hover .content .details
+{
+  transform: translateY(0px);
+}
+
+.card .content .details h2
+{
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #555;
+  line-height: 1.2em;
+}
+
+.card .content .details h2 span
+{
+  font-size: 0.75em;
+  font-weight: 500;
+  opacity: 0.5;
+}
+
+.card .content .details .data
+{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.card .content .details .data h3
+{
+  font-size: 1em;
+  color: #555;
+  line-height: 1.2em;
+  font-weight: 600;
+}
+
+.card .content .details .data h3 span
+{
+  font-size: 0.85em;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.card .content .details .actionBtn
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .content .details .actionBtn button
+{
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+  background: #1776d2;
+  color: #FFF;
+  cursor: pointer;
+}
