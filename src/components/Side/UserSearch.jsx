@@ -4,7 +4,7 @@ import React from 'react'
 import { Box, width } from '@mui/system'
 
 // components
-import UserItem from './UserItem'
+import UserItem from '../Items/UserItem'
 
 const data = [
     {
