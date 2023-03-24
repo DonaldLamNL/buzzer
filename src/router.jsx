@@ -1,10 +1,12 @@
-import Home from "./components/Home";
-import Login from "./components/Content/User/Login";
-import Signup from "./components/Content/User/Signup";
-import ForgotPassword from "./components/Content/User/ForgotPassword";
-import Hive from "./components/Hive";
-import MainContent from "./components/Content/MainContent";
-import BuzzSearch from "./components/Content/BuzzSearch";
+import Home from "./components/Main";
+import MainContent from "./components/Home/Home"
+import Buzz from "./components/BuzzPage/Buzz"
+import BuzzSearch from "./components/Searching/BuzzSearch"
+import Login from "./components/User/Login";
+import Signup from "./components/User/Signup";
+import ForgotPassword from "./components/User/ForgotPassword";
+import UserProfile from "./components/User/UserProfile";
+import Hive from "./components/Hive"
 
 const routerConfig = [
   {

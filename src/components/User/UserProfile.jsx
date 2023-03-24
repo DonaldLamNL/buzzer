@@ -5,6 +5,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import { maxWidth } from '@mui/system';
+import Buzz from '../Items/BuzzItem'
 
 const theme = createTheme();
 
@@ -40,6 +41,42 @@ function a11yProps(index) {
         'aria-controls': `full-width-tabpanel-${index}`,
     };
 }
+
+const data = [
+    {
+        pid: 123,
+        like: 123,
+        comment: 456,
+        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
+        image: 'https://p.ipic.vip/9j6cd6.png',
+        video: null,
+        uid: 'michaellyu123',
+        uname: 'Michael Lyu',
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    },
+    {
+        pid: 124,
+        like: 143,
+        comment: 534,
+        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
+        image: 'https://p.ipic.vip/e72rar.png',
+        video: null,
+        uid: 'irwinking124',
+        uname: 'Irwin King',
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    },
+    {
+        pid: 125,
+        like: 324,
+        comment: 635,
+        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
+        image: 'https://p.ipic.vip/phxapn.png',
+        video: null,
+        uid: 'johnlui',
+        uname: 'John Lui',
+        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    },
+]
 
 export default function UserProfile() {
 
@@ -103,8 +140,16 @@ export default function UserProfile() {
                                 <Avatar sx={{ m: 1, bgcolor: '#1776d2', width: 100, height: 100 }}>
                                     <PersonOutlineOutlinedIcon />
                                 </Avatar>
-                                <Typography component="h1" variant="h5">
+                                <Typography fontWeight="600" component="h1" variant="h6">
                                     Irwin King
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        fontSize: "14px",
+                                        display: "inline-block",
+                                        opacity: "0.5",
+                                    }}>
+                                    @irwinking124
                                 </Typography>
                             </Box>
                             <Box sx={{ bgcolor: 'background.paper', width: maxWidth }}>
@@ -124,7 +169,9 @@ export default function UserProfile() {
                                     </Tabs>
                                 </AppBar>
                                 <TabPanel value={value} index={0}>
-                                    Buzzers
+                                    {data.map((post) => (
+                                        <Buzz key={post.pid} {...post} />
+                                    ))}
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
                                     Replies

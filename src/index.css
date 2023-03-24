@@ -233,6 +233,8 @@ g text {
   padding: 20px;
   justify-content: center;
   align-items: center;
+  border-radius: 20px;
+  margin: 20px;
   min-height: 100vh;
   background: linear-gradient(45deg, #0051ff, #00eeff);
 }
