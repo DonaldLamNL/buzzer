@@ -57,7 +57,7 @@ export default function Nav({ isLogin }) {
           "&:hover": {
             backgroundColor: "#0069d9",
             // width: "14%",
-            width: "200px",
+            width: "217px",
             cursor: "pointer",
           },
         }}
