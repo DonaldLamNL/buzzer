@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Buzz from '../Items/BuzzItem';
+import ProfileCardItem from '../Items/ProfileCardItem';
 
 const theme = createTheme();
 
@@ -76,6 +77,33 @@ const data = [
         uid: 'johnlui',
         uname: 'John Lui',
         icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    },
+]
+
+const userData = [
+    {
+        uid: "elonmusk101", 
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
+    },
+    {
+        uid: "elonmusk102", 
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
+    },
+    {
+        uid: "elonmusk103", 
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
     },
 ]
 
@@ -322,65 +350,9 @@ export default function UserProfile() {
                                 <Typography component="h1" variant="h5" color="#000">
                                     You may also like
                                 </Typography>
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {userData.map((post) => (
+                                    <ProfileCardItem key={post.uid} {...post} />
+                                ))}
                             </Stack>
                         </div>
                     </Grid>
