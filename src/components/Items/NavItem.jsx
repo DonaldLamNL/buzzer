@@ -17,19 +17,26 @@ export default function NavItem(props) {
             navigate(`../${path}`);
           }}
         >
-          <Grid
+          {/* <Grid
             container
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <Grid item>
-              <Component sx={{ fontSize: 40, color: "#ffffff" }} />
-            </Grid>
+            <Grid item> */}
+
+          <Typography
+            fontSize={32}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <Component sx={{ fontSize: 32, color: "#ffffff", mr: 0.5 }} />
+            {name}
+          </Typography>
+          {/* </Grid>
             <Grid item>
               <Typography>{name}</Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Button>
       ) : (
         <IconButton
@@ -38,7 +45,7 @@ export default function NavItem(props) {
             navigate(`../${path}`);
           }}
         >
-          <Component sx={{ fontSize: 40, color: "#ffffff" }} />
+          <Component sx={{ fontSize: 38, color: "#ffffff" }} />
         </IconButton>
       )}
     </>
