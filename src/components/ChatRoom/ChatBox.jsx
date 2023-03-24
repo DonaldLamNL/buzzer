@@ -9,7 +9,9 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
+  TextField,
 } from "@mui/material";
+import ChatBubble from "./ChatBubble";
 
 export default function ChatBox() {
   return (
@@ -24,14 +26,42 @@ export default function ChatBox() {
             primaryTypographyProps={{ color: "white" }}
           />
         </ListItem>
-        {/* <ListItem>
+        <ListItem sx={{ justifyContent: "flex-end" }}>
           <ChatBubble
             message={"i love u"}
-            isSentByMe={true}
-            timestamp="23.59"
+            sentByMe={true}
+            timestamp="10:30 AM"
           ></ChatBubble>
-        </ListItem> */}
-        <Divider />
+        </ListItem>
+        <ListItem>
+          <ChatBubble
+            message="Hello, how are you?"
+            sentByMe={false}
+            timestamp="10:30 AM"
+          />
+        </ListItem>{" "}
+        <ListItem>
+          <ChatBubble
+            message="Hello, how are you?"
+            sentByMe={false}
+            timestamp="10:30 AM"
+          />
+        </ListItem>{" "}
+        <ListItem>
+          <ChatBubble
+            message="Hello, how are you?"
+            sentByMe={false}
+            timestamp="10:30 AM"
+          />
+        </ListItem>{" "}
+        <ListItem>
+          <ChatBubble
+            message="Hello, how are you?"
+            sentByMe={false}
+            timestamp="10:30 AM"
+          />
+        </ListItem>
+        {/* <Divider /> */}
       </Card>
     </>
   );

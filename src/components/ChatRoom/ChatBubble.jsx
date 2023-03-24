@@ -1,24 +1,18 @@
-import React from "react";
-import Paper from "@mui/material";
-import Typography from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
-const ChatBubble = ({ message, isSentByMe, timestamp }) => {
-  const bubbleStyle = {
-    backgroundColor: isSentByMe ? "purple" : "blue",
-    color: "#fff",
-    padding: "10px",
-    borderRadius: "10px",
-    maxWidth: "80%",
-    marginBottom: "10px",
-    alignSelf: isSentByMe ? "flex-end" : "flex-start",
-  };
-
+const ChatBubble = ({ message, sentByMe, timestamp }) => {
   return (
-    <Paper sx={bubbleStyle}>
-      <Typography variant="body1">{message}</Typography>
-      <Typography variant="caption" sx={{ textAlign: "right" }}>
-        {timestamp}
-      </Typography>
+    <Paper
+      sx={{
+        backgroundColor: sentByMe ? "#9c27b0" : "#2196f3",
+        color: "white",
+        borderRadius: "15px",
+        padding: "10px",
+        margin: "10px",
+      }}
+    >
+      <Typography>{message}</Typography>
+      <Typography fontSize={12}>{timestamp}</Typography>
     </Paper>
   );
 };

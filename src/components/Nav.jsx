@@ -49,7 +49,7 @@ export default function Nav({ isLogin }) {
           // alignItems: "center",
           height: "96%",
           // width: "100%",
-          width: "80px",
+          width: "100px",
           position: "fixed",
           transition: "0.5s",
 
