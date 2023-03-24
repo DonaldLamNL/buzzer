@@ -8,28 +8,28 @@ import UserItem from '../Items/UserItem'
 
 const data = [
     {
-        uid: 'michaellyu123',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    },
-    {
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    },
-    {
-        uid: 'johnlui',
+        uid: 'johnlui001',
         uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
     },
     {
-        uid: 'michaellyu1234',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'amywong124',
+        uname: 'Amy Wong',
+        icon: null,
     },
     {
-        uid: 'irwinking1245',
-        uname: 'Irwin King',
+        uid: 'amychan001',
+        uname: 'Amy Chan',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
+    },
+    {
+        uid: 'tomlui002',
+        uname: 'Tom Lui',
+        icon: null,
+    },
+    {
+        uid: 'michaellam331',
+        uname: 'Michael Lam',
         icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
     },
     {
