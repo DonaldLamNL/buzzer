@@ -6,7 +6,7 @@ import { Box, width } from '@mui/system'
 // components
 import UserItem from '../Items/UserItem'
 
-const data = [
+const users = [
     {
         uid: 'johnlui001',
         uname: 'John Lui',
@@ -30,34 +30,34 @@ const data = [
     {
         uid: 'michaellam331',
         uname: 'Michael Lam',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: null,
     },
     {
-        uid: 'johnlui1',
-        uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'chriswong123',
+        uname: 'Chris Wong',
+        icon: null,
     },
     {
-        uid: 'michaellyu1231',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'jimmylau342',
+        uname: 'Jimmy Lau',
+        icon: null,
     },
     {
         uid: 'irwinking1242',
         uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: null,
     },
     {
         uid: 'johnlui4',
         uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: null,
     },
 ]
 
 export default function UserSearch(props) {
     let input = props.input
 
-    const filteredData = data.filter(item => item.uname.toLowerCase().includes(input.toLowerCase()))
+    const filteredData = users.filter(item => item.uname.toLowerCase().includes(input.toLowerCase()))
 
     return (
         <Box sx={{ height: '80vh', width: '100%' }}>

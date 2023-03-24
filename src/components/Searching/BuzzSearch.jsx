@@ -1,33 +1,25 @@
-import React, { useState, useEffect } from 'react'
-
-// material-ui
-import { LinearProgress } from '@mui/material'
-
-// components
-import Buzz from '../Items/BuzzItem'
-
 const data = [
     {
         pid: 123,
         like: 123,
         comment: 456,
         content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
-        image: 'https://p.ipic.vip/9j6cd6.png',
+        image: null,
         video: null,
-        uid: 'michaellyu123',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'johnlui001',
+        uname: 'John Lui',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
     },
     {
         pid: 124,
         like: 143,
         comment: 534,
-        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
+        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia repellat, ad molestiae dolore hic consequatur incidunt facilis modi ea nulla, tempore totam voluptate sequi fugiat saepe quasi officiis ipsa laborum sapiente molestias quia veniam pariatur! Esse exercitationem vel praesentium. Voluptatibus!',
         image: 'https://p.ipic.vip/e72rar.png',
         video: null,
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'amychan001',
+        uname: 'Amy Chan',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
     },
     {
         pid: 125,
@@ -36,30 +28,56 @@ const data = [
         content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
         image: 'https://p.ipic.vip/phxapn.png',
         video: null,
-        uid: 'johnlui',
-        uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'tomlui002',
+        uname: 'Tom Lui',
+        icon: null,
     },
 ]
 
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+// material-ui
+import { Typography } from '@mui/material';
+
+// components
+import BuzzItem from '../Items/BuzzItem';
+
 export default function BuzzSearch() {
-    const [searchKey, setSearchKey] = useState('')
-    const urlParams = new URLSearchParams(window.location.search)
-  
+    const { search } = useParams();
+    const [filteredData, setFilteredData] = useState([]);
+
     useEffect(() => {
-        let urlParams = new URLSearchParams(window.location.search)
-        let searchValue = urlParams.get('search')
-        setSearchKey(searchValue)
-    }, [urlParams])
-    
+        const filtered = data.filter((post) =>
+            post.content.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredData(filtered);
+    }, [search]);
 
     return (
         <div>
-            <h1 style={{ height: '40px', lineHeight: '40px', fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>Searching for {searchKey}...</h1>
-            {data.map((post) => (
-                <Buzz key={post.pid} {...post} />
-            ))}
-            <LinearProgress />
+            <h1 style={{ height: '40px', lineHeight: '40px', fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>
+                Searching for {search} ...
+            </h1>
+
+            {filteredData.length === 0 ? (
+                <Typography variant="h6" align="center" mt={2}>
+                    No search results found.
+                </Typography>
+            ) : (
+                <>
+                    {filteredData.map((post) => (
+                        <BuzzItem
+                            key={post.pid}
+                            {...post}
+                            content={post.content.replace(
+                                new RegExp(`(${search})`, 'gi'),
+                                '<span style="background-color: #FFFF00;">$1</span>'
+                            )}
+                        />
+                    ))}
+                </>
+            )}
         </div>
-    )
+    );
 }

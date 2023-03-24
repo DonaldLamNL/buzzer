@@ -22,7 +22,7 @@ const routerConfig = [
     ),
   },
   {
-    path: "/search",
+    path: "/search/:search",
     element: (
       <>
         <BuzzSearch />
