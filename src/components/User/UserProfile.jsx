@@ -5,9 +5,9 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 import Buzz from '../Items/BuzzItem';
 import ProfileCardItem from '../Items/ProfileCardItem';
+import SideContent from "../Side/SideContent";
 
 const theme = createTheme();
 
@@ -44,33 +44,6 @@ const data = [
         uid: 'johnlui',
         uname: 'John Lui',
         icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    },
-]
-
-const userData = [
-    {
-        uid: "elonmusk101",
-        uname: "Elon Musk",
-        icon: "ElonMusk.jpg",
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-    },
-    {
-        uid: "elonmusk102",
-        uname: "Elon Musk",
-        icon: "ElonMusk.jpg",
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-    },
-    {
-        uid: "elonmusk103",
-        uname: "Elon Musk",
-        icon: "ElonMusk.jpg",
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
     },
 ]
 
@@ -280,18 +253,22 @@ export default function UserProfile() {
 
                         </Stack>
                     </Grid>
-                    <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <div className="side">
+
+                    {/* <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}> */}
+                    <Grid item xs={4} md={4}>
+                        {/* <div className="side">
                             <Stack spacing={8}>
                                 <Typography component="h1" variant="h5" color="#000">
                                     You may also like
                                 </Typography>
-                                {userData.map((post) => (
-                                    <ProfileCardItem key={post.uid} {...post} />
+                                {userData.map((item) => (
+                                    <ProfileCardItem key={item.uid} {...item} />
                                 ))}
                             </Stack>
-                        </div>
+                        </div> */}
+                        <SideContent />
                     </Grid>
+                    
                 </Grid>
                 {/* </Container> */}
             </section>
