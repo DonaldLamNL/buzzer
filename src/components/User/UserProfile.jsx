@@ -4,8 +4,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { maxWidth } from '@mui/system';
-import Buzz from '../Items/BuzzItem'
+import Buzz from '../Items/BuzzItem';
 
 const theme = createTheme();
 
@@ -115,44 +114,165 @@ export default function UserProfile() {
                 {/* <Container component="main" maxWidth="lg"> */}
                 <CssBaseline />
                 <Grid container spacing={0}>
-                    <Grid item xs={8} md={8}>
+                    <Grid item xs={8} md={8}
+                        sx={{
+                            borderLeft: '1px solid #DCDCDC',
+                            borderRight: '1px solid #DCDCDC',
+                        }}>
                         <Stack>
                             <Box
-                                height={50}
+                                height='30'
                                 sx={{
-                                    padding: '5px',
+                                    display: 'flex',
+                                    padding: '3px',
                                     background: '#1776d2',
                                 }}>
                                 <IconButton aria-label="back">
-                                    <ArrowBackIcon color='action' />
+                                    <ArrowBackIcon
+                                        sx={{
+                                            color: '#FFF',
+                                        }} />
                                 </IconButton>
-
+                                <Box 
+                                sx={{ marginLeft: '20px'}}>
+                                    <Typography
+                                        fontWeight="600"
+                                        component="h1"
+                                        variant="h6"
+                                        sx={{
+                                            color: '#FFF',
+                                        }}
+                                    >
+                                        Irwin King
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: '0.75em',
+                                            color: '#FFF',
+                                        }}>
+                                        123 Posts
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Box
+                            <Container
                                 sx={{
-                                    padding: '20px',
+                                    position: 'relative',
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
                                     background: '#66ccff',
+                                    height: '200px',
                                 }}
                             >
-                                <Avatar sx={{ m: 1, bgcolor: '#1776d2', width: 100, height: 100 }}>
-                                    <PersonOutlineOutlinedIcon />
-                                </Avatar>
-                                <Typography fontWeight="600" component="h1" variant="h6">
-                                    Irwin King
-                                </Typography>
-                                <Typography
+
+                            </Container>
+                            <Box
+                                sx={{
+                                    position: 'relative',
+                                    padding: '10px',
+                                    display: 'flex',
+                                    // flexDirection: 'column',
+                                    // alignItems: 'center',
+                                    background: '#FFF',
+                                    height: '220px',
+                                    borderBottom: '1px solid #DCDCDC',
+                                }}>
+                                <Container
                                     sx={{
-                                        fontSize: "14px",
-                                        display: "inline-block",
-                                        opacity: "0.5",
+                                        position: 'absolute',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        top: '-60px',
+                                        // height: '200px',
+                                        // bgcolor: '#999',
+                                        // opacity: '0.5',
                                     }}>
-                                    @irwinking124
-                                </Typography>
+                                    <Avatar
+                                        sx={{
+                                            // m: 1,
+                                            bgcolor: '#1776d2',
+                                            width: 100,
+                                            height: 100,
+                                            outline: '4px solid white'
+                                        }}>
+                                        <PersonOutlineOutlinedIcon />
+                                    </Avatar>
+                                    <Typography
+                                        fontWeight="600"
+                                        component="h1"
+                                        variant="h6"
+                                    >
+                                        Irwin King
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "14px",
+                                            // display: "inline-block",
+                                            opacity: "0.5",
+                                            // top: -80,
+                                        }}>
+                                        @irwinking124
+                                    </Typography>
+                                    <br></br>
+                                    <Typography>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    </Typography>
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            display: 'flex',
+                                            bottom: -50,
+                                            // flexDirection: 'column',
+                                            // alignItems: 'center',
+                                            // background: '#999',
+                                        }}>
+                                        <Link
+                                            href="#"
+                                            underline="hover"
+                                            sx={{
+                                                display: 'flex',
+                                            }}>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: '800',
+                                                }}>
+                                                789&nbsp;
+                                            </Typography>
+                                            <Typography>
+                                                Following
+                                            </Typography>
+                                        </Link>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Link
+                                            href="#"
+                                            underline="hover"
+                                            sx={{
+                                                display: 'flex',
+                                                color: '#000',
+                                            }}>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: '800',
+                                                }}>
+                                                456k&nbsp;
+                                            </Typography>
+                                            <Typography>
+                                                Followers
+                                            </Typography>
+                                        </Link>
+                                    </Box>
+
+                                </Container>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        position: 'absolute',
+                                        right: '20px',
+                                        borderRadius: '20px',
+                                    }}>
+                                    Follow
+                                </Button>
+
                             </Box>
-                            <Box sx={{ bgcolor: 'background.paper', width: maxWidth }}>
+                            {/* <Box sx={{ bgcolor: 'background.paper', width: maxWidth }}>
                                 <AppBar position="static">
                                     <Tabs
                                         value={value}
@@ -182,7 +302,10 @@ export default function UserProfile() {
                                 <TabPanel value={value} index={3}>
                                     Likes
                                 </TabPanel>
-                            </Box>
+                            </Box> */}
+                            {data.map((post) => (
+                                <Buzz key={post.pid} {...post} />
+                            ))}
                         </Stack>
                     </Grid>
                     <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}>
