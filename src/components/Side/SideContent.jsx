@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 // material-ui
 import { TextField, IconButton } from '@mui/material'
@@ -45,7 +45,14 @@ export default function SideContent() {
     }, [searchRef])
 
     return (
-        <div ref={searchRef} style={{ height: '100vh', width: '100%', position: 'relative' }}>
+        <div ref={searchRef}
+            style={{
+                height: '100vh',
+                width: '90%',
+                position: 'relative',
+                justifyContent: 'center',
+                margin: '0 auto'
+            }}>
             {/* <div style={{position: 'fixed' }}> */}
             <div>
                 <TextField
@@ -62,12 +69,12 @@ export default function SideContent() {
                     onChange={handleInput}
                     onKeyPress={handleEnter}
                 />
-                {isFocused && 
+                {isFocused &&
                     <div style={{ overflowY: 'auto' }}>
                         <UserSearch input={input} />
                     </div>
                 }
-                {!isFocused && 
+                {!isFocused &&
                     <div>
                         <News />
                     </div>

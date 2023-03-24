@@ -5,10 +5,24 @@ export default function ProfileCardItem(props) {
 
     return (
         <div className="card">
-            <div className="imgBx">
-                <img src={icon}></img>
-            </div>
-            <div className="content">
+            {icon === null ?
+                (
+                    <div className='charBx'
+                        style={{
+                            background: "#1776d2",
+                            color: "white",
+                        }}>
+                        {uname[0]}
+                    </div>
+
+                ) :
+                (
+                    <div className="imgBx">
+                        <img src={icon}></img>
+                    </div>
+                )
+            }
+            < div className="content">
                 <div className="details">
                     <h2>{uname}<br></br><span>@{uid}</span></h2>
                     <div className="data">
@@ -22,6 +36,6 @@ export default function ProfileCardItem(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

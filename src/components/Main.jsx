@@ -64,7 +64,7 @@ export default function Home() {
         <Grid item xs={8}>
           {element}
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <SideContent />
         </Grid>
       </Grid>
