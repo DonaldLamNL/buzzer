@@ -32,7 +32,8 @@ export default function Nav({ isLogin }) {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: "center",
+        marginLeft: "10px",
         alignItems: "center",
         height: "100vh",
       }}
@@ -56,7 +57,7 @@ export default function Nav({ isLogin }) {
           "&:hover": {
             backgroundColor: "#0069d9",
             // width: "14%",
-            width: "200px",
+            width: "217px",
             cursor: "pointer",
           },
         }}

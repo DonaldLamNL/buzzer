@@ -7,41 +7,9 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Buzz from '../Items/BuzzItem';
+import ProfileCardItem from '../Items/ProfileCardItem';
 
 const theme = createTheme();
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
 
 const data = [
     {
@@ -76,6 +44,33 @@ const data = [
         uid: 'johnlui',
         uname: 'John Lui',
         icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+    },
+]
+
+const userData = [
+    {
+        uid: "elonmusk101",
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
+    },
+    {
+        uid: "elonmusk102",
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
+    },
+    {
+        uid: "elonmusk103",
+        uname: "Elon Musk",
+        icon: "ElonMusk.jpg",
+        postsCount: 123,
+        followersCount: 456,
+        followingCount: 789,
     },
 ]
 
@@ -274,37 +269,6 @@ export default function UserProfile() {
                                 </Button>
 
                             </Box>
-                            {/* <Box sx={{ bgcolor: 'background.paper', width: maxWidth }}>
-                                <AppBar position="static">
-                                    <Tabs
-                                        value={value}
-                                        onChange={handleChange}
-                                        indicatorColor="secondary"
-                                        textColor="inherit"
-                                        variant="fullWidth"
-                                        aria-label="full width tabs example"
-                                    >
-                                        <Tab label="Buzzers" {...a11yProps(0)} />
-                                        <Tab label="Replies" {...a11yProps(1)} />
-                                        <Tab label="Media" {...a11yProps(2)} />
-                                        <Tab label="Likes" {...a11yProps(3)} />
-                                    </Tabs>
-                                </AppBar>
-                                <TabPanel value={value} index={0}>
-                                    {data.map((post) => (
-                                        <Buzz key={post.pid} {...post} />
-                                    ))}
-                                </TabPanel>
-                                <TabPanel value={value} index={1}>
-                                    Replies
-                                </TabPanel>
-                                <TabPanel value={value} index={2}>
-                                    Media
-                                </TabPanel>
-                                <TabPanel value={value} index={3}>
-                                    Likes
-                                </TabPanel>
-                            </Box> */}
                             <Box
                                 sx={{
                                     // background: '#f7f9f9',
@@ -322,65 +286,9 @@ export default function UserProfile() {
                                 <Typography component="h1" variant="h5" color="#000">
                                     You may also like
                                 </Typography>
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="card">
-                                    <div className="imgBx">
-                                        <img src='ElonMusk.jpg'></img>
-                                    </div>
-                                    <div className="content">
-                                        <div className="details">
-                                            <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div className="data">
-                                                <h3>123<br></br><span>Posts</span></h3>
-                                                <h3>456k<br></br><span>Followers</span></h3>
-                                                <h3>789<br></br><span>Following</span></h3>
-                                            </div>
-                                            <div className="actionBtn">
-                                                <button>Follow</button>
-                                                <button>Profile</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {userData.map((post) => (
+                                    <ProfileCardItem key={post.uid} {...post} />
+                                ))}
                             </Stack>
                         </div>
                     </Grid>

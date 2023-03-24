@@ -90,7 +90,7 @@ export default function ForgotPassword() {
                     <Button
                       type="submit"
                       variant="contained"
-                      sx={{ mt: 1, mb: 4,}}
+                      sx={{ mt: 1, mb: 1,}}
                     >
                       Get Code
                     </Button>
@@ -107,6 +107,28 @@ export default function ForgotPassword() {
                     />
                   </Grid>
                 </Grid>
+
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="New Password"
+                  type="password"
+                  id="password"
+                />
+
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password confirm"
+                  label="New Password Confirm"
+                  type="password"
+                  id="password"
+                />
 
                 <Button
                   type="submit"
