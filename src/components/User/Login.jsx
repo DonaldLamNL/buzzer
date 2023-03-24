@@ -30,7 +30,7 @@ export default function Login() {
         alignItems: 'center',
         minHeight: '100vh',
         width: '100%',
-        background: "url('../user_bg.jpeg')",
+        // background: "url('../user_bg.jpeg')",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
