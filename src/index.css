@@ -186,13 +186,14 @@ g text {
 
 .hex-grid__list{
   --amount: 6 !important;
-  --counter: 2 !important;
+  --counter: 1 !important;
   grid-gap: 1.5rem 3rem;
+  overflow:"scroll"
 }
 
 .hex-grid__content {
   padding: 1rem !important;
-  background-color:#EC9706 !important;
+  background-color:#000000 !important;
   font-size: 3rem !important;
   /* overflow: scroll; */
 }

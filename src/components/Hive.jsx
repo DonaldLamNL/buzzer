@@ -14,6 +14,7 @@ import HexGrids, { HexGridItem, HexGridList } from "react-hex-grids";
 import { Image} from "@mui/icons-material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SendIcon from'@mui/icons-material/Send';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 export default function Hive() {
@@ -114,17 +115,20 @@ export default function Hive() {
         <Grid item xs={8} className="bottomright" style={{ height: "100%"}}>
             <Card
               sx={
-                {display: "flex",
-                width: "90%",
-                height: "95%",
-                position: "relative",
-                margin: "20px auto",
-                borderRadius: 6,}
+                {
+                  display: "flex",
+                  width: "90%",
+                  height: "95%",
+                  position: "relative",
+                  margin: "20px auto",
+                  borderRadius: 6,
+                  overflow: "auto"
+                }
               }
 
               className="horny_background_color"
             >
-              <Grid container>
+              <Grid container sx={{margin: "20px auto"}}>
                 {/* <CardHeader title="Hive" sx={{justifyContent:"center", width:"100%", textAlign:"center", fontSize:"3rem"}}/> */}
                 <HexGridList>
                   {datalist.map((data, i) => (
@@ -133,7 +137,7 @@ export default function Hive() {
                           <Card className="hex-grid__content__inside" key={i}>
                             {(checkOnShow(i) === false)?"":<CardHeader titleTypographyProps={{variant:'subtitle2'}} title={data.uname}/>}
                             <CardContent style={{padding:"0"}}  onClick={(e)=>showContent(i)}>
-                              {(checkOnShow(i) === false)?<img src="./image/icon.png" style={{width:"90%", height:"auto"}}/>:<Typography style={{fontSize:"1.5rem"}}>{data.context}</Typography>} 
+                              {(checkOnShow(i) === false)?<AccountCircleIcon sx={{fontSize:130}}/>:<Typography style={{fontSize:"1.5rem"}}>{data.context}</Typography>} 
                             </CardContent>
                             {(checkOnShow(i) === false)?"":<CardActions>
                               <Typography>{data.likes}</Typography>
