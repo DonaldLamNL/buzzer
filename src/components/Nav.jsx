@@ -32,7 +32,7 @@ export default function Nav({ isLogin }) {
     <Box
       sx={{
         display: "flex",
-        // justifyContent: "center",
+        justifyContent: "center",
         marginLeft: "10px",
         alignItems: "center",
         height: "100vh",
@@ -50,7 +50,7 @@ export default function Nav({ isLogin }) {
           // alignItems: "center",
           height: "96%",
           // width: "100%",
-          width: "80px",
+          width: "100px",
           position: "fixed",
           transition: "0.5s",
 

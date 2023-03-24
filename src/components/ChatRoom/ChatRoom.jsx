@@ -6,9 +6,12 @@ import {
   Avatar,
   Typography,
   Stack,
+  IconButton,
 } from "@mui/material";
-import FriendList from "./UserList";
+import FriendList from "./FriendList";
 import ChatBox from "./ChatBox";
+import { Box } from "@mui/system";
+import SendIcon from "@mui/icons-material/Send";
 
 const ChatRoom = () => {
   return (
@@ -19,6 +22,16 @@ const ChatRoom = () => {
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
           <ChatBox />
+          <Box
+            display={"flex"}
+            justifyContent={"flex-end"}
+            alignItems="flex-end"
+          >
+            <TextField label="write message" variant="standard" />
+            <IconButton color="primary">
+              <SendIcon />
+            </IconButton>
+          </Box>
         </Grid>
       </Grid>
     </>

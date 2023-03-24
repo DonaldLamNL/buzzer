@@ -201,9 +201,9 @@ g text {
   position: absolute;
   height: 100%;
   width: 100%;
-  font-size: 3rem;
+  font-size: 1rem;
   color: #111111;
-  background-color: #EC9706;
+  background-color: #EC9706 !important;
   clip-path: polygon(74% 2%, 98% 50%, 74% 98%, 26% 98%, 2% 50%, 26% 2%);
   /* clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0); */
   display: flex;

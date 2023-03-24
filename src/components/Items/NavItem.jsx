@@ -11,7 +11,7 @@ export default function NavItem(props) {
       {hovering ? (
         <Button
           variant="text"
-          sx={{ fontSize: 20, color: "#ffffff" }}
+          sx={{ color: "#ffffff" }}
           // startIcon={<Component />}
           onClick={() => {
             navigate(`../${path}`);
@@ -26,10 +26,10 @@ export default function NavItem(props) {
             <Grid item> */}
 
           <Typography
-            fontSize={32}
+            fontSize={40}
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <Component sx={{ fontSize: 32, color: "#ffffff", mr: 0.5 }} />
+            <Component sx={{ fontSize: 40, color: "#ffffff", mr: 0.5 }} />
             {name}
           </Typography>
           {/* </Grid>
@@ -45,7 +45,7 @@ export default function NavItem(props) {
             navigate(`../${path}`);
           }}
         >
-          <Component sx={{ fontSize: 38, color: "#ffffff" }} />
+          <Component sx={{ fontSize: 42, color: "#ffffff" }} />
         </IconButton>
       )}
     </>
