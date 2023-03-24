@@ -131,14 +131,16 @@ export default function UserProfile() {
                                     padding: '3px',
                                     background: '#1776d2',
                                 }}>
-                                <IconButton aria-label="back">
+                                <IconButton
+                                    href="/#/home"
+                                    aria-label="back">
                                     <ArrowBackIcon
                                         sx={{
                                             color: '#FFF',
                                         }} />
                                 </IconButton>
-                                <Box 
-                                sx={{ marginLeft: '20px'}}>
+                                <Box
+                                    sx={{ marginLeft: '20px' }}>
                                     <Typography
                                         fontWeight="600"
                                         component="h1"
@@ -233,12 +235,13 @@ export default function UserProfile() {
                                             underline="hover"
                                             sx={{
                                                 display: 'flex',
+                                                color: '#000',
                                             }}>
                                             <Typography
                                                 sx={{
                                                     fontWeight: '800',
                                                 }}>
-                                                789&nbsp;Following
+                                                789 Following
                                             </Typography>
                                         </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -253,7 +256,7 @@ export default function UserProfile() {
                                                 sx={{
                                                     fontWeight: '800',
                                                 }}>
-                                                456k&nbsp;Followers
+                                                456k Followers
                                             </Typography>
                                         </Link>
                                     </Box>
@@ -309,7 +312,7 @@ export default function UserProfile() {
                     <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}>
                         <div className="side">
                             <Stack spacing={8}>
-                                <Typography component="h1" variant="h5" color="#fff">
+                                <Typography component="h1" variant="h5" color="#000">
                                     You may also like
                                 </Typography>
                                 <div className="card">
@@ -326,7 +329,7 @@ export default function UserProfile() {
                                             </div>
                                             <div className="actionBtn">
                                                 <button>Follow</button>
-                                                <button>Message</button>
+                                                <button>Profile</button>
                                             </div>
                                         </div>
                                     </div>
@@ -346,7 +349,7 @@ export default function UserProfile() {
                                             </div>
                                             <div className="actionBtn">
                                                 <button>Follow</button>
-                                                <button>Message</button>
+                                                <button>Profile</button>
                                             </div>
                                         </div>
                                     </div>
@@ -366,7 +369,7 @@ export default function UserProfile() {
                                             </div>
                                             <div className="actionBtn">
                                                 <button>Follow</button>
-                                                <button>Message</button>
+                                                <button>Profile</button>
                                             </div>
                                         </div>
                                     </div>

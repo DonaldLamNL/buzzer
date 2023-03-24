@@ -64,8 +64,9 @@ export default function ForgotPassword() {
                 Forgot Password
               </Typography>
 
-              <Typography variant="body3">
-                {"Please enter your email to receive a link to reset password"}
+              <Typography variant="body3"
+              sx={{fontSize: "0.9em"}}>
+                {"Please enter your email to receive a 6-digits verification code to reset password"}
               </Typography>
 
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -81,30 +82,31 @@ export default function ForgotPassword() {
                   autoFocus
                 />
 
-                {/* <Grid
+                <Grid
                   container
                   spacing={2}
                 >
-                  <Grid item xs={6}>
+                  <Grid item xs={5}>
                     <Button
                       type="submit"
                       variant="contained"
-                      sx={{ mt: 1, mb: 4 }}
+                      sx={{ mt: 1, mb: 4,}}
                     >
                       Get Code
                     </Button>
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item xs={7}>
                     <TextField
                       variant="standard"
                       required
                       name="verificationCode"
                       label="Verification Code"
                       id="verificationCode"
+                      // sx={{ mt: 1, mb: 4}}
                     />
                   </Grid>
-                </Grid> */}
+                </Grid>
 
                 <Button
                   type="submit"

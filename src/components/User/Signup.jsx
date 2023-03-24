@@ -105,6 +105,15 @@ export default function Signup() {
                   margin="normal"
                   required
                   fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                />
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
                   type="password"
