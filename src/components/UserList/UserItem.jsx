@@ -3,14 +3,22 @@ import { Box } from '@mui/system'
 import React from 'react'
 
 export default function UserItem(props) {
-    const { uid, uname, icon, description, isFollow, isDelete = false } = props
 
+    const { uid, uname, icon, description, isFollow, isDelete = false } = props
+    
     const handleButton = () => {
         if (isDelete) {
             alert(`bye bye ${uname}`)
             return
         }
         // handle follow state
+    }
+
+    const deleteUserComfirm = (e) => {
+        const result = window.confirm(`Are you sure you want to delete @${uid}?`);
+        if (result) {
+            console.log('yes');
+        }
     }
 
     return (
@@ -42,7 +50,7 @@ export default function UserItem(props) {
                 {/* Button */}
                 {isDelete ?
                     <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-                        <Button variant="contained" color="primary" sx={{ borderRadius: '18px' }} onClick={handleButton}>Delete</Button>
+                        <Button variant="contained" color="primary" sx={{ borderRadius: '18px' }} onClick={deleteUserComfirm}>Delete</Button>
                     </Box>
                     :
                     <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
