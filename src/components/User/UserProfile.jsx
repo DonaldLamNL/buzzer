@@ -11,39 +11,6 @@ import ProfileCardItem from '../Items/ProfileCardItem';
 
 const theme = createTheme();
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
-
 const data = [
     {
         pid: 123,
@@ -82,7 +49,7 @@ const data = [
 
 const userData = [
     {
-        uid: "elonmusk101", 
+        uid: "elonmusk101",
         uname: "Elon Musk",
         icon: "ElonMusk.jpg",
         postsCount: 123,
@@ -90,7 +57,7 @@ const userData = [
         followingCount: 789,
     },
     {
-        uid: "elonmusk102", 
+        uid: "elonmusk102",
         uname: "Elon Musk",
         icon: "ElonMusk.jpg",
         postsCount: 123,
@@ -98,7 +65,7 @@ const userData = [
         followingCount: 789,
     },
     {
-        uid: "elonmusk103", 
+        uid: "elonmusk103",
         uname: "Elon Musk",
         icon: "ElonMusk.jpg",
         postsCount: 123,
@@ -302,37 +269,6 @@ export default function UserProfile() {
                                 </Button>
 
                             </Box>
-                            {/* <Box sx={{ bgcolor: 'background.paper', width: maxWidth }}>
-                                <AppBar position="static">
-                                    <Tabs
-                                        value={value}
-                                        onChange={handleChange}
-                                        indicatorColor="secondary"
-                                        textColor="inherit"
-                                        variant="fullWidth"
-                                        aria-label="full width tabs example"
-                                    >
-                                        <Tab label="Buzzers" {...a11yProps(0)} />
-                                        <Tab label="Replies" {...a11yProps(1)} />
-                                        <Tab label="Media" {...a11yProps(2)} />
-                                        <Tab label="Likes" {...a11yProps(3)} />
-                                    </Tabs>
-                                </AppBar>
-                                <TabPanel value={value} index={0}>
-                                    {data.map((post) => (
-                                        <Buzz key={post.pid} {...post} />
-                                    ))}
-                                </TabPanel>
-                                <TabPanel value={value} index={1}>
-                                    Replies
-                                </TabPanel>
-                                <TabPanel value={value} index={2}>
-                                    Media
-                                </TabPanel>
-                                <TabPanel value={value} index={3}>
-                                    Likes
-                                </TabPanel>
-                            </Box> */}
                             <Box
                                 sx={{
                                     // background: '#f7f9f9',
