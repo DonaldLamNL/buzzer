@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container, Stack, Tabs, Tab, AppBar, IconButton } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Grid, Box, Typography, Container, Stack, Tabs, Tab, AppBar, IconButton } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PropTypes from 'prop-types';
@@ -78,6 +80,8 @@ const data = [
 ]
 
 export default function UserProfile() {
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -225,7 +229,7 @@ export default function UserProfile() {
                                             // background: '#999',
                                         }}>
                                         <Link
-                                            href="#"
+                                            to="/userlist"
                                             underline="hover"
                                             sx={{
                                                 display: 'flex',
@@ -234,15 +238,12 @@ export default function UserProfile() {
                                                 sx={{
                                                     fontWeight: '800',
                                                 }}>
-                                                789&nbsp;
-                                            </Typography>
-                                            <Typography>
-                                                Following
+                                                789&nbsp;Following
                                             </Typography>
                                         </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Link
-                                            href="#"
+                                            to="/userlist"
                                             underline="hover"
                                             sx={{
                                                 display: 'flex',
@@ -252,10 +253,7 @@ export default function UserProfile() {
                                                 sx={{
                                                     fontWeight: '800',
                                                 }}>
-                                                456k&nbsp;
-                                            </Typography>
-                                            <Typography>
-                                                Followers
+                                                456k&nbsp;Followers
                                             </Typography>
                                         </Link>
                                     </Box>
@@ -309,24 +307,24 @@ export default function UserProfile() {
                         </Stack>
                     </Grid>
                     <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <div class="side">
+                        <div className="side">
                             <Stack spacing={8}>
                                 <Typography component="h1" variant="h5" color="#fff">
                                     You may also like
                                 </Typography>
-                                <div class="card">
-                                    <div class="imgBx">
+                                <div className="card">
+                                    <div className="imgBx">
                                         <img src='ElonMusk.jpg'></img>
                                     </div>
-                                    <div class="content">
-                                        <div class="details">
+                                    <div className="content">
+                                        <div className="details">
                                             <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div class="data">
+                                            <div className="data">
                                                 <h3>123<br></br><span>Posts</span></h3>
                                                 <h3>456k<br></br><span>Followers</span></h3>
                                                 <h3>789<br></br><span>Following</span></h3>
                                             </div>
-                                            <div class="actionBtn">
+                                            <div className="actionBtn">
                                                 <button>Follow</button>
                                                 <button>Message</button>
                                             </div>
@@ -334,19 +332,19 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                                <div class="card">
-                                    <div class="imgBx">
+                                <div className="card">
+                                    <div className="imgBx">
                                         <img src='ElonMusk.jpg'></img>
                                     </div>
-                                    <div class="content">
-                                        <div class="details">
+                                    <div className="content">
+                                        <div className="details">
                                             <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div class="data">
+                                            <div className="data">
                                                 <h3>123<br></br><span>Posts</span></h3>
                                                 <h3>456k<br></br><span>Followers</span></h3>
                                                 <h3>789<br></br><span>Following</span></h3>
                                             </div>
-                                            <div class="actionBtn">
+                                            <div className="actionBtn">
                                                 <button>Follow</button>
                                                 <button>Message</button>
                                             </div>
@@ -354,19 +352,19 @@ export default function UserProfile() {
                                     </div>
                                 </div>
 
-                                <div class="card">
-                                    <div class="imgBx">
+                                <div className="card">
+                                    <div className="imgBx">
                                         <img src='ElonMusk.jpg'></img>
                                     </div>
-                                    <div class="content">
-                                        <div class="details">
+                                    <div className="content">
+                                        <div className="details">
                                             <h2>Elon Musk<br></br><span>@elonmusk</span></h2>
-                                            <div class="data">
+                                            <div className="data">
                                                 <h3>123<br></br><span>Posts</span></h3>
                                                 <h3>456k<br></br><span>Followers</span></h3>
                                                 <h3>789<br></br><span>Following</span></h3>
                                             </div>
-                                            <div class="actionBtn">
+                                            <div className="actionBtn">
                                                 <button>Follow</button>
                                                 <button>Message</button>
                                             </div>
