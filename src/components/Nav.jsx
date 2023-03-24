@@ -72,15 +72,34 @@ export default function Nav() {
             <Image src="../buzz.svg"></Image>
           </IconButton>
 
-          <NavItem hovering={hovering} path="home" name="home" component={HomeRoundedIcon} />
+          <NavItem
+            hovering={hovering}
+            path="home"
+            name="home"
+            component={HomeRoundedIcon}
+          />
 
-          <NavItem hovering={hovering} path="login" name="user" component={FaceIcon} />
+          <NavItem
+            hovering={hovering}
+            path="login"
+            name="user"
+            component={FaceIcon}
+          />
 
           <Stack direction="column" gap={15} justifyContent="center">
-            <NavItem hovering={hovering} path="hive" name="hive" component={HiveIcon} />
-            <NavItem hovering={hovering} path="home" name="logout" component={LogoutIcon} />
+            <NavItem
+              hovering={hovering}
+              path="hive"
+              name="hive"
+              component={HiveIcon}
+            />
+            <NavItem
+              hovering={hovering}
+              path="home"
+              name="logout"
+              component={LogoutIcon}
+            />
           </Stack>
-
         </Stack>
       </Card>
     </Box>
