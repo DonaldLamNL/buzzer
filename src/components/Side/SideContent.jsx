@@ -28,9 +28,10 @@ export default function SideContent() {
         }
     }
     const jumpSearch = () => {
-        navigate(`/search?search=${input}`)
-        // window.location.reload()
+        navigate(`/`)
+        navigate(`/search/${input}`)
     }
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {

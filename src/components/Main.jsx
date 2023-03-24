@@ -9,6 +9,8 @@ import MainContent from "./Home/Home";
 import BuzzSearch from "./Searching/BuzzSearch";
 import SideContent from "./Side/SideContent";
 import Buzz from "./BuzzPage/Buzz";
+import UserList from "./UserList/UserList"
+import AdminUserList from "./UserList/AdminUserList"
 
 const routerConfig = [
   {
@@ -20,7 +22,7 @@ const routerConfig = [
     ),
   },
   {
-    path: "/search",
+    path: "/search/:search",
     element: (
       <>
         <BuzzSearch />
@@ -32,6 +34,22 @@ const routerConfig = [
     element: (
       <>
         <Buzz />
+      </>
+    ),
+  },
+  {
+    path: "/userlist",
+    element: (
+      <>
+        <UserList />
+      </>
+    ),
+  },
+  {
+    path: "/admin-user",
+    element: (
+      <>
+        <AdminUserList />
       </>
     ),
   },

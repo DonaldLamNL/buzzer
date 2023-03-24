@@ -30,7 +30,7 @@ export default function Signup() {
         alignItems: 'center',
         minHeight: '100vh',
         width: '100%',
-        background: "url('../user_bg.jpeg')",
+        // background: "url('../user_bg.jpeg')",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
@@ -38,7 +38,7 @@ export default function Signup() {
           display: 'flex',
           margin: 'auto',
           position: 'relative',
-          width: '400px',
+          // width: '400px',
           // height: '550px',
           paddingBottom: '30px',
           background: 'transparent',
@@ -99,6 +99,15 @@ export default function Signup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                />
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
                 />
                 <TextField
                   variant="standard"

@@ -6,58 +6,58 @@ import { Box, width } from '@mui/system'
 // components
 import UserItem from '../Items/UserItem'
 
-const data = [
+const users = [
     {
-        uid: 'michaellyu123',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    },
-    {
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    },
-    {
-        uid: 'johnlui',
+        uid: 'johnlui001',
         uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
     },
     {
-        uid: 'michaellyu1234',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'amywong124',
+        uname: 'Amy Wong',
+        icon: null,
     },
     {
-        uid: 'irwinking1245',
-        uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'amychan001',
+        uname: 'Amy Chan',
+        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
     },
     {
-        uid: 'johnlui1',
-        uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'tomlui002',
+        uname: 'Tom Lui',
+        icon: null,
     },
     {
-        uid: 'michaellyu1231',
-        uname: 'Michael Lyu',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        uid: 'michaellam331',
+        uname: 'Michael Lam',
+        icon: null,
+    },
+    {
+        uid: 'chriswong123',
+        uname: 'Chris Wong',
+        icon: null,
+    },
+    {
+        uid: 'jimmylau342',
+        uname: 'Jimmy Lau',
+        icon: null,
     },
     {
         uid: 'irwinking1242',
         uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: null,
     },
     {
         uid: 'johnlui4',
         uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+        icon: null,
     },
 ]
 
 export default function UserSearch(props) {
     let input = props.input
 
-    const filteredData = data.filter(item => item.uname.toLowerCase().includes(input.toLowerCase()))
+    const filteredData = users.filter(item => item.uname.toLowerCase().includes(input.toLowerCase()))
 
     return (
         <Box sx={{ height: '80vh', width: '100%' }}>

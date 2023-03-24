@@ -30,14 +30,14 @@ export default function Login() {
         alignItems: 'center',
         minHeight: '100vh',
         width: '100%',
-        background: "url('../user_bg.jpeg')",
+        // background: "url('../user_bg.jpeg')",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
         <div style={{
           margin: 'auto',
           position: 'relative',
-          width: '400px',
+          // width: '400px',
           // height: '500px',
           paddingBottom: '30px',
           background: 'transparent',
@@ -70,7 +70,7 @@ export default function Login() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Username/Email Address"
                   name="email"
                   autoComplete="email"
                   autoFocus

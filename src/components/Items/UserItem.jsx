@@ -5,18 +5,8 @@ import { Avatar, Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import CancelIcon from '@mui/icons-material/Cancel';
 
-// demonstrate admin
-let isAdmin = true
-
 export default function UserItem(props) {
     const { uid, uname, icon } = props.userInfo
-
-    const deleteUserComfirm = (e) => {
-        const result = window.confirm(`Are you sure you want to delete @${uid}?`);
-        if (result) {
-            console.log('yes');
-        }
-    }
 
     return (
         <Box sx={{ position: 'relative' }}>
@@ -50,19 +40,6 @@ export default function UserItem(props) {
                     </Box>
                 </Grid>
             </Box>
-            {isAdmin ? (
-                <IconButton
-                    onClick={deleteUserComfirm}
-                    sx={{
-                        position: 'absolute',
-                        zIndex: 1,
-                        right: 15,
-                        top: 0,
-                    }}
-                >
-                    <CancelIcon sx={{ color: '#f00' }} />
-                </IconButton>
-            ) : <></>}
         </Box>
     )
 }

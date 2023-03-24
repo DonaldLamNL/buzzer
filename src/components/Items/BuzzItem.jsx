@@ -13,7 +13,7 @@ import Comment from '../BuzzPage/Comment'
 export default function BuzzItem(props) {
     const navigate = useNavigate()
     const { pid, like, comment, icon, content, image, video, uid, uname } = props;
-    const {displayComment = false} = props;
+    const { displayComment = false } = props;
 
     const toBuzz = () => {
         navigate(`/buzz?buzzid=${pid}`)
@@ -29,8 +29,8 @@ export default function BuzzItem(props) {
                     margin: "20px auto",
                     borderRadius: 6,
                 }}
-                >
-                <Box sx={{                    
+            >
+                <Box sx={{
                     display: "flex",
                     position: "relative",
                     width: "90%",
@@ -62,12 +62,13 @@ export default function BuzzItem(props) {
                                 </Typography>
                             </Box>
 
-                            {/* Content */}
                             <Box>
-                                <Typography sx={{ fontSize: "14px", marginRight: "10px" }}>
-                                    {content}
-                                </Typography>
+                                <Typography
+                                    sx={{ fontSize: "14px", marginRight: "10px" }}
+                                    dangerouslySetInnerHTML={{ __html: content }}
+                                />
                             </Box>
+
 
                             {/* Media Block */}
                             {image !== null || video !== null ? (
@@ -131,10 +132,10 @@ export default function BuzzItem(props) {
                 </Box>
 
                 {/* Comment */}
-                <div style={{display: 'block'}}>
+                <div style={{ display: 'block' }}>
                     {displayComment ? (
                         <Comment />
-                        ) : (
+                    ) : (
                         <></>
                     )}
                 </div>

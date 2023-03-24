@@ -1,45 +1,41 @@
 import React from "react";
-import { Grid, Paper, TextField, Avatar, Typography } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  TextField,
+  Avatar,
+  Typography,
+  Stack,
+  IconButton,
+} from "@mui/material";
+import FriendList from "./FriendList";
+import ChatBox from "./ChatBox";
+import { Box } from "@mui/system";
+import SendIcon from "@mui/icons-material/Send";
 
-const ChatBox = () => {
+const ChatRoom = () => {
   return (
-    <Grid container direction="column">
-      <Grid item container>
-        <Typography variant="h5">Chat with Friend A</Typography>
-      </Grid>
-      <Grid item container spacing={2}>
+    <>
+      <Grid container spacing={10}>
         <Grid item>
-          <Avatar alt="User Avatar" src="/avatar.jpg" />
+          <FriendList />
         </Grid>
-        <Grid item xs>
-          <Paper variant="outlined">
-            <Typography variant="subtitle1">Username</Typography>
-            <Typography variant="body1">Hello, how are you?</Typography>
-            <Typography variant="caption">10:30 AM</Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-      <Grid item container spacing={2}>
-        <Grid item xs>
-          <Paper variant="outlined">
-            <Typography variant="subtitle1">Friend A</Typography>
-            <Typography variant="body1">
-              I'm good, thanks for asking. How about you?
-            </Typography>
-            <Typography variant="caption">10:32 AM</Typography>
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Avatar alt="Friend A Avatar" src="/friendA.jpg" />
+        <Grid item sx={{ flexGrow: 1 }}>
+          <ChatBox />
+          <Box
+            display={"flex"}
+            justifyContent={"flex-end"}
+            alignItems="flex-end"
+          >
+            <TextField label="write message" variant="standard" />
+            <IconButton color="primary">
+              <SendIcon />
+            </IconButton>
+          </Box>
         </Grid>
       </Grid>
-      <Grid item container>
-        <Grid item xs>
-          <TextField label="Type your message" fullWidth />
-        </Grid>
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
-export default ChatBox;
+export default ChatRoom;
