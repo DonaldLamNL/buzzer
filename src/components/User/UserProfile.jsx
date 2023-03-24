@@ -177,7 +177,8 @@ export default function UserProfile() {
                                     display: 'flex',
                                     // flexDirection: 'column',
                                     // alignItems: 'center',
-                                    background: '#FFF',
+                                    // background: '#FFF',
+                                    background: '#f7f9f9',
                                     height: '220px',
                                     borderBottom: '1px solid #DCDCDC',
                                 }}>
@@ -304,9 +305,15 @@ export default function UserProfile() {
                                     Likes
                                 </TabPanel>
                             </Box> */}
-                            {data.map((post) => (
-                                <Buzz key={post.pid} {...post} />
-                            ))}
+                            <Box
+                                sx={{
+                                    // background: '#f7f9f9',
+                                }}>
+                                {data.map((post) => (
+                                    <Buzz key={post.pid} {...post} />
+                                ))}
+                            </Box>
+
                         </Stack>
                     </Grid>
                     <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}>
