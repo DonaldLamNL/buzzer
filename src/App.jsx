@@ -6,26 +6,24 @@ import routerConfig from "./router";
 
 import * as React from "react";
 
-
 // import * as React from "react";
 
 import Slide from "@mui/material/Slide";
 import ChatButton from "./components/ChatButton";
 
-
-
 export default function App() {
   const element = useRoutes(routerConfig);
-
 
   return (
     <>
       <ChatButton />
       <Grid container>
         <Grid item xs={2}>
-          <Nav />
+          <Nav isLogin={true} />
         </Grid>
-        <Grid item xs>{element}</Grid>
+        <Grid item xs>
+          {element}
+        </Grid>
       </Grid>
     </>
   );

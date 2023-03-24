@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 import NavItem from "./Items/NavItem";
 
 const Image = styled.img`
@@ -14,9 +15,10 @@ const Image = styled.img`
   height: auto;
 `;
 
-export default function Nav() {
+export default function Nav({ isLogin }) {
   const navigate = useNavigate();
   const [hovering, setHovering] = useState(false);
+  // const [isLogin, SetIsLogin] = useState(false);
 
   const handleMouseEnter = () => {
     setHovering(true);
@@ -52,7 +54,7 @@ export default function Nav() {
 
           "&:hover": {
             backgroundColor: "#0069d9",
-            width: "10%",
+            width: "14%",
             cursor: "pointer",
           },
         }}
@@ -72,15 +74,43 @@ export default function Nav() {
             <Image src="../buzz.svg"></Image>
           </IconButton>
 
-          <NavItem hovering={hovering} path="home" name="home" component={HomeRoundedIcon} />
+          <NavItem
+            hovering={hovering}
+            path="home"
+            name="home"
+            component={HomeRoundedIcon}
+          />
 
-          <NavItem hovering={hovering} path="login" name="user" component={FaceIcon} />
+          <NavItem
+            hovering={hovering}
+            path="login"
+            name="user"
+            component={FaceIcon}
+          />
 
           <Stack direction="column" gap={15} justifyContent="center">
-            <NavItem hovering={hovering} path="hive" name="hive" component={HiveIcon} />
-            <NavItem hovering={hovering} path="home" name="logout" component={LogoutIcon} />
+            <NavItem
+              hovering={hovering}
+              path="hive"
+              name="hive"
+              component={HiveIcon}
+            />
+            {isLogin ? (
+              <NavItem
+                hovering={hovering}
+                path="user"
+                name="login"
+                component={LoginIcon}
+              />
+            ) : (
+              <NavItem
+                hovering={hovering}
+                path="home"
+                name="logout"
+                component={LogoutIcon}
+              />
+            )}
           </Stack>
-
         </Stack>
       </Card>
     </Box>
