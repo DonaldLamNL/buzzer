@@ -5,7 +5,7 @@ import React from 'react'
 export default function UserItem(props) {
 
     const { uid, uname, icon, description, isFollow, isDelete = false } = props
-    
+
     const handleButton = () => {
         if (isDelete) {
             alert(`bye bye ${uname}`)
@@ -50,8 +50,10 @@ export default function UserItem(props) {
                 {/* Button */}
                 {isDelete ?
                     <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-                        <Button variant="contained" color="primary" sx={{ borderRadius: '18px' }} onClick={deleteUserComfirm}>Delete</Button>
+                        <Button variant="contained" color="secondary" sx={{ borderRadius: '18px', bgcolor: 'error.main', '&:hover': { bgcolor: 'error.dark' } }} onClick={deleteUserComfirm}>Delete</Button>
                     </Box>
+
+
                     :
                     <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
                         <Button variant="contained" color="primary" sx={{ borderRadius: '18px' }} onClick={handleButton}>{isFollow ? 'unfollow' : 'follow'}</Button>
