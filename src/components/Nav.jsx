@@ -33,11 +33,10 @@ export default function Nav({ isLogin }) {
       sx={{
         display: "flex",
         justifyContent: "flex-end",
-        marginRight: "30px",
+        marginRight: "20px",
         alignItems: "center",
         height: "100vh",
-        position: "absolute",
-        left: '200px',
+        position: "relative",
         zIndex: "3100",
       }}
     >
