@@ -36,6 +36,9 @@ export default function Nav({ isLogin }) {
         marginRight: "30px",
         alignItems: "center",
         height: "100vh",
+        position: "absolute",
+        left: '200px',
+        zIndex: "3100",
       }}
     >
       <Card
