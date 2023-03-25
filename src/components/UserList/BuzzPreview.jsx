@@ -1,10 +1,11 @@
+import { CheckCircle } from '@mui/icons-material'
 import { Avatar, Typography, Button, Card, Grid } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 
 export default function BuzzPreview(props) {
 
-    const { uid, uname, icon, pid, content } = props
+    const { uid, uname, icon, pid, content, isVerify } = props
 
     const deleteBuzzConfirm = (e) => {
         const result = window.confirm(`Are you sure to delete the post @${pid}?`);
@@ -21,6 +22,7 @@ export default function BuzzPreview(props) {
                 sx={{
                     width: "100%",
                     margin: "20px auto",
+                    paddingBottom: '20px',
                     borderRadius: 6,
                     position: 'relative',
                 }}
@@ -43,7 +45,11 @@ export default function BuzzPreview(props) {
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
                                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
-                                    {uname}{" "}
+                                    {uname}
+                                    {isVerify && (
+                                        <CheckCircle sx={{ color: 'orange', ml: 1 }} />
+                                    )}
+                                    {" "}
                                 </Typography>
                                 <Typography
                                     sx={{

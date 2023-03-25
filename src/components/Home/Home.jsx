@@ -18,6 +18,7 @@ const data = [
         video: null,
         uid: 'johnlui001',
         uname: 'John Lui',
+        isVerify: false,
         icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
     },
     {
@@ -29,6 +30,7 @@ const data = [
         video: null,
         uid: 'amychan001',
         uname: 'Amy Chan',
+        isVerify: true,
         icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
     },
     {
@@ -40,6 +42,7 @@ const data = [
         video: null,
         uid: 'tomlui002',
         uname: 'Tom Lui',
+        isVerify: false,
         icon: null,
     },
 ]

@@ -19,6 +19,7 @@ const data = [
         video: null,
         uid: 'amychan001',
         uname: 'Amy Chan',
+        isVerify: true,
         icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
     },
     {

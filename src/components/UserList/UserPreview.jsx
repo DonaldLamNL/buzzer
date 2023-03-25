@@ -1,10 +1,11 @@
+import { CheckCircle } from '@mui/icons-material'
 import { Avatar, Typography, Button } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 
-export default function UserItem(props) {
+export default function UserPreview(props) {
 
-    const { uid, uname, icon, description, isFollow, isDelete = false } = props
+    const { uid, uname, icon, description, isFollow, isDelete = false, isVerify } = props
 
     const handleFollowButton = () => {
         if (isDelete) {
@@ -21,7 +22,11 @@ export default function UserItem(props) {
         }
     }
     const verifyUserComfirm = (e) => {
-        const result = window.confirm(`Are you sure to verify @${uid}?`);
+        if(isVerify){
+            const result = window.confirm(`Are you sure to unverify @${uid}?`);
+        }else{
+            const result = window.confirm(`Are you sure to verify @${uid}?`);
+        }
         if (result) {
             console.log('yes');
         }
@@ -48,7 +53,12 @@ export default function UserItem(props) {
                 {/* Info */}
                 <Box sx={{ display: 'flex', flexDirection: 'column', }}>
                     <Box sx={{ height: '60px', }}>
-                        <Typography sx={{ fontSize: '18px', lineHeight: '46px' }}>{uname} </Typography>
+                        <Typography sx={{ fontSize: '18px', lineHeight: '46px' }}>
+                            {uname}
+                            {isVerify && (
+                                <CheckCircle sx={{ color: 'orange', ml: 1 }} />
+                            )}
+                        </Typography>
                         <Typography sx={{ fontSize: '14px', lineHeight: '0', color: '#7e7e7e' }}>@{uid}</Typography>
                     </Box>
                 </Box>
@@ -57,7 +67,7 @@ export default function UserItem(props) {
                 {isDelete ?
                     <Box sx={{ display: 'flex', }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-                            <Button variant="contained" sx={{ borderRadius: '18px', }} onClick={verifyUserComfirm}>Verify</Button>
+                            <Button variant="contained" sx={{ borderRadius: '18px', }} onClick={verifyUserComfirm}>{isVerify ? 'UnVerify' : 'Verify'}</Button>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '5px' }}>
                             <Button variant="contained" color="secondary" sx={{ borderRadius: '18px', bgcolor: 'error.main', '&:hover': { bgcolor: 'error.dark' } }} onClick={deleteUserComfirm}>Delete</Button>

@@ -40,6 +40,7 @@ const data = [
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
     image: "https://p.ipic.vip/9j6cd6.png",
     video: null,
+    isVerify: true,
     icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
   },
   {
@@ -52,6 +53,7 @@ const data = [
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
     image: "https://p.ipic.vip/e72rar.png",
     video: null,
+    isVerify: true,
     icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
   },
   {
@@ -64,6 +66,7 @@ const data = [
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
     image: "https://p.ipic.vip/phxapn.png",
     video: null,
+    isVerify: true,
     icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
   },
 ];

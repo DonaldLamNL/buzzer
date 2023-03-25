@@ -5,6 +5,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import { Box } from "@mui/system";
 import { useNavigate } from 'react-router-dom'
+import { CheckCircle } from '@mui/icons-material'
 
 import React, { useState } from "react";
 
@@ -12,7 +13,7 @@ import Comment from '../BuzzPage/Comment'
 
 export default function BuzzItem(props) {
     const navigate = useNavigate()
-    const { pid, like, comment, icon, content, image, video, uid, uname } = props;
+    const { pid, like, comment, icon, content, image, video, uid, uname, isVerify } = props;
     const { displayComment = false } = props;
 
     const toBuzz = () => {
@@ -48,7 +49,11 @@ export default function BuzzItem(props) {
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
                                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
-                                    {uname}{" "}
+                                    {uname}
+                                    {isVerify && (
+                                        <CheckCircle sx={{ color: 'orange', ml: 1 }} />
+                                    )}
+                                    {" "}
                                 </Typography>
                                 <Typography
                                     sx={{

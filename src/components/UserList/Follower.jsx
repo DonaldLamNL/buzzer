@@ -1,7 +1,7 @@
 import { Box } from '@mui/system'
 import React from 'react'
 
-import UserItem from './UserPreview.jsx'
+import UserPreview from './UserPreview.jsx'
 
 
 const users = [
@@ -12,7 +12,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: false,
+        isFollow: true,
     },
     {
         uid: 'amywong124',
@@ -21,7 +22,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: false
+        isVerify: true,
+        isFollow: false,
     },
     {
         uid: 'amychan001',
@@ -30,7 +32,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: false
+        isVerify: true,
+        isFollow: false,
     },
     {
         uid: 'tomlui002',
@@ -39,7 +42,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: false,
+        isFollow: true,
     },
     {
         uid: 'michaellam331',
@@ -48,7 +52,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: false
+        isVerify: true,
+        isFollow: false,
     },
     {
         uid: 'chriswong123',
@@ -57,7 +62,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: true,
+        isFollow: true,
     },
     {
         uid: 'jimmylau342',
@@ -66,7 +72,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: false
+        isVerify: false,
+        isFollow: false,
     },
     {
         uid: 'irwinking1242',
@@ -75,7 +82,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: false,
+        isFollow: true,
     },
     {
         uid: 'johnlui4',
@@ -84,7 +92,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: false,
+        isFollow: true,
     },
     {
         uid: "elonmusk103",
@@ -93,7 +102,8 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
-        isFollow: true
+        isVerify: true,
+        isFollow: true,
     },
 ]
 
@@ -102,7 +112,7 @@ export default function Follower() {
         <Box>
             {users.map(c => {
                 return (
-                    <UserItem key={c.uid} {...c} />
+                    <UserPreview key={c.uid} {...c} />
                 )
             })}
         </Box>
