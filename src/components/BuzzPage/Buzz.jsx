@@ -2,19 +2,19 @@ import React from 'react'
 import BuzzItem from '../Items/BuzzItem'
 
 const buzz = {
-    pid: 124,
-    like: 143,
-    comment: 534,
-    content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
-    image: 'https://p.ipic.vip/e72rar.png',
-    video: null,
-    uid: 'irwinking124',
-    uname: 'Irwin King',
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
+  pid: 124,
+  like: 143,
+  comment: 534,
+  content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia repellat, ad molestiae dolore hic consequatur incidunt facilis modi ea nulla, tempore totam voluptate sequi fugiat saepe quasi officiis ipsa laborum sapiente molestias quia veniam pariatur! Esse exercitationem vel praesentium. Voluptatibus!',
+  image: 'https://p.ipic.vip/e72rar.png',
+  video: null,
+  uid: 'amychan001',
+  uname: 'Amy Chan',
+  icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
 }
 
 export default function Buzz() {
   return (
-    <BuzzItem {...buzz} displayComment = {true} />
+    <BuzzItem {...buzz} displayComment={true} />
   )
 }

@@ -100,15 +100,15 @@ export default function Signup() {
                   name="email"
                   autoComplete="email"
                 />
-                <TextField
+                {/* <TextField
                   variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                />
+                  id="userid"
+                  label="User id"
+                  name="user id"
+                /> */}
                 <TextField
                   variant="standard"
                   margin="normal"

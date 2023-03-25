@@ -21,36 +21,36 @@ export default function FriendList() {
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>A</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Amy Lam" />
         </ListItemButton>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>C</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Chris Wong" />
         </ListItemButton>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>J</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Jimmy Lau" />
         </ListItemButton>
       </ListItem>
       <Divider />
-      <ListItem>
+      <ListItem sx={{backgroundColor: '#3577CB'}}>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>I</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Irwin King" />
         </ListItemButton>
       </ListItem>
       {/* </List> */}
