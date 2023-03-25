@@ -191,13 +191,15 @@ export default function UserProfile() {
                   <Avatar
                     sx={{
                       // m: 1,
-                      bgcolor: "#1776d2",
+                      bgcolor: "#fff",
                       width: 100,
                       height: 100,
                       outline: "4px solid white",
                     }}
+                    src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
                   >
-                    <PersonOutlineOutlinedIcon />
+                    {/* <PersonOutlineOutlinedIcon /> */}
+                    I
                   </Avatar>
                   <Typography fontWeight="600" component="h1" variant="h6">
                     Irwin King
