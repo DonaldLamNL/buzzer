@@ -13,7 +13,7 @@ export default function FriendList() {
       {/* <List> */}
       <ListItem sx={{ backgroundColor: "#0069d9" }}>
         <ListItemText
-          primary="Friends List"
+          primary="Messages"
           primaryTypographyProps={{ color: "white", align: "center" }}
         />
       </ListItem>
@@ -45,7 +45,7 @@ export default function FriendList() {
         </ListItemButton>
       </ListItem>
       <Divider />
-      <ListItem sx={{backgroundColor: '#3577CB'}}>
+      <ListItem sx={{ backgroundColor: "#006eff", color: "white" }}>
         <ListItemButton>
           <ListItemAvatar>
             <Avatar>I</Avatar>
