@@ -51,11 +51,12 @@ export default function News() {
             <Card
                 elevation={5}
                 sx={{
-                    width: "100%",
+                    width: "80%",
                     textAlign: "left",
                     display: "flex",
                     flexDirection: "column",
                     borderRadius: '20px',
+                    margin: '0 auto'
                 }}
             >
                 <h1 style={{ lineHeight: "60px", fontSize: "20px", textAlign: "center" }}>
