@@ -45,13 +45,13 @@ const categories = [
     {
         name: 'Others',
         number: '213'
-    }
+    },
 ];
 
 export default function News() {
 
     return (
-        <Box sx={{ height: "80vh", width: "100%" }}>
+        <Box sx={{ width: "100%" }}>
             <Card
                 elevation={5}
                 sx={{

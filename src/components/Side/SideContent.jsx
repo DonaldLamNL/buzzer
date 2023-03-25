@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 // material-ui
-import { TextField, IconButton } from '@mui/material'
+import { TextField, IconButton, Box } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 
@@ -48,7 +48,7 @@ export default function SideContent() {
     return (
         <div ref={searchRef}
             style={{
-                height: '100vh',
+                // height: '100vh',
                 width: '90%',
                 position: 'relative',
                 justifyContent: 'center',
@@ -80,6 +80,7 @@ export default function SideContent() {
                         <News />
                     </div>
                 }
+                <Box marginBottom={'50px'}></Box>
             </div>
         </div>
     )
