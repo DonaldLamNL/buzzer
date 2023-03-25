@@ -260,6 +260,18 @@ export default function UserProfile() {
                     </Link>
                   </Box>
                 </Container>
+                <Tooltip title="Send Message" placement="top" arrow>
+                  <IconButton
+                    variant="outlined"
+                    sx={{
+                      position: "absolute",
+                      right: "130px",
+                      outline: "1px solid #DCDCDC",
+                    }}
+                  >
+                    <MailOutlineIcon></MailOutlineIcon>
+                  </IconButton>
+                </Tooltip>
                 <Button
                   variant="contained"
                   sx={{
@@ -270,18 +282,7 @@ export default function UserProfile() {
                 >
                   Follow
                 </Button>
-                <Tooltip title="Send Message" placement="top" arrow>
-                  <IconButton
-                    sx={{
-                      position: "absolute",
-                      right: "50px",
-                      // marginTop: "10",
-                      top: "160px",
-                    }}
-                  >
-                    <MailOutlineIcon></MailOutlineIcon>
-                  </IconButton>
-                </Tooltip>
+                
               </Box>
               <Box
                 sx={
