@@ -42,6 +42,10 @@ const categories = [
         name: 'Social',
         number: 534
     },
+    {
+        name: 'Others',
+        number: '213'
+    }
 ];
 
 export default function News() {

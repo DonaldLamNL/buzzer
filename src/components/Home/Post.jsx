@@ -8,16 +8,46 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const categories = [
-    "Food",
-    "Music",
-    "Movie",
-    "News",
-    "Gaming",
-    "Business",
-    "Sport",
-    "Education",
-    "Social",
-    "Blog",
+    {
+        name: 'Food',
+        number: 123
+    },
+    {
+        name: 'Music',
+        number: 432
+    },
+    {
+        name: 'Movie',
+        number: 355
+    },
+    {
+        name: 'News',
+        number: 1442
+    },
+    {
+        name: 'Gaming',
+        number: 542
+    },
+    {
+        name: 'Sport',
+        number: 513
+    },
+    {
+        name: 'Business',
+        number: 31
+    },
+    {
+        name: 'Science',
+        number: 421
+    },
+    {
+        name: 'Social',
+        number: 534
+    },
+    {
+        name: 'Others',
+        number: '213'
+    }
 ];
 
 export default function Post() {
@@ -126,12 +156,9 @@ export default function Post() {
                                 onChange={handleCategoryChoose}
                                 label="Category"
                             >
-                                <MenuItem value="Others">
-                                    <em>Category</em>
-                                </MenuItem>
                                 {categories.map( c => {
                                     return(
-                                        <MenuItem key={c} value={c}>{c}</MenuItem>
+                                        <MenuItem key={c.name} value={c.name}>{c.name}</MenuItem>
                                     )
                                 })}
                             </Select>
