@@ -50,14 +50,14 @@ export default function Nav({ isLogin }) {
           // alignItems: "center",
           height: "96%",
           // width: "100%",
-          width: "100px",
+          width: "80px",
           position: "fixed",
           transition: "0.7s",
 
           "&:hover": {
             backgroundColor: "#0069d9",
             // width: "14%",
-            width: "220px",
+            width: "175px",
             cursor: "pointer",
           },
         }}
