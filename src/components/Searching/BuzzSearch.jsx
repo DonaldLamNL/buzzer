@@ -57,7 +57,7 @@ export default function BuzzSearch() {
     return (
         <div>
             <h1 style={{ height: '40px', lineHeight: '40px', fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>
-                Searching for {search} ...
+                Search for {search[0] === '*' ? `${search.slice(1).charAt(0).toUpperCase()}${search.slice(2)} Category` : ` ${search} buzzes ...`}
             </h1>
 
             {filteredData.length === 0 ? (
