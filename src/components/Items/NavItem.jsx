@@ -26,10 +26,10 @@ export default function NavItem(props) {
             <Grid item> */}
 
           <Typography
-            fontSize={40}
+            fontSize={23}
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <Component sx={{ fontSize: 40, color: "#ffffff", mr: 0.5 }} />
+            <Component sx={{ fontSize: 50, color: "#ffffff" }} />
             {name}
           </Typography>
           {/* </Grid>
@@ -39,14 +39,15 @@ export default function NavItem(props) {
           </Grid> */}
         </Button>
       ) : (
-        <IconButton
-          size="large"
+        <Button
+          // size="large"
+          variant="text"
           onClick={() => {
             navigate(`../${path}`);
           }}
         >
-          <Component sx={{ fontSize: 42, color: "#ffffff" }} />
-        </IconButton>
+          <Component sx={{ fontSize: 50, color: "#ffffff" }} />
+        </Button>
       )}
     </>
   );

@@ -67,6 +67,7 @@ export default function Nav({ isLogin }) {
           justifyContent="flex-start"
           alignItems="center"
           marginTop={3}
+          spacing={2}
         >
           <IconButton
             size="large"
@@ -91,7 +92,7 @@ export default function Nav({ isLogin }) {
             component={FaceIcon}
           />
 
-          <Stack direction="column" gap={15} justifyContent="center">
+          <Stack direction="column" gap={18} justifyContent="center">
             <NavItem
               hovering={hovering}
               path="hive"
