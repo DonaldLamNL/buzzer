@@ -1,7 +1,7 @@
 import { Box } from '@mui/system'
 import React from 'react'
 
-import UserItem from './UserItem.jsx'
+import UserItem from './UserPreview.jsx'
 
 
 const users = [

@@ -1,4 +1,6 @@
+import { IconButton } from '@mui/material'
 import { Box } from '@mui/system'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import React from 'react'
 
 import UserItem from './UserPreview.jsx'
@@ -97,14 +99,18 @@ const users = [
     },
 ]
 
-export default function Follower() {
+export default function UserManagement() {
+
     return (
-        <Box>
-            {users.map(c => {
-                return (
-                    <UserItem key={c.uid} {...c} />
-                )
-            })}
+        <Box sx={{ width: '90%' }}>
+            <Box>
+                {users.map(c => {
+                    return (
+                        <UserItem key={c.uid} {...c} isDelete={true} />
+                    )
+                })}
+            </Box>
         </Box>
+
     )
 }
