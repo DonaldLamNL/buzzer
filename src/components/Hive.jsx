@@ -135,8 +135,8 @@ export default function Hive() {
                         (data.context != "")?
                         <HexGridItem>
                           <Card className="hex-grid__content__inside" key={i}>
-                            {(checkOnShow(i) === false)?"":<CardHeader titleTypographyProps={{variant:'subtitle2'}} title={data.uname}/>}
-                            <CardContent style={{padding:"0"}}  onClick={(e)=>showContent(i)}>
+                            {(checkOnShow(i) === false)?"":<CardHeader titleTypographyProps={{variant:'subtitle2'}} title={data.uname} onClick={(e)=>showContent(i)}/>}
+                            <CardContent style={{padding:"0"}}  onClick={(e)=>showContent(i)} sx={{width:"100%"}}>
                               {(checkOnShow(i) === false)?<AccountCircleIcon sx={{fontSize:130}}/>:<Typography sx={{fontSize:"1.5rem"}}>{data.context}</Typography>} 
                             </CardContent>
                             {(checkOnShow(i) === false)?"":<CardActions>
