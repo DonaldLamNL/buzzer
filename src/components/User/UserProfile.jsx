@@ -117,6 +117,10 @@ export default function UserProfile() {
             sx={{
               borderLeft: "1px solid #DCDCDC",
               borderRight: "1px solid #DCDCDC",
+              borderBottom: "1px solid #DCDCDC",
+              borderRadius: "30px",
+              marginTop: "20px",
+              marginBottom: "20px",
             }}
           >
             <Stack>
@@ -126,6 +130,8 @@ export default function UserProfile() {
                   display: "flex",
                   padding: "3px",
                   background: "#1776d2",
+                  borderTopRightRadius: "30px",
+                  borderTopLeftRadius: "30px",
                 }}
               >
                 <IconButton href="/#/home" aria-label="back">
@@ -293,6 +299,8 @@ export default function UserProfile() {
                 sx={
                   {
                     // background: '#f7f9f9',
+                    borderBottomLeftRadius: "30px",
+                    borderBottomRightRadius: "30px",
                   }
                 }
               >
