@@ -13,7 +13,7 @@ export default function FriendList() {
       {/* <List> */}
       <ListItem sx={{ backgroundColor: "#0069d9" }}>
         <ListItemText
-          primary="Friends List"
+          primary="Messages"
           primaryTypographyProps={{ color: "white", align: "center" }}
         />
       </ListItem>
@@ -21,36 +21,36 @@ export default function FriendList() {
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>A</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Amy Lam" />
         </ListItemButton>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>C</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Chris Wong" />
         </ListItemButton>
       </ListItem>
       <Divider />
       <ListItem>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>J</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Jimmy Lau" />
         </ListItemButton>
       </ListItem>
       <Divider />
-      <ListItem>
+      <ListItem sx={{ backgroundColor: "#006eff", color: "white" }}>
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar>I</Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Michael" />
+          <ListItemText primary="Irwin King" />
         </ListItemButton>
       </ListItem>
       {/* </List> */}

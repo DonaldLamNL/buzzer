@@ -21,7 +21,7 @@ export default function App() {
         <Grid item xs={2}>
           <Nav isLogin={true} />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={10}>
           {element}
         </Grid>
       </Grid>

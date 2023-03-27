@@ -10,7 +10,7 @@ import BuzzSearch from "./Searching/BuzzSearch";
 import SideContent from "./Side/SideContent";
 import Buzz from "./BuzzPage/Buzz";
 import UserList from "./UserList/UserList"
-import AdminUserList from "./UserList/AdminUserList"
+import Admin from "./UserList/Admin"
 
 const routerConfig = [
   {
@@ -46,10 +46,10 @@ const routerConfig = [
     ),
   },
   {
-    path: "/admin-user",
+    path: "/admin",
     element: (
       <>
-        <AdminUserList />
+        <Admin />
       </>
     ),
   },

@@ -19,10 +19,14 @@ export default function ChatBox() {
       <Card variant="outlined">
         <ListItem sx={{ backgroundColor: "#0069d9" }}>
           <ListItemAvatar>
-            <Avatar alt="Michael" />
+            <Avatar
+              sx={{ width: 40, height: 40, margin: '15px' }}
+            >
+              {'I'}
+            </Avatar>
           </ListItemAvatar>
           <ListItemText
-            primary="Michael"
+            primary="Irwin King"
             primaryTypographyProps={{ color: "white" }}
           />
         </ListItem>
@@ -37,28 +41,28 @@ export default function ChatBox() {
           <ChatBubble
             message="Hello, how are you?"
             sentByMe={false}
-            timestamp="10:30 AM"
+            timestamp="10:31 AM"
+          />
+        </ListItem>{" "}
+        <ListItem sx={{ justifyContent: "flex-end" }}>
+          <ChatBubble
+            message="I'm fine, thank you, and you?"
+            sentByMe={true}
+            timestamp="10:40 AM"
           />
         </ListItem>{" "}
         <ListItem>
           <ChatBubble
-            message="Hello, how are you?"
+            message="I go to school by bus"
             sentByMe={false}
-            timestamp="10:30 AM"
+            timestamp="10:45 AM"
           />
         </ListItem>{" "}
-        <ListItem>
+        <ListItem sx={{ justifyContent: "flex-end" }}>
           <ChatBubble
-            message="Hello, how are you?"
-            sentByMe={false}
-            timestamp="10:30 AM"
-          />
-        </ListItem>{" "}
-        <ListItem>
-          <ChatBubble
-            message="Hello, how are you?"
-            sentByMe={false}
-            timestamp="10:30 AM"
+            message="I go to school by rocket"
+            sentByMe={true}
+            timestamp="10:50 AM"
           />
         </ListItem>
         {/* <Divider /> */}

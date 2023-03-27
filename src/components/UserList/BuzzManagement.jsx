@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import { IconButton } from '@mui/material'
+import { Box } from '@mui/system'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import React from 'react'
 
-// material-ui
-import { LinearProgress } from '@mui/material'
-
-// components
-import BuzzItem from '../Items/BuzzItem'
-import Post from './Post'
+import BuzzPreview from './BuzzPreview'
 
 // Demonstrate buzz data
 const data = [
@@ -47,15 +45,17 @@ const data = [
     },
 ]
 
-export default function MainContent() {
+export default function BuzzManagement() {
     return (
-        <div>
-            <Post />
-            {data.map((post) => (
-                <BuzzItem key={post.pid} {...post} />
-            ))}
-            <LinearProgress />
-        </div>
+        <Box sx={{ width: '100%' }}>
+            <Box >
+                {data.map(c => {
+                    return (
+                        <BuzzPreview key={c.uid} {...c} isDelete={true} />
+                    )
+                })}
+            </Box>
+        </Box>
+
     )
 }
-

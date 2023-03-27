@@ -1,154 +1,122 @@
-import { Box } from "@mui/system";
-import { Button, Card, IconButton } from "@mui/material";
+
+import { Box, Button, Card, IconButton } from "@mui/material";
 import TagIcon from "@mui/icons-material/Tag";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-// Demonstrate buzz data
-const data = [
-    {
-        pid: 123,
-        like: 123,
-        comment: 456,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/9j6cd6.png",
-        video: null,
-        uid: "michaellyu123",
-        uname: "Michael Lyu",
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-    {
-        pid: 124,
-        like: 143,
-        comment: 534,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/e72rar.png",
-        video: null,
-        uid: "irwinking124",
-        uname: "Irwin King",
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-    {
-        pid: 125,
-        like: 324,
-        comment: 635,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/phxapn.png",
-        video: null,
-        uid: "johnlui",
-        uname: "John Lui",
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-];
-
 const categories = [
-    "Food",
-    "Music",
-    "Movie",
-    "News",
-    "Gaming",
-    "Business",
-    "Sport",
-    "Education",
-    "Social",
-    "Blog",
+    {
+        name: 'Food',
+        number: 123
+    },
+    {
+        name: 'Music',
+        number: 432
+    },
+    {
+        name: 'Movie',
+        number: 355
+    },
+    {
+        name: 'News',
+        number: 1442
+    },
+    {
+        name: 'Gaming',
+        number: 542
+    },
+    {
+        name: 'Sport',
+        number: 513
+    },
+    {
+        name: 'Business',
+        number: 31
+    },
+    {
+        name: 'Science',
+        number: 421
+    },
+    {
+        name: 'Social',
+        number: 534
+    },
+    {
+        name: 'Others',
+        number: '213'
+    },
 ];
 
 export default function News() {
-    return (
-        <Box sx={{ height: "80vh", width: "100%" }}>
-            <Card
-                elevation={5}
-                sx={{
-                    width: "100%",
-                    height: "400px",
-                    borderRadius: 6,
-                    // boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-                    margin: "20px 0",
-                    // margin: "auto",
-                    // backgroundColor: "#fffbfb",
-                }}
-            >
-                <h1
-                    style={{ lineHeight: "30px", fontSize: "20px", textAlign: "center" }}
-                >
-                    Popular Buzzes
-                </h1>
 
-                <Box
-                    sx={{
-                        width: "100%",
-                        height: "300px",
-                        lineHeight: "20px",
-                        fontSize: "20px",
-                        textAlign: "center",
-                    }}
-                >
-                    {data.map((p) => {
-                        return (
-                            <Box
-                                key={p.pid}
-                                sx={{
-                                    width: "90%",
-                                    height: "100px",
-                                    backgroundColor: "#bfa",
-                                    margin: "10px auto",
-                                }}
-                            >
-                                {/* {p.content.slice(0, 100)} */}
-                            </Box>
-                        );
-                    })}
-                </Box>
-            </Card>
+    return (
+        <Box sx={{ width: "100%" }}>
             <Card
                 elevation={5}
-                // variant="outlined"
                 sx={{
-                    width: "100%",
-                    height: "200px",
-                    borderRadius: 6,
-                    // boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
-                    // backgroundColor: "#fffbfb",
+                    width: "80%",
+                    textAlign: "left",
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: '20px',
+                    margin: '0 auto'
                 }}
             >
-                <h1
-                    style={{ lineHeight: "30px", fontSize: "20px", textAlign: "center" }}
-                >
+                <h1 style={{ lineHeight: "60px", fontSize: "20px", textAlign: "center" }}>
                     Categories
                 </h1>
-
-                <Box
-                    sx={{
-                        width: "100%",
-                        height: "300px",
-                        textAlign: "left",
-                        display: "block",
-                    }}
-                >
-                    <Box sx={{ width: "90%", margin: "20px auto" }}>
-                        {categories.map((c) => {
-                            return (
-                                <Link
-                                    key={c}
-                                    to={`/search?category=${c.toLowerCase()}`}
-                                    style={{
-                                        margin: "5px",
-                                        fontSize: "20px",
-                                        lineHeight: "20px",
-                                        display: "inline-block",
-                                    }}
-                                >
-                                    #{c}
-                                </Link>
-                            );
-                        })}
-                    </Box>
-                </Box>
+                {categories
+                    .sort((a, b) => b.number - a.number) // sort categories by number in descending order
+                    .map((c) => {
+                        return (
+                            <Link
+                                id={`${c.name}-item`}
+                                key={c.name}
+                                to={`/search/*${c.name.toLowerCase()}`}
+                                style={{
+                                    margin: "5px",
+                                    fontSize: "20px",
+                                    lineHeight: "20px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    padding: "10px",
+                                    borderRadius: "10px",
+                                    textDecoration: "none",
+                                    color: "inherit",
+                                }}
+                                onMouseOver={() => {
+                                    document.getElementById(`${c.name}-item`).style.backgroundColor = "#f1f1f1";
+                                }}
+                                onMouseOut={() => {
+                                    document.getElementById(`${c.name}-item`).style.backgroundColor = "transparent";
+                                }}
+                            >
+                                <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            margin: "0 10px",
+                                            fontSize: '20px'
+                                        }}
+                                    >
+                                        # {c.name}
+                                    </Box>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            margin: "5px 10px 0 10px",
+                                            fontSize: '15px',
+                                            color: "gray",
+                                        }}
+                                    >
+                                        {c.number} buzzes
+                                    </Box>
+                                </Box>
+                            </Link>
+                        )
+                    })
+                }
             </Card>
         </Box>
     );

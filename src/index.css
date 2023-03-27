@@ -184,16 +184,16 @@ g text {
   stroke: none;
 }
 
-.hex-grid__list{
+.hex-grid__list {
   --amount: 6 !important;
   --counter: 1 !important;
   grid-gap: 1.5rem 3rem;
-  overflow:"scroll"
+  overflow: "scroll"
 }
 
 .hex-grid__content {
   padding: 1rem !important;
-  background-color:#000000 !important;
+  background-color: #000000 !important;
   font-size: 3rem !important;
   /* overflow: scroll; */
 }
@@ -217,9 +217,9 @@ g text {
   transition: transform 0.24s ease-out;
 }
 
-.horny_background_color{
-  background: rgb(255,184,37);
-  background: linear-gradient(0deg, rgba(255,184,37,1) 0%, rgba(255,170,37,1) 89%, rgba(255,150,36,1) 100%);
+.horny_background_color {
+  background: rgb(255, 184, 37);
+  background: linear-gradient(0deg, rgba(255, 184, 37, 1) 0%, rgba(255, 170, 37, 1) 89%, rgba(255, 150, 36, 1) 100%);
 }
 
 /* .footer {
@@ -229,8 +229,7 @@ g text {
   color: black;
 } */
 
-.side
-{
+.side {
   display: flex;
   padding: 20px;
   justify-content: center;
@@ -253,13 +252,11 @@ g text {
   transition: 0.5s;
 }
 
-.card:hover
-{
+.card:hover {
   height: 430px;
 }
 
-.imgBx
-{
+.imgBx {
   position: absolute;
   top: -50px;
   transform: translateX(-50%);
@@ -273,8 +270,7 @@ g text {
   transition: 0.5s;
 }
 
-.imgBx img
-{
+.imgBx img {
   position: absolute;
   top: 0;
   left: 0;
@@ -283,8 +279,7 @@ g text {
   object-fit: cover;
 }
 
-.charBx
-{
+.charBx {
   position: absolute;
   top: -50px;
   transform: translateX(-50%);
@@ -301,22 +296,20 @@ g text {
   align-items: center;
   font-size: 400%;
 }
-.card:hover .charBx
-{
+
+.card:hover .charBx {
   width: 250px;
   height: 250px;
   font-size: 900%;
 }
 
-.card:hover .imgBx
-{
+.card:hover .imgBx {
   width: 250px;
   height: 250px;
 }
 
-.card .content
-{
-  position:absolute;
+.card .content {
+  position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
@@ -325,8 +318,7 @@ g text {
   overflow: hidden;
 }
 
-.card .content .details
-{
+.card .content .details {
   padding: 40px;
   text-align: center;
   width: 100%;
@@ -334,56 +326,48 @@ g text {
   transform: translateY(150px);
 }
 
-.card:hover .content .details
-{
+.card:hover .content .details {
   transform: translateY(0px);
 }
 
-.card .content .details h2
-{
+.card .content .details h2 {
   font-size: 1.25em;
   font-weight: 600;
   color: #555;
   line-height: 1.2em;
 }
 
-.card .content .details h2 span
-{
+.card .content .details h2 span {
   font-size: 0.75em;
   font-weight: 500;
   opacity: 0.5;
 }
 
-.card .content .details .data
-{
+.card .content .details .data {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
 }
 
-.card .content .details .data h3
-{
+.card .content .details .data h3 {
   font-size: 1em;
   color: #555;
   line-height: 1.2em;
   font-weight: 600;
 }
 
-.card .content .details .data h3 span
-{
+.card .content .details .data h3 span {
   font-size: 0.85em;
   font-weight: 400;
   opacity: 0.5;
 }
 
-.card .content .details .actionBtn
-{
+.card .content .details .actionBtn {
   display: flex;
   justify-content: space-between;
 }
 
-.card .content .details .actionBtn button
-{
+.card .content .details .actionBtn button {
   padding: 15px 25px;
   border-radius: 30px;
   border: none;
@@ -395,8 +379,7 @@ g text {
   cursor: pointer;
 }
 
-.card .content .details .actionBtn button:nth-child(2)
-{
+.card .content .details .actionBtn button:nth-child(2) {
   border: 1px solid #1776d2;
   color: #1776d2;
   background: transparent;

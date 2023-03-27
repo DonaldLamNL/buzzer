@@ -32,10 +32,12 @@ export default function Nav({ isLogin }) {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
-        marginLeft: "10px",
+        justifyContent: "flex-end",
+        marginRight: "20px",
         alignItems: "center",
         height: "100vh",
+        position: "relative",
+        zIndex: "3100",
       }}
     >
       <Card
@@ -50,14 +52,14 @@ export default function Nav({ isLogin }) {
           // alignItems: "center",
           height: "96%",
           // width: "100%",
-          width: "100px",
+          width: "80px",
           position: "fixed",
-          transition: "0.5s",
+          transition: "0.7s",
 
           "&:hover": {
             backgroundColor: "#0069d9",
             // width: "14%",
-            width: "217px",
+            width: "175px",
             cursor: "pointer",
           },
         }}
@@ -67,6 +69,7 @@ export default function Nav({ isLogin }) {
           justifyContent="flex-start"
           alignItems="center"
           marginTop={3}
+          spacing={2}
         >
           <IconButton
             size="large"
@@ -91,7 +94,7 @@ export default function Nav({ isLogin }) {
             component={FaceIcon}
           />
 
-          <Stack direction="column" gap={15} justifyContent="center">
+          <Stack direction="column" gap={18} justifyContent="center">
             <NavItem
               hovering={hovering}
               path="hive"
