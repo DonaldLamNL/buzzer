@@ -13,7 +13,7 @@ The server for the buzzer
 
 3. Run the server in local
     ```bash
-    npm start
+    DEBUG=server:* npm start
     ```
     - The server is defaultly open in local port: 3100
 
