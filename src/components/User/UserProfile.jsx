@@ -175,7 +175,7 @@ export default function UserProfile() {
                     position: "absolute",
                     display: "flex",
                     flexDirection: "column",
-                    top: "-60px",
+                    top: "-50px",
                     // height: '200px',
                     // bgcolor: '#999',
                     // opacity: '0.5',
@@ -216,7 +216,7 @@ export default function UserProfile() {
                     sx={{
                       position: "absolute",
                       display: "flex",
-                      bottom: -50,
+                      bottom: -40,
                       // flexDirection: 'column',
                       // alignItems: 'center',
                       // background: '#999',
