@@ -16,3 +16,9 @@ The server for the buzzer
     npm start
     ```
     - The server is defaultly open in local post: 3000
+
+4. If npm install ERROR
+    ```bash
+    sudo chown -R 501:20 "/Users/edmundfung/.npm"
+    ```
+    - This can solve the npm install package problem.
