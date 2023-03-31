@@ -185,10 +185,28 @@ g text {
 }
 
 .hex-grid__list {
-  --amount: 6 !important;
-  --counter: 1 !important;
+  width: 100%;
+  --amount: 6;
+  --counter: 1;
   grid-gap: 1.5rem 3rem;
   overflow: "scroll"
+}
+
+@media screen and (min-width: 840px) and (max-width: 1119px){
+  .hex-grid__list{
+      --amount: 3 !important;
+      --counter: 1 !important;
+      grid-gap: 1.5rem 3rem;
+  }
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 839px){
+  .hex-grid__list {
+    --amount: 3 !important;
+    --counter: 1 !important;
+    grid-gap: 1.5rem 3rem;
+  }
 }
 
 .hex-grid__content {
