@@ -15,7 +15,7 @@ The server for the buzzer
     ```bash
     npm start
     ```
-    - The server is defaultly open in local post: 3000
+    - The server is defaultly open in local port: 3000
 
 4. If npm install ERROR
     ```bash
