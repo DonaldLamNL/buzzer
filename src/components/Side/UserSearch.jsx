@@ -15,6 +15,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'amywong124',
@@ -23,6 +24,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'amychan001',
@@ -31,6 +33,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'tomlui002',
@@ -39,6 +42,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'michaellam331',
@@ -47,6 +51,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'chriswong123',
@@ -55,6 +60,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'jimmylau342',
@@ -63,6 +69,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'irwinking1242',
@@ -71,6 +78,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: 'johnlui4',
@@ -79,6 +87,7 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
     {
         uid: "elonmusk103",
@@ -87,19 +96,22 @@ const users = [
         postsCount: 123,
         followersCount: 456,
         followingCount: 789,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, se do eiusmod tempor incididunt ut labore et dolore magnaaliqua.",
     },
 ]
+
+export { users };
 
 export default function UserSearch(props) {
     let input = props.input
     const filteredData = users.filter(item => item.uname.toLowerCase().includes(input.toLowerCase()))
 
     return (
-        <Box 
-            sx={{ 
-                height: '90vh', 
+        <Box
+            sx={{
+                height: '90vh',
                 width: '100%',
-                }}>
+            }}>
             {input != '' && <Box sx={{ width: '100%', lineHeight: '20px', fontSize: '20px', textAlign: 'center' }}>
                 Search for '{input.slice(0, 15)}{input.length > 15 ? '...' : ''}'
             </Box>}
@@ -110,6 +122,12 @@ export default function UserSearch(props) {
             {filteredData.map((item) => (
                 <ProfileCardItem key={item.uid} {...item} />
             ))}
+
+            <Box sx={{
+                height: "100px",
+            }}>
+                
+            </Box>
         </Box>
     )
 }

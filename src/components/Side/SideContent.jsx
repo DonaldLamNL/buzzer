@@ -21,6 +21,13 @@ export default function SideContent() {
     }
     const handleInput = (event) => {
         setInput(event.target.value)
+        fetch(`http://localhost:3000/users?input=$(event.target.value)`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+        });
     }
     const handleEnter = (event) => {
         if (event.key === 'Enter') {

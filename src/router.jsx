@@ -40,7 +40,7 @@ const routerConfig = [
     element: <ForgotPassword />,
   },
   {
-    path: "/userprofile",
+    path: "/user",
     element: <UserProfile />,
   },
   {

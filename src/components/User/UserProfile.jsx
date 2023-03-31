@@ -4,30 +4,25 @@ import {
   Avatar,
   Button,
   CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
   Container,
   Stack,
-  Tabs,
-  Tab,
-  AppBar,
   IconButton,
   Tooltip,
 } from "@mui/material";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Buzz from "../Items/BuzzItem";
-import ProfileCardItem from "../Items/ProfileCardItem";
-import SideContent from "../Side/SideContent";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { useParams } from 'react-router-dom';
+import { users } from "../Side/UserSearch";
 
 const theme = createTheme();
+
+const userProfileData = users;
 
 const data = [
   {
@@ -71,27 +66,20 @@ const data = [
   },
 ];
 
+function searchUserIdx(userid, userProfileData) {
+  for (let i = 0; i < userProfileData.length; i++) {
+    if (userProfileData[i]["uid"] == userid) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
 export default function UserProfile() {
-  const navigate = useNavigate();
+  const { userid } = useParams();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  let userIdx = searchUserIdx(userid, userProfileData)
 
   return (
     <ThemeProvider theme={theme}>
@@ -107,13 +95,12 @@ export default function UserProfile() {
           backgroundSize: "cover",
         }}
       >
-        {/* <Container component="main" maxWidth="lg"> */}
         <CssBaseline />
         <Grid container spacing={0}>
           <Grid
             item
-            xs={8}
-            md={8}
+            // xs={8}
+            // md={8}
             sx={{
               borderLeft: "1px solid #DCDCDC",
               borderRight: "1px solid #DCDCDC",
@@ -150,7 +137,7 @@ export default function UserProfile() {
                       color: "#FFF",
                     }}
                   >
-                    Irwin King
+                    {userProfileData[userIdx]["uname"]}
                   </Typography>
                   <Typography
                     sx={{
@@ -158,7 +145,7 @@ export default function UserProfile() {
                       color: "#FFF",
                     }}
                   >
-                    123 Posts
+                    {userProfileData[userIdx]["postsCount"]} Posts
                   </Typography>
                 </Box>
               </Box>
@@ -197,18 +184,19 @@ export default function UserProfile() {
                   <Avatar
                     sx={{
                       // m: 1,
-                      bgcolor: "#fff",
+                      fontSize: "400%",
+                      color: "white",
+                      background: "#1776d2",
                       width: 100,
                       height: 100,
                       outline: "4px solid white",
                     }}
-                    src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                    src={userProfileData[userIdx]["icon"]}
                   >
-                    {/* <PersonOutlineOutlinedIcon /> */}
-                    I
+                    {userProfileData[userIdx]["uname"][0]}
                   </Avatar>
                   <Typography fontWeight="600" component="h1" variant="h6">
-                    Irwin King
+                    {userProfileData[userIdx]["uname"]}
                   </Typography>
                   <Typography
                     sx={{
@@ -218,13 +206,11 @@ export default function UserProfile() {
                       // top: -80,
                     }}
                   >
-                    @irwinking124
+                    @{userProfileData[userIdx]["uid"]}
                   </Typography>
                   <br></br>
                   <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                    {userProfileData[userIdx]["description"]}
                   </Typography>
                   <Box
                     sx={{
@@ -249,7 +235,7 @@ export default function UserProfile() {
                           fontWeight: "800",
                         }}
                       >
-                        789 Following
+                        {userProfileData[userIdx]["followingCount"]} Following
                       </Typography>
                     </Link>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -266,7 +252,7 @@ export default function UserProfile() {
                           fontWeight: "800",
                         }}
                       >
-                        456k Followers
+                        {userProfileData[userIdx]["followersCount"]} Followers
                       </Typography>
                     </Link>
                   </Box>
@@ -293,7 +279,7 @@ export default function UserProfile() {
                 >
                   Follow
                 </Button>
-                
+
               </Box>
               <Box
                 sx={
@@ -310,23 +296,7 @@ export default function UserProfile() {
               </Box>
             </Stack>
           </Grid>
-
-          {/* <Grid item xs={4} md={4} sx={{ display: { xs: 'none', md: 'block' } }}> */}
-          <Grid item xs={4} md={4}>
-            {/* <div className="side">
-                            <Stack spacing={8}>
-                                <Typography component="h1" variant="h5" color="#000">
-                                    You may also like
-                                </Typography>
-                                {userData.map((item) => (
-                                    <ProfileCardItem key={item.uid} {...item} />
-                                ))}
-                            </Stack>
-                        </div> */}
-            <SideContent />
-          </Grid>
         </Grid>
-        {/* </Container> */}
       </section>
     </ThemeProvider>
   );

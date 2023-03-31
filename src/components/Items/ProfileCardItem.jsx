@@ -3,6 +3,8 @@ import React from 'react'
 export default function ProfileCardItem(props) {
     const { uid, uname, icon, postsCount, followersCount, followingCount } = props
 
+    const link = "#/user/" + uid;
+
     return (
         <div className="card">
             {icon === null ?
@@ -32,7 +34,19 @@ export default function ProfileCardItem(props) {
                     </div>
                     <div className="actionBtn">
                         <button>Follow</button>
-                        <button>Profile</button>
+                        <a href={link}>
+                            <button style={{
+                                padding: "15px 25px",
+                                borderRadius: "30px",
+                                border: "1px solid #1776d2",
+                                outline: "none",
+                                fontSize: "1em",
+                                fontWeight: "500",
+                                background: "transparent",
+                                color: "#1776d2",
+                                cursor: "pointer",
+                            }}>Profile</button>
+                        </a>
                     </div>
                 </div>
             </div>

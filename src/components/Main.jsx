@@ -11,6 +11,7 @@ import SideContent from "./Side/SideContent";
 import Buzz from "./BuzzPage/Buzz";
 import UserList from "./UserList/UserList"
 import Admin from "./UserList/Admin"
+import UserProfile from "./User/UserProfile";
 
 const routerConfig = [
   {
@@ -52,6 +53,14 @@ const routerConfig = [
         <Admin />
       </>
     ),
+  },
+  {
+    path: "/user/:userid",
+    element: (
+      <>
+        <UserProfile />
+      </>
+    )
   },
 ];
 

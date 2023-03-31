@@ -89,7 +89,7 @@ export default function Nav({ isLogin }) {
 
           <NavItem
             hovering={hovering}
-            path="userprofile"
+            path="user/irwinking1242"
             name="user"
             component={FaceIcon}
           />
