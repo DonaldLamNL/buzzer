@@ -19,6 +19,10 @@ The server for the buzzer
 
 4. If npm install ERROR
     ```bash
-    sudo chown -R 501:20 "/Users/edmundfung/.npm"
+    sudo chown -R 501:20 "/Users/[Username]/.npm"
+    ```
+    or
+    ```bash
+    sudo npm start
     ```
     - This can solve the npm install package problem.
