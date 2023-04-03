@@ -19,11 +19,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 路由之前配置 cors 中間件，以解決跨域問題
+// Use Cors middleware
 const cors = require('cors')
 app.use(cors())
 
-// Router
+// Use Mongo DB
+var mongoose = require('mongoose');
+// var uri = 'mongodb+srv://3100PJA0:WQslrDaD9bAGZZ5b@3100project.gbzxufi.mongodb.net/?retryWrites=true&w=majority'
+var uri = 'mongodb+srv://3100PJA0:3100PJA0@3100project.gbzxufi.mongodb.net/?retryWrites=true&w=majority'
+connect();
+
+// Routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -43,9 +49,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Mongo DB
-var mongoose = require('mongoose');
-var uri = 'mongodb+srv://3100PJA0:WQslrDaD9bAGZZ5b@3100project.gbzxufi.mongodb.net/?retryWrites=true&w=majority'
+
+
 // connect to mongoDB
 async function connect(){
   try {
@@ -55,7 +60,7 @@ async function connect(){
     console.log(error)
   }
 }
-connect();
+
 
 
 module.exports = app;
