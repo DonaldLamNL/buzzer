@@ -10,9 +10,9 @@ import Cookies from 'js-cookie'
 export default function UserSearch(props) {
     const [userList, setUserList] = useState(null);
     let input = props.input
-    const getUser = async () => {
+    const searchUser = async () => {
         try {
-            fetch(`http://localhost:3000/users?input=${input}&userid=${Cookies.get('BuzzerUser')}`)
+            fetch(`http://localhost:3000/users?keywords=${input}&userid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
                 .then(data => {
                     setUserList(data);
@@ -26,7 +26,7 @@ export default function UserSearch(props) {
     }
 
     useEffect(() => {
-        getUser();
+        searchUser();
     }, [input]);
 
     return (

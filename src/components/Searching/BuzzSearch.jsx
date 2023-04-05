@@ -1,6 +1,6 @@
 const data = [
     {
-        pid: 123,
+        buzzid: 123,
         like: 123,
         comment: 456,
         content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
@@ -11,7 +11,7 @@ const data = [
         icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
     },
     {
-        pid: 124,
+        buzzid: 124,
         like: 143,
         comment: 534,
         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia repellat, ad molestiae dolore hic consequatur incidunt facilis modi ea nulla, tempore totam voluptate sequi fugiat saepe quasi officiis ipsa laborum sapiente molestias quia veniam pariatur! Esse exercitationem vel praesentium. Voluptatibus!',
@@ -23,7 +23,7 @@ const data = [
         icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
     },
     {
-        pid: 125,
+        buzzid: 125,
         like: 324,
         comment: 635,
         content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
@@ -42,34 +42,46 @@ import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
 // components
-import BuzzItem from '../Items/BuzzItem';
+import NewBuzzItem from '../Items/NewBuzzItem';
+import Cookies from 'js-cookie';
 
 export default function BuzzSearch() {
     const { search } = useParams();
+    const [buzzList, setBuzzList] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
 
+    const searchBuzz = async () => {
+        try {
+            fetch(`http://localhost:3000/buzzes/search?keywords=${search}&userid=${Cookies.get('BuzzerUser')}`)
+                .then(response => response.json())
+                .then(data => {
+                    setBuzzList(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     useEffect(() => {
-        const filtered = data.filter((post) =>
-            post.content.toLowerCase().includes(search.toLowerCase())
-        );
-        setFilteredData(filtered);
+        searchBuzz();
     }, [search]);
 
     return (
         <div>
-            <h1 style={{ height: '40px', lineHeight: '40px', fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>
+            <h1 style={{ height: '40px', lineHeight: '40px', fontSize: '20px', textAlign: 'center', marginTop: '20px' }}
+                onClick={() => { console.log(buzzList) }}
+            >
                 Search for {search[0] === '*' ? `${search.slice(1).charAt(0).toUpperCase()}${search.slice(2)} Category` : ` ${search} buzzes ...`}
             </h1>
 
-            {filteredData.length === 0 ? (
-                <Typography variant="h6" align="center" mt={2}>
-                    No search results found.
-                </Typography>
-            ) : (
+            {buzzList ? (
                 <>
-                    {filteredData.map((post) => (
-                        <BuzzItem
-                            key={post.pid}
+                    {buzzList.map((post) => (
+                        <NewBuzzItem
+                            key={post.buzzid}
                             {...post}
                             content={post.content.replace(
                                 new RegExp(`(${search})`, 'gi'),
@@ -78,6 +90,10 @@ export default function BuzzSearch() {
                         />
                     ))}
                 </>
+            ) : (
+                <Typography variant="h6" align="center" mt={2}>
+                    No search results found.
+                </Typography>
             )}
         </div>
     );
