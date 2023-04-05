@@ -16,12 +16,13 @@ const userSchema = new mongoose.Schema({
 const buzzSchema = new mongoose.Schema({
     buzzid: { type: Number, required: true },
     userid: { type: String, required: true },
+    content: { type: String },
+    image: { type: Buffer },
+    video: { type: Buffer },
+    category: { type: String },
     like: [{ type: Number }],
     dislike: [{ type: Number }],
-    content: { type: String },
-    image: { type: String },
-    video: { type: String },
-    category: { type: String },
+    comment: [{ type: Number }],
     rebuzz: { type: Number }
 });
 
