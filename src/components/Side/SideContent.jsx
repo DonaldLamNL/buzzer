@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search'
 // components
 import UserSearch from './UserSearch'
 import News from './News'
+import Cookies from 'js-cookie'
 
 export default function SideContent() {
     const [isFocused, setIsFocused] = useState(false)
@@ -21,13 +22,6 @@ export default function SideContent() {
     }
     const handleInput = (event) => {
         setInput(event.target.value)
-        fetch(`http://localhost:3000/users?input=${event.target.value}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(error => {
-        });
     }
     const handleEnter = (event) => {
         if (event.key === 'Enter') {
@@ -35,10 +29,11 @@ export default function SideContent() {
         }
     }
     const jumpSearch = () => {
+        navigate(`/`)
         navigate(`/search/${input}`)
     }
 
-    useEffect(() => {
+    useEffect( () => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setIsFocused(false)
@@ -78,7 +73,7 @@ export default function SideContent() {
                 />
                 {isFocused &&
                     <div style={{ overflowY: 'auto' }}>
-                        <UserSearch input={input} />
+                        <UserSearch input={input} key={input}/>
                     </div>
                 }
                 {!isFocused &&

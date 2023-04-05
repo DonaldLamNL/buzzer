@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default function ProfileCardItem(props) {
-    const { uid, uname, icon, postsCount, followersCount, followingCount } = props
+    const { userid, username, icon, followersCount, followingCount, isFollow } = props
 
-    const link = "#/user/" + uid;
+    const link = "#/user/" + userid;
 
     return (
         <div className="card">
@@ -14,7 +14,7 @@ export default function ProfileCardItem(props) {
                             background: "#1776d2",
                             color: "white",
                         }}>
-                        {uname[0]}
+                        {username[0]}
                     </div>
 
                 ) :
@@ -26,14 +26,16 @@ export default function ProfileCardItem(props) {
             }
             < div className="content">
                 <div className="details">
-                    <h2>{uname}<br></br><span>@{uid}</span></h2>
+                    <h2>{username}<br></br><span>@{userid}</span></h2>
                     <div className="data">
-                        <h3>{postsCount}<br></br><span>Posts</span></h3>
+                        {/* <h3>{postsCount}<br></br><span>Posts</span></h3> */}
                         <h3>{followersCount}<br></br><span>Followers</span></h3>
                         <h3>{followingCount}<br></br><span>Following</span></h3>
                     </div>
                     <div className="actionBtn">
-                        <button>Follow</button>
+                        {isFollow ? 
+                            <button>Unfollow</button> : <button>Follow</button>
+                        }
                         <a href={link}>
                             <button style={{
                                 padding: "15px 25px",
