@@ -2,23 +2,47 @@ import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const theme = createTheme();
 
 export default function Signup() {
-  // const userStyle = {
-  //   height: '100vh',
-  //   width: '100%',
-  //   backgroundColor: '#bfa'
-  // }
+  const navigate = useNavigate()
+  const [signupMsg, setsignupMsg] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const input = new FormData(event.currentTarget)
+
+    try {
+      const response = await fetch('http://localhost:3000/account/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userid: input.get('userid'),
+          username: input.get('username'),
+          email: input.get('email'),
+          password: input.get('password'),
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      if(responseData.state == false){
+        setsignupMsg(responseData.message);
+      }else{
+        setsignupMsg(responseData.message);
+        Cookies.set('BuzzerUser', responseData.token);
+        navigate(`/home`)
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
   };
 
 
@@ -30,7 +54,6 @@ export default function Signup() {
         alignItems: 'center',
         minHeight: '100vh',
         width: '100%',
-        // background: "url('../user_bg.jpeg')",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
@@ -38,8 +61,6 @@ export default function Signup() {
           display: 'flex',
           margin: 'auto',
           position: 'relative',
-          // width: '400px',
-          // height: '550px',
           paddingBottom: '30px',
           background: 'transparent',
           borderRadius: '20px',
@@ -65,50 +86,33 @@ export default function Signup() {
                 Sign Up
               </Typography>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      autoComplete="given-name"
-                      name="firstName"
-                      required
-                      fullWidth
-                      id="firstName"
-                      label="First Name"
-                      autoFocus
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="standard"
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="family-name"
-                    />
-                  </Grid>
-                </Grid>
                 <TextField
                   variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  label="User ID"
+                  name="userid"
+                  autoComplete="userid"
                 />
-                {/* <TextField
+                <TextField
                   variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="userid"
-                  label="User id"
-                  name="user id"
-                /> */}
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                />
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
                 <TextField
                   variant="standard"
                   margin="normal"
@@ -117,7 +121,6 @@ export default function Signup() {
                   name="password"
                   label="Password"
                   type="password"
-                  id="password"
                 />
 
                 <TextField
@@ -128,14 +131,15 @@ export default function Signup() {
                   name="password confirm"
                   label="Password Confirm"
                   type="password"
-                  id="password"
                 />
+
+                <Box>{signupMsg}</Box>
 
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 1, mb: 2, borderRadius: 6}}
+                  sx={{ mt: 1, mb: 2, borderRadius: 6 }}
                 >
                   Sign Up
                 </Button>

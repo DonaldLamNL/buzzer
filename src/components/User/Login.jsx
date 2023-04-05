@@ -2,23 +2,45 @@ import React, { useState } from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const theme = createTheme();
 
 export default function Login() {
-  // const userStyle = {
-  //   height: '100vh',
-  //   width: '100%',
-  //   backgroundColor: '#bfa'
-  // }
+  const navigate = useNavigate()
+  const [loginMsg, setLoginMsg] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const input = new FormData(event.currentTarget)
+
+    try {
+      const response = await fetch('http://localhost:3000/account/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          usermsg: input.get('usermsg'),
+          password: input.get('password'),
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData)
+
+      if (responseData.state) {
+        setLoginMsg(responseData.message);
+        Cookies.set('BuzzerUser', responseData.token);
+        navigate(`/home`)
+      } else {
+        setLoginMsg(responseData.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setLoginMsg(responseData.message);
+    }
   };
 
 
@@ -61,7 +83,7 @@ export default function Login() {
                 <PersonOutlineOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Log in
               </Typography>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField
@@ -69,10 +91,9 @@ export default function Login() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
                   label="User Id / Email Address"
-                  name="email"
-                  autoComplete="email"
+                  name="usermsg"
+                  autoComplete="usermsg"
                   autoFocus
                 />
                 <TextField
@@ -86,6 +107,8 @@ export default function Login() {
                   id="password"
                   autoComplete="current-password"
                 />
+
+                <Box>{loginMsg}</Box>
 
                 <Grid container justifyContent="flex-end">
                   <Link href="#/forgotpassword" variant="body2">

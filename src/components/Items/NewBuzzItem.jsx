@@ -11,13 +11,12 @@ import React, { useState } from "react";
 
 import Comment from '../BuzzPage/Comment'
 
-export default function BuzzItem(props) {
+export default function NewBuzzItem(props) {
     const navigate = useNavigate()
-    const { pid, like, comment, icon, content, image, video, uid, uname, isVerify } = props;
-    const { displayComment = false } = props;
+    const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, displayComment = false } = props;
 
     const toBuzz = () => {
-        navigate(`/buzz/${pid}`)
+        navigate(`/buzz/${buzzid}`)
     }
 
     return (
@@ -39,7 +38,7 @@ export default function BuzzItem(props) {
                     {/* Poster Icon */}
                     <Box sx={{ width: "90px" }}>
                         <Avatar src={icon} sx={{ width: 50, height: 50, margin: "20px" }}>
-                            {uname[0]}
+                            {username[0]}
                         </Avatar>
                     </Box>
 
@@ -49,7 +48,7 @@ export default function BuzzItem(props) {
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
                                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
-                                    {uname}
+                                    {username}
                                     {isVerify && (
                                         <CheckCircle sx={{ color: 'orange', ml: 1 }} />
                                     )}
@@ -63,7 +62,7 @@ export default function BuzzItem(props) {
                                         display: "inline-block",
                                     }}
                                 >
-                                    @{uid}
+                                    @{userid}
                                 </Typography>
                             </Box>
 
@@ -103,33 +102,35 @@ export default function BuzzItem(props) {
                             ) : null}
 
                             {/* Tools */}
-                            <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <IconButton size="large" sx={{ marginLeft: "20px" }} onClick={toBuzz}>
-                                    <ChatBubbleOutlineOutlined />
-                                </IconButton>
+                            <Box sx={{width: '600px', marginTop: '20px'}}>
+                                <Box sx={{ display: "flex", alignItems: "center" }}>
+                                    <IconButton size="large" sx={{ marginLeft: "20px" }} onClick={toBuzz}>
+                                        <ChatBubbleOutlineOutlined />
+                                    </IconButton>
 
-                                <Box
-                                    sx={{ display: "flex", alignItems: "center", margin: "auto" }}
-                                >
-                                    <IconButton size="large">
-                                        <ThumbUpIcon />
-                                    </IconButton>
-                                    <div>{like}</div>
-                                    <IconButton size="large">
-                                        <ThumbDownIcon />
-                                    </IconButton>
-                                </Box>
+                                    <Box
+                                        sx={{ display: "flex", alignItems: "center", margin: "auto" }}
+                                    >
+                                        <IconButton size="large">
+                                            <ThumbUpIcon />
+                                        </IconButton>
+                                        <div>{numOfLike}</div>
+                                        <IconButton size="large">
+                                            <ThumbDownIcon />
+                                        </IconButton>
+                                    </Box>
 
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        marginRight: "50px",
-                                    }}
-                                >
-                                    <IconButton size="large">
-                                        <ReplyIcon />
-                                    </IconButton>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            marginRight: "50px",
+                                        }}
+                                    >
+                                        <IconButton size="large">
+                                            <ReplyIcon />
+                                        </IconButton>
+                                    </Box>
                                 </Box>
                             </Box>
                         </Box>

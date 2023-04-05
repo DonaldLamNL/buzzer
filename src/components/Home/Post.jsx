@@ -6,55 +6,53 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+
 
 const categories = [
     {
         name: 'Food',
-        number: 123
     },
     {
         name: 'Music',
-        number: 432
     },
     {
         name: 'Movie',
-        number: 355
     },
     {
         name: 'News',
-        number: 1442
     },
     {
         name: 'Gaming',
-        number: 542
     },
     {
         name: 'Sport',
-        number: 513
     },
     {
         name: 'Business',
-        number: 31
     },
     {
         name: 'Science',
-        number: 421
     },
     {
         name: 'Social',
-        number: 534
     },
     {
         name: 'Others',
-        number: '213'
     }
 ];
 
 export default function Post() {
+    const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
+    const [buzzInput, setBuzzInput] = useState("");
     const [postCat, setPostCat] = useState('Others');
 
+    const handleBuzzInputChange = (event) => {
+        setBuzzInput(event.target.value);
+    };
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -71,16 +69,45 @@ export default function Post() {
         setPostCat(event.target.value);
     };
 
+    const handlePost = async (event) => {
+        event.preventDefault();
+
+        if (!buzzInput) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('content', buzzInput);
+        formData.append('category', postCat);
+        formData.append('userid', Cookies.get('BuzzerUser'));
+        formData.append('image', image);
+        formData.append('video', video);
+
+        try {
+            const response = await fetch('http://localhost:3000/buzzes/po', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const responseData = await response.json();
+            console.log(responseData.message);``
+            if (responseData) {
+                navigate(`/buzz/${responseData.buzzid}`)
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
     return (
         <>
             {/* Post Block */}
             <Card
                 elevation={5}
-                // padding={100}
                 sx={{
                     display: "flex",
                     width: "90%",
-                    // backgroundColor: '#f9f9f9',
                     margin: "auto",
                     position: "relative",
                     marginTop: "20px",
@@ -110,6 +137,7 @@ export default function Post() {
                             },
                         }}
                         inputProps={{ rows: 4 }}
+                        onChange={handleBuzzInputChange}
                     />
 
                     {/* Tools Area */}
@@ -156,15 +184,15 @@ export default function Post() {
                                 onChange={handleCategoryChoose}
                                 label="Category"
                             >
-                                {categories.map( c => {
-                                    return(
+                                {categories.map(c => {
+                                    return (
                                         <MenuItem key={c.name} value={c.name}>{c.name}</MenuItem>
                                     )
                                 })}
                             </Select>
                         </FormControl>
                         {/* Submit Button */}
-                        <Button variant="contained" sx={{ borderRadius: "20px" }}>
+                        <Button onClick={handlePost} variant="contained" sx={{ borderRadius: "20px" }}>
                             Post
                         </Button>
                     </Box>

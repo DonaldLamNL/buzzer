@@ -31,7 +31,7 @@ const routerConfig = [
     ),
   },
   {
-    path: "/buzz",
+    path: "/buzz/:buzzid",
     element: (
       <>
         <Buzz />
