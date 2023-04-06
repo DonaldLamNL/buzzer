@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 export default function UserSearch(props) {
     const [userList, setUserList] = useState(null);
     let input = props.input
+
     const searchUser = async () => {
         try {
             fetch(`http://localhost:3000/users?keywords=${input}&userid=${Cookies.get('BuzzerUser')}`)

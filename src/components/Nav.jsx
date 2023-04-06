@@ -3,11 +3,12 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import NavItem from "./Items/NavItem";
+import Cookies from "js-cookie";
 
 const Image = styled.img`
   width: 100%;
@@ -15,10 +16,10 @@ const Image = styled.img`
   height: auto;
 `;
 
-export default function Nav({ isLogin }) {
+export default function Nav() {
   const navigate = useNavigate();
   const [hovering, setHovering] = useState(false);
-  // const [isLogin, SetIsLogin] = useState(false);
+  const [isLogin, SetIsLogin] = useState(true);
 
   const handleMouseEnter = () => {
     setHovering(true);
@@ -27,6 +28,28 @@ export default function Nav({ isLogin }) {
   const handleMouseLeave = () => {
     setHovering(false);
   };
+
+  const getLoginState = () => {
+    try {
+      fetch(`http://localhost:3000/account?userid=${Cookies.get('BuzzerUser')}`)
+        .then(response => response.json())
+        .then(data => {
+          SetIsLogin(data.isLogin);
+        })
+        .catch(error => {
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const handleLogout = () => {
+    Cookies.remove('BuzzerUser');
+  }
+
+  useEffect(() => {
+    getLoginState();
+  });
 
   return (
     <Box
@@ -49,16 +72,13 @@ export default function Nav({ isLogin }) {
           borderRadius: 6,
           display: "flex",
           justifyContent: "center",
-          // alignItems: "center",
           height: "96%",
-          // width: "100%",
           width: "80px",
           position: "fixed",
           transition: "0.7s",
 
           "&:hover": {
             backgroundColor: "#0069d9",
-            // width: "14%",
             width: "175px",
             cursor: "pointer",
           },
@@ -101,7 +121,7 @@ export default function Nav({ isLogin }) {
               name="hive"
               component={HiveIcon}
             />
-            {isLogin ? (
+            {!isLogin ? (
               <NavItem
                 hovering={hovering}
                 path="login"
@@ -109,12 +129,14 @@ export default function Nav({ isLogin }) {
                 component={LoginIcon}
               />
             ) : (
-              <NavItem
-                hovering={hovering}
-                path="home"
-                name="logout"
-                component={LogoutIcon}
-              />
+              <div onClick={handleLogout}>
+                <NavItem
+                  hovering={hovering}
+                  path="login"
+                  name="logout"
+                  component={LogoutIcon}
+                />
+              </div>
             )}
           </Stack>
         </Stack>

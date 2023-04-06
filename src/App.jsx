@@ -19,7 +19,7 @@ export default function App() {
       <ChatButton />
       <Grid container>
         <Grid item xs={2}>
-          <Nav isLogin={true} />
+          <Nav />
         </Grid>
         <Grid item xs={10}>
           {element}

@@ -6,6 +6,8 @@
 
 2. Login (**Done**)
 
+3. Logout (**Logout**)
+
 3. Reset Password
 
 ### Admin User

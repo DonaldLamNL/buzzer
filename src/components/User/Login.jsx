@@ -116,10 +116,6 @@ export default function Login() {
                   </Link>
                 </Grid>
 
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
                 <Button
                   type="submit"
                   fullWidth
