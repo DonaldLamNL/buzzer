@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { Users } = require('../databaseSchema');
+const { decodeUserID } = require('./commonfunct');
 
 // User login
 router.post('/login', async (req, res) => {
@@ -79,6 +79,14 @@ router.post('/signup', async (req, res) => {
         console.log(error);
         res.status(500).json({ state: false, message: 'Internal Server Error' });
     }
+});
+
+// Check login state
+router.get('/', async (req, res) => {
+    const { userid } = req.query;
+    let decodedUser = decodeUserID(userid);
+    let isLogin = decodedUser ? true : false
+    res.send({ status: true, isLogin });
 });
 
 module.exports = router;
