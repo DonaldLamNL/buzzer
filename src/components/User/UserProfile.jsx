@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, Button, CssBaseline, Grid, Box, Typography, Container, Stack, IconButton, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Buzz from "../Items/BuzzItem";
+import NewBuzzItem from "../Items/NewBuzzItem";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useParams } from 'react-router-dom';
 import Cookies from "js-cookie";
@@ -60,6 +60,7 @@ export default function UserProfile() {
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
     const [followersCount, setFollowersCount] = useState(null);
+    const [buzzList, setBuzzList] = useState(null);
 
     const handleButton = async () => {
         if (userInfo.isCurrentUser) {
@@ -111,8 +112,24 @@ export default function UserProfile() {
         }
     };
 
+    const getBuzzes = async () => {
+        try {
+            fetch(`http://localhost:3000/buzzes/user?userid=${userid}`)
+                .then(response => response.json())
+                .then(responseData => {
+                    setBuzzList(responseData);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     useEffect(() => {
         getUserInfo();
+        getBuzzes();
     }, [userid, isFollow]);
 
 
@@ -120,7 +137,7 @@ export default function UserProfile() {
         <ThemeProvider theme={theme}>
             {userInfo && <section
                 style={{
-                    display: "flex",
+                    display: "block",
                     justiftContent: "center",
                     minHeight: "100vh",
                     backgroundPosition: "center",
@@ -134,6 +151,7 @@ export default function UserProfile() {
                         sx={{
                             border: '1px solid #DCDCDC',
                             borderRadius: "30px",
+                            width: '100%',
                             height: "fit-content",
                             margin: "20px",
                         }}
@@ -146,7 +164,8 @@ export default function UserProfile() {
                                     background: "#66ccff",
                                     borderRadius: "30px 30px 0 0",
                                     height: "fit-content",
-                                    height: "250px",
+                                    minHeight: "250px",
+                                    width: '100%',
                                 }}
                             ></Container>
                             <Box
@@ -155,6 +174,7 @@ export default function UserProfile() {
                                     padding: "10px",
                                     display: "flex",
                                     background: "#f7f9f9",
+                                    width: '100%',
                                     height: "fit-content",
                                     borderBottom: "1px solid #DCDCDC",
                                 }}
@@ -253,7 +273,7 @@ export default function UserProfile() {
                                 >
                                     {userInfo.isCurrentUser ? 'Edit' : isFollow ? 'Unfollow' : 'Follow'}
                                 </Button>
-                                {!userInfo.isAdmin && 
+                                {!userInfo.isAdmin &&
                                     <Button
                                         variant="contained"
                                         sx={{
@@ -262,25 +282,41 @@ export default function UserProfile() {
                                             bottom: "10px",
                                             right: "20px",
                                             borderRadius: "20px",
-                                            '&:hover': { bgcolor: '#e14161' } 
+                                            '&:hover': { bgcolor: '#e14161' }
                                         }}
-                                        onClick={() => {navigator(`/admin`)}}
+                                        onClick={() => { navigator(`/admin`) }}
                                     >
                                         User Management
                                     </Button>
                                 }
 
                             </Box>
-                            <Box
-                                sx={{
-                                    borderBottomLeftRadius: "30px",
-                                    borderBottomRightRadius: "30px",
-                                }}
-                            >
-                                {data.map((post) => (
-                                    <Buzz key={post.buzzid} {...post} />
-                                ))}
-                            </Box>
+                            {
+                                <Box
+                                    sx={{
+                                        borderBottom: "0 30px",
+                                        width: '100%',
+                                    }}
+                                >
+                                    {
+                                        buzzList ?
+                                            buzzList.map((post) => (
+                                                <NewBuzzItem key={post.buzzid} {...post} />
+                                            ))
+                                            :
+                                            <Box
+                                                sx={{
+                                                    height: '150px',
+                                                    textAlign: 'center',
+                                                }}
+                                            >
+                                                <Typography fontSize={20} lineHeight={'150px'}>
+                                                    This user is so lazy...
+                                                </Typography>
+                                            </Box>
+                                    }
+                                </Box>
+                            }
                         </Stack>
                     </Grid>
                 </Grid>
