@@ -5,7 +5,7 @@ import { useRoutes } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 // components
-import MainContent from "./Home/Home";
+import Home from "./Home/Home";
 import BuzzSearch from "./Searching/BuzzSearch";
 import SideContent from "./Side/SideContent";
 import Buzz from "./BuzzPage/Buzz";
@@ -18,7 +18,7 @@ const routerConfig = [
     path: "/home",
     element: (
       <>
-        <MainContent />
+        <Home />
       </>
     ),
   },
@@ -64,7 +64,7 @@ const routerConfig = [
   },
 ];
 
-export default function Home() {
+export default function Main() {
   const element = useRoutes(routerConfig);
 
   return (

@@ -30,7 +30,7 @@
 
 6. Retweet
 
-7. Show following user tweets
+7. Show following user tweets (**Done**)
 
 
 ### Advanced

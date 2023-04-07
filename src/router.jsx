@@ -1,5 +1,5 @@
-import Home from "./components/Main";
-import MainContent from "./components/Home/Home"
+import Main from "./components/Main";
+import Home from "./components/Home/Home"
 import Buzz from "./components/BuzzPage/Buzz"
 import BuzzSearch from "./components/Searching/BuzzSearch"
 import Login from "./components/User/Login";
@@ -11,11 +11,11 @@ import Hive from "./components/Hive"
 const routerConfig = [
   {
     path: "/*",
-    element: <Home />,
+    element: <Main />,
     children: [
       {
         path: "home",
-        element: <MainContent />
+        element: <Home />
       },
       {
         path: "buzz",

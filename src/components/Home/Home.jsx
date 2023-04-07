@@ -2,61 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { LinearProgress } from '@mui/material'
 
 // components
-import BuzzItem from '../Items/BuzzItem'
+import NewBuzzItem from '../Items/NewBuzzItem'
 import Post from './Post'
 import Cookies from 'js-cookie'
 
-// Demonstrate buzz data
-const data = [
-    {
-        buzzid: 123,
-        like: 123,
-        comment: 456,
-        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
-        image: null,
-        video: null,
-        userid: 'johnlui001',
-        username: 'John Lui',
-        isVerify: false,
-        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
-    },
-    {
-        buzzid: 124,
-        like: 143,
-        comment: 534,
-        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia repellat, ad molestiae dolore hic consequatur incidunt facilis modi ea nulla, tempore totam voluptate sequi fugiat saepe quasi officiis ipsa laborum sapiente molestias quia veniam pariatur! Esse exercitationem vel praesentium. Voluptatibus!',
-        image: 'https://p.ipic.vip/e72rar.png',
-        video: null,
-        userid: 'amychan001',
-        username: 'Amy Chan',
-        isVerify: true,
-        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
-    },
-    {
-        buzzid: 125,
-        like: 324,
-        comment: 635,
-        content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.',
-        image: 'https://p.ipic.vip/phxapn.png',
-        video: null,
-        userid: 'tomlui002',
-        username: 'Tom Lui',
-        isVerify: false,
-        icon: null,
-    },
-]
-
 // Get buzzes
-export default function MainContent() {
+export default function Home() {
     const [buzzList, setBuzzList] = useState([]);
 
     const getBuzzes = async () => {
         try {
-            fetch(`http://localhost:3000/buzzes/search?userid=${Cookies.get('BuzzerUser')}`)
+            fetch(`http://localhost:3000/buzzes/follow?userid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
-                .then(data => {
-                    setUsername(data.buzzList);
-                    setIcon(data.icon);
+                .then(responseData => {
+                    setBuzzList(responseData);
                 })
                 .catch(error => {
                     console.log(error);
@@ -64,19 +23,19 @@ export default function MainContent() {
         } catch (err) {
             console.error(err);
         }
-    };
+    }
 
     useEffect(() => {
-        // getBuzzes();
-    });
+        getBuzzes();
+    }, []);
 
     return (
         <div>
             <Post />
-            {data.map((post) => (
-                <BuzzItem key={post.buzzid} {...post} />
+            {buzzList && buzzList.map((post) => (
+                <NewBuzzItem key={post.buzzid} {...post} />
             ))}
-            <LinearProgress />
+            {/* <LinearProgress /> */}
         </div>
     )
 }
