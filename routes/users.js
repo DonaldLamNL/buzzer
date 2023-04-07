@@ -28,7 +28,6 @@ router.get('/search', async (req, res) => {
         }
 
         responseData = userList.map(user => {
-            console.log(user.followers)
             return {
                 userid: user.userid,
                 username: user.username.toUpperCase(),

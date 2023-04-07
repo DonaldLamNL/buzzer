@@ -38,7 +38,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-
 // Posting System
 router.post('/post', upload.none(), async (req, res) => {
     const { content, category, userid } = req.body;
@@ -61,7 +60,7 @@ router.post('/post', upload.none(), async (req, res) => {
             like: [],
             dislike: [],
             comment: [],
-            rebuzz: undef,
+            rebuzz: null,
         });
 
         await newBuzz.save();
@@ -72,7 +71,6 @@ router.post('/post', upload.none(), async (req, res) => {
         res.send({ state: false, message: 'Failed to post Buzz.' });
     }
 });
-
 
 // Buzz Searching System
 router.get('/search', async (req, res) => {
@@ -164,7 +162,40 @@ router.post('/dislike', async (req, res) => {
 });
 
 
-// Dislike Button
+// Get Following Buzzes
+router.get('/follow', async (req, res) => {
+    const { userid } = req.query;
+    let decodedUser = decodeUserID(userid);
+
+    try {
+        const user = await Users.findOne({ userid: decodedUser })
+        const buzzes = await Buzzes.find({ userid: { $in: user.following } })
+    
+        const responseData = await Promise.all(buzzes.map(async (buzz) => {
+            const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
+            const author = await Users.findOne({ userid: buzz.userid });
+            return {
+                buzzid: buzz.buzzid,
+                userLike,
+                userid: buzz.userid,
+                username: author.username,
+                icon: author.avatar ? author.avatar : null,
+                isVerify: author.isVerify ? author.isVerify : null,
+                content: buzz.content,
+                category: buzz.category,
+                numOfLike: buzz.like.length - buzz.dislike.length,
+                image: buzz.image ? buzz.image : null,
+                video: buzz.video ? buzz.video : null,
+                comment: buzz.comment ? buzz.comment : null
+            };
+        }));
+        res.send(responseData);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 
 module.exports = router;
