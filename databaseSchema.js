@@ -20,8 +20,8 @@ const buzzSchema = new mongoose.Schema({
     image: { type: Buffer },
     video: { type: Buffer },
     category: { type: String },
-    like: [{ type: Number }],
-    dislike: [{ type: Number }],
+    like: [{ type: String }],
+    dislike: [{ type: String }],
     comment: [{ type: Number }],
     rebuzz: { type: Number }
 });

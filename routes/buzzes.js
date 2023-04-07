@@ -5,7 +5,7 @@ const { decodeUserID } = require('./commonfunct');
 const multer = require('multer');
 const upload = multer();
 
-// Buzz Searching System
+// Buzz Page
 router.get('/', async (req, res) => {
     const { buzzid, userid } = req.query;
     let decodedUser = decodeUserID(userid);
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
         const responseData = {
             buzzid,
-            userLike: 0,
+            userLike,
             userid: buzz.userid,
             username: author.username,
             icon: author.avatar ? author.avatar : null,
@@ -110,5 +110,61 @@ router.get('/search', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
+
+// Like Button
+router.post('/like', async (req, res) => {
+    const { buzzid, userid, isLike, isDislike } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        if(isDislike){
+            await Buzzes.updateOne({ buzzid }, { $pull: { dislike: decodedUser } });
+        }
+        
+        if(isLike){
+            await Buzzes.updateOne({ buzzid }, { $pull: { like: decodedUser } });
+        }else{
+            await Buzzes.updateOne({ buzzid }, { $push: { like: decodedUser } });
+        }
+
+        const buzz = await Buzzes.findOne({buzzid});
+
+        res.json({ state: true, isLike: !isLike, isDislike: false, likeCount: buzz.like.length - buzz.dislike.length });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({state: false, error: 'Internal Server Error'});
+    }
+});
+
+// Dislike Button
+router.post('/dislike', async (req, res) => {
+    const { buzzid, userid, isLike, isDislike } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        if(isLike){
+            await Buzzes.updateOne({ buzzid }, { $pull: { like: decodedUser } });
+        }
+        
+        if(isDislike){
+            await Buzzes.updateOne({ buzzid }, { $pull: { dislike: decodedUser } });
+        }else{
+            await Buzzes.updateOne({ buzzid }, { $push: { dislike: decodedUser } });
+        }
+
+        const buzz = await Buzzes.findOne({buzzid});
+
+        res.json({ state: true, isLike: false, isDislike: !isDislike, likeCount: buzz.like.length - buzz.dislike.length });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({state: false, error: 'Internal Server Error'});
+    }
+});
+
+
+// Dislike Button
+
 
 module.exports = router;
