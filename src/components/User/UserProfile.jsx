@@ -299,7 +299,7 @@ export default function UserProfile() {
                                     }}
                                 >
                                     {
-                                        buzzList == [] ?
+                                        buzzList != [] ?
                                             buzzList.map((post) => (
                                                 <NewBuzzItem key={post.buzzid} {...post} />
                                             ))
