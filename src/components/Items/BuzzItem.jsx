@@ -1,8 +1,10 @@
 import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
 import { Avatar, Card, Grid, IconButton, SvgIcon, Typography } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Box } from "@mui/system";
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
@@ -10,15 +12,37 @@ import { CheckCircle } from '@mui/icons-material'
 import React, { useEffect, useState } from "react";
 
 import Comment from '../BuzzPage/Comment'
+import Cookies from "js-cookie";
 
 export default function BuzzItem(props) {
     const navigate = useNavigate()
     const { buzzid, like, icon, content, image, video, userid, username, isVerify } = props;
     const { displayComment = false } = props;
+    const [isLike, setIsLike] = useState(null);
+    const [isDislike, setIsDislike] = useState(null);
+
+    const handleLike = () => {
+        if(isDislike != null){
+            setIsDislike(null)
+        }
+        setIsLike(!isLike)
+    }
+    
+    const handleDislike = () => {
+        if(isLike != null){
+            setIsLike(null)
+        }
+        
+        setIsDislike(!isDislike)
+    }
 
     const toBuzz = () => {
         navigate(`/buzz/${buzzid}`)
     }
+
+    useEffect(() => {
+
+    });
 
     return (
         <>
@@ -111,12 +135,21 @@ export default function BuzzItem(props) {
                                 <Box
                                     sx={{ display: "flex", alignItems: "center", margin: "auto" }}
                                 >
-                                    <IconButton size="large">
-                                        <ThumbUpIcon />
+                                    <IconButton size="large" onClick={handleLike}>
+                                        { isLike ? 
+                                            <ThumbUpAltIcon />
+                                            :
+                                            <ThumbUpOffAltIcon />
+                                        }
+                                        
                                     </IconButton>
                                     <div>{like}</div>
-                                    <IconButton size="large">
-                                        <ThumbDownIcon />
+                                    <IconButton size="large" onClick={handleDislike}>
+                                        { isDislike ? 
+                                            <ThumbDownAltIcon />
+                                            :
+                                            <ThumbDownOffAltIcon />
+                                        }
                                     </IconButton>
                                 </Box>
 

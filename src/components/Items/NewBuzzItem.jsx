@@ -1,8 +1,10 @@
 import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
 import { Avatar, Card, Grid, IconButton, SvgIcon, Typography } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Box } from "@mui/system";
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
@@ -10,14 +12,93 @@ import { CheckCircle } from '@mui/icons-material'
 import React, { useEffect, useState } from "react";
 
 import Comment from '../BuzzPage/Comment'
+import Cookies from "js-cookie";
 
 export default function NewBuzzItem(props) {
     const navigate = useNavigate()
     const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, displayComment = false } = props;
+    const [isLike, setIsLike] = useState(null);
+    const [isDislike, setIsDislike] = useState(null);
+    const [likeCount, setLikeCount] = useState(0);
+    const [isExecuting, setIsExecuting] = useState(false);
+
 
     const toBuzz = () => {
         navigate(`/buzz/${buzzid}`)
     }
+
+    const handleLike = async () => {
+        if (isExecuting) {
+            console.log('hi')
+            return;
+        }
+        setIsExecuting(true);
+        try {
+            const response = await fetch('http://localhost:3000/buzzes/like', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    buzzid,
+                    userid: Cookies.get('BuzzerUser'),
+                    isLike,
+                    isDislike,
+                }),
+            });
+            const responseData = await response.json();
+            if (responseData.state) {
+                setIsLike(responseData.isLike)
+                setIsDislike(responseData.isDislike)
+                setLikeCount(responseData.likeCount)
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsExecuting(false);
+        }
+    }
+
+    const handleDislike = async () => {
+        if (isExecuting) {
+            console.log('hi')
+            return;
+        }
+        setIsExecuting(true);
+        try {
+            const response = await fetch('http://localhost:3000/buzzes/dislike', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    buzzid,
+                    userid: Cookies.get('BuzzerUser'),
+                    isLike,
+                    isDislike,
+                }),
+            });
+            const responseData = await response.json();
+            if (responseData.state) {
+                setIsLike(responseData.isLike)
+                setIsDislike(responseData.isDislike)
+                setLikeCount(responseData.likeCount)
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsExecuting(false);
+        }
+    }
+
+    useEffect(() => {
+        if (userLike == 1) {
+            setIsLike(true)
+        } else if (userLike == -1) {
+            setIsDislike(true);
+        }
+        setLikeCount(numOfLike)
+    }, [userLike]);
 
     return (
         <>
@@ -102,7 +183,7 @@ export default function NewBuzzItem(props) {
                             ) : null}
 
                             {/* Tools */}
-                            <Box sx={{width: '600px', marginTop: '20px'}}>
+                            <Box sx={{ width: '600px', marginTop: '20px' }}>
                                 <Box sx={{ display: "flex", alignItems: "center" }}>
                                     <IconButton size="large" sx={{ marginLeft: "20px" }} onClick={toBuzz}>
                                         <ChatBubbleOutlineOutlined />
@@ -111,12 +192,21 @@ export default function NewBuzzItem(props) {
                                     <Box
                                         sx={{ display: "flex", alignItems: "center", margin: "auto" }}
                                     >
-                                        <IconButton size="large">
-                                            <ThumbUpIcon />
+                                        <IconButton size="large" onClick={handleLike}>
+                                            {isLike ?
+                                                <ThumbUpAltIcon />
+                                                :
+                                                <ThumbUpOffAltIcon />
+                                            }
+
                                         </IconButton>
-                                        <div>{numOfLike}</div>
-                                        <IconButton size="large">
-                                            <ThumbDownIcon />
+                                        <div>{likeCount}</div>
+                                        <IconButton size="large" onClick={handleDislike}>
+                                            {isDislike ?
+                                                <ThumbDownAltIcon />
+                                                :
+                                                <ThumbDownOffAltIcon />
+                                            }
                                         </IconButton>
                                     </Box>
 

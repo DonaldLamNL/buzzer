@@ -21,9 +21,9 @@
 
 2. Follow a user
 
-3. Like or dislike
+3. Like or dislike (**Done**)
 
-4. Comment
+4. Comment (**Done**)
 
 5. Post (**Base**)
     - Cannot post image or video

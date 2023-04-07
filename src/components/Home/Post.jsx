@@ -55,18 +55,21 @@ export default function Post() {
     const handleBuzzInputChange = (event) => {
         setBuzzInput(event.target.value);
     };
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             setImage(URL.createObjectURL(file));
         }
     };
+
     const handleVideoChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             setVideo(URL.createObjectURL(file));
         }
     };
+    
     const handleCategoryChoose = (event) => {
         setPostCat(event.target.value);
     };

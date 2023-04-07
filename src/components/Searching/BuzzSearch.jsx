@@ -18,6 +18,7 @@ export default function BuzzSearch() {
             fetch(`http://localhost:3000/buzzes/search?keywords=${search}&userid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     setBuzzList(data);
                 })
                 .catch(error => {
