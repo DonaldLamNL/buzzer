@@ -31,7 +31,7 @@ export default function Nav() {
 
   const getLoginState = () => {
     try {
-      fetch(`http://localhost:3000/account?userid=${Cookies.get('BuzzerUser')}`)
+      fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
         .then(response => response.json())
         .then(data => {
           SetIsLogin(data.isLogin);

@@ -8,7 +8,7 @@
 
 3. Logout (**Logout**)
 
-3. Reset Password
+3. Reset Password [Circle]
 
 ### Admin User
 1. Admin UI

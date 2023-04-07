@@ -1,7 +1,7 @@
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { TextField, Button, Grid, Avatar, Card } from "@mui/material";
 import { PhotoCamera, VideoCall } from "@mui/icons-material";
-import React, { useState } from "react";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -49,6 +49,8 @@ export default function Post() {
     const [video, setVideo] = useState(null);
     const [buzzInput, setBuzzInput] = useState("");
     const [postCat, setPostCat] = useState('Others');
+    const [username, setUsername] = useState("A");
+    const [icon, setIcon] = useState(null);
 
     const handleBuzzInputChange = (event) => {
         setBuzzInput(event.target.value);
@@ -90,7 +92,7 @@ export default function Post() {
             });
 
             const responseData = await response.json();
-            console.log(responseData.message);``
+            console.log(responseData.message); ``
             if (responseData) {
                 navigate(`/buzz/${responseData.buzzid}`)
             }
@@ -98,6 +100,24 @@ export default function Post() {
             console.error(err);
         }
     };
+
+    const getCurrentUser = async () => {
+        fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.isLogin){
+                    setUsername(data.username)
+                    setIcon(data.icon)
+                }
+            })
+            .catch(error => {
+                console.log('error');
+            });
+    };
+
+    useEffect(() => {
+        getCurrentUser();
+    });
 
 
     return (
@@ -116,7 +136,7 @@ export default function Post() {
             >
                 {/* Poster Icon */}
                 <Box sx={{ width: "90px" }}>
-                    <Avatar sx={{ width: 50, height: 50, margin: "20px" }}>H</Avatar>
+                    <Avatar sx={{ width: 50, height: 50, margin: "20px" }}>{username[0]}</Avatar>
                 </Box>
 
                 <Grid container item sx={{ flexGrow: 1 }}>

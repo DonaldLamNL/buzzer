@@ -13,7 +13,7 @@ export default function UserSearch(props) {
 
     const searchUser = async () => {
         try {
-            fetch(`http://localhost:3000/users?keywords=${input}&userid=${Cookies.get('BuzzerUser')}`)
+            fetch(`http://localhost:3000/users/search?keywords=${input}&userid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
                 .then(data => {
                     setUserList(data);
@@ -44,14 +44,14 @@ export default function UserSearch(props) {
             </Box>}
 
             {userList && userList.map((item) => (
-                    <ProfileCardItem key={item.userid} {...item} />
-                ))
+                <ProfileCardItem key={item.userid} {...item} />
+            ))
             }
 
             <Box sx={{
                 height: "100px",
             }}>
-
+                
             </Box>
         </Box>
     )

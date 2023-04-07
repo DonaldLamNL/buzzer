@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-
-// material-ui
+import React, { useEffect, useState } from 'react'
 import { LinearProgress } from '@mui/material'
 
 // components
 import BuzzItem from '../Items/BuzzItem'
 import Post from './Post'
+import Cookies from 'js-cookie'
 
 // Demonstrate buzz data
 const data = [
@@ -47,7 +46,30 @@ const data = [
     },
 ]
 
+// Get buzzes
 export default function MainContent() {
+    const [buzzList, setBuzzList] = useState([]);
+
+    const getBuzzes = async () => {
+        try {
+            fetch(`http://localhost:3000/buzzes/search?userid=${Cookies.get('BuzzerUser')}`)
+                .then(response => response.json())
+                .then(data => {
+                    setUsername(data.buzzList);
+                    setIcon(data.icon);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        // getBuzzes();
+    });
+
     return (
         <div>
             <Post />
