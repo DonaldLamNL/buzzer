@@ -5,6 +5,7 @@ const { decodeUserID } = require('./commonfunct');
 const multer = require('multer');
 const upload = multer();
 
+// Posting System
 router.post('/po', upload.none(), async (req, res) => {
     const { content, category, userid } = req.body;
     const image = req.file && req.file.buffer;
@@ -36,7 +37,7 @@ router.post('/po', upload.none(), async (req, res) => {
     }
 });
 
-
+// Buzz Searching System
 router.get('/', async (req, res) => {
     const { buzzid, userid } = req.query;
     let decodedUser = decodeUserID(userid);
@@ -61,6 +62,7 @@ router.get('/', async (req, res) => {
     res.send(responseData);
 });
 
+// Buzz Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
     let decodedUser = decodeUserID(userid);

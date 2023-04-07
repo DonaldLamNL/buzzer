@@ -3,7 +3,8 @@ var router = express.Router();
 const { Users } = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
 
-router.get('/', async (req, res) => {
+// User Searching System
+router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
     let decodedUser = decodeUserID(userid);
     let searchQuery = {};
@@ -40,6 +41,28 @@ router.get('/', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
+    }
+});
+
+// Get Current User
+router.get('/currentuser', async (req, res) => {
+    const { userid } = req.query;
+    let decodedUser = decodeUserID(userid);
+    let isLogin = decodedUser ? true : false;
+    if (isLogin) {
+        try {
+            const user = await Users.findOne({ userid: decodedUser });
+            if (user) {
+                res.send({ status: true, isLogin, username: user.username, icon: user.icon });
+            } else {
+                res.send({ status: false, message: 'User not found' });
+            }
+        } catch (error) {
+            console.error(error);
+            res.send({ status: false, message: 'Error fetching user' });
+        }
+    } else {
+        res.send({ status: true, isLogin });
     }
 });
 

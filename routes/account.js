@@ -81,12 +81,4 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// Check login state
-router.get('/', async (req, res) => {
-    const { userid } = req.query;
-    let decodedUser = decodeUserID(userid);
-    let isLogin = decodedUser ? true : false
-    res.send({ status: true, isLogin });
-});
-
 module.exports = router;
