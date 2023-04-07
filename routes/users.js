@@ -53,7 +53,7 @@ router.get('/currentuser', async (req, res) => {
         try {
             const user = await Users.findOne({ userid: decodedUser });
             if (user) {
-                res.send({ status: true, isLogin, username: user.username, icon: user.icon });
+                res.send({ status: true, isLogin, username: user.username, icon: user.icon, userid: decodedUser });
             } else {
                 res.send({ status: false, message: 'User not found' });
             }
@@ -82,6 +82,36 @@ router.post('/follow', async (req, res) => {
 
     res.json({ state: true, follow: !isFollow, numOfFollowers: isFollow ? followersCount - 1 : followersCount + 1 });
 
+});
+
+// Get User Profile
+router.get('/userprofile', async (req, res) => {
+    const { userid, currentid } = req.query;
+    const decodedUser = decodeUserID(currentid);
+    const isCurrentUser = userid == decodedUser ? true : false;
+
+    try {
+        const user = await Users.findOne({ userid });
+
+        const responseData = {
+            userInfo: {
+                userid,
+                username: user.username,
+                description: user.description,
+                avatar: user.avatar,
+                followersCount: user.followers.length,
+                followingCount: user.following.length,
+                isVerify: user.isVerify,
+                isFollow: isCurrentUser ? null : user.followers.includes(decodedUser),
+                isCurrentUser,
+            },
+            state: true,
+        }
+
+        res.send(responseData)
+    } catch (error) {
+        res.send({ state: false, message: 'Error fetching user' });
+    }
 });
 
 module.exports = router;
