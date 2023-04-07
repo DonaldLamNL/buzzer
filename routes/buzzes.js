@@ -161,7 +161,6 @@ router.post('/dislike', async (req, res) => {
     }
 });
 
-
 // Get Following Buzzes
 router.get('/follow', async (req, res) => {
     const { userid } = req.query;
@@ -173,6 +172,39 @@ router.get('/follow', async (req, res) => {
     
         const responseData = await Promise.all(buzzes.map(async (buzz) => {
             const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
+            const author = await Users.findOne({ userid: buzz.userid });
+            return {
+                buzzid: buzz.buzzid,
+                userLike,
+                userid: buzz.userid,
+                username: author.username,
+                icon: author.avatar ? author.avatar : null,
+                isVerify: author.isVerify ? author.isVerify : null,
+                content: buzz.content,
+                category: buzz.category,
+                numOfLike: buzz.like.length - buzz.dislike.length,
+                image: buzz.image ? buzz.image : null,
+                video: buzz.video ? buzz.video : null,
+                comment: buzz.comment ? buzz.comment : null
+            };
+        }));
+        res.send(responseData);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+// Get User Buzzes
+router.get('/user', async (req, res) => {
+    const { userid } = req.query;
+
+    try {
+        const buzzes = await Buzzes.find({ userid })
+    
+        const responseData = await Promise.all(buzzes.map(async (buzz) => {
+            const userLike = (buzz.like.includes(userid) ? 1 : (buzz.dislike.includes(userid) ? -1 : 0));
             const author = await Users.findOne({ userid: buzz.userid });
             return {
                 buzzid: buzz.buzzid,
