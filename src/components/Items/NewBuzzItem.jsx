@@ -1,12 +1,12 @@
 import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
-import { Avatar, Card, Grid, IconButton, SvgIcon, Typography } from "@mui/material";
+import { Avatar, Button, Card, Grid, IconButton, SvgIcon, Typography } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Box } from "@mui/system";
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 
 import React, { useEffect, useState } from "react";
@@ -117,18 +117,26 @@ export default function NewBuzzItem(props) {
                     width: "90%",
                 }}>
                     {/* Poster Icon */}
-                    <Box sx={{ width: "90px" }}>
-                        <Avatar src={icon} sx={{ width: 50, height: 50, margin: "20px" }}>
-                            {username[0]}
-                        </Avatar>
-                    </Box>
+
+                        <Box>
+                            <Avatar 
+                                src={icon}
+                                sx={{ width: 50, height: 50, margin: "20px", cursor: 'pointer' }}
+                                onClick={() => {navigate(`/user/${userid}`)}}
+                            >
+                                {username[0]}
+                            </Avatar>
+                        </Box>
 
                     {/* Content Part */}
                     <Grid container item sx={{ flexGrow: 1 }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
-                                <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
+                                <Typography 
+                                    sx={{ fontSize: "18px", display: "inline-block", cursor: 'pointer' }}
+                                    onClick={() => {navigate(`/user/${userid}`)}}
+                                >
                                     {username}
                                     {isVerify && (
                                         <CheckCircle sx={{ color: 'orange', ml: 1 }} />
@@ -141,7 +149,9 @@ export default function NewBuzzItem(props) {
                                         color: "#7e7e7e",
                                         marginLeft: "20px",
                                         display: "inline-block",
+                                        cursor: 'pointer',
                                     }}
+                                    onClick={() => {navigate(`/user/${userid}`)}}
                                 >
                                     @{userid}
                                 </Typography>
