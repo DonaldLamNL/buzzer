@@ -60,7 +60,7 @@ export default function UserProfile() {
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
     const [followersCount, setFollowersCount] = useState(null);
-    const [buzzList, setBuzzList] = useState(null);
+    const [buzzList, setBuzzList] = useState([]);
 
     const handleButton = async () => {
         if (userInfo.isCurrentUser) {
@@ -299,7 +299,7 @@ export default function UserProfile() {
                                     }}
                                 >
                                     {
-                                        buzzList ?
+                                        buzzList == [] ?
                                             buzzList.map((post) => (
                                                 <NewBuzzItem key={post.buzzid} {...post} />
                                             ))

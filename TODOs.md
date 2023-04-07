@@ -36,7 +36,7 @@
 ### Advanced
 1. Pretty UI (**Super Fancy**)
 
-2. User Profile (**Base**)
+2. User Profile (**Done**)
 
 3. User Profile Editting
 
