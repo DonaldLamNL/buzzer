@@ -11,14 +11,12 @@ import Cookies from 'js-cookie';
 export default function BuzzSearch() {
     const { search } = useParams();
     const [buzzList, setBuzzList] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
 
     const searchBuzz = async () => {
         try {
             fetch(`http://localhost:3000/buzzes/search?keywords=${search}&userid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     setBuzzList(data);
                 })
                 .catch(error => {

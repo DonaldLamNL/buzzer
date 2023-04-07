@@ -1,11 +1,10 @@
 
-import { Box, Button, Card, IconButton } from "@mui/material";
-import TagIcon from "@mui/icons-material/Tag";
+import { Box, Card } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const categories = [
+const cats = [
     {
         name: 'Food',
         number: 123
@@ -44,11 +43,21 @@ const categories = [
     },
     {
         name: 'Others',
-        number: '213'
+        number: 213
     },
 ];
 
 export default function News() {
+
+    const [categories, setCategories] = useState([]);
+
+    const getCategories = () => {
+        console.log('hello')
+    }
+
+    useEffect(() => {
+        getCategories();
+    }, []);
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -66,7 +75,7 @@ export default function News() {
                 <h1 style={{ lineHeight: "60px", fontSize: "20px", textAlign: "center" }}>
                     Categories
                 </h1>
-                {categories
+                {cats
                     .sort((a, b) => b.number - a.number) // sort categories by number in descending order
                     .map((c) => {
                         return (

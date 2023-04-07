@@ -14,7 +14,7 @@ export default function NavItem(props) {
           sx={{ color: "#ffffff" }}
           // startIcon={<Component />}
           onClick={() => {
-            navigate(`../${path}`);
+            path && navigate(`../${path}`);
           }}
         >
           {/* <Grid

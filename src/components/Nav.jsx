@@ -35,7 +35,6 @@ export default function Nav() {
         .then(response => response.json())
         .then(data => {
           if (data.isLogin) {
-            console.log(data)
             navigate(`/user/${data.userid}`)
           }
         })
@@ -127,6 +126,7 @@ export default function Nav() {
           <Box onClick={jumpToUserProfile}>
             <NavItem
               hovering={hovering}
+              path={null}
               name="user"
               component={FaceIcon}
             />

@@ -1,14 +1,14 @@
 ## Requirements
 
 ### User Management
-1. Sign up (**Done**)
+1. Sign up [Done]
     - To Chris: Add the function to check the input email format and check two password equivalent.
 
-2. Login (**Done**)
+2. Login [Done]
 
-3. Logout (**Done**)
+3. Logout [Done]
 
-3. Reset Password [Circle]
+3. Reset Password
 
 ### Admin User
 1. Admin UI
@@ -17,26 +17,26 @@
 2. Delete users
 
 ### User Features
-1. Search for a user or buzz (**Done**)
+1. Search for a user or buzz [Done]
 
-2. Follow a user (**Done**)
+2. Follow a user [Done]
 
-3. Like or dislike (**Done**)
+3. Like or dislike [Done]
 
-4. Comment (**Done**)
+4. Comment [Done]
 
-5. Post (**Base**)
+5. Post [Done]
     - Cannot post image or video
 
 6. Retweet
 
-7. Show following user tweets (**Done**)
+7. Show following user tweets [Done]
 
 
 ### Advanced
 1. Pretty UI (**Super Fancy**)
 
-2. User Profile (**Done**)
+2. User Profile [Done]
 
 3. User Profile Editting
 

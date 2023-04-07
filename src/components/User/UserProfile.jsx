@@ -296,25 +296,18 @@ export default function UserProfile() {
                                     sx={{
                                         borderBottom: "0 30px",
                                         width: '100%',
+                                        minHeight: '150px'
+                                        
                                     }}
                                 >
-                                    {
-                                        buzzList != [] ?
-                                            buzzList.map((post) => (
-                                                <NewBuzzItem key={post.buzzid} {...post} />
-                                            ))
-                                            :
-                                            <Box
-                                                sx={{
-                                                    height: '150px',
-                                                    textAlign: 'center',
-                                                }}
-                                            >
-                                                <Typography fontSize={20} lineHeight={'150px'}>
-                                                    This user is so lazy...
-                                                </Typography>
-                                            </Box>
-                                    }
+                                    {buzzList.length != 0 ?
+                                        buzzList.map((post) => (
+                                            <NewBuzzItem key={post.buzzid} {...post} />
+                                        ))
+                                        :
+                                        <Typography fontSize={20} lineHeight={'150px'} textAlign={'center'}>
+                                            This user is so lazy...
+                                        </Typography>}
                                 </Box>
                             }
                         </Stack>
