@@ -58,7 +58,6 @@ router.get('/currentuser', async (req, res) => {
                 res.send({ status: false, message: 'User not found' });
             }
         } catch (error) {
-            console.error(error);
             res.send({ status: false, message: 'Error fetching user' });
         }
     } else {

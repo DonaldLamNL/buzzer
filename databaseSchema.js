@@ -27,10 +27,10 @@ const buzzSchema = new mongoose.Schema({
 });
 
 const commentSchema = new mongoose.Schema({
-    cid: { type: Number, required: true },
-    bid: { type: Number, required: true },
-    user_id: { type: String, required: true },
-    author_id: { type: String, required: true },
+    commentid: { type: Number, required: true },
+    buzzid: { type: Number, required: true },
+    userid: { type: String, required: true },
+    // author_id: { type: String, required: true },
     content: { type: String, required: true }
 });
 
