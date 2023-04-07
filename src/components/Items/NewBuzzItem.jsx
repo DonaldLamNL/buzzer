@@ -24,12 +24,12 @@ export default function NewBuzzItem(props) {
 
 
     const toBuzz = () => {
-        navigate(`/buzz/${buzzid}`)
+        navigate(`/buzz/${buzzid}`);
+        window.scrollTo({ top: 0 });
     }
 
     const handleLike = async () => {
         if (isExecuting) {
-            console.log('hi')
             return;
         }
         setIsExecuting(true);

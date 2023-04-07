@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 // material-ui
 import { Box, width } from '@mui/system'
@@ -17,6 +17,7 @@ export default function UserSearch(props) {
                 .then(response => response.json())
                 .then(data => {
                     setUserList(data);
+                    
                 })
                 .catch(error => {
                     console.log(error);

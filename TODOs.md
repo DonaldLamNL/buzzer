@@ -19,7 +19,7 @@
 ### User Features
 1. Search for a user or buzz (**Done**)
 
-2. Follow a user
+2. Follow a user (**Done**)
 
 3. Like or dislike (**Done**)
 

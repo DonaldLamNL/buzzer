@@ -97,6 +97,7 @@ export default function Post() {
             const responseData = await response.json();
             console.log(responseData.message); 
             if (responseData) {
+                console.log(responseData)
                 navigate(`/buzz/${responseData.buzzid}`)
             }
         } catch (err) {

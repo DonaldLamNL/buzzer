@@ -1,26 +1,66 @@
-import React from 'react'
+import Cookies from 'js-cookie';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function ProfileCardItem(props) {
-    const { userid, username, icon, followersCount, followingCount, isFollow } = props
+    let { userid, username, icon, numOfFollowing, numOfFollowers, follow } = props
+    const [isExecuting, setIsExecuting] = useState(false);
+    const [isFollow, setIsFollow] = useState(null);
+    const [followersCount, setFollowersCount] = useState(null);
+    const [followingCount, setFollowingCount] = useState(null);
 
-    const link = "#/user/" + userid;
+    const handleFollow = async () => {
+        if (isExecuting) {
+            return;
+        }
+        setIsExecuting(true);
+        try {
+            const response = await fetch('http://localhost:3000/users/follow', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    targetid: userid,
+                    userid: Cookies.get('BuzzerUser'),
+                    isFollow,
+                    followersCount,
+                }),
+            });
+            const responseData = await response.json();
+            if (responseData.state) {
+                setIsFollow(responseData.follow);
+                setFollowersCount(responseData.numOfFollowers);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsExecuting(false);
+        }
+    }
+
+    useEffect(() => {
+        setIsFollow(follow);
+        setFollowersCount(numOfFollowers);
+        setFollowingCount(numOfFollowing);
+    }, [userid]);
 
     return (
         <div className="card">
-            {icon === null ?
-                (
-                    <div className='charBx'
-                        style={{
-                            background: "#1776d2",
-                            color: "white",
-                        }}>
-                        {username[0]}
-                    </div>
-
-                ) :
+            {icon ?
                 (
                     <div className="imgBx">
                         <img src={icon}></img>
+                    </div>
+                )
+                :
+                (
+                    <div className='charBx'
+                        style={{
+                            background: "#BDBDBD",
+                            color: "white",
+                        }}>
+                        {username[0]}
                     </div>
                 )
             }
@@ -33,10 +73,12 @@ export default function ProfileCardItem(props) {
                         <h3>{followingCount}<br></br><span>Following</span></h3>
                     </div>
                     <div className="actionBtn">
-                        {isFollow ? 
-                            <button>Unfollow</button> : <button>Follow</button>
-                        }
-                        <a href={link}>
+                        <div onClick={handleFollow}>
+                            {isFollow ?
+                                <button>Unfollow</button> : <button>Follow</button>
+                            }
+                        </div>
+                        <Link to={`/user/${userid}`}>
                             <button style={{
                                 padding: "15px 25px",
                                 borderRadius: "30px",
@@ -48,7 +90,7 @@ export default function ProfileCardItem(props) {
                                 color: "#1776d2",
                                 cursor: "pointer",
                             }}>Profile</button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
