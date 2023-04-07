@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
     following: [{ type: String }],
     followers: [{ type: String }],
     favour: [{ type: String }],
-    isVerify: { type: Boolean }
+    isVerify: { type: Boolean },
+    isAdmin: { type: Boolean },
 });
 
 const buzzSchema = new mongoose.Schema({

@@ -71,6 +71,7 @@ router.post('/signup', async (req, res) => {
             followers: [],
             favour: [],
             isVerify: false,
+            isAdmin: false,
         });
 
         await user.save();

@@ -104,6 +104,7 @@ router.get('/userprofile', async (req, res) => {
                 isVerify: user.isVerify,
                 isFollow: isCurrentUser ? null : user.followers.includes(decodedUser),
                 isCurrentUser,
+                isAdmin: user.isAdmin,
             },
             state: true,
         }
