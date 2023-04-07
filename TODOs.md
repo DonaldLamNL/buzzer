@@ -36,18 +36,20 @@
 ### Advanced
 1. Pretty UI (**Super Fancy**)
 
-2. User Profile Editting
+2. User Profile (**Base**)
 
-3. Category Search
+3. User Profile Editting
 
-4. Buzzes visibility
+4. Category Search
 
-5. Users Recommendation
+5. Buzzes visibility (--)
 
-6. Buzzes Recommendation
+6. Users Recommendation
 
-7. Video buzzes
+7. Buzzes Recommendation
 
-8. Chat Room (--)
+8. Video buzzes
 
-9. Hive (--)
+9. Chat Room (--)
+
+10. Hive (--)

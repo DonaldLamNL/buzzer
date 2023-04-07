@@ -49,7 +49,7 @@ export default function Post() {
     const [video, setVideo] = useState(null);
     const [buzzInput, setBuzzInput] = useState("");
     const [postCat, setPostCat] = useState('Others');
-    const [username, setUsername] = useState("A");
+    const [username, setUsername] = useState("");
     const [icon, setIcon] = useState(null);
 
     const handleBuzzInputChange = (event) => {
@@ -139,7 +139,7 @@ export default function Post() {
             >
                 {/* Poster Icon */}
                 <Box sx={{ width: "90px" }}>
-                    <Avatar sx={{ width: 50, height: 50, margin: "20px" }}>{username[0]}</Avatar>
+                    <Avatar sx={{ width: 50, height: 50, margin: "20px" }}>{username ? username[0] : username}</Avatar>
                 </Box>
 
                 <Grid container item sx={{ flexGrow: 1 }}>

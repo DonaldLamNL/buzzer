@@ -19,7 +19,7 @@ export default function NewBuzzItem(props) {
     const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, displayComment = false } = props;
     const [isLike, setIsLike] = useState(null);
     const [isDislike, setIsDislike] = useState(null);
-    const [likeCount, setLikeCount] = useState(0);
+    const [likeCount, setLikeCount] = useState(null);
     const [isExecuting, setIsExecuting] = useState(false);
 
 

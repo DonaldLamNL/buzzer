@@ -54,6 +54,7 @@ const data = [
 
 
 export default function UserProfile() {
+    const navigator = useNavigate();
     const { userid } = useParams();
     const [userInfo, setUserInfo] = useState(null);
     const [isExecuting, setIsExecuting] = useState(false);
@@ -193,11 +194,7 @@ export default function UserProfile() {
 
                                     <Typography margin="20px 0"> {userInfo.description} </Typography>
 
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                        }}
-                                    >
+                                    <Box display={"flex"}>
                                         <Link
                                             to="/userlist"
                                             underline="hover"
@@ -256,6 +253,22 @@ export default function UserProfile() {
                                 >
                                     {userInfo.isCurrentUser ? 'Edit' : isFollow ? 'Unfollow' : 'Follow'}
                                 </Button>
+                                {!userInfo.isAdmin && 
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            bgcolor: '#ff6383',
+                                            position: "absolute",
+                                            bottom: "10px",
+                                            right: "20px",
+                                            borderRadius: "20px",
+                                            '&:hover': { bgcolor: '#e14161' } 
+                                        }}
+                                        onClick={() => {navigator(`/admin`)}}
+                                    >
+                                        User Management
+                                    </Button>
+                                }
 
                             </Box>
                             <Box

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton, TextField, Box, AppBar, Tabs, Tab, Typography } from '@mui/material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PropTypes from 'prop-types';
 
 import Following from './Following'
@@ -57,9 +56,6 @@ export default function UserList() {
                 sx={{
                     padding: '5px',
                 }}>
-                <IconButton aria-label="back">
-                    <ArrowBackIcon color='action' />
-                </IconButton>
             </Box>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} centered>
