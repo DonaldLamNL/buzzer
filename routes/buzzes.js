@@ -61,12 +61,12 @@ router.post('/post', upload.none(), async (req, res) => {
             like: [],
             dislike: [],
             comment: [],
-            rebuzz: null,
+            rebuzz: undef,
         });
 
         await newBuzz.save();
         console.log('success');
-        res.send({ state: true, message: 'Buzz post successfully!', newBuzzid });
+        res.send({ state: true, message: 'Buzz post successfully!', buzzid: newBuzzid });
     } catch (err) {
         console.error(err);
         res.send({ state: false, message: 'Failed to post Buzz.' });
@@ -124,7 +124,7 @@ router.post('/like', async (req, res) => {
         if(isLike){
             await Buzzes.updateOne({ buzzid }, { $pull: { like: decodedUser } });
         }else{
-            await Buzzes.updateOne({ buzzid }, { $push: { like: decodedUser } });
+            await Buzzes.updateOne({ buzzid }, { $addToSet: { like: decodedUser } });
         }
 
         const buzz = await Buzzes.findOne({buzzid});
@@ -150,7 +150,7 @@ router.post('/dislike', async (req, res) => {
         if(isDislike){
             await Buzzes.updateOne({ buzzid }, { $pull: { dislike: decodedUser } });
         }else{
-            await Buzzes.updateOne({ buzzid }, { $push: { dislike: decodedUser } });
+            await Buzzes.updateOne({ buzzid }, { $addToSet: { dislike: decodedUser } });
         }
 
         const buzz = await Buzzes.findOne({buzzid});

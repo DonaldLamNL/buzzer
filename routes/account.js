@@ -65,6 +65,12 @@ router.post('/signup', async (req, res) => {
             username,
             email,
             password: hashedPassword,
+            avatar: undefined,
+            description: undefined,
+            followers: [],
+            followers: [],
+            favour: [],
+            isVerify: false,
         });
 
         await user.save();

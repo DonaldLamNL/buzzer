@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     avatar: { type: String },
     description: { type: String },
-    following: [{ type: Number }],
-    followers: [{ type: Number }],
+    following: [{ type: String }],
+    followers: [{ type: String }],
     favour: [{ type: String }],
     isVerify: { type: Boolean }
 });
