@@ -29,6 +29,23 @@ export default function Nav() {
     setHovering(false);
   };
 
+  const jumpToUserProfile = () => {
+    try {
+      fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.isLogin) {
+            console.log(data)
+            navigate(`/user/${data.userid}`)
+          }
+        })
+        .catch(error => {
+        });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   const getLoginState = () => {
     try {
       fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
@@ -107,12 +124,13 @@ export default function Nav() {
             component={HomeRoundedIcon}
           />
 
-          <NavItem
-            hovering={hovering}
-            path="user/irwinking1242"
-            name="user"
-            component={FaceIcon}
-          />
+          <Box onClick={jumpToUserProfile}>
+            <NavItem
+              hovering={hovering}
+              name="user"
+              component={FaceIcon}
+            />
+          </Box>
 
           <Stack direction="column" gap={18} justifyContent="center">
             <NavItem
