@@ -7,17 +7,17 @@ import { Box } from "@mui/system";
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Comment from '../BuzzPage/Comment'
 
 export default function BuzzItem(props) {
     const navigate = useNavigate()
-    const { pid, like, comment, icon, content, image, video, uid, uname, isVerify } = props;
+    const { buzzid, like, icon, content, image, video, userid, username, isVerify } = props;
     const { displayComment = false } = props;
 
     const toBuzz = () => {
-        navigate(`/buzz/${pid}`)
+        navigate(`/buzz/${buzzid}`)
     }
 
     return (
@@ -39,7 +39,7 @@ export default function BuzzItem(props) {
                     {/* Poster Icon */}
                     <Box sx={{ width: "90px" }}>
                         <Avatar src={icon} sx={{ width: 50, height: 50, margin: "20px" }}>
-                            {uname[0]}
+                            {username[0]}
                         </Avatar>
                     </Box>
 
@@ -49,7 +49,7 @@ export default function BuzzItem(props) {
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
                                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
-                                    {uname}
+                                    {username}
                                     {isVerify && (
                                         <CheckCircle sx={{ color: 'orange', ml: 1 }} />
                                     )}
@@ -63,7 +63,7 @@ export default function BuzzItem(props) {
                                         display: "inline-block",
                                     }}
                                 >
-                                    @{uid}
+                                    @{userid}
                                 </Typography>
                             </Box>
 
@@ -139,7 +139,7 @@ export default function BuzzItem(props) {
                 {/* Comment */}
                 <div style={{ display: 'block' }}>
                     {displayComment ? (
-                        <Comment />
+                        <Comment buzzid={buzzid} />
                     ) : (
                         <></>
                     )}

@@ -7,7 +7,7 @@ import { Box } from "@mui/system";
 import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Comment from '../BuzzPage/Comment'
 
@@ -140,7 +140,7 @@ export default function NewBuzzItem(props) {
                 {/* Comment */}
                 <div style={{ display: 'block' }}>
                     {displayComment ? (
-                        <Comment />
+                        <Comment buzzid={buzzid} />
                     ) : (
                         <></>
                     )}

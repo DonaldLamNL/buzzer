@@ -86,13 +86,13 @@ export default function Post() {
         formData.append('video', video);
 
         try {
-            const response = await fetch('http://localhost:3000/buzzes/po', {
+            const response = await fetch('http://localhost:3000/buzzes/post', {
                 method: 'POST',
                 body: formData,
             });
 
             const responseData = await response.json();
-            console.log(responseData.message); ``
+            console.log(responseData.message); 
             if (responseData) {
                 navigate(`/buzz/${responseData.buzzid}`)
             }

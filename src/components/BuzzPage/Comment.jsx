@@ -1,36 +1,97 @@
 import { Avatar, Card, Grid, IconButton, TextField } from '@mui/material'
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Cookies from 'js-cookie';
 
 const buzzComment = [
     {
         cid: 1,
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        comment: 'This is so good'
+        userid: 'irwinking124',
+        username: 'Irwin King',
+        content: 'This is so good'
     },
     {
         cid: 2,
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        comment: 'This is so bad'
+        userid: 'irwinking124',
+        username: 'Irwin King',
+        content: 'This is so bad'
     },
     {
         cid: 3,
-        uid: 'irwinking124',
-        uname: 'Irwin King',
-        comment: 'This is so nice'
+        userid: 'irwinking124',
+        username: 'Irwin King',
+        content: 'This is so nice'
     },
     {
         cid: 4,
-        uid: 'michael123',
-        uname: 'Michael Lyu',
-        comment: 'This is so fancy'
+        userid: 'michael123',
+        username: 'Michael Lyu',
+        content: 'This is so fancy'
     }
 ]
 
-export default function Comment() {
+export default function Comment(props) {
+    const { buzzid } = props;
+    const [comments, setComments] = useState([]);
+    const [commentInput, setCommentInput] = useState('');
+    const [postedComment, setPostedComment] = useState(0);
+
+    const getComments = async () => {
+        try {
+            fetch(`http://localhost:3000/comments?buzzid=${buzzid}`)
+                .then(response => response.json())
+                .then(data => {
+                    setComments(data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleCommentInputChange = (event) => {
+        setCommentInput(event.target.value)
+    }
+
+    const handlePostComment = async (event) => {
+        event.preventDefault();
+
+        if (!commentInput) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('content', commentInput);
+        formData.append('userid', Cookies.get('BuzzerUser'));
+        formData.append('buzzid', buzzid);
+
+        try {
+            const response = await fetch('http://localhost:3000/comments/post', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const responseData = await response.json();
+            console.log(responseData.message);
+            if (responseData) {
+                setPostedComment(responseData.newCommentid);
+                getComments();
+                setCommentInput('');
+                document.getElementById("comment-input").value = "";
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    useEffect(() => {
+        getComments();
+    }, [buzzid, postedComment]);
+
     return (
         <Box>
             <Box
@@ -50,8 +111,8 @@ export default function Comment() {
                 <Grid container item sx={{ flexGrow: 1 }}>
                     {/* Buzz Input Block */}
                     <TextField
+                        
                         multiline
-                        // rows={1}
                         placeholder="Comment..."
                         sx={{
                             fontSize: "16px",
@@ -62,7 +123,8 @@ export default function Comment() {
                                 backgroundColor: "#ffffff !important",
                             },
                         }}
-                        inputProps={{ rows: 4 }}
+                        inputProps={{ rows: 4, id: "comment-input" }}
+                        onChange={handleCommentInputChange}
                     />
                     <Box
                         sx={{
@@ -70,38 +132,41 @@ export default function Comment() {
                             alignItems: "center",
                         }}
                     >
-                        <IconButton size="large">
+                        <IconButton 
+                            size="large"
+                            onClick={handlePostComment}
+                        >
                             <SendRoundedIcon />
                         </IconButton>
                     </Box>
                 </Grid>
             </Box>
-
             {
-                buzzComment.map((c, i) => {
+                comments.map((c, i) => {
                     return (
                         <Box
                             key={i}
                             elevation={5}
                             sx={{
+                                borderRadius: '15px',
                                 display: "flex",
                                 width: "95%",
                                 margin: " 20px auto",
                                 position: "relative",
-                                backgroundColor: "#f4f4f4",
+                                backgroundColor: postedComment == c.commentid ? "#fff0c2" : "#f4f4f4" 
                             }}
                         >
                             {/* Poster Icon */}
                             <Box sx={{ width: "60px" }}>
                                 <Avatar sx={{ width: 40, height: 40, margin: "10px" }}>
-                                    {c.uname[0]}
+                                    {c.username[0]}
                                 </Avatar>
                             </Box>
 
                             <Grid container item sx={{ flexGrow: 1, lineHeight: "60px" }}>
                                 <Box sx={{ flexDirection: "column" }}>
-                                    <Box sx={{ mr: 2 }}>{c.uname}</Box>
-                                    <Box>{c.comment}</Box>
+                                    <Box sx={{ mr: 2 }}>{c.username}</Box>
+                                    <Box>{c.content}</Box>
                                 </Box>
                             </Grid>
                         </Box>
