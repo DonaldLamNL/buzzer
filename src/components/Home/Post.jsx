@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { TextField, Button, Grid, Avatar, Card } from "@mui/material";
+import { TextField, Button, Grid, Avatar, Card, Typography } from "@mui/material";
 import { PhotoCamera, VideoCall } from "@mui/icons-material";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Cookies from 'js-cookie';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import PubSub from 'pubsub-js';
+import RebuzzContent from "../Items/RebuzzContent";
+
 
 
 const categories = [
@@ -51,6 +54,7 @@ export default function Post() {
     const [postCat, setPostCat] = useState('Others');
     const [username, setUsername] = useState("");
     const [icon, setIcon] = useState(null);
+    const [rebuzz, setRebuzz] = useState(null);
 
     const handleBuzzInputChange = (event) => {
         setBuzzInput(event.target.value);
@@ -69,7 +73,7 @@ export default function Post() {
             setVideo(URL.createObjectURL(file));
         }
     };
-    
+
     const handleCategoryChoose = (event) => {
         setPostCat(event.target.value);
     };
@@ -87,6 +91,7 @@ export default function Post() {
         formData.append('userid', Cookies.get('BuzzerUser'));
         formData.append('image', image);
         formData.append('video', video);
+        formData.append('rebuzz', rebuzz);
 
         try {
             const response = await fetch('http://localhost:3000/buzzes/post', {
@@ -95,7 +100,7 @@ export default function Post() {
             });
 
             const responseData = await response.json();
-            console.log(responseData.message); 
+            console.log(responseData.message);
             if (responseData) {
                 navigate(`/buzz/${responseData.buzzid}`)
             }
@@ -108,7 +113,7 @@ export default function Post() {
         fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
             .then(response => response.json())
             .then(data => {
-                if(data.isLogin){
+                if (data.isLogin) {
                     setUsername(data.username)
                     setIcon(data.icon)
                 }
@@ -120,7 +125,12 @@ export default function Post() {
 
     useEffect(() => {
         getCurrentUser();
-    });
+        const token = PubSub.subscribe("REBUZZ", async (channel, buzzid) => {
+            if (buzzid) {
+                setRebuzz(buzzid);
+            }
+        });
+    }, [rebuzz]);
 
 
     return (
@@ -143,6 +153,10 @@ export default function Post() {
                 </Box>
 
                 <Grid container item sx={{ flexGrow: 1 }}>
+
+                    {/* Rebuzz */}
+                    {rebuzz && <RebuzzContent buzzid={rebuzz} />}
+
                     {/* Buzz Input Block */}
                     <TextField
                         multiline

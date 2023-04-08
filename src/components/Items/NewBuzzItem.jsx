@@ -8,20 +8,19 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Box } from "@mui/system";
 import { Link, useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
-
+import PubSub from 'pubsub-js';
 import React, { useEffect, useState } from "react";
-
 import Comment from '../BuzzPage/Comment'
 import Cookies from "js-cookie";
+import RebuzzContent from "./RebuzzContent";
 
 export default function NewBuzzItem(props) {
     const navigate = useNavigate()
-    const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, displayComment = false } = props;
+    const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, rebuzz, displayComment = false } = props;
     const [isLike, setIsLike] = useState(null);
     const [isDislike, setIsDislike] = useState(null);
     const [likeCount, setLikeCount] = useState(null);
     const [isExecuting, setIsExecuting] = useState(false);
-
 
     const toBuzz = () => {
         navigate(`/buzz/${buzzid}`);
@@ -91,6 +90,12 @@ export default function NewBuzzItem(props) {
         }
     }
 
+    const handleRebuzz = () => {
+        PubSub.publish('REBUZZ', buzzid);
+        window.scrollTo({ top: 0 });
+        navigate('/home');
+    }
+
     useEffect(() => {
         if (userLike == 1) {
             setIsLike(true)
@@ -117,25 +122,24 @@ export default function NewBuzzItem(props) {
                     width: "90%",
                 }}>
                     {/* Poster Icon */}
-
-                        <Box>
-                            <Avatar 
-                                src={icon}
-                                sx={{ width: 50, height: 50, margin: "20px", cursor: 'pointer' }}
-                                onClick={() => {navigate(`/user/${userid}`)}}
-                            >
-                                {username[0]}
-                            </Avatar>
-                        </Box>
+                    <Box>
+                        <Avatar
+                            src={icon}
+                            sx={{ width: 50, height: 50, margin: "20px", cursor: 'pointer' }}
+                            onClick={() => { navigate(`/user/${userid}`) }}
+                        >
+                            {username[0]}
+                        </Avatar>
+                    </Box>
 
                     {/* Content Part */}
                     <Grid container item sx={{ flexGrow: 1 }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
-                                <Typography 
+                                <Typography
                                     sx={{ fontSize: "18px", display: "inline-block", cursor: 'pointer' }}
-                                    onClick={() => {navigate(`/user/${userid}`)}}
+                                    onClick={() => { navigate(`/user/${userid}`) }}
                                 >
                                     {username}
                                     {isVerify && (
@@ -151,17 +155,21 @@ export default function NewBuzzItem(props) {
                                         display: "inline-block",
                                         cursor: 'pointer',
                                     }}
-                                    onClick={() => {navigate(`/user/${userid}`)}}
+                                    onClick={() => { navigate(`/user/${userid}`) }}
                                 >
                                     @{userid}
                                 </Typography>
                             </Box>
 
+                            {/* Rebuzz */}
+                            {rebuzz && <RebuzzContent buzzid={rebuzz} />}
+                            
                             <Box>
                                 <Typography
                                     sx={{ fontSize: "14px", marginRight: "10px" }}
-                                    dangerouslySetInnerHTML={{ __html: content }}
-                                />
+                                >
+                                    {content}
+                                </Typography>
                             </Box>
 
 
@@ -227,7 +235,7 @@ export default function NewBuzzItem(props) {
                                             marginRight: "50px",
                                         }}
                                     >
-                                        <IconButton size="large">
+                                        <IconButton size="large" onClick={handleRebuzz}>
                                             <ReplyIcon />
                                         </IconButton>
                                     </Box>

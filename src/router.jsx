@@ -14,7 +14,7 @@ const routerConfig = [
     element: <Main />,
     children: [
       {
-        path: "home",
+        path: "home/",
         element: <Home />
       },
       {

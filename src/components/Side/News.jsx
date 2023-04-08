@@ -52,7 +52,7 @@ export default function News() {
     const [categories, setCategories] = useState([]);
 
     const getCategories = () => {
-        console.log('hello')
+        // console.log('hello')
     }
 
     useEffect(() => {
