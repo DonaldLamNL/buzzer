@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton, TextField, Box, AppBar, Tabs, Tab, Typography } from '@mui/material'
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import Following from './Following'
 import Follower from './Follower'
 
@@ -12,7 +12,7 @@ function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
     return (
-        <div
+        <Box
             role="tabpanel"
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
@@ -21,10 +21,10 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
-        </div>
+        </Box>
     );
 }
 
@@ -42,12 +42,14 @@ function a11yProps(index) {
 }
 
 export default function UserList() {
-
-    const [value, setValue] = React.useState(0);
+    const { userid, type } = useParams();
+    const [value, setValue] = React.useState( parseInt(type, 10) );
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        window.history.pushState(null, '', `/#/userlist/irwinking123/${newValue}`);
     };
+
 
     return (
         <Box sx={{ width: '90%' }}>
@@ -61,14 +63,13 @@ export default function UserList() {
                 <Tabs value={value} onChange={handleChange} centered>
                     <Tab label="Following" {...a11yProps(0)} />
                     <Tab label="Followers" {...a11yProps(1)} />
-                    {/* <Tab label="User List" {...a11yProps(2)} /> */}
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Following />
+                <Following userid={userid} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Follower />
+                <Follower userid={userid} />
             </TabPanel>
         </Box>
     )

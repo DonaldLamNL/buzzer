@@ -216,7 +216,7 @@ export default function UserProfile() {
 
                                     <Box display={"flex"}>
                                         <Link
-                                            to="/userlist"
+                                            to={`/userlist/${userid}/0`}
                                             underline="hover"
                                             sx={{
                                                 display: "flex",
@@ -233,7 +233,7 @@ export default function UserProfile() {
                                         </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Link
-                                            to="/userlist"
+                                            to={`/userlist/${userid}/1`}
                                             underline="hover"
                                             sx={{
                                                 display: "flex",
@@ -262,18 +262,37 @@ export default function UserProfile() {
                                         <MailOutlineIcon></MailOutlineIcon>
                                     </IconButton>
                                 </Tooltip> */}
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        position: "absolute",
-                                        right: "20px",
-                                        borderRadius: "20px",
-                                    }}
-                                    onClick={handleButton}
-                                >
-                                    {userInfo.isCurrentUser ? 'Edit' : isFollow ? 'Unfollow' : 'Follow'}
-                                </Button>
-                                {!userInfo.isAdmin &&
+                                {
+                                    userInfo.isCurrentUser &&
+                                    <Button
+                                        variant="contained"
+                                        sx={{ position: "absolute", right: "20px", borderRadius: "20px" }}
+                                        onClick={handleButton}
+                                    >
+                                        Edit
+                                    </Button>
+                                }
+                                {
+                                    !userInfo.isCurrentUser && (isFollow ?
+                                        <Button
+                                            variant="contained"
+                                            sx={{ position: "absolute", right: "20px", borderRadius: "20px" }}
+                                            onClick={handleButton}
+                                        >
+                                            Unfollow
+                                        </Button>
+                                        :
+                                        <Button
+                                            variant="contained"
+                                            sx={{ position: "absolute", right: "20px", borderRadius: "20px" }}
+                                            onClick={handleButton}
+                                        >
+                                            Follow
+                                        </Button>
+                                    )
+                                }
+
+                                {userInfo.isCurrentUser && !userInfo.isAdmin &&
                                     <Button
                                         variant="contained"
                                         sx={{
@@ -297,7 +316,7 @@ export default function UserProfile() {
                                         borderBottom: "0 30px",
                                         width: '100%',
                                         minHeight: '150px'
-                                        
+
                                     }}
                                 >
                                     {buzzList.length != 0 ?
@@ -314,6 +333,6 @@ export default function UserProfile() {
                     </Grid>
                 </Grid>
             </section>}
-        </ThemeProvider>
+        </ThemeProvider >
     );
 }

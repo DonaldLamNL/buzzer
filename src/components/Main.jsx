@@ -39,7 +39,7 @@ const routerConfig = [
     ),
   },
   {
-    path: "/userlist",
+    path: "/userlist/:userid/:type",
     element: (
       <>
         <UserList />

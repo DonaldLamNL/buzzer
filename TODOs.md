@@ -11,8 +11,7 @@
 3. Reset Password
 
 ### Admin User
-1. Admin UI
-    - For admin user, add a button in admin user profile to visit the management page
+1. Admin UI 
 
 2. Delete users
 
@@ -42,7 +41,7 @@
 
 4. Category Search
 
-5. Buzzes visibility (--)
+5. Buzzes visibility [?]
 
 6. Users Recommendation
 
@@ -50,6 +49,6 @@
 
 8. Video buzzes
 
-9. Chat Room (--)
+9. Chat Room [?]
 
-10. Hive (--)
+10. Hive [?]

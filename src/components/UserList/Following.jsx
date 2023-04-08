@@ -1,118 +1,31 @@
 import { Box } from '@mui/system'
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 import UserPreview from './UserPreview.jsx'
+import Cookies from 'js-cookie';
 
+export default function Following(props) {
+    const { userid } = props;
+    const [UserList, setUserList] = useState([]);
 
-const users = [
-    {
-        uid: 'johnlui001',
-        uname: 'John Lui',
-        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbMVxTCb03CByfk6S2yGQJLpyrARrPJofuRg&usqp=CAUU',
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: false,
-        isFollow: true,
-    },
-    {
-        uid: 'amywong124',
-        uname: 'Amy Wong',
-        icon: null,
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: true,
-        isFollow: false,
-    },
-    {
-        uid: 'amychan001',
-        uname: 'Amy Chan',
-        icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTabrl2VTWfpp7MbwZp6gVKWPv5C_3Xkx-VlQ&usqp=CAU',
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: true,
-        isFollow: false,
-    },
-    {
-        uid: 'tomlui002',
-        uname: 'Tom Lui',
-        icon: null,
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: false,
-        isFollow: true,
-    },
-    {
-        uid: 'michaellam331',
-        uname: 'Michael Lam',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: true,
-        isFollow: false,
-    },
-    {
-        uid: 'chriswong123',
-        uname: 'Chris Wong',
-        icon: null,
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: true,
-        isFollow: true,
-    },
-    {
-        uid: 'jimmylau342',
-        uname: 'Jimmy Lau',
-        icon: null,
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: false,
-        isFollow: false,
-    },
-    {
-        uid: 'irwinking1242',
-        uname: 'Irwin King',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: false,
-        isFollow: true,
-    },
-    {
-        uid: 'johnlui4',
-        uname: 'John Lui',
-        icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: false,
-        isFollow: true,
-    },
-    {
-        uid: "elonmusk103",
-        uname: "Elon Musk",
-        icon: "ElonMusk.jpg",
-        postsCount: 123,
-        followersCount: 456,
-        followingCount: 789,
-        isVerify: true,
-        isFollow: true,
-    },
-]
+    const getFollowers = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/users/followlist?userid=${userid}&currentid=${Cookies.get('BuzzerUser')}&type=${'following'}`);
+            const data = await response.json();
+            setUserList(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-export default function Following() {
+    useEffect(() => {
+        getFollowers();
+    }, []);
+
     return (
         <Box>
-            {users.map(c => {
-                return(
-                    <UserPreview key={c.uid} {...c} button={'Unfollow'} />
+            {UserList && UserList.map(c => {
+                return (
+                    <UserPreview key={c.userid} {...c} />
                 )
             })}
         </Box>
