@@ -39,7 +39,11 @@ export default function BuzzSearch() {
                 Search for {search[0] === '*' ? `${search.slice(1).charAt(0).toUpperCase()}${search.slice(2)} Category` : ` ${search} buzzes ...`}
             </h1>
 
-            {buzzList ? (
+            {(buzzList.length == 0) ? (
+                <Typography variant="h6" align="center" mt={2}>
+                    No search results found.
+                </Typography>
+            ) : (
                 <>
                     {buzzList.map((post) => (
                         <NewBuzzItem
@@ -52,10 +56,6 @@ export default function BuzzSearch() {
                         />
                     ))}
                 </>
-            ) : (
-                <Typography variant="h6" align="center" mt={2}>
-                    No search results found.
-                </Typography>
             )}
         </div>
     );

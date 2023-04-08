@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function UserPreview(props) {
 
-    const { userid, username, icon, follow, isDelete = false, isVerify } = props;
+    const { userid, username, icon, follow, isDelete = false, isVerify, updateUserList } = props;
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
 
@@ -14,17 +14,40 @@ export default function UserPreview(props) {
         handleFollow();
     }
 
-    const deleteUserComfirm = (e) => {
+    const deleteUserComfirm = async (e) => {
         const result = window.confirm(`Are you sure to delete @${userid}?`);
         if (result) {
-            console.log('yes');
+            try {
+                const response = await fetch('http://localhost:3000/admin/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userid: Cookies.get('BuzzerUser'), targetid: userid })
+                });
+
+                const data = await response.json();
+
+                updateUserList(userid);
+
+                if (data.state) {
+                    alert('User deleted successfully');
+                } else {
+                    alert('Failed to delete user');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while deleting user');
+            }
         }
     }
 
+
     const verifyUserComfirm = (e) => {
-        if(isVerify){
+        if (isVerify) {
             const result = window.confirm(`Are you sure to unverify @${userid}?`);
-        }else{
+        } else {
             const result = window.confirm(`Are you sure to verify @${userid}?`);
         }
         if (result) {

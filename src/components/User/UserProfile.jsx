@@ -292,7 +292,7 @@ export default function UserProfile() {
                                     )
                                 }
 
-                                {userInfo.isCurrentUser && !userInfo.isAdmin &&
+                                {userInfo.isCurrentUser && userInfo.isAdmin &&
                                     <Button
                                         variant="contained"
                                         sx={{
