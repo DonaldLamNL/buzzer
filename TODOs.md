@@ -27,7 +27,7 @@
 5. Post [Done]
     - Cannot post image or video
 
-6. Retweet
+6. Retweet [Done]
 
 7. Show following user tweets [Done]
 

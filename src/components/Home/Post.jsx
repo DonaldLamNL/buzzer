@@ -155,7 +155,22 @@ export default function Post() {
                 <Grid container item sx={{ flexGrow: 1 }}>
 
                     {/* Rebuzz */}
-                    {rebuzz && <RebuzzContent buzzid={rebuzz} />}
+                    {rebuzz && 
+                        <Box
+                        sx={{
+                            bgcolor: '#e0e0e0',
+                            opacity: '0.7',
+                            width: '90%',
+                            display: "flex",
+                            position: "relative",
+                            marginTop: '20px',
+                            borderRadius: '10px',
+                            overflow: 'hidden'
+                        }}
+                        >
+                            <RebuzzContent buzzid={rebuzz} />
+                        </Box>
+                    }
 
                     {/* Buzz Input Block */}
                     <TextField

@@ -3,6 +3,8 @@ import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom'
+
 
 const buzzComment = [
     {
@@ -32,6 +34,7 @@ const buzzComment = [
 ]
 
 export default function Comment(props) {
+    const navigate = useNavigate()
     const { buzzid } = props;
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
@@ -86,6 +89,11 @@ export default function Comment(props) {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    const jumpToUserprofile = (uid) => {
+        navigate(`/user/${uid}`);
+        window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     useEffect(() => {
@@ -158,15 +166,18 @@ export default function Comment(props) {
                         >
                             {/* Poster Icon */}
                             <Box sx={{ width: "60px" }}>
-                                <Avatar sx={{ width: 40, height: 40, margin: "10px" }}>
+                                <Avatar 
+                                    sx={{ width: 40, height: 40, margin: "10px", cursor: 'pointer' }}
+                                    onClick={() => {jumpToUserprofile(c.userid)}}
+                                >
                                     {c.username[0]}
                                 </Avatar>
                             </Box>
 
-                            <Grid container item sx={{ flexGrow: 1, lineHeight: "60px" }}>
+                            <Grid container item sx={{ flexGrow: 1 }}>
                                 <Box sx={{ flexDirection: "column" }}>
-                                    <Box sx={{ mr: 2 }}>{c.username}</Box>
-                                    <Box>{c.content}</Box>
+                                    <Box sx={{ mr: 2, cursor: 'pointer', marginTop: '15px', fontSize: '16px', lineHeight: "30px" }} onClick={() => {jumpToUserprofile(c.userid)}}>{c.username}</Box>
+                                    <Box sx={{ lineHeight: "40px"}}>{c.content}</Box>
                                 </Box>
                             </Grid>
                         </Box>

@@ -96,6 +96,11 @@ export default function NewBuzzItem(props) {
         navigate('/home');
     }
 
+    const jumpToUserprofile = () => {
+        navigate(`/user/${userid}`);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
     useEffect(() => {
         if (userLike == 1) {
             setIsLike(true)
@@ -126,7 +131,7 @@ export default function NewBuzzItem(props) {
                         <Avatar
                             src={icon}
                             sx={{ width: 50, height: 50, margin: "20px", cursor: 'pointer' }}
-                            onClick={() => { navigate(`/user/${userid}`) }}
+                            onClick={jumpToUserprofile}
                         >
                             {username[0]}
                         </Avatar>
@@ -136,10 +141,10 @@ export default function NewBuzzItem(props) {
                     <Grid container item sx={{ flexGrow: 1 }}>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                             {/* Poster Info */}
-                            <Box sx={{ height: "60px", lineHeight: "60px" }}>
+                            <Box sx={{ height: "45px", lineHeight: "60px" }}>
                                 <Typography
                                     sx={{ fontSize: "18px", display: "inline-block", cursor: 'pointer' }}
-                                    onClick={() => { navigate(`/user/${userid}`) }}
+                                    onClick={jumpToUserprofile}
                                 >
                                     {username}
                                     {isVerify && (
@@ -155,7 +160,7 @@ export default function NewBuzzItem(props) {
                                         display: "inline-block",
                                         cursor: 'pointer',
                                     }}
-                                    onClick={() => { navigate(`/user/${userid}`) }}
+                                    onClick={jumpToUserprofile}
                                 >
                                     @{userid}
                                 </Typography>
@@ -163,12 +168,12 @@ export default function NewBuzzItem(props) {
 
                             {/* Rebuzz */}
                             {rebuzz && <RebuzzContent buzzid={rebuzz} />}
-                            
+
                             <Box>
                                 <Typography
                                     sx={{ fontSize: "14px", marginRight: "10px" }}
+                                    dangerouslySetInnerHTML={{ __html: content }}
                                 >
-                                    {content}
                                 </Typography>
                             </Box>
 

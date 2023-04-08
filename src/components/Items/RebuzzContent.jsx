@@ -33,41 +33,15 @@ export default function RebuzzContent(props) {
 
     return (
         <>
-            {/* {rebuzzContent && <Box
-                sx={{
-                    width: "90%",
-                    height: "50px",
-                    bgcolor: '#bfa',
-                    marginTop: '20px'
-                }}
-            >
-                <Typography
-                    onClick={() => { navigate(`/buzz/${rebuzz}`) }}
-                    sx={{
-                        "&:hover": {
-                            cursor: "pointer",
-                            // textDecoration: "underline",
-                        },
-                    }}
-                >
-                    {rebuzzContent.content}
-                </Typography>
-                <Button
-                    onClick={() => { setRebuzz(null); }}
-                >
-                </Button>
-            </Box>} */}
-
             {rebuzzContent &&
                 <Box
                     sx={{
                         bgcolor: '#e0e0e0',
                         opacity: '0.7',
                         width: '90%',
-                        // borderRadius: '20px',
                         display: "flex",
                         position: "relative",
-                        marginTop: '20px',
+                        marginBottom: '10px'
                     }}
                 >
                     < Box >
