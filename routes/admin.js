@@ -32,6 +32,30 @@ router.post('/delete', upload.none(), async (req, res) => {
     }
 });
 
+// Delete buzz
+router.post('/deletebuzz', upload.none(), async (req, res) => {
+    const { userid, buzzid } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        // Admin Verify
+        const user = await Users.findOne({ userid: decodedUser });
+
+        if (user.isAdmin) {
+            // Delete buzzes and comments
+            await Buzzes.deleteMany({ buzzid });
+            await Comments.deleteMany({ buzzid });
+
+            res.send({ state: true, message: "Buzz deleted successfully." });
+        } else {
+            res.send({ state: false, message: "You do not have permission to delete buzz." });
+        }
+    } catch (err) {
+        console.error(err);
+        res.send({ state: false, message: 'Failed to delete buzz.' });
+    }
+});
+
 // Verify user
 router.post('/verify', upload.none(), async (req, res) => {
     const { userid, targetid } = req.body;
