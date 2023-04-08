@@ -28,6 +28,7 @@ router.get('/', async (req, res) => {
             image: buzz.image ? buzz.image : null,
             video: buzz.video ? buzz.video : null,
             comment: buzz.comment ? buzz.comment : null,
+            rebuzz: buzz.rebuzz,
         }
 
         res.send(responseData);
@@ -40,7 +41,7 @@ router.get('/', async (req, res) => {
 
 // Posting System
 router.post('/post', upload.none(), async (req, res) => {
-    const { content, category, userid } = req.body;
+    const { content, category, userid, rebuzz } = req.body;
     const image = req.file && req.file.buffer;
     const video = req.file && req.file.buffer;
     const decodedUser = decodeUserID(userid);
@@ -60,7 +61,7 @@ router.post('/post', upload.none(), async (req, res) => {
             like: [],
             dislike: [],
             comment: [],
-            rebuzz: null,
+            rebuzz,
         });
 
         await newBuzz.save();
@@ -99,7 +100,8 @@ router.get('/search', async (req, res) => {
                 numOfLike: buzz.like.length - buzz.dislike.length,
                 image: buzz.image ? buzz.image : null,
                 video: buzz.video ? buzz.video : null,
-                comment: buzz.comment ? buzz.comment : null
+                comment: buzz.comment ? buzz.comment : null,
+                rebuzz: buzz.rebuzz,
             };
         }));
         res.send(responseData);
@@ -185,7 +187,8 @@ router.get('/follow', async (req, res) => {
                 numOfLike: buzz.like.length - buzz.dislike.length,
                 image: buzz.image ? buzz.image : null,
                 video: buzz.video ? buzz.video : null,
-                comment: buzz.comment ? buzz.comment : null
+                comment: buzz.comment ? buzz.comment : null,
+                rebuzz: buzz.rebuzz,
             };
         }));
         res.send(responseData);
@@ -218,7 +221,8 @@ router.get('/user', async (req, res) => {
                 numOfLike: buzz.like.length - buzz.dislike.length,
                 image: buzz.image ? buzz.image : null,
                 video: buzz.video ? buzz.video : null,
-                comment: buzz.comment ? buzz.comment : null
+                comment: buzz.comment ? buzz.comment : null,
+                rebuzz: buzz.rebuzz,
             };
         }));
         res.send(responseData);
