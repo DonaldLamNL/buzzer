@@ -41,9 +41,10 @@ router.get('/', async (req, res) => {
 
 // Posting System
 router.post('/post', upload.none(), async (req, res) => {
-    const { content, category, userid, rebuzz } = req.body;
+    const { content, category, userid } = req.body;
     const image = req.file && req.file.buffer;
     const video = req.file && req.file.buffer;
+    const rebuzz = req.file && req.file.buffer;
     const decodedUser = decodeUserID(userid);
 
     try {
