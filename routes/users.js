@@ -18,7 +18,7 @@ router.get('/search', async (req, res) => {
     try {
         let userList = await Users.find(
             searchQuery,
-            { userid: 1, username: 1, avatar: 1, following: 1, followers: 1 }
+            { userid: 1, username: 1, avatar: 1, following: 1, followers: 1, isVerify: 1 }
         );
 
         userList = userList.filter(user => user.userid !== decodedUser);
@@ -34,7 +34,8 @@ router.get('/search', async (req, res) => {
                 // icon: `https://example.com/${user.avatar}`,
                 numOfFollowing: user.following.length,
                 numOfFollowers: user.followers.length,
-                follow: user.followers.includes(decodedUser)
+                follow: user.followers.includes(decodedUser),
+                isVerify: user.isVerify,
             };
         });
         res.send(responseData);
@@ -53,7 +54,7 @@ router.get('/currentuser', async (req, res) => {
         try {
             const user = await Users.findOne({ userid: decodedUser });
             if (user) {
-                res.send({ status: true, isLogin, username: user.username, icon: user.icon, userid: decodedUser });
+                res.send({ status: true, isLogin, username: user.username, icon: user.icon, userid: decodedUser, isVerify: user.isVerify });
             } else {
                 res.send({ status: false, message: 'User not found' });
             }
@@ -105,6 +106,7 @@ router.get('/userprofile', async (req, res) => {
                 isFollow: isCurrentUser ? null : user.followers.includes(decodedUser),
                 isCurrentUser,
                 isAdmin: user.isAdmin,
+                isVerify: user.isVerify,
             },
             state: true,
         }

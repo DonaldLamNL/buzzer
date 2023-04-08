@@ -14,7 +14,7 @@ router.post('/delete', upload.none(), async (req, res) => {
         // Admin Verify
         const user = await Users.findOne({ userid: decodedUser });
 
-        if(user.isAdmin){
+        if (user.isAdmin) {
             // Delete buzzes and comments
             await Buzzes.deleteMany({ userid: targetid });
             await Comments.deleteMany({ userid: targetid });
@@ -26,6 +26,39 @@ router.post('/delete', upload.none(), async (req, res) => {
         } else {
             res.send({ state: false, message: "You do not have permission to delete users." });
         }
+    } catch (err) {
+        console.error(err);
+        res.send({ state: false, message: 'Failed to delete user.' });
+    }
+});
+
+// Verify user
+router.post('/verify', upload.none(), async (req, res) => {
+    const { userid, targetid } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        // Admin Verify
+        const user = await Users.findOne({ userid: decodedUser });
+        if (user.isAdmin) {
+
+            // Target User
+            const target = await Users.findOne({ userid: targetid });
+
+            if (target) {
+                if (target.isVerify) {
+                    await Users.updateOne({ userid: targetid }, { $set: { isVerify: false } });
+                } else {
+                    await Users.updateOne({ userid: targetid }, { $set: { isVerify: true } });
+                }
+                res.send({ state: true, message: `User with userid ${targetid} has been updated.` });
+            } else {
+                res.send({ state: false, message: `User with userid ${targetid} does not exist.` });
+            }
+        } else {
+            res.send({ state: false, message: "You do not have permission to verify users." });
+        }
+
     } catch (err) {
         console.error(err);
         res.send({ state: false, message: 'Failed to delete user.' });
