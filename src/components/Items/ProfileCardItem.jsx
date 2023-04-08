@@ -1,9 +1,10 @@
+import { CheckCircle } from '@mui/icons-material';
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function ProfileCardItem(props) {
-    let { userid, username, icon, numOfFollowing, numOfFollowers, follow } = props
+    let { userid, username, icon, numOfFollowing, numOfFollowers, follow, isVerify } = props
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
     const [followersCount, setFollowersCount] = useState(null);
@@ -66,7 +67,14 @@ export default function ProfileCardItem(props) {
             }
             < div className="content">
                 <div className="details">
-                    <h2>{username}<br></br><span>@{userid}</span></h2>
+                    <h2>
+                        {username}
+                        {isVerify && (
+                            <CheckCircle sx={{ color: 'orange', ml: 1 }} />
+                        )}
+                        <br></br>
+                        <span>@{userid}</span>
+                    </h2>
                     <div className="data">
                         {/* <h3>{postsCount}<br></br><span>Posts</span></h3> */}
                         <h3>{followersCount}<br></br><span>Followers</span></h3>

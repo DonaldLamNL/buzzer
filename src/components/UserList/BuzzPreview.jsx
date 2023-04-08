@@ -1,16 +1,39 @@
 import { CheckCircle } from '@mui/icons-material'
 import { Avatar, Typography, Button, Card, Grid } from '@mui/material'
 import { Box } from '@mui/system'
+import Cookies from 'js-cookie'
 import React from 'react'
 
 export default function BuzzPreview(props) {
 
-    const { uid, uname, icon, pid, content, isVerify } = props
+    const { userid, username, icon, buzzid, content, isVerify, deletedBuzz } = props
 
-    const deleteBuzzConfirm = (e) => {
-        const result = window.confirm(`Are you sure to delete the post @${pid}?`);
+    const deleteBuzzConfirm = async (e) => {
+        const result = window.confirm(`Are you sure to delete the post @${buzzid}?`);
         if (result) {
-            console.log('yes');
+            try {
+                const response = await fetch('http://localhost:3000/admin/deletebuzz', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userid: Cookies.get('BuzzerUser'), buzzid })
+                });
+
+                const data = await response.json();
+
+                deletedBuzz(buzzid);
+
+                if (data.state) {
+                    alert('User deleted successfully');
+                } else {
+                    alert('Failed to delete user');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while deleting user');
+            }
         }
     }
 
@@ -35,7 +58,7 @@ export default function BuzzPreview(props) {
                     {/* Poster Icon */}
                     <Box sx={{ width: "90px" }}>
                         <Avatar src={icon} sx={{ width: 50, height: 50, margin: "20px" }}>
-                            {uname[0]}
+                            {username[0]}
                         </Avatar>
                     </Box>
 
@@ -45,7 +68,7 @@ export default function BuzzPreview(props) {
                             {/* Poster Info */}
                             <Box sx={{ height: "60px", lineHeight: "60px" }}>
                                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
-                                    {uname}
+                                    {username}
                                     {isVerify && (
                                         <CheckCircle sx={{ color: 'orange', ml: 1 }} />
                                     )}
@@ -59,7 +82,7 @@ export default function BuzzPreview(props) {
                                         display: "inline-block",
                                     }}
                                 >
-                                    @{uid}
+                                    @{userid}
                                 </Typography>
                             </Box>
 

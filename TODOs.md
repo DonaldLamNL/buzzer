@@ -11,9 +11,9 @@
 3. Reset Password
 
 ### Admin User
-1. Admin UI 
+1. Admin UI [Done]
 
-2. Delete users
+2. Delete users [Done]
 
 ### User Features
 1. Search for a user or buzz [Done]
@@ -33,7 +33,7 @@
 
 
 ### Advanced
-1. Pretty UI (**Super Fancy**)
+1. Pretty UI [**Super Fancy**]
 
 2. User Profile [Done]
 
