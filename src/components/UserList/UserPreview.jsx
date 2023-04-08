@@ -9,6 +9,7 @@ export default function UserPreview(props) {
     const { userid, username, icon, follow, isDelete = false, isVerify, updateUserList } = props;
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
+    const [isUserVerified, setIsUserVerified] = useState(null);
 
     const handleFollowButton = () => {
         handleFollow();
@@ -28,7 +29,7 @@ export default function UserPreview(props) {
 
                 const data = await response.json();
 
-                updateUserList(userid);
+                deletedUser(userid);
 
                 if (data.state) {
                     alert('User deleted successfully');
@@ -44,14 +45,38 @@ export default function UserPreview(props) {
     }
 
 
-    const verifyUserComfirm = (e) => {
-        if (isVerify) {
-            const result = window.confirm(`Are you sure to unverify @${userid}?`);
+    const verifyUserComfirm = async (e) => {
+        let result = null;
+        if (isUserVerified) {
+            result = window.confirm(`Are you sure to unverify @${userid}?`);
         } else {
-            const result = window.confirm(`Are you sure to verify @${userid}?`);
+            result = window.confirm(`Are you sure to verify @${userid}?`);
         }
+
         if (result) {
             console.log('yes');
+            try {
+                const response = await fetch('http://localhost:3000/admin/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userid: Cookies.get('BuzzerUser'), targetid: userid })
+                });
+
+                const data = await response.json();
+
+                setIsUserVerified(!isUserVerified);
+
+                if (data.state) {
+                    alert('User update successfully');
+                } else {
+                    alert('Failed to update user');
+                }
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while updating user');
+            }
         }
     }
 
@@ -84,7 +109,8 @@ export default function UserPreview(props) {
     }
 
     useEffect(() => {
-        setIsFollow(follow)
+        setIsFollow(follow);
+        setIsUserVerified(isVerify);
     }, []);
 
     return (
@@ -110,7 +136,7 @@ export default function UserPreview(props) {
                     <Box sx={{ height: '60px', }}>
                         <Typography sx={{ fontSize: '18px', lineHeight: '46px' }}>
                             {username}
-                            {isVerify && (
+                            {isUserVerified && (
                                 <CheckCircle sx={{ color: 'orange', ml: 1 }} />
                             )}
                         </Typography>
@@ -122,7 +148,7 @@ export default function UserPreview(props) {
                 {isDelete ?
                     <Box sx={{ display: 'flex', }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-                            <Button variant="contained" sx={{ borderRadius: '18px', }} onClick={verifyUserComfirm}>{isVerify ? 'UnVerify' : 'Verify'}</Button>
+                            <Button variant="contained" sx={{ borderRadius: '18px', }} onClick={verifyUserComfirm}>{isUserVerified ? 'UnVerify' : 'Verify'}</Button>
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '5px' }}>
                             <Button variant="contained" color="secondary" sx={{ borderRadius: '18px', bgcolor: 'error.main', '&:hover': { bgcolor: 'error.dark' } }} onClick={deleteUserComfirm}>Delete</Button>

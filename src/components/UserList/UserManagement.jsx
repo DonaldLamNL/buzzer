@@ -10,7 +10,7 @@ export default function UserManagement() {
 
     const [userList, setUserList] = useState([]);
 
-    const updateUserList = (userId) => {
+    const deletedUser = (userId) => {
         setUserList(userList.filter((user) => user.userid !== userId));
     };
 
@@ -38,7 +38,7 @@ export default function UserManagement() {
             <Box>
                 {userList.map(c => {
                     return (
-                        <UserPreview updateUserList={updateUserList} key={c.userid} {...c} isDelete={true} />
+                        <UserPreview deletedUser={deletedUser} key={c.userid} {...c} isDelete={true} />
                     )
                 })}
             </Box>

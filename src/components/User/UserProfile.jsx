@@ -7,51 +7,9 @@ import NewBuzzItem from "../Items/NewBuzzItem";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useParams } from 'react-router-dom';
 import Cookies from "js-cookie";
+import { CheckCircle } from "@mui/icons-material";
 
 const theme = createTheme();
-
-const data = [
-    {
-        userid: "irwinking124",
-        username: "Irwin King",
-        buzzid: 123,
-        like: 123,
-        comment: 456,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/9j6cd6.png",
-        video: null,
-        isVerify: true,
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-    {
-        userid: "irwinking124",
-        username: "Irwin King",
-        buzzid: 124,
-        like: 143,
-        comment: 534,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/e72rar.png",
-        video: null,
-        isVerify: true,
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-    {
-        userid: "irwinking124",
-        username: "Irwin King",
-        buzzid: 125,
-        like: 324,
-        comment: 635,
-        content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi voluptate exercitationem molestiae sunt, esse, officia saepe reiciendis id odio error eveniet dolorem consequuntur natus, optio temporibus accusamus quae aut alias eos eius adipisci deleniti pariatur suscipit minus? At laboriosam labore voluptas consectetur fugiat nostrum. Dolor laborum nostrum quas eos a.",
-        image: "https://p.ipic.vip/phxapn.png",
-        video: null,
-        isVerify: true,
-        icon: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-    },
-];
-
 
 export default function UserProfile() {
     const navigator = useNavigate();
@@ -201,7 +159,12 @@ export default function UserProfile() {
                                     </Avatar>
 
                                     <Box marginTop='10px' >
-                                        <Typography fontWeight="600" component="h1" variant="h6"> {userInfo.username} </Typography>
+                                        <Typography fontWeight="600" component="h1" variant="h6">
+                                            {userInfo.username}
+                                            {userInfo.isVerify &&
+                                                <CheckCircle sx={{ color: 'orange', ml: 1 }} />
+                                            }
+                                        </Typography>
                                         <Typography
                                             sx={{
                                                 fontSize: "14px",
@@ -305,7 +268,7 @@ export default function UserProfile() {
                                         }}
                                         onClick={() => { navigator(`/admin`) }}
                                     >
-                                        User Management
+                                        Management
                                     </Button>
                                 }
 
