@@ -115,4 +115,43 @@ router.get('/userprofile', async (req, res) => {
     }
 });
 
+// Get Followers / Following
+router.get('/followlist', async (req, res) => {
+    const { userid, currentid, type } = req.query;
+    const decodedUser = decodeUserID(currentid);
+
+    try {
+        const user = await Users.findOne({ userid });
+        const currentUser = await Users.findOne({ userid: decodedUser });
+
+        let userList = user.followers;
+        if (type == "following") {
+            userList = user.following;
+        }
+
+        const responseData = [];
+        for (const uid of userList) {
+            try {
+                if(uid == decodedUser) continue;
+                const target = await Users.findOne({ userid: uid });
+                responseData.push({
+                    userid: target.userid,
+                    username: target.username,
+                    icon: target.avatar,
+                    isVerify: target.isVerify,
+                    follow: currentUser.following.includes(target.userid),
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        res.send(responseData);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+})
+
 module.exports = router;
