@@ -31,16 +31,23 @@ const commentSchema = new mongoose.Schema({
     commentid: { type: Number, required: true },
     buzzid: { type: Number, required: true },
     userid: { type: String, required: true },
-    // author_id: { type: String, required: true },
     content: { type: String, required: true }
+});
+
+const categorySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    buzz: [{ type: Number }],
+    user: [{ type: String }],
 });
 
 const Users = mongoose.model('Users', userSchema);
 const Buzzes = mongoose.model('Buzzes', buzzSchema);
 const Comments = mongoose.model('Comments', commentSchema);
+const Categories = mongoose.model('Categories', categorySchema);
 
 module.exports = {
     Users,
     Buzzes,
-    Comments
+    Comments,
+    Categories
 };

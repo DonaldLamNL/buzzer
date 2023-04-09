@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Buzzes, Users } = require('../databaseSchema');
+const { Buzzes, Users, Categories } = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
 const multer = require('multer');
 const upload = multer();
@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
             comment: buzz.comment ? buzz.comment : null,
             rebuzz: buzz.rebuzz,
         }
-
         res.send(responseData);
 
     } catch (error) {
@@ -41,16 +40,30 @@ router.get('/', async (req, res) => {
 
 // Posting System
 router.post('/post', upload.none(), async (req, res) => {
-    const { content, category, userid } = req.body;
+    const { content, category, userid, rebuzz } = req.body;
     const image = req.file && req.file.buffer;
     const video = req.file && req.file.buffer;
-    const rebuzz = req.file && req.file.buffer;
     const decodedUser = decodeUserID(userid);
+    const rebuzzid = isNaN(rebuzz) ? 0 : parseInt(rebuzz);
 
     try {
         // Generate new buzzid
         const highestBuzz = await Buzzes.findOne().sort({ buzzid: -1 }).exec();
         const newBuzzid = highestBuzz ? highestBuzz.buzzid + 1 : 1;
+
+        // Update category
+        // const cat = await Categories.findOne({ name: category });
+        // if (cat) {
+        //     cat.buzz.push(newBuzzid);
+        //     await cat.save();
+        // } else {
+        //     const cat = new Categories({
+        //         name: category,
+        //         user: [decodedUser],
+        //         buzz: [newBuzzid],
+        //     });
+        //     await cat.save();
+        // }
 
         const newBuzz = new Buzzes({
             buzzid: newBuzzid,
@@ -62,10 +75,11 @@ router.post('/post', upload.none(), async (req, res) => {
             like: [],
             dislike: [],
             comment: [],
-            rebuzz,
+            rebuzz: rebuzzid,
         });
 
         await newBuzz.save();
+
         console.log('success');
         res.send({ state: true, message: 'Buzz post successfully!', buzzid: newBuzzid });
     } catch (err) {
@@ -118,23 +132,23 @@ router.post('/like', async (req, res) => {
     const decodedUser = decodeUserID(userid);
 
     try {
-        if(isDislike){
+        if (isDislike) {
             await Buzzes.updateOne({ buzzid }, { $pull: { dislike: decodedUser } });
         }
-        
-        if(isLike){
+
+        if (isLike) {
             await Buzzes.updateOne({ buzzid }, { $pull: { like: decodedUser } });
-        }else{
+        } else {
             await Buzzes.updateOne({ buzzid }, { $addToSet: { like: decodedUser } });
         }
 
-        const buzz = await Buzzes.findOne({buzzid});
+        const buzz = await Buzzes.findOne({ buzzid });
 
         res.json({ state: true, isLike: !isLike, isDislike: false, likeCount: buzz.like.length - buzz.dislike.length });
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({state: false, error: 'Internal Server Error'});
+        res.status(500).json({ state: false, error: 'Internal Server Error' });
     }
 });
 
@@ -144,23 +158,23 @@ router.post('/dislike', async (req, res) => {
     const decodedUser = decodeUserID(userid);
 
     try {
-        if(isLike){
+        if (isLike) {
             await Buzzes.updateOne({ buzzid }, { $pull: { like: decodedUser } });
         }
-        
-        if(isDislike){
+
+        if (isDislike) {
             await Buzzes.updateOne({ buzzid }, { $pull: { dislike: decodedUser } });
-        }else{
+        } else {
             await Buzzes.updateOne({ buzzid }, { $addToSet: { dislike: decodedUser } });
         }
 
-        const buzz = await Buzzes.findOne({buzzid});
+        const buzz = await Buzzes.findOne({ buzzid });
 
         res.json({ state: true, isLike: false, isDislike: !isDislike, likeCount: buzz.like.length - buzz.dislike.length });
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({state: false, error: 'Internal Server Error'});
+        res.status(500).json({ state: false, error: 'Internal Server Error' });
     }
 });
 
@@ -172,7 +186,7 @@ router.get('/follow', async (req, res) => {
     try {
         const user = await Users.findOne({ userid: decodedUser })
         const buzzes = await Buzzes.find({ userid: { $in: user.following } })
-    
+
         const responseData = await Promise.all(buzzes.map(async (buzz) => {
             const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
             const author = await Users.findOne({ userid: buzz.userid });
@@ -202,13 +216,14 @@ router.get('/follow', async (req, res) => {
 
 // Get User Buzzes
 router.get('/user', async (req, res) => {
-    const { userid } = req.query;
+    const { userid, currentid } = req.query;
+    const decodedUser = decodeUserID(currentid);
 
     try {
         const buzzes = await Buzzes.find({ userid })
-    
+
         const responseData = await Promise.all(buzzes.map(async (buzz) => {
-            const userLike = (buzz.like.includes(userid) ? 1 : (buzz.dislike.includes(userid) ? -1 : 0));
+            const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
             const author = await Users.findOne({ userid: buzz.userid });
             return {
                 buzzid: buzz.buzzid,
