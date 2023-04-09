@@ -16,7 +16,7 @@ import RebuzzContent from "./RebuzzContent";
 
 export default function NewBuzzItem(props) {
     const navigate = useNavigate();
-    const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, rebuzz, displayComment = false } = props;
+    const { buzzid, userLike, numOfLike, commentCount, icon, content, category, image, video, userid, username, isVerify, rebuzz, displayComment = false } = props;
     const [isLike, setIsLike] = useState(null);
     const [isDislike, setIsDislike] = useState(null);
     const [likeCount, setLikeCount] = useState(null);
@@ -103,7 +103,7 @@ export default function NewBuzzItem(props) {
     }
 
     const getImage = async () => {
-        if(image){
+        if (image) {
             fetch(`http://localhost:3000/buzzes/image/${image}`)
                 .then(response => response.blob())
                 .then(image => {
@@ -113,6 +113,11 @@ export default function NewBuzzItem(props) {
                     console.log(error);
                 });
         }
+    }
+
+    const searchCategory = () => {
+        navigate(`/search/*${category}`);
+        window.scrollTo({ top: 0 });
     }
 
     useEffect(() => {
@@ -179,26 +184,11 @@ export default function NewBuzzItem(props) {
                                 >
                                     @{userid}
                                 </Typography>
+
                             </Box>
 
                             {/* Rebuzz */}
                             {rebuzz != 0 && <RebuzzContent buzzid={rebuzz} />}
-                            {/* {rebuzz == -1 &&
-                                <Box
-                                    sx={{
-                                        bgcolor: '#e0e0e0',
-                                        opacity: '0.7',
-                                        width: '90%',
-                                        display: "flex",
-                                        position: "relative",
-                                        marginBottom: '10px',
-                                        height: '50px',
-                                        lineHeight: 1,
-                                    }}
-                                >
-                                    This Buzz is deleted
-                                </Box>
-                            } */}
 
                             <Box>
                                 <Typography
@@ -236,12 +226,26 @@ export default function NewBuzzItem(props) {
                                 </Box>
                             ) : null}
 
+                            <Typography
+                                sx={{
+                                    marginTop: '10px',
+                                    fontSize: "16px",
+                                    color: "#66a0ff",
+                                    display: "inline-block",
+                                    cursor: 'pointer',
+                                }}
+                                onClick={searchCategory}
+                            >
+                                # {category}
+                            </Typography>
+
                             {/* Tools */}
                             <Box sx={{ width: '600px', marginTop: '20px' }}>
                                 <Box sx={{ display: "flex", alignItems: "center" }}>
                                     <IconButton size="large" sx={{ marginLeft: "20px" }} onClick={toBuzz}>
                                         <ChatBubbleOutlineOutlined />
                                     </IconButton>
+                                    <div>{commentCount}</div>
 
                                     <Box
                                         sx={{ display: "flex", alignItems: "center", margin: "auto" }}

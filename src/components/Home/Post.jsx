@@ -11,52 +11,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import PubSub from 'pubsub-js';
 import RebuzzContent from "../Items/RebuzzContent";
 
-
-
-const categories = [
-    {
-        name: 'Food',
-    },
-    {
-        name: 'Music',
-    },
-    {
-        name: 'Movie',
-    },
-    {
-        name: 'News',
-    },
-    {
-        name: 'Gaming',
-    },
-    {
-        name: 'Sport',
-    },
-    {
-        name: 'Business',
-    },
-    {
-        name: 'Science',
-    },
-    {
-        name: 'Social',
-    },
-    {
-        name: 'Others',
-    }
-];
-
 export default function Post() {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [imageDisplay, setImageDisplay] = useState(null);
-
     const [video, setVideo] = useState(null);
     const [buzzInput, setBuzzInput] = useState("");
     const [postCat, setPostCat] = useState('Others');
     const [username, setUsername] = useState("");
     const [icon, setIcon] = useState(null);
     const [rebuzz, setRebuzz] = useState(null);
+    const [categories, setCategories] = useState([]);
 
     const handleBuzzInputChange = (event) => {
         setBuzzInput(event.target.value);
@@ -105,6 +70,7 @@ export default function Post() {
             const responseData = await response.json();
             console.log(responseData.message);
             if (responseData.state) {
+                PubSub.publish('newBuzzPosted');
                 navigate(`/buzz/${responseData.buzzid}`)
             }
         } catch (err) {
@@ -126,8 +92,20 @@ export default function Post() {
             });
     };
 
+    const getCategories = () => {
+        fetch('http://localhost:3000/categories')
+            .then(response => response.json())
+            .then(data => {
+                setCategories(data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
     useEffect(() => {
         getCurrentUser();
+        getCategories();
         const token = PubSub.subscribe("REBUZZ", async (channel, buzzid) => {
             if (buzzid) {
                 setRebuzz(buzzid);

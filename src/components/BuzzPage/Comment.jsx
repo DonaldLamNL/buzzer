@@ -39,6 +39,8 @@ export default function Comment(props) {
     const [comments, setComments] = useState([]);
     const [commentInput, setCommentInput] = useState('');
     const [postedComment, setPostedComment] = useState(0);
+    const [username, setUsername] = useState('');
+    const [icon, setIcon] = useState(null);
 
     const getComments = async () => {
         try {
@@ -91,13 +93,28 @@ export default function Comment(props) {
         }
     }
 
+    const getCurrentUser = async () => {
+        fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.isLogin) {
+                    setUsername(data.username)
+                    setIcon(data.icon)
+                }
+            })
+            .catch(error => {
+                console.log('error');
+            });
+    };
+
     const jumpToUserprofile = (uid) => {
         navigate(`/user/${uid}`);
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     useEffect(() => {
         getComments();
+        getCurrentUser();
     }, [buzzid, postedComment]);
 
     return (
@@ -113,7 +130,12 @@ export default function Comment(props) {
             >
                 {/* Poster Icon */}
                 <Box sx={{ width: "60px", margin: "auto" }}>
-                    <Avatar sx={{ width: 40, height: 40, margin: "17px auto" }}>H</Avatar>
+                    <Avatar 
+                        src={icon}
+                        sx={{ width: 40, height: 40, margin: "17px auto" }}
+                    >
+                        {username ? username[0] : ''}
+                    </Avatar>
                 </Box>
 
                 <Grid container item sx={{ flexGrow: 1 }}>
@@ -139,7 +161,7 @@ export default function Comment(props) {
                             alignItems: "center",
                         }}
                     >
-                        <IconButton 
+                        <IconButton
                             size="large"
                             onClick={handlePostComment}
                         >
@@ -160,14 +182,14 @@ export default function Comment(props) {
                                 width: "95%",
                                 margin: " 20px auto",
                                 position: "relative",
-                                backgroundColor: postedComment == c.commentid ? "#fff0c2" : "#f4f4f4" 
+                                backgroundColor: postedComment == c.commentid ? "#fff0c2" : "#f4f4f4"
                             }}
                         >
                             {/* Poster Icon */}
                             <Box sx={{ width: "60px" }}>
-                                <Avatar 
+                                <Avatar
                                     sx={{ width: 40, height: 40, margin: "10px", cursor: 'pointer' }}
-                                    onClick={() => {jumpToUserprofile(c.userid)}}
+                                    onClick={() => { jumpToUserprofile(c.userid) }}
                                 >
                                     {c.username[0]}
                                 </Avatar>
@@ -175,8 +197,8 @@ export default function Comment(props) {
 
                             <Grid container item sx={{ flexGrow: 1 }}>
                                 <Box sx={{ flexDirection: "column" }}>
-                                    <Box sx={{ mr: 2, cursor: 'pointer', marginTop: '15px', fontSize: '16px', lineHeight: "30px" }} onClick={() => {jumpToUserprofile(c.userid)}}>{c.username}</Box>
-                                    <Box sx={{ lineHeight: "40px", whiteSpace: "pre-wrap" }}>{c.content}</Box>
+                                    <Box sx={{ mr: 2, cursor: 'pointer', margin: '15px 0', fontSize: '16px', lineHeight: "30px" }} onClick={() => { jumpToUserprofile(c.userid) }}>{c.username}</Box>
+                                    <Box sx={{ whiteSpace: "pre-wrap", marginBottom: '15px' }}>{c.content}</Box>
                                 </Box>
                             </Grid>
                         </Box>

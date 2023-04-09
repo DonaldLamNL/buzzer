@@ -23,7 +23,7 @@
 1. Pretty UI [Done]
 2. User Profile [Done]
 3. User Profile Editting
-4. Category Search
+4. Category Search [Done]
 5. Buzzes visibility [?]
 6. Users and Buzzes Recommendation
 7. Video buzzes

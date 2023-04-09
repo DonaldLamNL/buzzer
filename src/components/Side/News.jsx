@@ -1,62 +1,32 @@
 
 import { Box, Card } from "@mui/material";
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const cats = [
-    {
-        name: 'Food',
-        number: 123
-    },
-    {
-        name: 'Music',
-        number: 432
-    },
-    {
-        name: 'Movie',
-        number: 355
-    },
-    {
-        name: 'News',
-        number: 1442
-    },
-    {
-        name: 'Gaming',
-        number: 542
-    },
-    {
-        name: 'Sport',
-        number: 513
-    },
-    {
-        name: 'Business',
-        number: 31
-    },
-    {
-        name: 'Science',
-        number: 421
-    },
-    {
-        name: 'Social',
-        number: 534
-    },
-    {
-        name: 'Others',
-        number: 213
-    },
-];
+import PubSub from 'pubsub-js';
 
 export default function News() {
-
     const [categories, setCategories] = useState([]);
 
     const getCategories = () => {
-        // console.log('hello')
+        fetch('http://localhost:3000/categories')
+            .then(response => response.json())
+            .then(data => {
+                setCategories(data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     useEffect(() => {
         getCategories();
+        const token = PubSub.subscribe('newBuzzPosted', () => {
+            getCategories();
+        });
+
+        return () => {
+            PubSub.unsubscribe(token);
+        };
     }, []);
 
     return (
@@ -75,14 +45,15 @@ export default function News() {
                 <h1 style={{ lineHeight: "60px", fontSize: "20px", textAlign: "center" }}>
                     Categories
                 </h1>
-                {cats
-                    .sort((a, b) => b.number - a.number) // sort categories by number in descending order
+                {categories
+                    .sort((a, b) => b.count - a.count) // sort categories by count in descending order
                     .map((c) => {
                         return (
                             <Link
                                 id={`${c.name}-item`}
                                 key={c.name}
-                                to={`/search/*${c.name.toLowerCase()}`}
+                                to={`/search/*${c.name}`}
+                                onClick={() => { window.scrollTo({ top: 0 }) }}
                                 style={{
                                     margin: "5px",
                                     fontSize: "20px",
@@ -119,7 +90,7 @@ export default function News() {
                                             color: "gray",
                                         }}
                                     >
-                                        {c.number} buzzes
+                                        {c.count} buzzes
                                     </Box>
                                 </Box>
                             </Link>

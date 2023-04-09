@@ -172,7 +172,7 @@ export default function BuzzItem(props) {
                 {/* Comment */}
                 <div style={{ display: 'block' }}>
                     {displayComment ? (
-                        <Comment buzzid={buzzid} />
+                        <Comment buzzid={buzzid} username={username} icon={icon} />
                     ) : (
                         <></>
                     )}

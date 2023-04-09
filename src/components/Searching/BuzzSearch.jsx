@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 // material-ui
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 // components
 import NewBuzzItem from '../Items/NewBuzzItem';
@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 export default function BuzzSearch() {
     const { search } = useParams();
     const [buzzList, setBuzzList] = useState([]);
+    const [isCatSearch, setIsCatSearch] = useState(false);
 
     const searchBuzz = async () => {
         try {
@@ -29,6 +30,9 @@ export default function BuzzSearch() {
 
     useEffect(() => {
         searchBuzz();
+        if (search[0] == "*") {
+            setIsCatSearch(true);
+        }
     }, [search]);
 
     return (
@@ -45,16 +49,36 @@ export default function BuzzSearch() {
                 </Typography>
             ) : (
                 <>
-                    {buzzList.map((post) => (
-                        <NewBuzzItem
-                            key={post.buzzid}
-                            {...post}
-                            content={post.content.replace(
-                                new RegExp(`(${search})`, 'gi'),
-                                '<span style="background-color: #FFFF00;">$1</span>'
-                            )}
-                        />
-                    ))}
+                    {isCatSearch ? (
+                        <Box>
+                            {
+                                buzzList.map((post) => (
+                                    <NewBuzzItem
+                                        key={post.buzzid}
+                                        {...post}
+                                        content={post.content.replace(
+                                            new RegExp(`(${search.slice(1)})`, 'gi')
+                                        )}
+                                    />
+                                ))
+                            }
+                        </Box>
+                    ) : (
+                        <Box>
+                            {
+                                buzzList.map((post) => (
+                                    <NewBuzzItem
+                                        key={post.buzzid}
+                                        {...post}
+                                        content={post.content.replace(
+                                            new RegExp(`(${search})`, 'gi'),
+                                            '<span style="background-color: #FFFF00;">$1</span>'
+                                        )}
+                                    />
+                                ))
+                            }
+                        </Box>)
+                    }
                 </>
             )}
         </div>

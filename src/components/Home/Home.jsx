@@ -25,6 +25,16 @@ export default function Home() {
         }
     }
 
+    const shuffleArray = (array) => {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
 
     useEffect(() => {
         getBuzzes();
@@ -33,7 +43,7 @@ export default function Home() {
     return (
         <div>
             <Post />
-            {buzzList && buzzList.map((post) => (
+            {buzzList && shuffleArray(buzzList).map((post) => (
                 <NewBuzzItem key={post.buzzid} {...post} />
             ))}
             {/* <LinearProgress /> */}
