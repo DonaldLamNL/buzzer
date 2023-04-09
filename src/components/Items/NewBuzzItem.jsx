@@ -98,7 +98,7 @@ export default function NewBuzzItem(props) {
 
     const jumpToUserprofile = () => {
         navigate(`/user/${userid}`);
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     useEffect(() => {
@@ -108,7 +108,7 @@ export default function NewBuzzItem(props) {
             setIsDislike(true);
         }
         setLikeCount(numOfLike)
-    }, [userLike]);
+    }, []);
 
     return (
         <>
@@ -167,7 +167,23 @@ export default function NewBuzzItem(props) {
                             </Box>
 
                             {/* Rebuzz */}
-                            {rebuzz && <RebuzzContent buzzid={rebuzz} />}
+                            {rebuzz != 0 && <RebuzzContent buzzid={rebuzz} />}
+                            {/* {rebuzz == -1 &&
+                                <Box
+                                    sx={{
+                                        bgcolor: '#e0e0e0',
+                                        opacity: '0.7',
+                                        width: '90%',
+                                        display: "flex",
+                                        position: "relative",
+                                        marginBottom: '10px',
+                                        height: '50px',
+                                        lineHeight: 1,
+                                    }}
+                                >
+                                    This Buzz is deleted
+                                </Box>
+                            } */}
 
                             <Box>
                                 <Typography

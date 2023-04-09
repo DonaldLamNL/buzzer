@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function UserPreview(props) {
 
-    const { userid, username, icon, follow, isDelete = false, isVerify, updateUserList } = props;
+    const { userid, username, icon, follow, isDelete = false, isVerify, deletedUser } = props;
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
     const [isUserVerified, setIsUserVerified] = useState(null);

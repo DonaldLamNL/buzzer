@@ -72,7 +72,7 @@ export default function UserProfile() {
 
     const getBuzzes = async () => {
         try {
-            fetch(`http://localhost:3000/buzzes/user?userid=${userid}`)
+            fetch(`http://localhost:3000/buzzes/user?userid=${userid}&currentid=${Cookies.get('BuzzerUser')}`)
                 .then(response => response.json())
                 .then(responseData => {
                     setBuzzList(responseData);

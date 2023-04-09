@@ -21,18 +21,51 @@ export default function RebuzzContent(props) {
             console.log(error)
         }
     }
-    
+
     const jumpToRebuzz = () => {
         window.scrollTo({ top: 0 });
         navigate(`/buzz/${buzzid}`);
     }
 
     useEffect(() => {
-        getRebuzzContent();
-    }, [buzzid]);
+        if (buzzid != -1) {
+            getRebuzzContent();
+        }
+    }, []);
 
     return (
         <>
+            {buzzid == -1 &&
+                <Box
+                    sx={{
+                        bgcolor: '#e0e0e0',
+                        opacity: '0.7',
+                        width: '90%',
+                        display: "flex",
+                        position: "relative",
+                        marginBottom: '10px',
+                        height: '50px',
+                    }}
+                >
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: "14px",
+                                marginRight: "10px",
+                                lineHeight: '50px',
+                                fontStyle: 'italic',
+                                marginLeft: '20px',
+                                "&:hover": {
+                                    cursor: "pointer",
+                                },
+                            }}
+                        >
+                            This buzz is deleted.
+                        </Typography>
+                    </Box>
+                </Box>
+            }
+
             {rebuzzContent &&
                 <Box
                     sx={{
@@ -41,7 +74,7 @@ export default function RebuzzContent(props) {
                         width: '90%',
                         display: "flex",
                         position: "relative",
-                        marginBottom: '10px'
+                        marginBottom: '10px',
                     }}
                 >
                     < Box >
@@ -91,7 +124,6 @@ export default function RebuzzContent(props) {
                                         marginRight: "10px",
                                         "&:hover": {
                                             cursor: "pointer",
-                                            // textDecoration: "underline",
                                         },
                                     }}
                                 >

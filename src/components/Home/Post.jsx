@@ -101,7 +101,7 @@ export default function Post() {
 
             const responseData = await response.json();
             console.log(responseData.message);
-            if (responseData) {
+            if (responseData.state) {
                 navigate(`/buzz/${responseData.buzzid}`)
             }
         } catch (err) {
@@ -155,18 +155,18 @@ export default function Post() {
                 <Grid container item sx={{ flexGrow: 1 }}>
 
                     {/* Rebuzz */}
-                    {rebuzz && 
+                    {rebuzz &&
                         <Box
-                        sx={{
-                            bgcolor: '#e0e0e0',
-                            opacity: '0.7',
-                            width: '90%',
-                            display: "flex",
-                            position: "relative",
-                            marginTop: '20px',
-                            borderRadius: '10px',
-                            overflow: 'hidden'
-                        }}
+                            sx={{
+                                bgcolor: '#e0e0e0',
+                                opacity: '0.7',
+                                width: '90%',
+                                display: "flex",
+                                position: "relative",
+                                marginTop: '20px',
+                                borderRadius: '10px',
+                                overflow: 'hidden'
+                            }}
                         >
                             <RebuzzContent buzzid={rebuzz} />
                         </Box>
