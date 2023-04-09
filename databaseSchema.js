@@ -40,8 +40,6 @@ const commentSchema = new mongoose.Schema({
 
 const categorySchema = new mongoose.Schema({
     name: { type: String, required: true },
-    buzz: [{ type: Number }],
-    user: [{ type: String }],
 });
 
 const Users = mongoose.model('Users', userSchema);

@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
             image: buzz.image ? buzz.image.name : null, // send the image name instead of the image data
             video: buzz.video ? buzz.video : null,
             comment: buzz.comment ? buzz.comment : null,
+            commentCount: buzz.comment.length,
             rebuzz: buzz.rebuzz,
         }
 
@@ -124,33 +125,27 @@ router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
     let decodedUser = decodeUserID(userid);
 
+    const categorySearch = (keywords && keywords[0] == "*" ? true : false);
+
+    console.log("cat = ", categorySearch, keywords.substring(1))
+
     try {
         // Search for buzzes by keywords
-        const buzzes = await Buzzes.find({
-            content: { $regex: keywords, $options: 'i' }
-        });
+        let buzzes;
 
-        const responseData = await Promise.all(buzzes.map(async (buzz) => {
-            const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
-            const author = await Users.findOne({ userid: buzz.userid });
+        if (categorySearch) {
+            buzzes = await Buzzes.find({
+                category: keywords.substring(1)
+            });
+        } else {
+            buzzes = await Buzzes.find({
+                content: { $regex: keywords, $options: 'i' }
+            });
+        }
 
-            return {
-                buzzid: buzz.buzzid,
-                userLike,
-                userid: buzz.userid,
-                username: author.username,
-                icon: author.avatar ? author.avatar : null,
-                isVerify: author.isVerify ? author.isVerify : null,
-                content: buzz.content,
-                category: buzz.category,
-                numOfLike: buzz.like.length - buzz.dislike.length,
-                image: buzz.image ? buzz.image.name : null,
-                video: buzz.video ? buzz.video : null,
-                comment: buzz.comment ? buzz.comment : null,
-                rebuzz: buzz.rebuzz,
-            };
-        }));
+        const responseData = await getBuzzesList(buzzes, decodedUser);
         res.send(responseData);
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -209,15 +204,8 @@ router.post('/dislike', async (req, res) => {
     }
 });
 
-// Get Following Buzzes
-router.get('/follow', async (req, res) => {
-    const { userid } = req.query;
-    let decodedUser = decodeUserID(userid);
-
+const getBuzzesList = async (buzzes, decodedUser) => {
     try {
-        const user = await Users.findOne({ userid: decodedUser })
-        const buzzes = await Buzzes.find({ userid: { $in: user.following } })
-
         const responseData = await Promise.all(buzzes.map(async (buzz) => {
             const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
             const author = await Users.findOne({ userid: buzz.userid });
@@ -234,11 +222,39 @@ router.get('/follow', async (req, res) => {
                 image: buzz.image ? buzz.image.name : null,
                 video: buzz.video ? buzz.video : null,
                 comment: buzz.comment ? buzz.comment : null,
+                commentCount: buzz.comment.length,
                 rebuzz: buzz.rebuzz,
             };
         }));
-        res.send(responseData);
+        return responseData;
+    } catch (error) {
+        console.error(error);
+        return {};
+    }
+}
 
+router.get('/follow', async (req, res) => {
+    const { userid } = req.query;
+    let decodedUser = decodeUserID(userid);
+
+    try {
+        const user = await Users.findOne({ userid: decodedUser })
+        const buzzes = await Buzzes.find({ userid: { $in: user.following } })
+        if (buzzes.length < 10) {
+            const randomBuzzes = await Buzzes.aggregate([
+                {
+                    $match: {
+                        userid: { $nin: [decodedUser, ...user.following] },
+                        buzzid: { $nin: buzzes.map(buzz => buzz.buzzid) }
+                    }
+                },
+                { $sample: { size: 10 - buzzes.length } }
+            ]);
+            buzzes.push(...randomBuzzes);
+
+        }
+        const responseData = await getBuzzesList(buzzes, decodedUser);
+        res.send(responseData);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -252,33 +268,12 @@ router.get('/user', async (req, res) => {
 
     try {
         const buzzes = await Buzzes.find({ userid })
-
-        const responseData = await Promise.all(buzzes.map(async (buzz) => {
-            const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
-            const author = await Users.findOne({ userid: buzz.userid });
-            return {
-                buzzid: buzz.buzzid,
-                userLike,
-                userid: buzz.userid,
-                username: author.username,
-                icon: author.avatar ? author.avatar : null,
-                isVerify: author.isVerify ? author.isVerify : null,
-                content: buzz.content,
-                category: buzz.category,
-                numOfLike: buzz.like.length - buzz.dislike.length,
-                image: buzz.image ? buzz.image.name : null,
-                video: buzz.video ? buzz.video : null,
-                comment: buzz.comment ? buzz.comment : null,
-                rebuzz: buzz.rebuzz,
-            };
-        }));
+        const responseData = await getBuzzesList(buzzes, decodedUser);
         res.send(responseData);
-
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
     }
 });
-
 
 module.exports = router;

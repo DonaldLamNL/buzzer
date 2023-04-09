@@ -9,6 +9,7 @@ var accountRouter = require('./routes/account');
 var buzzesRouter = require('./routes/buzzes');
 var commentsRouter = require('./routes/comments');
 var adminRouter = require('./routes/admin');
+var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/account', accountRouter);
 app.use('/buzzes', buzzesRouter);
 app.use('/comments', commentsRouter);
 app.use('/admin', adminRouter);
+app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
