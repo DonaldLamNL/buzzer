@@ -1,4 +1,4 @@
-import { ChatBubbleOutlineOutlined } from "@mui/icons-material";
+import { ChatBubbleOutlineOutlined, Co2Sharp } from "@mui/icons-material";
 import { Avatar, Button, Card, Grid, IconButton, SvgIcon, Typography } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -6,7 +6,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import { Box } from "@mui/system";
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 import PubSub from 'pubsub-js';
 import React, { useEffect, useState } from "react";
@@ -15,12 +15,13 @@ import Cookies from "js-cookie";
 import RebuzzContent from "./RebuzzContent";
 
 export default function NewBuzzItem(props) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { buzzid, userLike, numOfLike, icon, content, category, image, video, userid, username, isVerify, rebuzz, displayComment = false } = props;
     const [isLike, setIsLike] = useState(null);
     const [isDislike, setIsDislike] = useState(null);
     const [likeCount, setLikeCount] = useState(null);
     const [isExecuting, setIsExecuting] = useState(false);
+    const [buzzImage, setBuzzImage] = useState(null);
 
     const toBuzz = () => {
         navigate(`/buzz/${buzzid}`);
@@ -101,13 +102,27 @@ export default function NewBuzzItem(props) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    const getImage = async () => {
+        if(image){
+            fetch(`http://localhost:3000/buzzes/image/${image}`)
+                .then(response => response.blob())
+                .then(image => {
+                    setBuzzImage(URL.createObjectURL(image));
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
+
     useEffect(() => {
         if (userLike == 1) {
             setIsLike(true)
         } else if (userLike == -1) {
             setIsDislike(true);
         }
-        setLikeCount(numOfLike)
+        setLikeCount(numOfLike);
+        getImage();
     }, []);
 
     return (
@@ -187,7 +202,7 @@ export default function NewBuzzItem(props) {
 
                             <Box>
                                 <Typography
-                                    sx={{ fontSize: "14px", marginRight: "10px" }}
+                                    sx={{ fontSize: "14px", marginRight: "10px", whiteSpace: "pre-wrap" }}
                                     dangerouslySetInnerHTML={{ __html: content }}
                                 >
                                 </Typography>
@@ -195,11 +210,11 @@ export default function NewBuzzItem(props) {
 
 
                             {/* Media Block */}
-                            {image !== null || video !== null ? (
+                            {buzzImage !== null || video !== null ? (
                                 <Box sx={{ margin: "20px auto" }}>
-                                    {image !== null && (
+                                    {buzzImage !== null && (
                                         <img
-                                            src={image}
+                                            src={buzzImage}
                                             style={{
                                                 maxWidth: "95%",
                                                 maxHeight: "200px",

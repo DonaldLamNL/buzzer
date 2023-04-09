@@ -71,18 +71,14 @@ export default function UserProfile() {
     };
 
     const getBuzzes = async () => {
-        try {
-            fetch(`http://localhost:3000/buzzes/user?userid=${userid}&currentid=${Cookies.get('BuzzerUser')}`)
-                .then(response => response.json())
-                .then(responseData => {
-                    setBuzzList(responseData);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        } catch (err) {
-            console.error(err);
-        }
+        fetch(`http://localhost:3000/buzzes/user?userid=${userid}&currentid=${Cookies.get('BuzzerUser')}`)
+            .then(response => response.json())
+            .then(responseData => {
+                setBuzzList(responseData);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     useEffect(() => {
@@ -175,11 +171,12 @@ export default function UserProfile() {
                                         </Typography>
                                     </Box>
 
-                                    <Typography margin="20px 0"> {userInfo.description} </Typography>
+                                    <Typography margin="20px 0" whiteSpace="pre-wrap" > {userInfo.description} </Typography>
 
                                     <Box display={"flex"}>
                                         <Link
                                             to={`/userlist/${userid}/0`}
+                                            onClick={() => {window.scrollTo({top: 0, behavior: 'smooth'})}}
                                             underline="hover"
                                             sx={{
                                                 display: "flex",
@@ -197,6 +194,7 @@ export default function UserProfile() {
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <Link
                                             to={`/userlist/${userid}/1`}
+                                            onClick={() => {window.scrollTo({top: 0, behavior: 'smooth'})}}
                                             underline="hover"
                                             sx={{
                                                 display: "flex",

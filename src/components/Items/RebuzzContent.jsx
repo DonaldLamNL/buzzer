@@ -2,6 +2,7 @@ import { Avatar, Box, Button, Grid, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
+import { CheckCircle } from '@mui/icons-material';
 
 
 export default function RebuzzContent(props) {
@@ -55,6 +56,7 @@ export default function RebuzzContent(props) {
                                 lineHeight: '50px',
                                 fontStyle: 'italic',
                                 marginLeft: '20px',
+                                whiteSpace: "pre-wrap",
                                 "&:hover": {
                                     cursor: "pointer",
                                 },

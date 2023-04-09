@@ -49,6 +49,8 @@ const categories = [
 export default function Post() {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
+    const [imageDisplay, setImageDisplay] = useState(null);
+
     const [video, setVideo] = useState(null);
     const [buzzInput, setBuzzInput] = useState("");
     const [postCat, setPostCat] = useState('Others');
@@ -63,7 +65,8 @@ export default function Post() {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setImage(URL.createObjectURL(file));
+            setImageDisplay(URL.createObjectURL(file));
+            setImage(file);
         }
     };
 
@@ -251,7 +254,7 @@ export default function Post() {
 
                     {/* Image Preview */}
                     {image && (
-                        <img src={image} style={{ maxWidth: "300px", marginTop: "10px", marginBottom: '10px' }} />
+                        <img src={imageDisplay} style={{ maxWidth: "300px", marginTop: "10px", marginBottom: '10px' }} />
                     )}
                     {video && (
                         <video controls style={{ maxWidth: "300px", marginBottom: '10px' }}>

@@ -3,9 +3,10 @@ import { Avatar, Typography, Button } from '@mui/material'
 import { Box } from '@mui/system'
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserPreview(props) {
-
+    const navigate = useNavigate();
     const { userid, username, icon, follow, isDelete = false, isVerify, deletedUser } = props;
     const [isExecuting, setIsExecuting] = useState(false);
     const [isFollow, setIsFollow] = useState(null);
@@ -13,6 +14,11 @@ export default function UserPreview(props) {
 
     const handleFollowButton = () => {
         handleFollow();
+    }
+
+    const jumpToUserprofile = () => {
+        navigate(`/user/${userid}`);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     const deleteUserComfirm = async (e) => {
@@ -122,7 +128,10 @@ export default function UserPreview(props) {
                 justifyContent: 'space-between',
             }}>
                 {/* Icon */}
-                <Box sx={{ width: '70px' }}>
+                <Box 
+                    sx={{ width: '70px', cursor: 'pointer' }}
+                    onClick={jumpToUserprofile}
+                >
                     <Avatar
                         src={icon}
                         sx={{ width: 40, height: 40, margin: '15px' }}
@@ -132,7 +141,10 @@ export default function UserPreview(props) {
                 </Box>
 
                 {/* Info */}
-                <Box sx={{ display: 'flex', flexDirection: 'column', }}>
+                <Box 
+                    sx={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+                    onClick={jumpToUserprofile}
+                >
                     <Box sx={{ height: '60px', }}>
                         <Typography sx={{ fontSize: '18px', lineHeight: '46px' }}>
                             {username}

@@ -119,7 +119,6 @@ export default function Comment(props) {
                 <Grid container item sx={{ flexGrow: 1 }}>
                     {/* Buzz Input Block */}
                     <TextField
-                        
                         multiline
                         placeholder="Comment..."
                         sx={{
@@ -177,7 +176,7 @@ export default function Comment(props) {
                             <Grid container item sx={{ flexGrow: 1 }}>
                                 <Box sx={{ flexDirection: "column" }}>
                                     <Box sx={{ mr: 2, cursor: 'pointer', marginTop: '15px', fontSize: '16px', lineHeight: "30px" }} onClick={() => {jumpToUserprofile(c.userid)}}>{c.username}</Box>
-                                    <Box sx={{ lineHeight: "40px"}}>{c.content}</Box>
+                                    <Box sx={{ lineHeight: "40px", whiteSpace: "pre-wrap" }}>{c.content}</Box>
                                 </Box>
                             </Grid>
                         </Box>

@@ -15,7 +15,7 @@
 2. Follow a user [Done]
 3. Like or dislike [Done]
 4. Comment [Done]
-5. Post [Base] (**NEED** allow user upload images and videos)
+5. Post [Base]
 6. Retweet [Done]
 7. Show following user tweets [Done]
 
