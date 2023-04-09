@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 const { Buzzes, Users, Categories } = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
+
 const multer = require('multer');
-const upload = multer();
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // Buzz Page
 router.get('/', async (req, res) => {
@@ -25,11 +27,12 @@ router.get('/', async (req, res) => {
             content: buzz.content,
             category: buzz.category,
             numOfLike: buzz.like.length - buzz.dislike.length,
-            image: buzz.image ? buzz.image : null,
+            image: buzz.image ? buzz.image.name : null, // send the image name instead of the image data
             video: buzz.video ? buzz.video : null,
             comment: buzz.comment ? buzz.comment : null,
             rebuzz: buzz.rebuzz,
         }
+
         res.send(responseData);
 
     } catch (error) {
@@ -38,45 +41,73 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Image Endpoint
+router.get('/image/:imageName', async (req, res) => {
+    const { imageName } = req.params;
+
+    try {
+        const buzz = await Buzzes.findOne({ 'image.name': imageName });
+        if (buzz) {
+            res.contentType(buzz.image.contentType);
+            res.send(buzz.image.data);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+{
+    // Update category
+    // const cat = await Categories.findOne({ name: category });
+    // if (cat) {
+    //     cat.buzz.push(newBuzzid);
+    //     await cat.save();
+    // } else {
+    //     const cat = new Categories({
+    //         name: category,
+    //         user: [decodedUser],
+    //         buzz: [newBuzzid],
+    //     });
+    //     await cat.save();
+    // }
+
+}
+
 // Posting System
-router.post('/post', upload.none(), async (req, res) => {
+router.post('/post', upload.single('image'), async (req, res) => {
     const { content, category, userid, rebuzz } = req.body;
-    const image = req.file && req.file.buffer;
-    const video = req.file && req.file.buffer;
     const decodedUser = decodeUserID(userid);
     const rebuzzid = isNaN(rebuzz) ? 0 : parseInt(rebuzz);
+
 
     try {
         // Generate new buzzid
         const highestBuzz = await Buzzes.findOne().sort({ buzzid: -1 }).exec();
         const newBuzzid = highestBuzz ? highestBuzz.buzzid + 1 : 1;
 
-        // Update category
-        // const cat = await Categories.findOne({ name: category });
-        // if (cat) {
-        //     cat.buzz.push(newBuzzid);
-        //     await cat.save();
-        // } else {
-        //     const cat = new Categories({
-        //         name: category,
-        //         user: [decodedUser],
-        //         buzz: [newBuzzid],
-        //     });
-        //     await cat.save();
-        // }
-
         const newBuzz = new Buzzes({
             buzzid: newBuzzid,
             userid: decodedUser,
             content,
-            image,
-            video,
+            // video,
             category,
             like: [],
             dislike: [],
             comment: [],
             rebuzz: rebuzzid,
         });
+
+        if (req.file) {
+            const { originalname, buffer, mimetype } = req.file;
+            newBuzz.image = {
+                name: originalname,
+                data: buffer,
+                contentType: mimetype,
+            };
+        }
 
         await newBuzz.save();
 
@@ -113,7 +144,7 @@ router.get('/search', async (req, res) => {
                 content: buzz.content,
                 category: buzz.category,
                 numOfLike: buzz.like.length - buzz.dislike.length,
-                image: buzz.image ? buzz.image : null,
+                image: buzz.image ? buzz.image.name : null,
                 video: buzz.video ? buzz.video : null,
                 comment: buzz.comment ? buzz.comment : null,
                 rebuzz: buzz.rebuzz,
@@ -200,7 +231,7 @@ router.get('/follow', async (req, res) => {
                 content: buzz.content,
                 category: buzz.category,
                 numOfLike: buzz.like.length - buzz.dislike.length,
-                image: buzz.image ? buzz.image : null,
+                image: buzz.image ? buzz.image.name : null,
                 video: buzz.video ? buzz.video : null,
                 comment: buzz.comment ? buzz.comment : null,
                 rebuzz: buzz.rebuzz,
@@ -235,7 +266,7 @@ router.get('/user', async (req, res) => {
                 content: buzz.content,
                 category: buzz.category,
                 numOfLike: buzz.like.length - buzz.dislike.length,
-                image: buzz.image ? buzz.image : null,
+                image: buzz.image ? buzz.image.name : null,
                 video: buzz.video ? buzz.video : null,
                 comment: buzz.comment ? buzz.comment : null,
                 rebuzz: buzz.rebuzz,

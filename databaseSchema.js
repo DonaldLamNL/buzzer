@@ -18,7 +18,11 @@ const buzzSchema = new mongoose.Schema({
     buzzid: { type: Number, required: true },
     userid: { type: String, required: true },
     content: { type: String },
-    image: { type: Buffer },
+    image: { 
+        name: String,
+        data: Buffer,
+        contentType: String,
+    },
     video: { type: Buffer },
     category: { type: String },
     like: [{ type: String }],

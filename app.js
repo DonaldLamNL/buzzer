@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var accountRouter = require('./routes/account');
@@ -32,6 +31,9 @@ const mongoose = require('mongoose');
 const { Users, Buzzes, Comments } = require('./databaseSchema');
 var uri = 'mongodb+srv://3100PJA0:3100PJA0@3100project.gbzxufi.mongodb.net/Buzzer?retryWrites=true&w=majority'
 connect();
+
+app.set('maxHttpHeaderSize', 1000000);
+
 
 // Routers
 app.use('/', indexRouter);
