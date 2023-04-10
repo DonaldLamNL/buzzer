@@ -24,6 +24,48 @@ export default function Signup() {
   const navigate = useNavigate();
   const [signupMsg, setsignupMsg] = useState("");
 
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState('');
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (!event.target.value.includes('@')) {
+      setError(true);
+      setHelperText('Please enter a valid email');
+    } else {
+      setError(false);
+      setHelperText('');
+    }
+  };
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [pwerror, pwsetError] = useState(false);
+  const [pwhelperText, pwsetHelperText] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (confirmPassword && event.target.value !== confirmPassword) {
+      pwsetError(true);
+      pwsetHelperText('Passwords do not match');
+    } else {
+      pwsetError(false);
+      pwsetHelperText('');
+    }
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (event.target.value !== password) {
+      pwsetError(true);
+      pwsetHelperText('Passwords do not match');
+    } else {
+      pwsetError(false);
+      pwsetHelperText('');
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const input = new FormData(event.currentTarget);
@@ -132,6 +174,11 @@ export default function Signup() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+
+                  value={email}
+                  onChange={handleEmailChange}
+                  error={error}
+                  helperText={helperText}
                 />
                 <TextField
                   variant="standard"
@@ -141,6 +188,9 @@ export default function Signup() {
                   name="password"
                   label="Password"
                   type="password"
+
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
 
                 <TextField
@@ -151,6 +201,11 @@ export default function Signup() {
                   name="password confirm"
                   label="Password Confirm"
                   type="password"
+
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  error={pwerror}
+                  helperText={pwhelperText}
                 />
 
                 <Box>{signupMsg}</Box>
