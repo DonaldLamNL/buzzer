@@ -25,7 +25,7 @@ export default function ForgotPassword() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   async function getVerificationCode() {
-    preventDefault();
+    event.preventDefault();
     try {
       const response = await fetch(`${serverPath}/account/forgot`, {
         method: "POST",
@@ -34,7 +34,8 @@ export default function ForgotPassword() {
         },
         body: JSON.stringify({ email }),
       });
-      const data = await response.json();
+      const responseData = await response.json();
+      console.log(responseData);
       return data;
     } catch (error) {
       console.error(error);
