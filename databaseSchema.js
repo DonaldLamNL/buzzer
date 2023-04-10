@@ -24,7 +24,12 @@ const buzzSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  video: { type: Buffer },
+//   video: { type: Buffer },
+  video: {
+    name: String,
+    data: Buffer,
+    contentType: String,
+  },
   category: { type: String },
   like: [{ type: String }],
   dislike: [{ type: String }],
