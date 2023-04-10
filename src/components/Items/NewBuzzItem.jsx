@@ -245,7 +245,7 @@ export default function NewBuzzItem(props) {
               </Box>
 
               {/* Media Block */}
-              {buzzImage !== null || video !== null ? (
+              {buzzImage !== null || buzzVideo !== null ? (
                 <Box sx={{ margin: "20px auto" }}>
                   {buzzImage !== null && (
                     <img
@@ -257,9 +257,9 @@ export default function NewBuzzItem(props) {
                       }}
                     />
                   )}
-                  {video !== null && (
+                  {buzzVideo !== null && (
                     <video
-                      src={video}
+                      src={buzzVideo}
                       controls
                       style={{
                         maxWidth: "95%",
