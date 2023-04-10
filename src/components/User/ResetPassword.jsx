@@ -34,29 +34,44 @@ export default function ResetPassword() {
   }
 
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  const [passwordHelperText, passwordSetHelperText] = useState('');
+  const [passwordHelperText, setPasswordHelperText] = useState('');
+
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [confirmPasswordHelperText, setConfirmPasswordHelperText] = useState('');
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
     if (confirmPassword && event.target.value !== confirmPassword) {
+      setConfirmPasswordError(true);
+      setConfirmPasswordHelperText('Passwords do not match');
+    } else {
+      setConfirmPasswordError(false);
+      setConfirmPasswordHelperText('');
+    }
+    const strongPasswordRegex = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+    );
+    if (!strongPasswordRegex.test(event.target.value)) {
       setPasswordError(true);
-      passwordSetHelperText('Passwords do not match');
+      setPasswordHelperText(
+        'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      );
     } else {
       setPasswordError(false);
-      passwordSetHelperText('');
+      setPasswordHelperText('');
     }
   };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
     if (event.target.value !== password) {
-      setPasswordError(true);
-      passwordSetHelperText('Passwords do not match');
+      setConfirmPasswordError(true);
+      setConfirmPasswordHelperText('Passwords do not match');
     } else {
-      setPasswordError(false);
-      passwordSetHelperText('');
+      setConfirmPasswordError(false);
+      setConfirmPasswordHelperText('');
     }
   };
 
@@ -144,6 +159,8 @@ export default function ResetPassword() {
 
                   value={password}
                   onChange={handlePasswordChange}
+                  error={passwordError}
+                  helperText={passwordHelperText}
                 />
 
                 <TextField
@@ -158,8 +175,8 @@ export default function ResetPassword() {
 
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  error={passwordError}
-                  helperText={passwordHelperText}
+                  error={confirmPasswordError}
+                  helperText={confirmPasswordHelperText}
                 />
 
                 <Button

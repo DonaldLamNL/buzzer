@@ -19,10 +19,19 @@ import serverPath from "../../ServerPath";
 const theme = createTheme();
 
 export default function ForgotPassword() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState(false);
+  const [emailHelperText, setEmailHelperText] = useState('');
+
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, setPasswordHelperText] = useState('');
+
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [confirmPasswordHelperText, setConfirmPasswordHelperText] = useState('');
+
   const [verificationCode, setVerificationCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   async function getVerificationCode() {
     event.preventDefault();
@@ -109,7 +118,20 @@ export default function ForgotPassword() {
                   name="email"
                   autoComplete="email"
                   autoFocus
-                  onChange={(event) => setEmail(event.target.value)}
+
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (!event.target.value.includes('@')) {
+                      setEmailError(true);
+                      setEmailHelperText('Please enter a valid email');
+                    } else {
+                      setEmailError(false);
+                      setEmailHelperText('');
+                    }
+                  }}
+                  error={emailError}
+                  helperText={emailHelperText}
                 />
 
                 <Grid container spacing={2}>
@@ -119,6 +141,8 @@ export default function ForgotPassword() {
                       variant="contained"
                       sx={{ mt: 1, mb: 1 }}
                       onClick={() => getVerificationCode()}
+
+                      disabled={!email || emailError}
                     >
                       Get Code
                     </Button>
@@ -131,10 +155,14 @@ export default function ForgotPassword() {
                       name="verificationCode"
                       label="Verification Code"
                       id="verificationCode"
+
+                      value={verificationCode}
                       onChange={(event) =>
                         setVerificationCode(event.target.value)
                       }
-                      // sx={{ mt: 1, mb: 4}}
+
+                      disabled={!email || emailError}
+                    // sx={{ mt: 1, mb: 4}}
                     />
                   </Grid>
                 </Grid>
@@ -147,7 +175,32 @@ export default function ForgotPassword() {
                   name="password"
                   label="New Password"
                   type="password"
-                  onChange={(event) => setPassword(event.target.value)}
+
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                    if (confirmPassword && event.target.value !== confirmPassword) {
+                      setConfirmPasswordError(true);
+                      setConfirmPasswordHelperText('Passwords do not match');
+                    } else {
+                      setConfirmPasswordError(false);
+                      setConfirmPasswordHelperText('');
+                    }
+                    const strongPasswordRegex = new RegExp(
+                      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+                    );
+                    if (!strongPasswordRegex.test(event.target.value)) {
+                      setPasswordError(true);
+                      setPasswordHelperText(
+                        'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+                      );
+                    } else {
+                      setPasswordError(false);
+                      setPasswordHelperText('');
+                    }
+                  }}
+                  error={passwordError}
+                  helperText={passwordHelperText}
                 />
 
                 <TextField
@@ -158,7 +211,20 @@ export default function ForgotPassword() {
                   name="password confirm"
                   label="New Password Confirm"
                   type="password"
-                  onChange={(event) => setPasswordConfirm(event.target.value)}
+
+                  value={confirmPassword}
+                  onChange={(event) => {
+                    setConfirmPassword(event.target.value);
+                    if (event.target.value !== password) {
+                      setConfirmPasswordError(true);
+                      setConfirmPasswordHelperText('Passwords do not match');
+                    } else {
+                      setConfirmPasswordError(false);
+                      setConfirmPasswordHelperText('');
+                    }
+                  }}
+                  error={confirmPasswordError}
+                  helperText={confirmPasswordHelperText}
                 />
 
                 <Button
@@ -166,6 +232,8 @@ export default function ForgotPassword() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
+
+                  disabled={!email || !password || !confirmPassword || !verificationCode || emailError || passwordError || confirmPasswordError}
                 >
                   Reset Password
                 </Button>
