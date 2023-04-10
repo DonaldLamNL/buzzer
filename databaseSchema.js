@@ -31,6 +31,13 @@ const buzzSchema = new mongoose.Schema({
     rebuzz: { type: Number }
 });
 
+const hiveSchema = new mongoose.Schema({
+    cellid: { type: Number, required: true },
+    userid: { type: String, required: true },
+    content: { type: String },
+    like: {type: Number}
+});
+
 const commentSchema = new mongoose.Schema({
     commentid: { type: Number, required: true },
     buzzid: { type: Number, required: true },
@@ -46,10 +53,12 @@ const Users = mongoose.model('Users', userSchema);
 const Buzzes = mongoose.model('Buzzes', buzzSchema);
 const Comments = mongoose.model('Comments', commentSchema);
 const Categories = mongoose.model('Categories', categorySchema);
+const Hive = mongoose.model('Hive',hiveSchema);
 
 module.exports = {
     Users,
     Buzzes,
     Comments,
-    Categories
+    Categories,
+    Hive
 };
