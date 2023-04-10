@@ -72,7 +72,7 @@ export default function ForgotPassword() {
                 Reset Password
               </Typography>
 
-              <Typography variant="body3" sx={{ fontSize: "0.9em" }}>
+              <Typography variant="body3" sx={{ fontSize: "0.9em", textJustify: "auto"}}>
                 {
                   "Please enter your new password and confirmed password to reset password"
                 }
