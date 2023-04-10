@@ -27,6 +27,34 @@ export default function ResetPassword() {
     });
   };
 
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [pwerror, pwsetError] = useState(false);
+  const [pwhelperText, pwsetHelperText] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (confirmPassword && event.target.value !== confirmPassword) {
+      pwsetError(true);
+      pwsetHelperText('Passwords do not match');
+    } else {
+      pwsetError(false);
+      pwsetHelperText('');
+    }
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (event.target.value !== password) {
+      pwsetError(true);
+      pwsetHelperText('Passwords do not match');
+    } else {
+      pwsetError(false);
+      pwsetHelperText('');
+    }
+  };
+
+
   return (
     <ThemeProvider theme={theme}>
       <section
@@ -105,6 +133,9 @@ export default function ResetPassword() {
                   label="New Password"
                   type="password"
                   id="newpassword"
+
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
 
                 <TextField
@@ -116,6 +147,11 @@ export default function ResetPassword() {
                   label="New Password Confirm"
                   type="password"
                   id="confirmpassword"
+
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  error={pwerror}
+                  helperText={pwhelperText}
                 />
 
                 <Button
@@ -128,7 +164,7 @@ export default function ResetPassword() {
                 </Button>
 
                 <Grid container style={{ alignItems: "center" }}>
-                  <Link href="/#/login" variant="body2" color="secondary">
+                  <Link href="/#/edit" variant="body2" color="secondary">
                     {"Back"}
                   </Link>
                 </Grid>

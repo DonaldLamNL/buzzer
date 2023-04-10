@@ -65,10 +65,18 @@ export default function Post() {
     formData.append("content", buzzInput);
     formData.append("category", postCat);
     formData.append("userid", Cookies.get("BuzzerUser"));
-    formData.append("image", image);
-    formData.append("video", video);
     formData.append("rebuzz", rebuzz);
 
+    if (image) {
+      console.log("uploaded iamge");
+      formData.append("image", image);
+    }
+  
+    if (video) {
+      console.log("uploaded video");
+      formData.append("video", video);
+    }
+    
     try {
       const response = await fetch(`${serverPath}/buzzes/post`, {
         method: "POST",
