@@ -128,7 +128,7 @@ export default function ResetPassword() {
                 </Button>
 
                 <Grid container style={{ alignItems: "center" }}>
-                  <Link href="/#/login" variant="body2" color="secondary">
+                  <Link href="/#/edit" variant="body2" color="secondary">
                     {"Back"}
                   </Link>
                 </Grid>

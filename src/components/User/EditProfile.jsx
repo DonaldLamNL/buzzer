@@ -49,7 +49,9 @@ export default function EditProfile() {
         navigator(`/user/${userInfo.userid}`);
     }
 
-    
+    const handleResetPwd = async () => {
+        navigator(`/resetpassword`)
+    }
 
     //   const getUserInfo = async () => {
     //     try {
@@ -334,7 +336,7 @@ export default function EditProfile() {
                                                     Password
                                                 </Typography>
 
-                                                <Button variant="contained">
+                                                <Button variant="contained" onClick={handleResetPwd}>
                                                     Reset Password
                                                 </Button>
 
