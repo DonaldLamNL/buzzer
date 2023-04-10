@@ -46,7 +46,7 @@ export default function NewBuzzItem(props) {
   const [likeCount, setLikeCount] = useState(null);
   const [isExecuting, setIsExecuting] = useState(false);
   const [buzzImage, setBuzzImage] = useState(null);
-  const [video, setVideo] = useState(null);
+  const [buzzVideo, setBuzzVideo] = useState(null);
 
   const toBuzz = () => {
     navigate(`/buzz/${buzzid}`);
@@ -145,7 +145,7 @@ export default function NewBuzzItem(props) {
       fetch(`${serverPath}/buzzes/video/${video}`)
         .then((response) => response.blob())
         .then((video) => {
-          setVideo(URL.createObjectURL(video));
+          setBuzzVideo(URL.createObjectURL(video));
         })
         .catch((error) => {
           console.log(error);
