@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 // components
 import NewBuzzItem from "../Items/NewBuzzItem";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 export default function BuzzSearch() {
   const { search } = useParams();

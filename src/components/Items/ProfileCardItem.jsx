@@ -2,6 +2,7 @@ import { CheckCircle } from "@mui/icons-material";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import serverPath from "../../ServerPath";
 
 export default function ProfileCardItem(props) {
   let {

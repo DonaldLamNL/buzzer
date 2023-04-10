@@ -19,6 +19,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CheckCircle } from "@mui/icons-material";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 

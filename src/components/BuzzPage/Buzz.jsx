@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NewBuzzItem from "../Items/NewBuzzItem";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
+// import serverPath from "../ServerPath";
 
 export default function Buzz() {
   const { buzzid } = useParams();

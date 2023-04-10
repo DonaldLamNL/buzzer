@@ -6,6 +6,7 @@ import { Box, width } from "@mui/system";
 // components
 import ProfileCardItem from "../Items/ProfileCardItem";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 export default function UserSearch(props) {
   const [userList, setUserList] = useState(null);

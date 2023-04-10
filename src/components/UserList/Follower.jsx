@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import UserPreview from "./UserPreview.jsx";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 export default function Follower(props) {
   const { userid } = props;

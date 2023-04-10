@@ -16,6 +16,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 

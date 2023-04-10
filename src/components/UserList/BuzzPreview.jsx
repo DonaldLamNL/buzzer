@@ -3,6 +3,7 @@ import { Avatar, Typography, Button, Card, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import Cookies from "js-cookie";
 import React from "react";
+import serverPath from "../../ServerPath";
 
 export default function BuzzPreview(props) {
   const { userid, username, icon, buzzid, content, isVerify, deletedBuzz } =

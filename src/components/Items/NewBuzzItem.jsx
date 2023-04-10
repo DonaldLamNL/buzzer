@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import Comment from "../BuzzPage/Comment";
 import Cookies from "js-cookie";
 import RebuzzContent from "./RebuzzContent";
+import serverPath from "../../ServerPath";
 
 export default function NewBuzzItem(props) {
   const navigate = useNavigate();

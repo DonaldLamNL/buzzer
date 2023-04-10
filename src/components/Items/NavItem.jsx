@@ -15,7 +15,7 @@ export default function NavItem(props) {
           // startIcon={<Component />}
           onClick={() => {
             path && navigate(`../${path}`);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           {/* <Grid

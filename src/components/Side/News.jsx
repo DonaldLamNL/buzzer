@@ -2,6 +2,7 @@ import { Box, Card } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PubSub from "pubsub-js";
+import serverPath from "../../ServerPath";
 
 export default function News() {
   const [categories, setCategories] = useState([]);

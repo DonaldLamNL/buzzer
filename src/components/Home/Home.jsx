@@ -5,6 +5,7 @@ import { LinearProgress } from "@mui/material";
 import NewBuzzItem from "../Items/NewBuzzItem";
 import Post from "./Post";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 // Get buzzes
 export default function Home() {

@@ -3,6 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import React, { useEffect, useState } from "react";
 import BuzzPreview from "./BuzzPreview";
 import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 export default function BuzzManagement() {
   const [buzzList, setBuzzList] = useState([]);

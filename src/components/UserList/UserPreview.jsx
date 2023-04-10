@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import serverPath from "../../ServerPath";
 
 export default function UserPreview(props) {
   const navigate = useNavigate();
