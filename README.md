@@ -15,7 +15,7 @@ The server for the buzzer
     ```bash
     DEBUG=server:* npm start
     ```
-    - The server is defaultly open in local port: 3100
+    - The server is defaultly open in local port: 3000
 
 4. If npm install ERROR
     ```bash
