@@ -27,33 +27,38 @@ export default function ResetPassword() {
     });
   };
 
+  const [oldPassword, setOldPassword] = useState('');
+
+  const handleOldPasswordChange = (event) => {
+    setOldPassword(event.target.value);
+  }
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [pwerror, pwsetError] = useState(false);
-  const [pwhelperText, pwsetHelperText] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, passwordSetHelperText] = useState('');
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
     if (confirmPassword && event.target.value !== confirmPassword) {
-      pwsetError(true);
-      pwsetHelperText('Passwords do not match');
+      setPasswordError(true);
+      passwordSetHelperText('Passwords do not match');
     } else {
-      pwsetError(false);
-      pwsetHelperText('');
+      setPasswordError(false);
+      passwordSetHelperText('');
     }
   };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
     if (event.target.value !== password) {
-      pwsetError(true);
-      pwsetHelperText('Passwords do not match');
+      setPasswordError(true);
+      passwordSetHelperText('Passwords do not match');
     } else {
-      pwsetError(false);
-      pwsetHelperText('');
+      setPasswordError(false);
+      passwordSetHelperText('');
     }
   };
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -122,6 +127,9 @@ export default function ResetPassword() {
                   label="Original Password"
                   type="password"
                   id="oldpassword"
+
+                  value={oldPassword}
+                  onChange={handleOldPasswordChange}
                 />
 
                 <TextField
@@ -150,8 +158,8 @@ export default function ResetPassword() {
 
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  error={pwerror}
-                  helperText={pwhelperText}
+                  error={passwordError}
+                  helperText={passwordHelperText}
                 />
 
                 <Button
@@ -159,6 +167,8 @@ export default function ResetPassword() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
+
+                  disabled={!oldPassword || !password || !confirmPassword || passwordError}
                 >
                   Reset Password
                 </Button>
