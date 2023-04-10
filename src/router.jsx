@@ -9,12 +9,13 @@ import ResetPassword from "./components/User/ResetPassword";
 import UserProfile from "./components/User/UserProfile";
 import EditProfile from "./components/User/EditProfile";
 import Hive from "./components/Hive";
+import { Navigate } from "react-router-dom";
 
 const routerConfig = (isLogin) => {
   return [
     {
       path: "/*",
-      element: isLogin ? <Main /> : <Login />,
+      element: isLogin ? <Main /> : <Navigate to="/login" />,
       children: [
         {
           path: "home/",
@@ -36,27 +37,27 @@ const routerConfig = (isLogin) => {
     },
     {
       path: "/signup",
-      element: isLogin ? <Signup /> : <Login />,
+      element: isLogin ? <Signup /> : <Navigate to="/login" />,
     },
     {
       path: "/forgotpassword",
-      element: isLogin ? <ForgotPassword /> : <Login />,
+      element: isLogin ? <ForgotPassword /> : <Navigate to="/login" />,
     },
     {
       path: "/resetpassword",
-      element: isLogin ? <ResetPassword /> : <Login />,
+      element: isLogin ? <ResetPassword /> : <Navigate to="/login" />,
     },
     {
       path: "/user",
-      element: isLogin ? <UserProfile /> : <Login />,
+      element: isLogin ? <UserProfile /> : <Navigate to="/login" />,
     },
     {
       path: "/edit",
-      element: isLogin ? <EditProfile /> : <Login />,
+      element: isLogin ? <EditProfile /> : <Navigate to="/login" />,
     },
     {
       path: "/hive",
-      element: isLogin ? <Hive /> : <Login />,
+      element: isLogin ? <Hive /> : <Navigate to="/login" />,
     },
   ];
 };
