@@ -5,6 +5,7 @@ import BuzzSearch from "./components/Searching/BuzzSearch"
 import Login from "./components/User/Login";
 import Signup from "./components/User/Signup";
 import ForgotPassword from "./components/User/ForgotPassword";
+import ResetPassword from "./components/User/ResetPassword";
 import UserProfile from "./components/User/UserProfile";
 import Hive from "./components/Hive"
 
@@ -38,6 +39,10 @@ const routerConfig = [
   {
     path: "/forgotpassword",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/resetpassword",
+    element: <ResetPassword />,
   },
   {
     path: "/user",

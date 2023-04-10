@@ -69,12 +69,12 @@ export default function ForgotPassword() {
                 <MailLockIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Forgot Password
+                Reset Password
               </Typography>
 
               <Typography variant="body3" sx={{ fontSize: "0.9em" }}>
                 {
-                  "Please enter your email to receive a 6-digits verification code to reset password"
+                  "Please enter your new password and confirmed password to reset password"
                 }
               </Typography>
 
@@ -84,7 +84,7 @@ export default function ForgotPassword() {
                 noValidate
                 sx={{ mt: 1 }}
               >
-                <TextField
+                {/* <TextField
                   variant="standard"
                   margin="normal"
                   required
@@ -117,7 +117,7 @@ export default function ForgotPassword() {
                       // sx={{ mt: 1, mb: 4}}
                     />
                   </Grid>
-                </Grid>
+                </Grid> */}
 
                 <TextField
                   variant="standard"
