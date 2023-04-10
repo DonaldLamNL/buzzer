@@ -7,6 +7,7 @@ import Signup from "./components/User/Signup";
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
 import UserProfile from "./components/User/UserProfile";
+import EditProfile from "./components/User/EditProfile";
 import Hive from "./components/Hive"
 
 const routerConfig = [
@@ -47,6 +48,10 @@ const routerConfig = [
   {
     path: "/user",
     element: <UserProfile />,
+  },
+  {
+    path: "/edit",
+    element: <EditProfile />,
   },
   {
     path: "/hive",

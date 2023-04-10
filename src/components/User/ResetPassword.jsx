@@ -17,7 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-export default function ForgotPassword() {
+export default function ResetPassword() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -72,7 +72,7 @@ export default function ForgotPassword() {
                 Reset Password
               </Typography>
 
-              <Typography variant="body3" sx={{ fontSize: "0.9em", textJustify: "auto"}}>
+              <Typography variant="body3" sx={{ fontSize: "0.9em", textJustify: "auto" }}>
                 {
                   "Please enter your new password and confirmed password to reset password"
                 }
@@ -84,50 +84,27 @@ export default function ForgotPassword() {
                 noValidate
                 sx={{ mt: 1 }}
               >
-                {/* <TextField
-                  variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-
-                <Grid container spacing={2}>
-                  <Grid item xs={5}>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      sx={{ mt: 1, mb: 1 }}
-                    >
-                      Get Code
-                    </Button>
-                  </Grid>
-
-                  <Grid item xs={7}>
-                    <TextField
-                      variant="standard"
-                      required
-                      name="verificationCode"
-                      label="Verification Code"
-                      id="verificationCode"
-                      // sx={{ mt: 1, mb: 4}}
-                    />
-                  </Grid>
-                </Grid> */}
 
                 <TextField
                   variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  name="password"
+                  name="oldpassword"
+                  label="Original Password"
+                  type="password"
+                  id="oldpassword"
+                />
+
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="newpassword"
                   label="New Password"
                   type="password"
-                  id="password"
+                  id="newpassword"
                 />
 
                 <TextField
@@ -135,10 +112,10 @@ export default function ForgotPassword() {
                   margin="normal"
                   required
                   fullWidth
-                  name="password confirm"
+                  name="confirmpassword"
                   label="New Password Confirm"
                   type="password"
-                  id="password"
+                  id="confirmpassword"
                 />
 
                 <Button
