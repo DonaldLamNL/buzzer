@@ -24,45 +24,56 @@ export default function Signup() {
   const navigate = useNavigate();
   const [signupMsg, setsignupMsg] = useState("");
 
+  const [userid, setUserid] = useState('');
+  const [username, setUsername] = useState('');
+
+  const handleUseridChange = (event) => {
+    setUserid(event.target.value);
+  }
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  }
+
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState('');
+  const [emailError, setEmailError] = useState(false);
+  const [emailHelperText, setEmailHelperText] = useState('');
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [passwordHelperText, passwordSetHelperText] = useState('');
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
     if (!event.target.value.includes('@')) {
-      setError(true);
-      setHelperText('Please enter a valid email');
+      setEmailError(true);
+      setEmailHelperText('Please enter a valid email');
     } else {
-      setError(false);
-      setHelperText('');
+      setEmailError(false);
+      setEmailHelperText('');
     }
   };
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [pwerror, pwsetError] = useState(false);
-  const [pwhelperText, pwsetHelperText] = useState('');
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
     if (confirmPassword && event.target.value !== confirmPassword) {
-      pwsetError(true);
-      pwsetHelperText('Passwords do not match');
+      setPasswordError(true);
+      passwordSetHelperText('Passwords do not match');
     } else {
-      pwsetError(false);
-      pwsetHelperText('');
+      setPasswordError(false);
+      passwordSetHelperText('');
     }
   };
 
   const handleConfirmPasswordChange = (event) => {
     setConfirmPassword(event.target.value);
     if (event.target.value !== password) {
-      pwsetError(true);
-      pwsetHelperText('Passwords do not match');
+      setPasswordError(true);
+      passwordSetHelperText('Passwords do not match');
     } else {
-      pwsetError(false);
-      pwsetHelperText('');
+      setPasswordError(false);
+      passwordSetHelperText('');
     }
   };
 
@@ -156,6 +167,8 @@ export default function Signup() {
                   label="User ID"
                   name="userid"
                   autoComplete="userid"
+
+                  onChange={handleUseridChange}
                 />
                 <TextField
                   variant="standard"
@@ -165,6 +178,8 @@ export default function Signup() {
                   label="Username"
                   name="username"
                   autoComplete="username"
+
+                  onChange={handleUsernameChange}
                 />
                 <TextField
                   variant="standard"
@@ -177,8 +192,8 @@ export default function Signup() {
 
                   value={email}
                   onChange={handleEmailChange}
-                  error={error}
-                  helperText={helperText}
+                  error={emailError}
+                  helperText={emailHelperText}
                 />
                 <TextField
                   variant="standard"
@@ -204,8 +219,8 @@ export default function Signup() {
 
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  error={pwerror}
-                  helperText={pwhelperText}
+                  error={passwordError}
+                  helperText={passwordHelperText}
                 />
 
                 <Box>{signupMsg}</Box>
@@ -215,6 +230,8 @@ export default function Signup() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
+                  
+                  disabled={!userid || !username || !email || !password || !confirmPassword || emailError || passwordError}
                 >
                   Sign Up
                 </Button>
