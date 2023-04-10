@@ -46,6 +46,7 @@ export default function NewBuzzItem(props) {
   const [likeCount, setLikeCount] = useState(null);
   const [isExecuting, setIsExecuting] = useState(false);
   const [buzzImage, setBuzzImage] = useState(null);
+  const [video, setVideo] = useState(null);
 
   const toBuzz = () => {
     navigate(`/buzz/${buzzid}`);
@@ -139,6 +140,19 @@ export default function NewBuzzItem(props) {
     }
   };
 
+  const getVideo = async () => {
+    if (video) {
+      fetch(`${serverPath}/buzzes/video/${video}`)
+        .then((response) => response.blob())
+        .then((video) => {
+          setVideo(URL.createObjectURL(video));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const searchCategory = () => {
     navigate(`/search/*${category}`);
     window.scrollTo({ top: 0 });
@@ -152,6 +166,7 @@ export default function NewBuzzItem(props) {
     }
     setLikeCount(numOfLike);
     getImage();
+    getVideo();
   }, []);
 
   return (
