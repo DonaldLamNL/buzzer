@@ -9,6 +9,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import NavItem from "./Items/NavItem";
 import Cookies from "js-cookie";
+import serverPath from "../ServerPath";
 
 const Image = styled.img`
   width: 100%;
@@ -31,37 +32,39 @@ export default function Nav() {
 
   const jumpToUserProfile = () => {
     try {
-      fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
-        .then(response => response.json())
-        .then(data => {
+      fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
           if (data.isLogin) {
-            navigate(`/user/${data.userid}`)
+            navigate(`/user/${data.userid}`);
           }
         })
-        .catch(error => {
-        });
+        .catch((error) => {});
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   const getLoginState = () => {
     try {
-      fetch(`http://localhost:3000/users/currentuser?userid=${Cookies.get('BuzzerUser')}`)
-        .then(response => response.json())
-        .then(data => {
+      fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
           SetIsLogin(data.isLogin);
         })
-        .catch(error => {
-        });
+        .catch((error) => {});
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   const handleLogout = () => {
-    Cookies.remove('BuzzerUser');
-  }
+    Cookies.remove("BuzzerUser");
+  };
 
   useEffect(() => {
     getLoginState();

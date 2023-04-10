@@ -21,7 +21,7 @@ export default function App() {
         <Grid item xs={2}>
           <Nav />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs>
           {element}
         </Grid>
       </Grid>
