@@ -14,18 +14,32 @@ import {
 } from "@mui/material";
 import MailLockIcon from "@mui/icons-material/MailLock";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 
 export default function ForgotPassword() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      verificationCode: data.get("verificationCode"),
-    });
-  };
+  const [email, setEmail] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
+  async function getVerificationCode() {
+    preventDefault();
+    try {
+      const response = await fetch(`${serverPath}/account/forgot`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -80,7 +94,7 @@ export default function ForgotPassword() {
 
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                // onSubmit={handleSubmit}
                 noValidate
                 sx={{ mt: 1 }}
               >
@@ -94,6 +108,7 @@ export default function ForgotPassword() {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  onChange={(event) => setEmail(event.target.value)}
                 />
 
                 <Grid container spacing={2}>
@@ -102,6 +117,7 @@ export default function ForgotPassword() {
                       type="submit"
                       variant="contained"
                       sx={{ mt: 1, mb: 1 }}
+                      onClick={() => getVerificationCode()}
                     >
                       Get Code
                     </Button>
@@ -114,6 +130,9 @@ export default function ForgotPassword() {
                       name="verificationCode"
                       label="Verification Code"
                       id="verificationCode"
+                      onChange={(event) =>
+                        setVerificationCode(event.target.value)
+                      }
                       // sx={{ mt: 1, mb: 4}}
                     />
                   </Grid>
@@ -127,7 +146,7 @@ export default function ForgotPassword() {
                   name="password"
                   label="New Password"
                   type="password"
-                  id="password"
+                  onChange={(event) => setPassword(event.target.value)}
                 />
 
                 <TextField
@@ -138,7 +157,7 @@ export default function ForgotPassword() {
                   name="password confirm"
                   label="New Password Confirm"
                   type="password"
-                  id="password"
+                  onChange={(event) => setPasswordConfirm(event.target.value)}
                 />
 
                 <Button
