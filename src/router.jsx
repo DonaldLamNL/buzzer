@@ -33,15 +33,16 @@ const routerConfig = (isLogin) => {
     },
     {
       path: "/login",
-      element: <Login />,
+      // element: <Login />,
+      element: isLogin ? <Navigate to="/home" /> : <Login />
     },
     {
       path: "/signup",
-      element: <Signup />
+      element: isLogin ? <Navigate to="/home" /> : <Signup />
     },
     {
       path: "/forgotpassword",
-      element: <ForgotPassword />
+      element: isLogin ? <Navigate to="/home" /> : <ForgotPassword />
     },
     {
       path: "/resetpassword",
