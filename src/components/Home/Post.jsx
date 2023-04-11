@@ -24,6 +24,7 @@ export default function Post() {
   const [image, setImage] = useState(null);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [video, setVideo] = useState(null);
+  const [videoDisplay, setVideoDisplay] = useState(null);
   const [buzzInput, setBuzzInput] = useState("");
   const [postCat, setPostCat] = useState("Others");
   const [username, setUsername] = useState("");
@@ -46,7 +47,8 @@ export default function Post() {
   const handleVideoChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setVideo(URL.createObjectURL(file));
+      setVideoDisplay(URL.createObjectURL(file));
+      setVideo(file);
     }
   };
 
@@ -265,9 +267,9 @@ export default function Post() {
               }}
             />
           )}
-          {video && (
+          {videoDisplay && (
             <video controls style={{ maxWidth: "300px", marginBottom: "10px" }}>
-              <source src={video} type="video/mp4" />
+              <source src={videoDisplay} type="video/mp4" />
             </video>
           )}
         </Grid>
