@@ -3,10 +3,13 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";
 import HiveIcon from "@mui/icons-material/Hive";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import LogoutIcon from "@mui/icons-material/Logout";
-import NavItem from "./NavItem";
+import LoginIcon from "@mui/icons-material/Login";
+import NavItem from "./Items/NavItem";
+import Cookies from "js-cookie";
+import serverPath from "../ServerPath";
 
 const Image = styled.img`
   width: 100%;
@@ -17,6 +20,7 @@ const Image = styled.img`
 export default function Nav() {
   const navigate = useNavigate();
   const [hovering, setHovering] = useState(false);
+  const [isLogin, SetIsLogin] = useState(true);
 
   const handleMouseEnter = () => {
     setHovering(true);
@@ -26,13 +30,56 @@ export default function Nav() {
     setHovering(false);
   };
 
+  const jumpToUserProfile = () => {
+    try {
+      fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.isLogin) {
+            navigate(`/user/${data.userid}`);
+          }
+        })
+        .catch((error) => {});
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getLoginState = () => {
+    try {
+      fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          SetIsLogin(data.isLogin);
+        })
+        .catch((error) => {});
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleLogout = () => {
+    Cookies.remove("BuzzerUser");
+  };
+
+  useEffect(() => {
+    getLoginState();
+  });
+
   return (
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-end",
+        marginRight: "20px",
         alignItems: "center",
         height: "100vh",
+        position: "relative",
+        zIndex: "3100",
       }}
     >
       <Card
@@ -44,15 +91,14 @@ export default function Nav() {
           borderRadius: 6,
           display: "flex",
           justifyContent: "center",
-          // alignItems: "center",
           height: "96%",
-          // width: "100%",
+          width: "80px",
           position: "fixed",
-          transition: "1.5s",
+          transition: "0.7s",
 
           "&:hover": {
             backgroundColor: "#0069d9",
-            width: "10%",
+            width: "175px",
             cursor: "pointer",
           },
         }}
@@ -62,6 +108,7 @@ export default function Nav() {
           justifyContent="flex-start"
           alignItems="center"
           marginTop={3}
+          spacing={2}
         >
           <IconButton
             size="large"
@@ -72,15 +119,47 @@ export default function Nav() {
             <Image src="../buzz.svg"></Image>
           </IconButton>
 
-          <NavItem hovering={hovering} path="home" name="home" component={HomeRoundedIcon} />
+          <NavItem
+            hovering={hovering}
+            path="home"
+            name="home"
+            component={HomeRoundedIcon}
+          />
 
-          <NavItem hovering={hovering} path="login" name="user" component={FaceIcon} />
+          <Box onClick={jumpToUserProfile}>
+            <NavItem
+              hovering={hovering}
+              path={null}
+              name="user"
+              component={FaceIcon}
+            />
+          </Box>
 
-          <Stack direction="column" gap={15} justifyContent="center">
-            <NavItem hovering={hovering} path="hive" name="hive" component={HiveIcon} />
-            <NavItem hovering={hovering} path="home" name="logout" component={LogoutIcon} />
+          <Stack direction="column" gap={18} justifyContent="center">
+            <NavItem
+              hovering={hovering}
+              path="hive"
+              name="hive"
+              component={HiveIcon}
+            />
+            {!isLogin ? (
+              <NavItem
+                hovering={hovering}
+                path="login"
+                name="login"
+                component={LoginIcon}
+              />
+            ) : (
+              <div onClick={handleLogout}>
+                <NavItem
+                  hovering={hovering}
+                  path="login"
+                  name="logout"
+                  component={LogoutIcon}
+                />
+              </div>
+            )}
           </Stack>
-
         </Stack>
       </Card>
     </Box>

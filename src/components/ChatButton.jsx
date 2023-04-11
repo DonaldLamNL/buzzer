@@ -1,31 +1,33 @@
-import React from 'react'
+import React from "react";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PhoneInTalkRoundedIcon from "@mui/icons-material/PhoneInTalkRounded";
 import Tooltip from "@mui/material/Tooltip";
-import { Fab, Button, Dialog } from '@mui/material';
+import Slide from "@mui/material/Slide";
+import { Fab, Button, Dialog, Card } from "@mui/material";
+import ChatRoom from "./ChatRoom/ChatRoom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function ChatButton() {
-    const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-    const handleClick = () => {
-        if (open == true) {
-        setOpen(false);
-        } else {
-        setOpen(true);
-        }
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <>
-        <Tooltip title="Chat">
+      <Tooltip title="Chat">
         <Fab
-          onClick={handleClick}
+          onClick={handleClickOpen}
           color="primary"
           sx={{
             position: "fixed",
@@ -39,27 +41,20 @@ export default function ChatButton() {
       </Tooltip>
       <Dialog
         open={open}
-        // TransitionComponent={Transition}
-        // keepMounted
-        hideBackdrop
-        // disableBackdropClick
-        // disableEnforceFocus // Let the user focus on elements outside the dialog
+        fullWidth={true}
+        maxWidth="md"
+        TransitionComponent={Transition}
+        hideBackdrop // Disable the backdrop color/image
         disableScrollLock
-        // style={{ position: "initial" }}
-        // onClose={handleClose}
       >
-        <DialogTitle>Chat Room</DialogTitle>
+        <DialogTitle align="center">Chat Room</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
+          <ChatRoom></ChatRoom>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClick}>leave</Button>
-          {/* <Button onClick={handleClick}></Button> */}
+          <Button onClick={handleClose}>leave</Button>
         </DialogActions>
       </Dialog>
     </>
-  )
+  );
 }

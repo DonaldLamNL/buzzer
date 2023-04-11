@@ -1,13 +1,14 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 // material-ui
-import { TextField, IconButton } from '@mui/material'
+import { TextField, IconButton, Box } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search'
 
 // components
-import UserSearch from './SideContent/UserSearch'
-import News from './SideContent/News'
+import UserSearch from './UserSearch'
+import News from './News'
+import Cookies from 'js-cookie'
 
 export default function SideContent() {
     const [isFocused, setIsFocused] = useState(false)
@@ -28,10 +29,11 @@ export default function SideContent() {
         }
     }
     const jumpSearch = () => {
-        navigate(`/search?search=${input}`)
-        // window.location.reload()
+        navigate(`/`)
+        navigate(`/search/${input}`)
     }
-    useEffect(() => {
+
+    useEffect( () => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setIsFocused(false)
@@ -45,7 +47,14 @@ export default function SideContent() {
     }, [searchRef])
 
     return (
-        <div ref={searchRef} style={{ height: '100vh', width: '100%', position: 'relative' }}>
+        <div ref={searchRef}
+            style={{
+                // height: '100vh',
+                width: '90%',
+                position: 'relative',
+                justifyContent: 'center',
+                margin: '0 auto'
+            }}>
             {/* <div style={{position: 'fixed' }}> */}
             <div>
                 <TextField
@@ -62,16 +71,17 @@ export default function SideContent() {
                     onChange={handleInput}
                     onKeyPress={handleEnter}
                 />
-                {isFocused && 
+                {isFocused &&
                     <div style={{ overflowY: 'auto' }}>
-                        <UserSearch input={input} />
+                        <UserSearch input={input} key={input}/>
                     </div>
                 }
-                {!isFocused && 
+                {!isFocused &&
                     <div>
                         <News />
                     </div>
                 }
+                <Box marginBottom={'50px'}></Box>
             </div>
         </div>
     )
