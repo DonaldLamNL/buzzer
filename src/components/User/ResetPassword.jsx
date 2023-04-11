@@ -15,53 +15,34 @@ import {
 import MailLockIcon from "@mui/icons-material/MailLock";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect } from "react";
+// import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 
 export default function ResetPassword() {
-  const handleSubmit = async(event) => {
+  const [userInfo, setUserInfo] = useState(null);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const input = new FormData(event.currentTarget);
-    var temp = "";
     try {
-      await fetch(
-        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
-      )
-        .then((_response) => _response.json())
-        .then((data) => {
-          // SetIsLogin(data.isLogin);
-          temp = data.userid;
-          console.log(temp);
-        })
-        .catch((error) => { });
-      // console.log("z abc");
       const response = await fetch(`${serverPath}/account/reset`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userid: temp,
+          userid: userInfo.userid,
+          oldPassword: oldPassword,
           password: password,
         }),
       });
       const responseData = await response.json();
       console.log(responseData);
-      // console.log("zzz");
-      // return data;
     } catch (error) {
       console.error(error);
     }
-    console.log("password = ", password);
-    // const data = new FormData(event.currentTarget);
-    // console.log("abc");
-    // console.log({
-    // email: data.get("email"),
-    // verificationCode: data.get("verificationCode"),
-    // password: data.get("password"),
-    // });
   };
 
   const [oldPassword, setOldPassword] = useState('');
@@ -112,55 +93,24 @@ export default function ResetPassword() {
     }
   };
 
-  const [userInfo, setUserInfo] = useState(null);
-  const getUserInfo = async () => {
+  const getUserid = async () => {
     try {
-      const response = await fetch(
-        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
-      );
-      const data = await response.json();
-      setUserInfo(data.userInfo);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  async function resetPassword() {
-    event.preventDefault();
-    try {
-      fetch(
-        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
-      )
-        .then((_response) => _response.json())
-        .then((data) => {
-          // SetIsLogin(data.isLogin);
-          const username = data.username;
-          console.log(username)
+      fetch(`${serverPath}/account/user?userid=${Cookies.get("BuzzerUser")}`)
+        .then((response) => response.json())
+        .then((responseData) => {
+          const temp = {
+            userid: Cookies.get("BuzzerUser"),
+          };
+          setUserInfo(temp);
         })
-        .catch((error) => { });
-      const response = await fetch(`${serverPath}/account/reset`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // email,
-          // verificationCode,
-          password,
-          // confirmPassword,
-        }),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
-      return data;
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
     }
   }
 
   useEffect(() => {
-    getUserInfo();
-  })
+    getUserid();
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
