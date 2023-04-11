@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
     let decodedUser = decodeUserID(userid);
     
     try {
-        console.log('startttttttttttt')
         const buzz = await Buzzes.findOne({ buzzid });
         const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
         const author = await Users.findOne({ userid: buzz.userid });
@@ -35,7 +34,6 @@ router.get('/', async (req, res) => {
             rebuzz: buzz.rebuzz,
         }
         res.send(responseData);
-        console.log('endddddddddddddd')
 
     } catch (error) {
         console.log(error);
