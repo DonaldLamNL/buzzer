@@ -88,6 +88,8 @@ export default function UserProfile() {
                 .catch((error) => {
                     console.log(error);
                 });
+        } else {
+            setBgImageDisplay(null)
         }
     };
 
@@ -129,7 +131,6 @@ export default function UserProfile() {
     };
 
     useEffect(() => {
-        setBgImageDisplay(null);
         getUserInfo();
         getBuzzes();
     }, [userid, isFollow]);
