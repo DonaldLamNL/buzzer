@@ -47,6 +47,8 @@ export default function NewBuzzItem(props) {
   const [isExecuting, setIsExecuting] = useState(false);
   const [buzzImage, setBuzzImage] = useState(null);
   const [buzzVideo, setBuzzVideo] = useState(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
 
   const toBuzz = () => {
     navigate(`/buzz/${buzzid}`);
@@ -141,6 +143,7 @@ export default function NewBuzzItem(props) {
   };
 
   const getVideo = async () => {
+    console.log('test')
     if (video) {
       fetch(`${serverPath}/buzzes/video/${video}`)
         .then((response) => response.blob())
@@ -151,6 +154,10 @@ export default function NewBuzzItem(props) {
           console.log(error);
         });
     }
+  };
+
+  const handleVideoLoad = () => {
+    setIsVideoReady(true);
   };
 
   const searchCategory = () => {
@@ -261,6 +268,7 @@ export default function NewBuzzItem(props) {
                     <video
                       src={buzzVideo}
                       controls
+                      onLoadedMetadata={handleVideoLoad}
                       style={{
                         maxWidth: "95%",
                         maxHeight: "300px",
