@@ -11,8 +11,9 @@ const upload = multer({ storage: storage });
 router.get('/', async (req, res) => {
     const { buzzid, userid } = req.query;
     let decodedUser = decodeUserID(userid);
-
+    
     try {
+        console.log('startttttttttttt')
         const buzz = await Buzzes.findOne({ buzzid });
         const userLike = (buzz.like.includes(decodedUser) ? 1 : (buzz.dislike.includes(decodedUser) ? -1 : 0));
         const author = await Users.findOne({ userid: buzz.userid });
@@ -33,8 +34,8 @@ router.get('/', async (req, res) => {
             commentCount: buzz.comment.length,
             rebuzz: buzz.rebuzz,
         }
-
         res.send(responseData);
+        console.log('endddddddddddddd')
 
     } catch (error) {
         console.log(error);
@@ -128,12 +129,13 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
         }
 
         if (req.files.video) {
-          const { originalname, buffer, mimetype } = req.files.video[0];
-          newBuzz.video = {
-            name: originalname,
-            data: buffer,
-            contentType: mimetype,
-          };
+            console.log("video recieved~~~");
+            const { originalname, buffer, mimetype } = req.files.video[0];
+            newBuzz.video = {
+                name: originalname,
+                data: buffer,
+                contentType: mimetype,
+            };
         }
         await newBuzz.save();
 
@@ -288,7 +290,7 @@ const getBuzzesList = async (buzzes, decodedUser) => {
                 category: buzz.category,
                 numOfLike: buzz.like.length - buzz.dislike.length,
                 image: buzz.image ? buzz.image.name : null,
-                video: buzz.video ? buzz.video : null,
+                video: buzz.video ? buzz.video.name : null,
                 comment: buzz.comment ? buzz.comment : null,
                 commentCount: buzz.comment.length,
                 rebuzz: buzz.rebuzz,
