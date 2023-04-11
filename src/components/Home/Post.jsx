@@ -86,7 +86,6 @@ export default function Post() {
       });
 
       const responseData = await response.json();
-      console.log(responseData.message);
       if (responseData.state) {
         PubSub.publish("newBuzzPosted");
         navigate(`/buzz/${responseData.buzzid}`);

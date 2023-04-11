@@ -6,33 +6,6 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import serverPath from "../../ServerPath";
 
-const buzzComment = [
-  {
-    cid: 1,
-    userid: "irwinking124",
-    username: "Irwin King",
-    content: "This is so good",
-  },
-  {
-    cid: 2,
-    userid: "irwinking124",
-    username: "Irwin King",
-    content: "This is so bad",
-  },
-  {
-    cid: 3,
-    userid: "irwinking124",
-    username: "Irwin King",
-    content: "This is so nice",
-  },
-  {
-    cid: 4,
-    userid: "michael123",
-    username: "Michael Lyu",
-    content: "This is so fancy",
-  },
-];
-
 export default function Comment(props) {
   const navigate = useNavigate();
   const { buzzid } = props;
