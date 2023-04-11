@@ -136,31 +136,6 @@ export default function Hive() {
     // const listItem = datalist.map((d) => <HexGridItem>{d.context}</HexGridItem>);
   };
 
-  // const postHive = (value) => {
-  //   const temp = JSON.parse(JSON.stringify(datalist));
-  //   // console.log(userInfo);
-  //   console.log(temp);
-  //   console.log(userInfo.tdhive === null);
-  //   if (userInfo.tdhive === false) {
-  //     temp.push({
-  //       context: value,
-  //       uid: userInfo.uid,
-  //       uname: userInfo.uname,
-  //       likes: ""
-  //     });
-  //     setInfo({
-  //       uid: userInfo.uid,
-  //       uname: userInfo.uname,
-  //       tdhive: true,
-  //       hivepositio: temp.length
-  //     });
-  //   } else {
-  //     // temp[userInfo.hiveposition].context = value;
-  //   }
-  //   console.log(userInfo);
-  //   setDataList(temp);
-  // }
-
   const checkOnShow = (prop) => {
     // console.log("new return");
     for (let i = 0; i < showList.length; i++) {
@@ -182,13 +157,6 @@ export default function Hive() {
     setDum(Math.random());
     console.log(temp);
   };
-
-  // const likeContent = (index) => {
-  //   const temp = JSON.parse(JSON.stringify(datalist));
-  //   temp[index].like++;
-  //   setDataList(temp);
-  //   console.log(datalist[index].uname + " has " + datalist[index].like + "like");
-  // };
 
   const getTopNCells = (n) => {
     const temp = JSON.parse(JSON.stringify(datalist));
@@ -287,7 +255,7 @@ export default function Hive() {
             ref={inputCellCardRef}
           >
             <div style={{ width: "100%", padding: "1rem" }}>
-              <HexGridItem>
+              <HexGridItem className="ex">
                 <Paper className="hex-grid__content__inside">
                   <CardHeader titleTypographyProps={{ vartgriant: 'h6' }} title={userInfo.username} />
                   <TextField
