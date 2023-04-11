@@ -34,7 +34,7 @@ export default function ForgotPassword() {
 
   const [verificationCode, setVerificationCode] = useState("");
 
-  async function getVerificationCode(event) {
+  async function getVerificationCode() {
     event.preventDefault();
     try {
       const response = await fetch(`${serverPath}/account/forgot`, {
