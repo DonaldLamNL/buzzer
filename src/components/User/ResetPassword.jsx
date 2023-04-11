@@ -14,18 +14,54 @@ import {
 } from "@mui/material";
 import MailLockIcon from "@mui/icons-material/MailLock";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 
 export default function ResetPassword() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      // email: data.get("email"),
-      // verificationCode: data.get("verificationCode"),
-      password: data.get("password"),
-    });
+    // const input = new FormData(event.currentTarget);
+    var temp = "";
+    try {
+      await fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((_response) => _response.json())
+        .then((data) => {
+          // SetIsLogin(data.isLogin);
+          temp = data.userid;
+          console.log(temp);
+        })
+        .catch((error) => { });
+      // console.log("z abc");
+      const response = await fetch(`${serverPath}/account/reset`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: temp,
+          password: password,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      // console.log("zzz");
+      // return data;
+    } catch (error) {
+      console.error(error);
+    }
+    console.log("password = ", password);
+    // const data = new FormData(event.currentTarget);
+    // console.log("abc");
+    // console.log({
+    // email: data.get("email"),
+    // verificationCode: data.get("verificationCode"),
+    // password: data.get("password"),
+    // });
   };
 
   const [oldPassword, setOldPassword] = useState('');
@@ -75,6 +111,56 @@ export default function ResetPassword() {
       setConfirmPasswordHelperText('');
     }
   };
+
+  const [userInfo, setUserInfo] = useState(null);
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      );
+      const data = await response.json();
+      setUserInfo(data.userInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async function resetPassword() {
+    event.preventDefault();
+    try {
+      fetch(
+        `${serverPath}/users/currentuser?userid=${Cookies.get("BuzzerUser")}`
+      )
+        .then((_response) => _response.json())
+        .then((data) => {
+          // SetIsLogin(data.isLogin);
+          const username = data.username;
+          console.log(username)
+        })
+        .catch((error) => { });
+      const response = await fetch(`${serverPath}/account/reset`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // email,
+          // verificationCode,
+          password,
+          // confirmPassword,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  })
 
   return (
     <ThemeProvider theme={theme}>
@@ -186,6 +272,7 @@ export default function ResetPassword() {
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
 
+                  // onClick={() => resetPassword()}
                   disabled={!oldPassword || !password || !confirmPassword || passwordError}
                 >
                   Reset Password
