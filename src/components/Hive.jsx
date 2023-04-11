@@ -334,7 +334,7 @@ export default function Hive() {
                       (data.content != undefined)?
                       <Paper sx={{ padding: "20px", fontSize: "headline" }}>
                         <Grid container>
-                          <Grid item><Typography>{(i + 1) + ". " + data.content}</Typography></Grid>
+                          <Grid item><Typography>{(i + 1) + ". " + data.userid}</Typography></Grid>
                           <Grid item style={{ flexGrow: "1" }}></Grid>
                           <Grid item xs={3}><Typography sx={{ display: "flex", float: "right" }}><FavoriteIcon />{data.like}</Typography></Grid>
                         </Grid>
