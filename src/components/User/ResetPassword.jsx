@@ -22,8 +22,9 @@ export default function ResetPassword() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
-      verificationCode: data.get("verificationCode"),
+      // email: data.get("email"),
+      // verificationCode: data.get("verificationCode"),
+      password: data.get("password"),
     });
   };
 

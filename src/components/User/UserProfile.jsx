@@ -34,7 +34,7 @@ export default function UserProfile() {
 
   const handleButton = async () => {
     if (userInfo.isCurrentUser) {
-      navigator(`/useredit`);
+      navigator(`/edit`);
     } else {
       handleFollow();
     }
