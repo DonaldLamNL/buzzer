@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Hive} = require('../databaseSchema');
+const {Hive} = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
 
 const multer = require('multer');
@@ -12,7 +12,24 @@ router.get('/', async (req, res) => {
     try {
         const hive_list = await Hive.find() 
         const responseData = hive_list;
-        res.json(responseData);
+        res.send(responseData);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Get Username
+router.get('/user', async (req, res) => {
+    const {userid } = req.query;
+    let decodedUser = decodeUserID(userid);
+
+    try {
+        const responseData = {
+            username:decodedUser
+        }
+
+        res.send(responseData);
 
     } catch (error) {
         console.log(error);
@@ -21,9 +38,10 @@ router.get('/', async (req, res) => {
 });
 
 // Posting System
-router.post('/post', upload.single('image'), async (req, res) => {
-    const { content, userid} = req.body;
-    const decodedUser = decodeUserID(userid);
+router.post('/post', async (req, res) => {
+    const { content, userid} = req.query;
+    let decodedUser = decodeUserID(userid);
+    console.log(req.body)
 
     try {
         // Generate new buzzid
@@ -33,7 +51,7 @@ router.post('/post', upload.single('image'), async (req, res) => {
         const newCell = new Hive({
             cellid: newCellID,
             userid: decodedUser,
-            content,
+            content: content,
             like: 0,
         });
 
@@ -49,12 +67,11 @@ router.post('/post', upload.single('image'), async (req, res) => {
 
 // Like Button
 router.post('/like', async (req, res) => {
-    const { hiveid} = req.body;
-
+    const {cellid} = req.query;
+    
     try {
-
         const hive = await Hive.findByIdAndUpdate(
-            req.params.id,
+            cellid,
             { $inc: { like: 1 } },
             { new: true }
         );
