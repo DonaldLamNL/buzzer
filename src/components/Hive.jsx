@@ -33,7 +33,8 @@ export default function Hive() {
   };
 
   const postCell = async (content) => {
-    if(checkTodayPosted() === true){
+    console.log(checkTodayPosted());
+    if(!checkTodayPosted()){
       try {
         const response = await fetch(`${serverPath}/hive/post?content=${content}&userid=${Cookies.get("BuzzerUser")}`, {
           method: "POST",
@@ -198,7 +199,7 @@ export default function Hive() {
 
   const checkTodayPosted = () => { 
     for(let i = 0; i < datalist.length; i++){
-      if(datalist[i].username === userInfo.username){
+      if(datalist[i].userid === userInfo.username){
         return true;
       }
     } 
@@ -208,6 +209,7 @@ export default function Hive() {
   useEffect(() => {
     getHive();
     getUsername();
+    console.log(checkTodayPosted());
     const handleWindowResize = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
     };
