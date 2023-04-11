@@ -3,6 +3,10 @@ var router = express.Router();
 const { Users } = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
 
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 // User Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
@@ -107,6 +111,7 @@ router.get('/userprofile', async (req, res) => {
                 isCurrentUser,
                 isAdmin: user.isAdmin,
                 isVerify: user.isVerify,
+                bgimage: user.bgimage ? user.bgimage.name : null,
             },
             state: true,
         }
@@ -134,7 +139,7 @@ router.get('/followlist', async (req, res) => {
         const responseData = [];
         for (const uid of userList) {
             try {
-                if(uid == decodedUser) continue;
+                if (uid == decodedUser) continue;
                 const target = await Users.findOne({ userid: uid });
                 responseData.push({
                     userid: target.userid,
@@ -155,5 +160,47 @@ router.get('/followlist', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 })
+
+router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (req, res) => {
+    const { userid } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        const user = await Users.findOne({ userid: decodedUser });
+
+        if (req.files.image) {
+            const { originalname, buffer, mimetype } = req.files.image[0];
+            user.bgimage = {
+                name: originalname,
+                data: buffer,
+                contentType: mimetype,
+            };
+        }
+
+        await user.save();
+        res.send({ state: true, message: 'Buzz post successfully!' });
+    } catch (err) {
+        console.error(err);
+        res.send({ state: false, message: 'Failed to post Buzz.' });
+    }
+})
+
+// Image Endpoint
+router.get('/bgimage/:imageName', async (req, res) => {
+    const { imageName } = req.params;
+
+    try {
+        const user = await Users.findOne({ 'bgimage.name': imageName });
+        if (user) {
+            res.contentType(user.bgimage.contentType);
+            res.send(user.bgimage.data);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 module.exports = router;

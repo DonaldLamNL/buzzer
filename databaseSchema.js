@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema({
   isVerify: { type: Boolean },
   isAdmin: { type: Boolean },
   verificationCode: { type: String },
+  bgimage: {
+    name: String,
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 const buzzSchema = new mongoose.Schema({
@@ -24,7 +29,6 @@ const buzzSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-//   video: { type: Buffer },
   video: {
     name: String,
     data: Buffer,
