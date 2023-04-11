@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {Hive} = require('../databaseSchema');
+const {Hive,Users} = require('../databaseSchema');
 const { decodeUserID } = require('./commonfunct');
 
 const multer = require('multer');
@@ -25,11 +25,16 @@ router.get('/user', async (req, res) => {
     let decodedUser = decodeUserID(userid);
 
     try {
-        const responseData = {
-            username:decodedUser
+        const user = await Users.findOne({ userid: decodedUser });
+        if(user){
+            const responseData = {
+                username:user.username,
+                userid:user.userid
+            }
+            res.send(responseData);
+        }else{
+            res.send({ status: false, message: 'User not found' })
         }
-
-        res.send(responseData);
 
     } catch (error) {
         console.log(error);
@@ -47,10 +52,11 @@ router.post('/post', async (req, res) => {
         // Generate new buzzid
         const highestHive = await Hive.findOne().sort({ cellid: -1 }).exec();
         const newCellID = highestHive ? highestHive.cellid + 1 : 1;
+        const user = await Users.findOne({ userid: decodedUser });
 
         const newCell = new Hive({
             cellid: newCellID,
-            userid: decodedUser,
+            userid: user.username,
             content: content,
             like: 0,
         });
@@ -68,7 +74,7 @@ router.post('/post', async (req, res) => {
 // Like Button
 router.post('/like', async (req, res) => {
     const {cellid} = req.query;
-    
+
     try {
         const hive = await Hive.findByIdAndUpdate(
             cellid,
