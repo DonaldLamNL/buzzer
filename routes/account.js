@@ -145,27 +145,49 @@ router.post("/forgot/reset", async (req, res) => {
   }
 });
 
-router.post("/reset", async (req, res) => {
-  const { userid, password } = req.body;
+router.get('/user', async (req, res) => {
+  const { userid } = req.query;
+  let decodedUser = decodeUserID(userid);
+
   try {
-    const user = await Users.findOne({ userid: userid });
-    console.log("abc");
-    // if (!user) {
-    //   console.log("wrong email ");
-    //   return res.status(400).json({ state: false, message: "Invalid email" });
-    // }
-    // if (user.verificationCode == verificationCode) {
+      const user = await Users.findOne({ userid: decodedUser });
+      if(user){
+          const responseData = {
+              // username:user.username,
+              userid:user.userid
+          }
+          res.send(responseData);
+      }else{
+          res.send({ status: false, message: 'User not found' })
+      }
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post("/reset", async (req, res) => {
+  const { userid, oldPassword, password } = req.body;
+  const decodedUser = decodeUserID(userid);
+  try {
+    const user = await Users.findOne({ userid: decodedUser });
+    if (!user) {
+      return res.status(400).json({ state: false, message: "Invalid user" });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      console.log("wrong password");
+      return res.status(400).json({ state: false, message: "Wrong Password!" });
+    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(hashedPassword);
-    // user.password = hashedPassword;
-    // user.verificationCode = null; // Clear the verification code after a successful reset
-    // await user.save();
-    res.json({ state: true, message: "Password reset successful." });
-    // }
-    // } else {
-    //   res.status(400).json({ state: false, message: "Invalid verification code" });
-    // }
+    user.password = hashedPassword;
+    await user.save();
+    res.json({ state: true, message: "Password reset successfully." });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ state: false, message: "Error resetting password" });
