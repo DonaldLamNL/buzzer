@@ -120,4 +120,23 @@ router.post("/forgot", async (req, res) => {
   }
 });
 
+router.post("/forgot/reset", async (req, res) => {
+  const { email, verificationCode, password } = req.body;
+  try {
+    const user = await Users.findOne({ email: email });
+    if (!user) {
+      console.log("wrong email ");
+      return res.status(400).json({ state: false, message: "Invalid email" });
+    }
+    if (user.verificationCode == verificationCode) {
+      user.password = password;
+      await user.save();
+      res.json({ state: true, message: "password reset." });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ state: false, message: "Error sending email" });
+  }
+});
+
 module.exports = router;
