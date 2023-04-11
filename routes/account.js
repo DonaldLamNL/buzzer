@@ -145,6 +145,33 @@ router.post("/forgot/reset", async (req, res) => {
   }
 });
 
+router.post("/reset", async (req, res) => {
+  const { userid, password } = req.body;
+  try {
+    const user = await Users.findOne({ userid: userid });
+    console.log("abc");
+    // if (!user) {
+    //   console.log("wrong email ");
+    //   return res.status(400).json({ state: false, message: "Invalid email" });
+    // }
+    // if (user.verificationCode == verificationCode) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(hashedPassword);
+    // user.password = hashedPassword;
+    // user.verificationCode = null; // Clear the verification code after a successful reset
+    // await user.save();
+    res.json({ state: true, message: "Password reset successful." });
+    // }
+    // } else {
+    //   res.status(400).json({ state: false, message: "Invalid verification code" });
+    // }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ state: false, message: "Error resetting password" });
+  }
+});
+
 // router.post("/forgot", async (req, res) => {
 //   const { email } = req.body;
 //   try {
