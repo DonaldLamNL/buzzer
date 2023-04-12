@@ -69,10 +69,12 @@ export default function UserProfile() {
                 )}`
             );
             const data = await response.json();
-            setUserInfo(data.userInfo);
-            setIsFollow(data.userInfo.isFollow);
-            setFollowersCount(data.userInfo.followersCount);
-            getImage(data.userInfo.bgimage)
+            if(data.state){
+                setUserInfo(data.userInfo);
+                setIsFollow(data.userInfo.isFollow);
+                setFollowersCount(data.userInfo.followersCount);
+                getImage(data.userInfo.bgimage)
+            }
         } catch (error) {
             console.log(error);
         }

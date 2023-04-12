@@ -246,7 +246,13 @@ export default function NewBuzzItem(props) {
                                         marginRight: "10px",
                                         whiteSpace: "pre-wrap",
                                     }}
-                                    dangerouslySetInnerHTML={{ __html: content }}
+                                    // dangerouslySetInnerHTML={{ __html: content }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: content.replace(
+                                            /%@(\w+)%/g,
+                                            `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                                        )
+                                    }}
                                 ></Typography>
                             </Box>
 

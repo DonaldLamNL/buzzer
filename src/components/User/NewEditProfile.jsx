@@ -14,13 +14,16 @@ const theme = createTheme();
 
 export default function NewEditProfile() {
     const navigator = useNavigate();
-    const inputRef = useRef(null);
+    const bgImageRef = useRef(null);
+    const iconRef = useRef(null);
     const [userInfo, setUserInfo] = useState(null);
     const [username, setUsername] = useState(null);
     const [description, setDescription] = useState(null);
     const [bgImageDisplay, setBgImageDisplay] = useState(null);
     const [bgImage, setBgImage] = useState(null);
     const [onExecute, setOnExecute] = useState(false);
+    const [icon, setIcon] = useState(null);
+    const [iconDisplay, setIconDisplay] = useState(null);
 
 
     const getUserInfo = async () => {
@@ -30,7 +33,8 @@ export default function NewEditProfile() {
             setUserInfo(data.userInfo);
             setUsername(data.userInfo.username);
             setDescription(data.userInfo.description);
-            getImage(data.userInfo.bgimage)
+            getImage(data.userInfo.bgimage);
+            getIcon(data.userInfo.icon)
         } catch (error) {
             console.log(error);
         }
@@ -51,10 +55,31 @@ export default function NewEditProfile() {
         }
     };
 
+    const getIcon = async (imageName) => {
+        if (imageName) {
+            fetch(`${serverPath}/users/icon/${imageName}`)
+                .then((response) => response.blob())
+                .then((image) => {
+                    setBgImageDisplay(URL.createObjectURL(image));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            setBgImageDisplay(null)
+        }
+    };
+
     const handleBgImageUpload = async (e) => {
         const file = e.target.files[0];
         setBgImageDisplay(URL.createObjectURL(file));
         setBgImage(file)
+    };
+
+    const handleIconUpdate = async (e) => {
+        const file = e.target.files[0];
+        setIconDisplay(URL.createObjectURL(file));
+        setIcon(file)
     };
 
     const handleSave = async () => {
@@ -72,7 +97,19 @@ export default function NewEditProfile() {
                 method: "POST",
                 body: formData,
             });
-            const responseData = await response.json();
+        } catch (err) {
+            console.error(err);
+        }
+
+        const iconData = new FormData();
+        formData.append("userid", Cookies.get("BuzzerUser"));
+        formData.append("icon", icon);
+
+        try {
+            const response = await fetch(`${serverPath}/users/icon`, {
+                method: "POST",
+                body: iconData,
+            });
         } catch (err) {
             console.error(err);
         }
@@ -100,6 +137,7 @@ export default function NewEditProfile() {
         }
     }
 
+    // Navigate Reset Password
     const handleResetPwd = async () => {
         window.scrollTo({ top: 0 });
         navigator(`/resetpassword`);
@@ -149,12 +187,12 @@ export default function NewEditProfile() {
                                         borderRadius: "30px 30px 0 0",
                                     }}
                                     onClick={() => {
-                                        inputRef.current.click();
+                                        bgImageRef.current.click();
                                     }}
                                 />
                                 <input
                                     type="file"
-                                    ref={inputRef}
+                                    ref={bgImageRef}
                                     onChange={handleBgImageUpload}
                                     style={{ display: 'none' }}
                                 />
@@ -188,11 +226,16 @@ export default function NewEditProfile() {
                                                 marginTop: "-64px",
                                                 outline: "4px solid white",
                                             }}
-                                            src={userInfo.icon}
+                                            src={iconDisplay}
+                                            // onClick={() => {iconRef.current.click();}}
                                         >
-                                            {userInfo.username
-                                                ? userInfo.username[0]
-                                                : userInfo.username}
+                                            {/* <input
+                                                type="file"
+                                                ref={iconRef}
+                                                onChange={handleIconUpdate}
+                                                style={{ display: 'none' }}
+                                            /> */}
+                                            {userInfo.username ? userInfo.username[0] : userInfo.username}
                                         </Avatar>
 
                                         {/* User Info */}
@@ -255,7 +298,7 @@ export default function NewEditProfile() {
                                         <div>
                                             <hr style={{ opacity: "30%" }}></hr>
                                         </div>
-                                            
+
                                         {/* Email */}
                                         <Grid
                                             container
