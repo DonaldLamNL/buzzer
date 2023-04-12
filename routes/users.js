@@ -161,6 +161,7 @@ router.get('/followlist', async (req, res) => {
     }
 })
 
+// Post background image
 router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (req, res) => {
     const { userid } = req.body;
     const decodedUser = decodeUserID(userid);
