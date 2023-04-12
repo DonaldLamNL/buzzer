@@ -1,3 +1,4 @@
+const { Users } = require('../databaseSchema');
 const jwt = require('jsonwebtoken');
 
 function decodeUserID(token) {
