@@ -40,6 +40,7 @@ const buzzSchema = new mongoose.Schema({
 const hiveSchema = new mongoose.Schema({
   cellid: { type: Number, required: true },
   userid: { type: String, required: true },
+  username: { type: String, required: true },
   content: { type: String },
   like: { type: Number },
 });
