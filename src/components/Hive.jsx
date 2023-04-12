@@ -213,10 +213,10 @@ export default function Hive() {
               {/* <CardHeader title="Hive" sx={{justifyContent:"center", width:"100%", textAlign:"center", fontSize:"3rem"}}/> */}
               <HexGridList>
                 {datalist.map((data, i) => (
-                  (data.username != undefined) ?
+                  (data.username != undefined || data.userid != undefined) ?
                     <HexGridItem>
                       <Card className="hex-grid__content__inside" key={i}>
-                        {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={data.username} onClick={(e) => showContent(i)} />}
+                        {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={(data.username != undefined)?data.username:data.userid} onClick={(e) => showContent(i)} />}
                         <CardContent style={{ padding: "0" }} onClick={(e) => showContent(i)} sx={{ width: "100%" }}>
                           {(checkOnShow(i) === false) ? <AccountCircleIcon sx={{ fontSize: 130 }} /> : <Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll" }}>{data.content}</Typography>}
                         </CardContent>
@@ -298,7 +298,7 @@ export default function Hive() {
                       (data.content != undefined)?
                       <Paper sx={{ padding: "20px", fontSize: "headline" }}>
                         <Grid container>
-                          <Grid item><Typography>{(i + 1) + ". " + data.username}</Typography></Grid>
+                          <Grid item><Typography>{(i + 1) + ". " + ((data.username != undefined)?data.username:data.userid)}</Typography></Grid>
                           <Grid item style={{ flexGrow: "1" }}></Grid>
                           <Grid item xs={3}><Typography sx={{ display: "flex", float: "right" }}><FavoriteIcon />{data.like}</Typography></Grid>
                         </Grid>
