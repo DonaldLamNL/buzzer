@@ -39,8 +39,8 @@ export default function EditProfile() {
             const data = await response.json();
             console.log(data);
             setUserInfo(data);
-            // setDescription(userInfo.description);
-            // setUsername(userInfo.username);
+            setDescription(userInfo.description);
+            setUsername(userInfo.username);
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +61,8 @@ export default function EditProfile() {
                 },
                 body: JSON.stringify({
                     userid: userInfo.userid,
-                    username: userInfo.username,
-                    description: userInfo.description,
+                    username: username,
+                    description: description,
                 }),
             });
             const data = await response.json();
