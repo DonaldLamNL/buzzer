@@ -241,7 +241,7 @@ export default function UserProfile() {
                                         </Box>
 
                                         <Typography margin="20px 0" whiteSpace="pre-wrap">
-                                            {" "}
+                                            {/* {" "} */}
                                             {userInfo.description}{" "}
                                         </Typography>
 
