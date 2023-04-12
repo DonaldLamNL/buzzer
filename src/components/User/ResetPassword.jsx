@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -22,6 +23,7 @@ import serverPath from "../../ServerPath";
 const theme = createTheme();
 
 export default function ResetPassword() {
+  const navigator = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -40,6 +42,11 @@ export default function ResetPassword() {
       });
       const responseData = await response.json();
       console.log(responseData);
+      if (responseData.state) {
+        setTimeout(() => {
+          navigator(`/edit`);
+        }, 2000);
+      }
     } catch (error) {
       console.error(error);
     }
