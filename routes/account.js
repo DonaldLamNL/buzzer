@@ -154,7 +154,10 @@ router.get('/user', async (req, res) => {
       if(user){
           const responseData = {
               // username:user.username,
-              userid:user.userid
+              userid: user.userid,
+              username: user.username,
+              description: user.description,
+              email: user.email,
           }
           res.send(responseData);
       }else{
