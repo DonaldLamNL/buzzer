@@ -165,6 +165,7 @@ router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (
     const { userid } = req.body;
     const decodedUser = decodeUserID(userid);
 
+
     try {
         const user = await Users.findOne({ userid: decodedUser });
 
@@ -189,6 +190,8 @@ router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (
 router.get('/bgimage/:imageName', async (req, res) => {
     const { imageName } = req.params;
 
+    console.log('============',imageName);
+
     try {
         const user = await Users.findOne({ 'bgimage.name': imageName });
         if (user) {
@@ -202,5 +205,56 @@ router.get('/bgimage/:imageName', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Get User All Info
+router.get('/userinfo', async (req, res) => {
+    const { userid } = req.query;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        const user = await Users.findOne({ userid: decodedUser });
+
+        const responseData = {
+            userInfo: {
+                userid: decodedUser,
+                email: user.email,
+                username: user.username,
+                description: user.description,
+                avatar: user.avatar,
+                isVerify: user.isVerify,
+                bgimage: user.bgimage ? user.bgimage.name : null,
+            },
+            state: true,
+        }
+
+        res.send(responseData)
+    } catch (error) {
+        res.send({ state: false, message: 'Error fetching user' });
+    }
+});
+
+// User profile update
+router.post("/update", async (req, res) => {
+    const { userid, username, description } = req.body;
+    const decodedUser = decodeUserID(userid);
+    console.log(req.body)
+    try {
+      const user = await Users.findOne({ userid: decodedUser });
+      if (!user) {
+        console.log("User not found");
+        return res.status(400).json({ state: false, message: "User not found" });
+      }
+  
+      user.username = username;
+      user.description = description;
+  
+      await user.save();
+  
+      res.json({ state: true, message: "Profile updated successfully" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ state: false, message: "Internal Server Error" });
+    }
+  });
 
 module.exports = router;
