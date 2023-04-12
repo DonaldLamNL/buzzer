@@ -58,9 +58,9 @@ export default function NewEditProfile() {
     };
 
     const handleSave = async () => {
-        if(onExecute){
+        if (onExecute) {
             return
-        }else{
+        } else {
             setOnExecute(true);
         }
         const formData = new FormData();
@@ -222,6 +222,7 @@ export default function NewEditProfile() {
                                             justifyContent="space-between"
                                             alignItems="center"
                                             marginTop="30px"
+                                            marginBottom="30px"
                                         >
                                             <Box>
                                                 <Grid container direction="row" alignItems="center">
@@ -251,13 +252,18 @@ export default function NewEditProfile() {
                                             </Box>
                                         </Grid>
 
-                                        {/* Description */}
+                                        <div>
+                                            <hr style={{ opacity: "30%" }}></hr>
+                                        </div>
+                                            
+                                        {/* Email */}
                                         <Grid
                                             container
                                             direction="row"
                                             justifyContent="space-between"
                                             alignItems="center"
                                             marginTop="30px"
+                                            marginBottom="30px"
                                         >
                                             <Typography>
                                                 Email
@@ -271,6 +277,10 @@ export default function NewEditProfile() {
                                             />
                                         </Grid>
 
+                                        <div>
+                                            <hr style={{ opacity: "30%" }}></hr>
+                                        </div>
+
                                         {/* Description */}
                                         <Grid
                                             container
@@ -278,6 +288,7 @@ export default function NewEditProfile() {
                                             justifyContent="space-between"
                                             alignItems="center"
                                             marginTop="30px"
+                                            marginBottom="30px"
                                         >
                                             <Typography>
                                                 Description
@@ -293,8 +304,12 @@ export default function NewEditProfile() {
                                             />
                                         </Grid>
 
+                                        <div>
+                                            <hr style={{ opacity: "30%" }}></hr>
+                                        </div>
+
                                         {/* Category */}
-                                        <Grid
+                                        {/* <Grid
                                             container
                                             direction="row"
                                             justifyContent="space-between"
@@ -306,7 +321,7 @@ export default function NewEditProfile() {
                                                 Category
                                             </Typography>
 
-                                        </Grid>
+                                        </Grid> */}
 
                                         {/* Password */}
                                         <Grid
@@ -315,6 +330,7 @@ export default function NewEditProfile() {
                                             justifyContent="space-between"
                                             alignItems="center"
                                             marginTop="30px"
+                                            marginBottom="30px"
                                         >
                                             <Typography>Password</Typography>
                                             <Button
@@ -324,6 +340,11 @@ export default function NewEditProfile() {
                                                 Reset Password
                                             </Button>
                                         </Grid>
+
+                                        <div>
+                                            <hr style={{ opacity: "30%" }}></hr>
+                                        </div>
+
                                         <Button
                                             variant="contained"
                                             sx={{
