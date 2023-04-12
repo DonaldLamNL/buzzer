@@ -197,34 +197,6 @@ router.post("/reset", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// User profile update
-router.post("/updateProfile", async (req, res) => {
-  const { userid, username, description } = req.body;
-  // const decodedUser = decodeUserID(userid);
-  try {
-    // Check if the user exists in the database
-    const user = await Users.findOne({ userid });
-    if (!user) {
-      console.log("User not found");
-      return res.status(400).json({ state: false, message: "User not found" });
-    }
-
-    // Update the user's profile information
-    user.username = username;
-    user.description = description;
-
-    // Save the updated user information
-    await user.save();
-
-    res.json({ state: true, message: "Profile updated successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ state: false, message: "Internal Server Error" });
-  }
-});
-=======
->>>>>>> 45b05cd34c78f17ff96f1dbc5f60233cc8f8f50c
 // router.post("/forgot", async (req, res) => {
 //   const { email } = req.body;
 //   try {
