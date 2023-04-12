@@ -63,21 +63,16 @@ export default function NewEditProfile() {
         }else{
             setOnExecute(true);
         }
-        console.log("executing")
         const formData = new FormData();
         formData.append("userid", Cookies.get("BuzzerUser"));
         formData.append("image", bgImage);
 
         try {
-            console.log('send')
             const response = await fetch(`${serverPath}/users/bgimage`, {
                 method: "POST",
                 body: formData,
             });
             const responseData = await response.json();
-            if (responseData.state) {
-                // PubSub.publish("newBuzzPosted");
-            }
         } catch (err) {
             console.error(err);
         }
