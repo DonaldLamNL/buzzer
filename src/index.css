@@ -185,7 +185,7 @@ g text {
 }
 
 .hex-grid__list {
-  width: 100%;
+  width: 95%;
   --amount: 6;
   --counter: 1;
   grid-gap: 1.5rem 3rem;
@@ -238,9 +238,9 @@ g text {
   background: rgb(255, 184, 37);
   background: linear-gradient(
     0deg,
-    rgba(255, 184, 37, 1) 0%,
-    rgba(255, 170, 37, 1) 89%,
-    rgba(255, 150, 36, 1) 100%
+    rgba(255, 184, 37, 0.8) 0%,
+    rgba(255, 170, 37, 0.9) 89%,
+    rgba(255, 150, 36, 0.95) 100%
   );
 }
 

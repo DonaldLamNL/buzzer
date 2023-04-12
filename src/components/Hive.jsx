@@ -33,8 +33,13 @@ export default function Hive() {
   };
 
   const postCell = async (content) => {
-    console.log(checkTodayPosted());
-    if(!checkTodayPosted()){
+    if(!userInfo.posted){
+      const temp = {
+        userid: userInfo.userid,
+        username: userInfo.username,
+        posted: true
+      };
+      setInfo(temp);
       try {
         const response = await fetch(`${serverPath}/hive/post?content=${content}&userid=${Cookies.get("BuzzerUser")}`, {
           method: "POST",
@@ -46,6 +51,7 @@ export default function Hive() {
           // PubSub.publish("newBuzzPosted");
           // navigate(`/buzz/${responseData.buzzid}`);
           getHive();
+          getUserInfo()
         }
         setDum(Math.random());
       } catch (err) {
@@ -94,18 +100,18 @@ export default function Hive() {
     }
   };
 
-  const getUsername = async () => {
+  const getUserInfo = async () => {
     try {
       fetch(`${serverPath}/hive/user?userid=${Cookies.get("BuzzerUser")}`)
         .then((response) => response.json())
         .then((responseData) => {
           const temp = {
-            userid: Cookies.get("BuzzerUser"),
+            userid: responseData.userid,
             username: responseData.username,
-            tdhive: false
+            posted: responseData.posted
           };
           setInfo(temp);
-          console.log(responseData.username);
+          console.log(temp);
         })
     } catch(err){
       console.error(err);
@@ -123,7 +129,7 @@ export default function Hive() {
   const [dumyValue, setDum] = useState("");
   const [value, setValue] = useState("");
   const [showList, setShowList] = useState([]);
-  const [datalist, setDataList] = useState([{cellid:0,content:"There are no cell or have bug...",like:69,userid:":(",_id:"6434e5f09bfd6db1f747169c"}]);
+  const [datalist, setDataList] = useState([{cellid:0,content:"There are no cell or have bug...",like:69,username:":(",_id:"6434e5f09bfd6db1f747169c"}]);
   const [windowSize, setWindowSize] = useState([
     window.innerWidth,
     window.innerHeight,
@@ -165,19 +171,9 @@ export default function Hive() {
     return temp.slice(0, n);
   };
 
-  const checkTodayPosted = () => { 
-    for(let i = 0; i < datalist.length; i++){
-      if(datalist[i].userid === userInfo.username){
-        return true;
-      }
-    } 
-    return false
-  };
-
   useEffect(() => {
     getHive();
-    getUsername();
-    console.log(checkTodayPosted());
+    getUserInfo();
     const handleWindowResize = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
     };
@@ -213,14 +209,14 @@ export default function Hive() {
 
             className="horny_background_color"
           >
-            <Grid container sx={{ margin: "20px auto" }}>
+            <Grid container sx={{ margin: "20px auto", justifyContent: "center"}}>
               {/* <CardHeader title="Hive" sx={{justifyContent:"center", width:"100%", textAlign:"center", fontSize:"3rem"}}/> */}
               <HexGridList>
                 {datalist.map((data, i) => (
-                  (data.userid != undefined) ?
+                  (data.username != undefined) ?
                     <HexGridItem>
                       <Card className="hex-grid__content__inside" key={i}>
-                        {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={data.userid} onClick={(e) => showContent(i)} />}
+                        {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={data.username} onClick={(e) => showContent(i)} />}
                         <CardContent style={{ padding: "0" }} onClick={(e) => showContent(i)} sx={{ width: "100%" }}>
                           {(checkOnShow(i) === false) ? <AccountCircleIcon sx={{ fontSize: 130 }} /> : <Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll" }}>{data.content}</Typography>}
                         </CardContent>
@@ -302,7 +298,7 @@ export default function Hive() {
                       (data.content != undefined)?
                       <Paper sx={{ padding: "20px", fontSize: "headline" }}>
                         <Grid container>
-                          <Grid item><Typography>{(i + 1) + ". " + data.userid}</Typography></Grid>
+                          <Grid item><Typography>{(i + 1) + ". " + data.username}</Typography></Grid>
                           <Grid item style={{ flexGrow: "1" }}></Grid>
                           <Grid item xs={3}><Typography sx={{ display: "flex", float: "right" }}><FavoriteIcon />{data.like}</Typography></Grid>
                         </Grid>
