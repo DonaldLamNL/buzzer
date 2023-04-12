@@ -129,7 +129,14 @@ export default function Login() {
                   autoComplete="current-password"
                 />
 
-                <Box>{loginMsg}</Box>
+                <Box>
+                  <Typography
+                    variant="body3"
+                    sx={{ fontSize: "0.9em", color: "red" }}
+                  >
+                    {loginMsg}
+                  </Typography>
+                </Box>
 
                 <Grid container justifyContent="flex-end">
                   <Link href="#/forgotpassword" variant="body2">
