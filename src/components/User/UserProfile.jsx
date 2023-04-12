@@ -104,32 +104,6 @@ export default function UserProfile() {
             });
     };
 
-    const handleBgImageUpload = async (e) => {
-        if (!userInfo.isCurrentUser) {
-            return;
-        }
-        const file = e.target.files[0];
-        setBgImageDisplay(URL.createObjectURL(file));
-
-        const formData = new FormData();
-        formData.append("userid", Cookies.get("BuzzerUser"));
-        formData.append("image", file);
-
-        try {
-            console.log('send')
-            const response = await fetch(`${serverPath}/users/bgimage`, {
-                method: "POST",
-                body: formData,
-            });
-            const responseData = await response.json();
-            if (responseData.state) {
-                PubSub.publish("newBuzzPosted");
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
     useEffect(() => {
         getUserInfo();
         getBuzzes();
@@ -173,17 +147,6 @@ export default function UserProfile() {
                                         background: "#66ccff",
                                         borderRadius: "30px 30px 0 0",
                                     }}
-                                    onClick={() => {
-                                        if (userInfo.isCurrentUser) {
-                                            inputRef.current.click();
-                                        }
-                                    }}
-                                />
-                                <input
-                                    type="file"
-                                    ref={userInfo.isCurrentUser ? inputRef : null}
-                                    onChange={handleBgImageUpload}
-                                    style={{ display: 'none' }}
                                 />
 
                                 {/* Profile Information */}

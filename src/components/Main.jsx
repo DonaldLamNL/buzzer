@@ -12,6 +12,7 @@ import Buzz from "./BuzzPage/Buzz";
 import UserList from "./UserList/UserList"
 import Admin from "./UserList/Admin"
 import UserProfile from "./User/UserProfile";
+import NewEditProfile from "./User/NewEditProfile";
 
 const routerConfig = [
   {
@@ -59,6 +60,14 @@ const routerConfig = [
     element: (
       <>
         <UserProfile />
+      </>
+    )
+  },
+  {
+    path: "/edit",
+    element: (
+      <>
+        <NewEditProfile />
       </>
     )
   },
