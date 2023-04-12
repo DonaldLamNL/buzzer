@@ -26,8 +26,7 @@ const theme = createTheme();
 
 export default function EditProfile() {
     const navigator = useNavigate();
-    // const userid = "admin"; // needs debugging to get the correct uid
-    // console.log(userid);
+    
     const [username, setUsername] = useState("");
     const [description, setDescription] = useState("");
     const [userInfo, setUserInfo] = useState("");
@@ -37,7 +36,7 @@ export default function EditProfile() {
             // const response = await fetch(`${serverPath}/users/userprofile?userid=${userid}&currentid=${Cookies.get("BuzzerUser")}`);
             const response = await fetch(`${serverPath}/account/user?userid=${Cookies.get("BuzzerUser")}`);
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setUserInfo(data);
             setDescription(data.description);
             setUsername(data.username);
@@ -69,13 +68,13 @@ export default function EditProfile() {
 
             if (data.state) {
                 setMessage("Profile updated successfully.");
+                console.log(data.message);
                 setTimeout(() => {
                     navigator(`/user/${userInfo.userid}`);
                 }, 2000);
             } else {
                 setMessage(data.message);
             }
-            console.log(message);
         } catch (error) {
             setMessage("Error updating profile.");
             console.log(error);
