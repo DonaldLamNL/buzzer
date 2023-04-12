@@ -25,19 +25,22 @@ import serverPath from "../../ServerPath";
 const theme = createTheme();
 
 export default function EditProfile(){
+    const navigator = useNavigate();
     const userid = "admin"; // needs debugging to get the correct uid
-    console.log(userid);
+    // console.log(userid);
     const [username, setUsername] = useState("");
     const [description, setDescription] = useState("");
     const [userInfo, setUserInfo] = useState("");
 
     const getUserInfo = async () => {
         try {
-            const response = await fetch(`${serverPath}/users/userprofile?userid=${userid}&currentid=${Cookies.get("BuzzerUser")}`);
+            // const response = await fetch(`${serverPath}/users/userprofile?userid=${userid}&currentid=${Cookies.get("BuzzerUser")}`);
+            const response = await fetch(`${serverPath}/account/user?userid=${Cookies.get("BuzzerUser")}`);
             const data = await response.json();
-            setUserInfo(data.userInfo);
-            setDescription(data.userInfo.description);
-            setUsername(data.userInfo.username);
+            console.log(data);
+            setUserInfo(data);
+            setDescription(userInfo.description);
+            setUsername(userInfo.username);
         } catch (error) {
         console.log(error);
         }
@@ -81,7 +84,7 @@ export default function EditProfile(){
     }
 
     const handleResetPwd = async () => {
-        navigator(`/reset`)
+        navigator(`/resetpassword`);
     }
 
 
