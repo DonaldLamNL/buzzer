@@ -39,8 +39,8 @@ export default function EditProfile() {
             const data = await response.json();
             console.log(data);
             setUserInfo(data);
-            setDescription(userInfo.description);
-            setUsername(userInfo.username);
+            setDescription(data.description);
+            setUsername(data.username);
         } catch (error) {
             console.log(error);
         }
