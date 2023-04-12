@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { Buzzes, Users, Categories } = require('../databaseSchema');
-const { decodeUserID } = require('./commonfunct');
+const { decodeUserID, replaceMentions } = require('./commonfunct');
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
@@ -59,7 +59,6 @@ router.get('/image/:imageName', async (req, res) => {
     }
 });
 
-
 // Video Endpoint
 router.get('/video/:videoName', async (req, res) => {
     const { videoName } = req.params;
@@ -102,6 +101,7 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
     const rebuzzid = isNaN(rebuzz) ? 0 : parseInt(rebuzz);
 
     try {
+        const replacedContent = await replaceMentions(content);
         // Generate new buzzid
         const highestBuzz = await Buzzes.findOne().sort({ buzzid: -1 }).exec();
         const newBuzzid = highestBuzz ? highestBuzz.buzzid + 1 : 1;
@@ -109,7 +109,7 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
         const newBuzz = new Buzzes({
             buzzid: newBuzzid,
             userid: decodedUser,
-            content,
+            content: replacedContent,
             category,
             like: [],
             dislike: [],

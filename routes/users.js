@@ -7,6 +7,18 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// Function to generate an array of unique random integers
+function getRandomIntegers(min, max, count, exclude) {
+    const randomIntegers = new Set();
+    while (randomIntegers.size < count) {
+        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (!exclude.includes(randomNumber)) {
+            randomIntegers.add(randomNumber);
+        }   
+    }
+    return Array.from(randomIntegers);
+}
+    
 // User Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
@@ -28,7 +40,10 @@ router.get('/search', async (req, res) => {
         userList = userList.filter(user => user.userid !== decodedUser);
 
         if (keywords == '') {
-            console.log('All Recommend')
+            console.log('All Recommend');
+            const decodedUserIndex = userList.findIndex(user => user.userid === decodedUser);
+            const randomIndices = getRandomIntegers(0, userList.length - 1, 10, [decodedUserIndex]);
+            userList = randomIndices.map(index => userList[index]);
         }
 
         responseData = userList.map(user => {
@@ -161,6 +176,7 @@ router.get('/followlist', async (req, res) => {
     }
 })
 
+// Post background image
 router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (req, res) => {
     const { userid } = req.body;
     const decodedUser = decodeUserID(userid);

@@ -1,6 +1,7 @@
+const { Users } = require('../databaseSchema');
 const jwt = require('jsonwebtoken');
 
-function decodeUserID(token){
+function decodeUserID(token) {
     try {
         const JWT_SECRET = '12345';
         const decodedUserID = jwt.verify(token, JWT_SECRET);
@@ -15,7 +16,22 @@ function decodeUserID(token){
     }
 }
 
+const replaceMentions = async (content) => {
+    const regex = /@(\w+)/g;
+    let replacedContent = content;
+    let matches = regex.exec(content);
+    while (matches !== null) {
+        const userid = matches[1];
+        const user = await Users.findOne({ userid });
+        if (user) {
+            replacedContent = replacedContent.replace(`@${userid}`, `%@${user.userid}%`);
+        }
+        matches = regex.exec(content);
+    }
+    return replacedContent;
+};
 
 module.exports = {
-    decodeUserID
+    decodeUserID,
+    replaceMentions
 };
