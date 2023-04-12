@@ -28,13 +28,13 @@ export default function BuzzPreview(props) {
         deletedBuzz(buzzid);
 
         if (data.state) {
-          alert("User deleted successfully");
+          alert("Buzz deleted successfully");
         } else {
-          alert("Failed to delete user");
+          alert("Failed to delete buzz");
         }
       } catch (error) {
         console.error(error);
-        alert("An error occurred while deleting user");
+        alert("An error occurred while deleting buzz");
       }
     }
   };
