@@ -3,8 +3,9 @@ import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import serverPath from "../../ServerPath";
+import ReplyIcon from "@mui/icons-material/Reply";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Comment(props) {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function Comment(props) {
   const [postedComment, setPostedComment] = useState(0);
   const [username, setUsername] = useState("");
   const [icon, setIcon] = useState(null);
+  const [atUser, setAtUser] = useState(null);
 
   const getComments = async () => {
     try {
@@ -78,6 +80,24 @@ export default function Comment(props) {
         console.log("error");
       });
   };
+
+  const searchUser = (targetid) => {
+    const response = fetch(`${serverPath}/users/search?keywords=@${targetid}&userid=${Cookies.get("BuzzerUser")}`);
+    return response
+      .then((res) => res.json())
+      .then((data) => {
+        if (data[0]) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        return false;
+      });
+  };
+
 
   const jumpToUserprofile = (uid) => {
     navigate(`/user/${uid}`);
@@ -170,7 +190,6 @@ export default function Comment(props) {
                 {c.username[0]}
               </Avatar>
             </Box>
-
             <Grid container item sx={{ flexGrow: 1 }}>
               <Box sx={{ flexDirection: "column" }}>
                 <Box
@@ -188,8 +207,27 @@ export default function Comment(props) {
                   {c.username}
                 </Box>
                 <Box sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}>
-                  {c.content}
+                  <Box
+                    sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
+                    dangerouslySetInnerHTML={{
+                      __html: c.content.replace(
+                        /%@(\w+)%/g,
+                        `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                      )
+                    }}
+                  />
                 </Box>
+                {/* <IconButton
+                    size="large"
+                    sx={{
+                      position: "absolute",
+                      right: 10,
+                      bottom: 10,
+                    }}
+                    onClick={handleReply(c.userid)}
+                  >
+                    <ReplyIcon />
+                  </IconButton> */}
               </Box>
             </Grid>
           </Box>
