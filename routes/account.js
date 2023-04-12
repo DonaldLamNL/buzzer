@@ -145,6 +145,58 @@ router.post("/forgot/reset", async (req, res) => {
   }
 });
 
+router.get('/user', async (req, res) => {
+  const { userid } = req.query;
+  let decodedUser = decodeUserID(userid);
+
+  try {
+      const user = await Users.findOne({ userid: decodedUser });
+      if(user){
+          const responseData = {
+              // username:user.username,
+              userid: user.userid,
+              username: user.username,
+              description: user.description,
+              email: user.email,
+          }
+          res.send(responseData);
+      }else{
+          res.send({ status: false, message: 'User not found' })
+      }
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post("/reset", async (req, res) => {
+  const { userid, oldPassword, password } = req.body;
+  const decodedUser = decodeUserID(userid);
+  try {
+    const user = await Users.findOne({ userid: decodedUser });
+    if (!user) {
+      return res.status(400).json({ state: false, message: "Invalid user" });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      console.log("wrong password");
+      return res.status(400).json({ state: false, message: "Wrong Password!" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    user.password = hashedPassword;
+    await user.save();
+    res.json({ state: true, message: "Password reset successfully." });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ state: false, message: "Error resetting password" });
+  }
+});
+
 // router.post("/forgot", async (req, res) => {
 //   const { email } = req.body;
 //   try {
