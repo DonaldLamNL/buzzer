@@ -19,17 +19,19 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Get Username
+// Get UserInfo
 router.get('/user', async (req, res) => {
     const {userid } = req.query;
     let decodedUser = decodeUserID(userid);
 
     try {
         const user = await Users.findOne({ userid: decodedUser });
+        const cell = await Hive.findOne({username: user.username})
         if(user){
             const responseData = {
                 username:user.username,
-                userid:user.userid
+                userid:user.userid,
+                posted:(cell != null)
             }
             res.send(responseData);
         }else{
@@ -56,7 +58,8 @@ router.post('/post', async (req, res) => {
 
         const newCell = new Hive({
             cellid: newCellID,
-            userid: user.username,
+            userid: decodedUser,
+            username: user.username,
             content: content,
             like: 0,
         });
