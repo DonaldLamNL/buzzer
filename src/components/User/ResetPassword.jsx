@@ -23,6 +23,8 @@ import serverPath from "../../ServerPath";
 const theme = createTheme();
 
 export default function ResetPassword() {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
   const navigator = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
 
@@ -43,6 +45,13 @@ export default function ResetPassword() {
       const responseData = await response.json();
       console.log(responseData);
       if (responseData.state) {
+        setIsSuccess(true);
+        setIsFailure(false);
+      } else {
+        setIsFailure(true);
+        setIsSuccess(false);
+      }
+      if (responseData.state) {
         setTimeout(() => {
           navigator(`/edit`);
         }, 2000);
@@ -52,40 +61,41 @@ export default function ResetPassword() {
     }
   };
 
-  const [oldPassword, setOldPassword] = useState('');
+  const [oldPassword, setOldPassword] = useState("");
 
   const handleOldPasswordChange = (event) => {
     setOldPassword(event.target.value);
-  }
+  };
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [passwordHelperText, setPasswordHelperText] = useState('');
+  const [passwordHelperText, setPasswordHelperText] = useState("");
 
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-  const [confirmPasswordHelperText, setConfirmPasswordHelperText] = useState('');
+  const [confirmPasswordHelperText, setConfirmPasswordHelperText] =
+    useState("");
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
     if (confirmPassword && event.target.value !== confirmPassword) {
       setConfirmPasswordError(true);
-      setConfirmPasswordHelperText('Passwords do not match');
+      setConfirmPasswordHelperText("Passwords do not match");
     } else {
       setConfirmPasswordError(false);
-      setConfirmPasswordHelperText('');
+      setConfirmPasswordHelperText("");
     }
     const strongPasswordRegex = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
     );
     if (!strongPasswordRegex.test(event.target.value)) {
       setPasswordError(true);
       setPasswordHelperText(
-        'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character"
       );
     } else {
       setPasswordError(false);
-      setPasswordHelperText('');
+      setPasswordHelperText("");
     }
   };
 
@@ -93,10 +103,10 @@ export default function ResetPassword() {
     setConfirmPassword(event.target.value);
     if (event.target.value !== password) {
       setConfirmPasswordError(true);
-      setConfirmPasswordHelperText('Passwords do not match');
+      setConfirmPasswordHelperText("Passwords do not match");
     } else {
       setConfirmPasswordError(false);
-      setConfirmPasswordHelperText('');
+      setConfirmPasswordHelperText("");
     }
   };
 
@@ -109,15 +119,15 @@ export default function ResetPassword() {
             userid: Cookies.get("BuzzerUser"),
           };
           setUserInfo(temp);
-        })
+        });
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   useEffect(() => {
     getUserid();
-  }, [])
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -164,7 +174,10 @@ export default function ResetPassword() {
                 Reset Password
               </Typography>
 
-              <Typography variant="body3" sx={{ fontSize: "0.9em", textJustify: "auto" }}>
+              <Typography
+                variant="body3"
+                sx={{ fontSize: "0.9em", textJustify: "auto" }}
+              >
                 {
                   "Please enter your new password and confirmed password to reset password"
                 }
@@ -176,7 +189,6 @@ export default function ResetPassword() {
                 noValidate
                 sx={{ mt: 1 }}
               >
-
                 <TextField
                   variant="standard"
                   margin="normal"
@@ -186,7 +198,6 @@ export default function ResetPassword() {
                   label="Original Password"
                   type="password"
                   id="oldpassword"
-
                   value={oldPassword}
                   onChange={handleOldPasswordChange}
                 />
@@ -200,7 +211,6 @@ export default function ResetPassword() {
                   label="New Password"
                   type="password"
                   id="newpassword"
-
                   value={password}
                   onChange={handlePasswordChange}
                   error={passwordError}
@@ -216,7 +226,6 @@ export default function ResetPassword() {
                   label="New Password Confirm"
                   type="password"
                   id="confirmpassword"
-
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
                   error={confirmPasswordError}
@@ -228,12 +237,32 @@ export default function ResetPassword() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
-
                   // onClick={() => resetPassword()}
-                  disabled={!oldPassword || !password || !confirmPassword || passwordError}
+                  disabled={
+                    !oldPassword ||
+                    !password ||
+                    !confirmPassword ||
+                    passwordError
+                  }
                 >
                   Reset Password
                 </Button>
+                {isSuccess && (
+                  <Typography
+                    variant="body3"
+                    sx={{ fontSize: "0.9em", color: "green" }}
+                  >
+                    Reset password successfully
+                  </Typography>
+                )}
+                {isFailure && (
+                  <Typography
+                    variant="body3"
+                    sx={{ fontSize: "0.9em", color: "red" }}
+                  >
+                    Original Password is not match
+                  </Typography>
+                )}
 
                 <Grid container style={{ alignItems: "center" }}>
                   <Link href="/#/edit" variant="body2" color="secondary">

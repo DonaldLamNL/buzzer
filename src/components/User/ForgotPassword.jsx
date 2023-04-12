@@ -95,8 +95,7 @@ export default function ForgotPassword() {
       if (responseData.state) {
         setIsSuccess(true);
         setIsFailure(false);
-      }
-      if (responseData.state === false) {
+      } else {
         setIsFailure(true);
         setIsSuccess(false);
       }
