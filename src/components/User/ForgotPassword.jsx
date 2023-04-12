@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -11,6 +11,7 @@ import {
   Box,
   Typography,
   Container,
+  colors,
 } from "@mui/material";
 import MailLockIcon from "@mui/icons-material/MailLock";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -19,6 +20,8 @@ import serverPath from "../../ServerPath";
 const theme = createTheme();
 
 export default function ForgotPassword() {
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailure, setIsFailure] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [emailHelperText, setEmailHelperText] = useState("");
@@ -52,6 +55,27 @@ export default function ForgotPassword() {
     }
   }
 
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(10);
+
+  useEffect(() => {
+    if (isDisabled) {
+      const timer = setInterval(() => {
+        setTimeLeft((time) => time - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [isDisabled]);
+
+  const handleClick = () => {
+    setIsDisabled(true);
+    getVerificationCode();
+    setTimeout(() => {
+      setIsDisabled(false);
+      setTimeLeft(10);
+    }, 10000);
+  };
+
   async function resetPassword() {
     event.preventDefault();
     try {
@@ -68,6 +92,14 @@ export default function ForgotPassword() {
         }),
       });
       const responseData = await response.json();
+      if (responseData.state) {
+        setIsSuccess(true);
+        setIsFailure(false);
+      }
+      if (responseData.state === false) {
+        setIsFailure(true);
+        setIsSuccess(false);
+      }
       console.log(responseData);
       return data;
     } catch (error) {
@@ -163,10 +195,10 @@ export default function ForgotPassword() {
                       type="submit"
                       variant="contained"
                       sx={{ mt: 1, mb: 1 }}
-                      onClick={() => getVerificationCode()}
-                      disabled={!email || emailError}
+                      onClick={handleClick}
+                      disabled={!email || emailError || isDisabled}
                     >
-                      Get Code
+                      {isDisabled ? `Get Code (${timeLeft}s)` : "Get Code"}
                     </Button>
                   </Grid>
 
@@ -266,6 +298,22 @@ export default function ForgotPassword() {
                 >
                   Reset Password
                 </Button>
+                {isSuccess && (
+                  <Typography
+                    variant="body3"
+                    sx={{ fontSize: "0.9em", color: "green" }}
+                  >
+                    Reset password successfully
+                  </Typography>
+                )}
+                {isFailure && (
+                  <Typography
+                    variant="body3"
+                    sx={{ fontSize: "0.9em", color: "red" }}
+                  >
+                    Incorrect verification code
+                  </Typography>
+                )}
 
                 <Grid container style={{ alignItems: "center" }}>
                   <Link href="/#/login" variant="body2" color="secondary">
