@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -14,18 +15,41 @@ import {
 } from "@mui/material";
 import MailLockIcon from "@mui/icons-material/MailLock";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useEffect } from "react";
+// import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 
 export default function ResetPassword() {
-  const handleSubmit = (event) => {
+  const navigator = useNavigate();
+  const [userInfo, setUserInfo] = useState(null);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      // email: data.get("email"),
-      // verificationCode: data.get("verificationCode"),
-      password: data.get("password"),
-    });
+    try {
+      const response = await fetch(`${serverPath}/account/reset`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: userInfo.userid,
+          oldPassword: oldPassword,
+          password: password,
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+      if (responseData.state) {
+        setTimeout(() => {
+          navigator(`/edit`);
+        }, 2000);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const [oldPassword, setOldPassword] = useState('');
@@ -75,6 +99,25 @@ export default function ResetPassword() {
       setConfirmPasswordHelperText('');
     }
   };
+
+  const getUserid = async () => {
+    try {
+      fetch(`${serverPath}/account/user?userid=${Cookies.get("BuzzerUser")}`)
+        .then((response) => response.json())
+        .then((responseData) => {
+          const temp = {
+            userid: Cookies.get("BuzzerUser"),
+          };
+          setUserInfo(temp);
+        })
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    getUserid();
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -186,6 +229,7 @@ export default function ResetPassword() {
                   variant="contained"
                   sx={{ mt: 1, mb: 2, borderRadius: 6 }}
 
+                  // onClick={() => resetPassword()}
                   disabled={!oldPassword || !password || !confirmPassword || passwordError}
                 >
                   Reset Password

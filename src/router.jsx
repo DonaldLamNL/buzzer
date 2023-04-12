@@ -53,10 +53,6 @@ const routerConfig = (isLogin) => {
       element: isLogin ? <UserProfile /> : <Navigate to="/login" />,
     },
     {
-      path: "/edit",
-      element: isLogin ? <EditProfile /> : <Navigate to="/login" />,
-    },
-    {
       path: "/hive",
       element: isLogin ? <Hive /> : <Navigate to="/login" />,
     },

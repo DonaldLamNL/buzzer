@@ -20,56 +20,75 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CheckCircle } from "@mui/icons-material";
-// import serverPath from "../../ServerPath";
+import serverPath from "../../ServerPath";
 
 const theme = createTheme();
 
 export default function EditProfile() {
     const navigator = useNavigate();
-    const { userid } = useParams();
-    //   const [userInfo, setUserInfo] = useState(null);
+    
+    const [username, setUsername] = useState("");
+    const [description, setDescription] = useState("");
+    const [userInfo, setUserInfo] = useState("");
 
-    const userInfo = {
-        username: "abc def",
-        userid: "abc101",
-        email: "abcdef@gmail.com",
-        icon: "",
-        description: "abcdefg",
-        followingCount: 12,
-        followersCount: 23,
-        isVerify: false,
-        isCurrentUser: true,
-    }
+    const getUserInfo = async () => {
+        try {
+            // const response = await fetch(`${serverPath}/users/userprofile?userid=${userid}&currentid=${Cookies.get("BuzzerUser")}`);
+            const response = await fetch(`${serverPath}/account/user?userid=${Cookies.get("BuzzerUser")}`);
+            const data = await response.json();
+            // console.log(data);
+            setUserInfo(data);
+            setDescription(data.description);
+            setUsername(data.username);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+
+
+    const [message, setMessage] = useState("");
     const handleSave = async () => {
-        
-    }
+        try {
+            const response = await fetch(`${serverPath}/account/updateProfile`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userid: userInfo.userid,
+                    username: username,
+                    description: description,
+                }),
+            });
+            const data = await response.json();
+
+            if (data.state) {
+                setMessage("Profile updated successfully.");
+                console.log(data.message);
+                setTimeout(() => {
+                    navigator(`/user/${userInfo.userid}`);
+                }, 2000);
+            } else {
+                setMessage(data.message);
+            }
+        } catch (error) {
+            setMessage("Error updating profile.");
+            console.log(error);
+        }
+    };
 
     const handleCancel = async () => {
         navigator(`/user/${userInfo.userid}`);
     }
 
     const handleResetPwd = async () => {
-        navigator(`/resetpassword`)
+        navigator(`/resetpassword`);
     }
 
-    //   const getUserInfo = async () => {
-    //     try {
-    //       const response = await fetch(
-    //         `${serverPath}/users/userprofile?userid=${userid}&currentid=${Cookies.get(
-    //           "BuzzerUser"
-    //         )}`
-    //       );
-    //       const data = await response.json();
-    //       setUserInfo(data.userInfo);
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   useEffect(() => {
-    //     getUserInfo();
-    //   }, [userid]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -77,7 +96,7 @@ export default function EditProfile() {
                 <section
                     style={{
                         display: "block",
-                        justiftContent: "center",
+                        justifyContent: "center",
                         minHeight: "100vh",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
@@ -139,29 +158,22 @@ export default function EditProfile() {
                                             }}
                                             src={userInfo.icon}
                                         >
-                                            {userInfo.username
-                                                ? userInfo.username[0]
-                                                : userInfo.username}
+                                            {userInfo.username ? userInfo.username[0] : userInfo.username}
                                         </Avatar>
 
                                         <Box marginTop="20px">
-                                            <Typography variant="h4">
-                                                Edit Profile
-                                            </Typography>
+                                            <Typography variant="h4">Edit Profile</Typography>
                                         </Box>
 
                                         <Box marginTop="10px">
-
                                             <Grid
                                                 container
                                                 direction="row"
                                                 justifyContent="space-between"
                                                 alignItems="center"
-                                                marginY="30px">
-
-                                                <Typography>
-                                                    User ID
-                                                </Typography>
+                                                marginY="30px"
+                                            >
+                                                <Typography>User ID</Typography>
 
                                                 {/* <div style={{ height: "50px" }}></div> */}
 
@@ -172,7 +184,6 @@ export default function EditProfile() {
                                                     name="userid"
                                                     defaultValue={userInfo.userid}
                                                 />
-
                                             </Grid>
 
                                             <hr style={{ opacity: "30%" }}></hr>
@@ -182,94 +193,16 @@ export default function EditProfile() {
                                                 direction="row"
                                                 justifyContent="space-between"
                                                 alignItems="center"
-                                                marginY="30px">
-
-                                                <Box>
-                                                    <Grid container direction="row" alignItems="center">
-                                                        <Typography>
-                                                            First name
-                                                        </Typography>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <TextField
-                                                            required
-                                                            id="outlined-required"
-                                                            label="Required"
-                                                            defaultValue={userInfo.username.substring(0, userInfo.username.indexOf(' '))}
-                                                        />
-                                                    </Grid>
-                                                </Box>
-
-                                                <Box>
-                                                    <Grid container direction="row" alignItems="center">
-                                                        <Typography>
-                                                            Last name
-                                                        </Typography>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <TextField
-                                                            required
-                                                            id="outlined-required"
-                                                            label="Required"
-                                                            defaultValue={userInfo.username.substring(userInfo.username.indexOf(' ') + 1)}
-                                                        />
-                                                    </Grid>
-                                                </Box>
-
-
-                                            </Grid>
-
-                                            <hr style={{ opacity: "30%" }}></hr>
-
-                                            {/* <Grid
-                                                container
-                                                direction="row"
-                                                justifyContent="space-between"
-                                                alignItems="center"
-                                                marginY="30px">
-                                                <Typography>
-                                                    Icon
-                                                </Typography>
-
-                                                <Avatar
-                                                    sx={{
-                                                        fontSize: "400%",
-                                                        color: "white",
-                                                        background: "#1776d2",
-                                                        width: "100px",
-                                                        height: "100px",
-                                                    }}
-                                                    src={userInfo.icon}
-                                                >
-                                                    {userInfo.username
-                                                        ? userInfo.username[0]
-                                                        : userInfo.username}
-                                                </Avatar>
-
-                                                <Box container>
-                                                    <Button variant="outlined" color="error">
-                                                        Delete
-                                                    </Button>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <Button variant="contained">
-                                                        Upload
-                                                    </Button>
-                                                </Box>
-
-                                            </Grid>
-
-                                            <hr style={{ opacity: "30%" }}></hr> */}
-
-                                            <Grid
-                                                container
-                                                direction="row"
-                                                justifyContent="flex-start"
-                                                // alignItems="center"
-                                                marginY="30px">
-
-                                                <Typography>
-                                                    Category Preference
-                                                </Typography>
-
-
+                                                marginY="30px"
+                                            >
+                                                <Typography>Username</Typography>
+                                                <TextField
+                                                    required
+                                                    id="outlined-required"
+                                                    label="Required"
+                                                    defaultValue={userInfo.username}
+                                                    onChange={(e) => setUsername(e.target.value)}
+                                                />
                                             </Grid>
 
                                             <hr style={{ opacity: "30%" }}></hr>
@@ -279,11 +212,9 @@ export default function EditProfile() {
                                                 direction="row"
                                                 justifyContent="flex-start"
                                                 // alignItems="center"
-                                                marginY="30px">
-
-                                                <Typography>
-                                                    Description
-                                                </Typography>
+                                                marginY="30px"
+                                            >
+                                                <Typography>Description</Typography>
 
                                                 <div style={{ height: "50px" }}></div>
 
@@ -294,9 +225,9 @@ export default function EditProfile() {
                                                     rows={2}
                                                     defaultValue={userInfo.description}
                                                     fullWidth
+                                                    onChange={(e) => setDescription(e.target.value)}
                                                 />
-
-                                            </ Grid>
+                                            </Grid>
 
                                             <hr style={{ opacity: "30%" }}></hr>
 
@@ -305,11 +236,9 @@ export default function EditProfile() {
                                                 direction="row"
                                                 justifyContent="flex-start"
                                                 alignItems="center"
-                                                marginY="30px">
-
-                                                <Typography>
-                                                    Email
-                                                </Typography>
+                                                marginY="30px"
+                                            >
+                                                <Typography>Email</Typography>
 
                                                 <div style={{ height: "50px" }}></div>
 
@@ -320,7 +249,6 @@ export default function EditProfile() {
                                                     name="email"
                                                     defaultValue={userInfo.email}
                                                 />
-
                                             </Grid>
 
                                             <hr style={{ opacity: "30%" }}></hr>
@@ -330,22 +258,16 @@ export default function EditProfile() {
                                                 direction="row"
                                                 justifyContent="space-between"
                                                 alignItems="center"
-                                                marginY="30px">
-
-                                                <Typography>
-                                                    Password
-                                                </Typography>
-
+                                                marginY="30px"
+                                            >
+                                                <Typography>Password</Typography>
                                                 <Button variant="contained" onClick={handleResetPwd}>
                                                     Reset Password
                                                 </Button>
-
                                             </Grid>
 
                                             {/* <hr style={{ opacity: "30%" }}></hr> */}
-
                                         </Box>
-
                                     </Container>
 
                                     <Button
@@ -371,20 +293,17 @@ export default function EditProfile() {
                                     >
                                         Save
                                     </Button>
-
-
                                 </Box>
                                 {/* {
-                                    <Box
-                                        sx={{
-                                            borderBottom: "0 30px",
-                                            width: "100%",
-                                            minHeight: "150px",
-                                        }}
-                                    >
-
-                                    </Box>
-                                } */}
+                <Box
+                  sx={{
+                    borderBottom: "0 30px",
+                    width: "100%",
+                    minHeight: "150px",
+                  }}
+                >
+                </Box>
+              } */}
                             </Stack>
                         </Grid>
                     </Grid>
@@ -392,4 +311,6 @@ export default function EditProfile() {
             )}
         </ThemeProvider>
     );
+
+
 }
