@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { Users, Buzzes, Comments } = require('../databaseSchema');
-const { decodeUserID } = require('./commonfunct');
+const { decodeUserID, replaceMentions } = require('./commonfunct');
 const multer = require('multer');
 const upload = multer();
 
@@ -9,8 +9,10 @@ const upload = multer();
 router.post('/post', upload.none(), async (req, res) => {
     const { buzzid, userid, content } = req.body;
     const decodedUser = decodeUserID(userid);
-    
+
     try {
+        const replacedContent = await replaceMentions(content);
+        console.log(replacedContent);
         // Post a comment
         const highestComment = await Comments.findOne().sort({ commentid: -1 }).exec();
         const newCommentid = highestComment ? highestComment.commentid + 1 : 1;  // generate new commentid
@@ -18,7 +20,7 @@ router.post('/post', upload.none(), async (req, res) => {
             commentid: newCommentid,
             userid: decodedUser,
             buzzid,
-            content,
+            content: replacedContent,
         });
         await newComment.save();
 
