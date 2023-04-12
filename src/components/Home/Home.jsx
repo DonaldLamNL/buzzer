@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LinearProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 // components
 import NewBuzzItem from "../Items/NewBuzzItem";
@@ -10,6 +10,7 @@ import serverPath from "../../ServerPath";
 // Get buzzes
 export default function Home() {
   const [buzzList, setBuzzList] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const getBuzzes = async () => {
     try {
@@ -17,6 +18,7 @@ export default function Home() {
         .then((response) => response.json())
         .then((responseData) => {
           setBuzzList(responseData);
+          setIsLoaded(true);
         })
         .catch((error) => {
           console.log(error);
@@ -47,10 +49,16 @@ export default function Home() {
   return (
     <div>
       <Post />
+      {!isLoaded && (
+        <Box textAlign={"center"} marginTop={20}>
+          <CircularProgress size={100} />
+        </Box>
+      )}
       {buzzList &&
         shuffleArray(buzzList).map((post) => (
           <NewBuzzItem key={post.buzzid} {...post} />
         ))}
+
       {/* <LinearProgress /> */}
     </div>
   );
