@@ -59,15 +59,17 @@ export default function Home() {
         shuffleArray(buzzList).map((post) => (
           <NewBuzzItem key={post.buzzid} {...post} />
         ))}
-      <Box textAlign={"center"}>
-        <IconButton
-          onClick={() => {
-            window.location.reload();
-          }}
-        >
-          <AutorenewIcon fontSize="large" />
-        </IconButton>
-      </Box>
+      {isLoaded &&
+        <Box textAlign={"center"}>
+          <IconButton
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            <AutorenewIcon fontSize="large" />
+          </IconButton>
+        </Box>
+      }
     </div>
   );
 }

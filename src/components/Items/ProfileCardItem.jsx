@@ -18,6 +18,7 @@ export default function ProfileCardItem(props) {
   const [isFollow, setIsFollow] = useState(null);
   const [followersCount, setFollowersCount] = useState(null);
   const [followingCount, setFollowingCount] = useState(null);
+  const [iconDisplay, setIconDisplay] = useState(null);
 
   const handleFollow = async () => {
     if (isExecuting) {
@@ -49,17 +50,34 @@ export default function ProfileCardItem(props) {
     }
   };
 
+  const getIcon = async (imageName) => {
+    console.log(imageName)
+    if (imageName) {
+      fetch(`${serverPath}/users/icon/${imageName}`)
+        .then((response) => response.blob())
+        .then((image) => {
+          setIconDisplay(URL.createObjectURL(image));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setIconDisplay(null);
+    }
+  };
+
   useEffect(() => {
     setIsFollow(follow);
     setFollowersCount(numOfFollowers);
     setFollowingCount(numOfFollowing);
+    getIcon(icon)
   }, [userid]);
 
   return (
     <div className="card">
-      {icon ? (
+      {iconDisplay ? (
         <div className="imgBx">
-          <img src={icon}></img>
+          <img src={iconDisplay}></img>
         </div>
       ) : (
         <div
@@ -81,7 +99,6 @@ export default function ProfileCardItem(props) {
             <span>@{userid}</span>
           </h2>
           <div className="data">
-            {/* <h3>{postsCount}<br></br><span>Posts</span></h3> */}
             <h3>
               {followersCount}
               <br></br>

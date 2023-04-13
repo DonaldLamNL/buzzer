@@ -147,7 +147,7 @@ export default function Post() {
       >
         {/* Poster Icon */}
         <Box sx={{ width: "90px" }}>
-          <BuzzIcon userid={null} username={username} icon={icon} />
+          <BuzzIcon username={username} icon={icon} />
         </Box>
 
         <Grid container item sx={{ flexGrow: 1 }}>
