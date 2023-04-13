@@ -49,6 +49,8 @@ router.get('/', async (req, res) => {
                 userid: comment.userid,
                 username: user.username,
                 content: comment.content,
+                isVerify: user.isVerify,
+                icon: user.avatar ? user.avatar.name : null,
             };
         }));
         res.send(responseComments);
