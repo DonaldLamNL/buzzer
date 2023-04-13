@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Link, useNavigate } from "react-router-dom";
+import BuzzIcon from "../Items/BuzzIcon";
 
 export default function Comment(props) {
   const navigate = useNavigate();
@@ -121,12 +122,7 @@ export default function Comment(props) {
       >
         {/* Poster Icon */}
         <Box sx={{ width: "60px", margin: "auto" }}>
-          <Avatar
-            src={icon}
-            sx={{ width: 40, height: 40, margin: "17px auto" }}
-          >
-            {username ? username[0] : ""}
-          </Avatar>
+          <BuzzIcon userid={null} username={username} icon={icon} />
         </Box>
 
         <Grid container item sx={{ flexGrow: 1 }}>
@@ -138,7 +134,8 @@ export default function Comment(props) {
               fontSize: "16px",
               borderRadius: "20px",
               width: "90%",
-              margin: "10px 5px",
+              margin: "17px 30px",
+              width: "80%",
               "&:focus": {
                 backgroundColor: "#ffffff !important",
               },
@@ -174,20 +171,8 @@ export default function Comment(props) {
             }}
           >
             {/* Poster Icon */}
-            <Box sx={{ width: "60px" }}>
-              <Avatar
-                sx={{
-                  width: 40,
-                  height: 40,
-                  margin: "10px",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  jumpToUserprofile(c.userid);
-                }}
-              >
-                {c.username[0]}
-              </Avatar>
+            <Box sx={{ width: "90px" }}>
+              <BuzzIcon userid={c.userid} username={c.username} icon={c.icon} />
             </Box>
             <Grid container item sx={{ flexGrow: 1 }}>
               <Box sx={{ flexDirection: "column" }}>
@@ -195,8 +180,8 @@ export default function Comment(props) {
                   sx={{
                     mr: 2,
                     cursor: "pointer",
-                    margin: "15px 0",
-                    fontSize: "16px",
+                    margin: "20px 0 10px 0",
+                    fontSize: "20px",
                     lineHeight: "30px",
                   }}
                   onClick={() => {
