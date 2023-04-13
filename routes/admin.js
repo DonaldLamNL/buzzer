@@ -195,7 +195,7 @@ router.get("/all", async (req, res) => {
         return {
           userid: user.userid,
           username: user.username.toUpperCase(),
-          // icon: `https://example.com/${user.avatar}`,
+          icon: user.avatar ? user.avatar.name : null,
           numOfFollowing: user.following.length,
           numOfFollowers: user.followers.length,
           follow: user.followers.includes(decodedUser),
