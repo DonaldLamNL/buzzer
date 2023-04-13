@@ -199,49 +199,6 @@ router.post("/reset", async (req, res) => {
   }
 });
 
-// router.post("/forgot", async (req, res) => {
-//   const { email } = req.body;
-//   try {
-//     const user = await Users.findOne({ email: email });
-//     if (!user) {
-//       console.log("wrong email ");
-//       return res.status(400).json({ state: false, message: "Invalid email" });
-//     }
-//     const verificationCode = Math.floor(100000 + Math.random() * 900000);
-//     const message = {
-//       from: "buzzerfobuzz@gmail.com", // Replace with your Gmail address
-//       to: email, // Replace with recipient's email address
-//       subject: "Your verification code",
-//       text: `Your verification code is ${verificationCode}. If this is not you, please ignore this email.`,
-//     };
-//     await transporter.sendMail(message);
-//     console.log("Email sent: " + info.response);
-//     user.verificationCode = verificationCode;
-//     await user.save();
-//     res.json({ state: true, message: "Sent. Please check email" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ state: false, message: "Error sending email" });
-//   }
-// });
 
-// router.post("/forgot/reset", async (req, res) => {
-//   const { email, verificationCode, password } = req.body;
-//   try {
-//     const user = await Users.findOne({ email: email });
-//     if (!user) {
-//       console.log("wrong email ");
-//       return res.status(400).json({ state: false, message: "Invalid email" });
-//     }
-//     if (user.verificationCode == verificationCode) {
-//       user.password = password;
-//       await user.save();
-//       res.json({ state: true, message: "password reset." });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ state: false, message: "Error sending email" });
-//   }
-// });
 
 module.exports = router;

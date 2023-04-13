@@ -180,4 +180,34 @@ router.post("/verify", upload.none(), async (req, res) => {
   }
 });
 
+// Get All users
+router.get("/all", async (req, res) => {
+  const { userid } = req.query;
+  const decodedUser = decodeUserID(userid);
+
+  try {
+    // Admin Verification
+    const admin = await Users.findOne({ userid: decodedUser });
+    if (admin.isAdmin) {
+      let userList = await Users.find({}, { userid: 1, username: 1, avatar: 1, following: 1, followers: 1, isVerify: 1 });
+      userList = userList.filter(user => user.userid !== decodedUser);
+      responseData = userList.map(user => {
+        return {
+          userid: user.userid,
+          username: user.username.toUpperCase(),
+          // icon: `https://example.com/${user.avatar}`,
+          numOfFollowing: user.following.length,
+          numOfFollowers: user.followers.length,
+          follow: user.followers.includes(decodedUser),
+          isVerify: user.isVerify,
+        };
+      });
+      res.send(responseData);
+    }
+  } catch (error) {
+    console.error(error);
+    res.send({ state: false });
+  }
+});
+
 module.exports = router;

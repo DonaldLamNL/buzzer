@@ -39,10 +39,10 @@ router.get('/search', async (req, res) => {
 
         userList = userList.filter(user => user.userid !== decodedUser);
 
-        if (keywords == '') {
-            // const decodedUserIndex = userList.findIndex(user => user.userid === decodedUser);
-            // const randomIndices = getRandomIntegers(0, userList.length - 1, 10, [decodedUserIndex]);
-            // userList = randomIndices.map(index => userList[index]);
+        if (keywords == '' && userList.length > 10) {
+            const numToSelect = 10;
+            const shuffledList = userList.sort(() => Math.random() - 0.5);
+            userList = shuffledList.slice(0, numToSelect);
         }
 
         responseData = userList.map(user => {
@@ -249,7 +249,6 @@ router.get('/userinfo', async (req, res) => {
 router.post("/update", async (req, res) => {
     const { userid, username, description } = req.body;
     const decodedUser = decodeUserID(userid);
-    console.log(req.body)
     try {
         const user = await Users.findOne({ userid: decodedUser });
         if (!user) {
