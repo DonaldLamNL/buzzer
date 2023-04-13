@@ -139,7 +139,7 @@ export default function NewEditProfile() {
 
     useEffect(() => {
         getUserInfo();
-    }, [userInfo, iconDisplay]);
+    }, []);
 
     return (
         <ThemeProvider theme={theme}>
