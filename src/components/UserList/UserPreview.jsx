@@ -155,7 +155,7 @@ export default function UserPreview(props) {
 
         {/* Info */}
         <Box
-          sx={{ display: "flex", flexDirection: "column", cursor: "pointer" }}
+          sx={{ display: "flex", flexDirection: "column", cursor: "pointer", marginLeft: "40px" }}
           onClick={jumpToUserprofile}
         >
           <Box sx={{ height: "60px" }}>
