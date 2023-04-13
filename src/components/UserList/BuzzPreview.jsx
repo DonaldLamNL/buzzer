@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import Cookies from "js-cookie";
 import React from "react";
 import serverPath from "../../ServerPath";
+import BuzzIcon from "../Items/BuzzIcon";
 
 export default function BuzzPreview(props) {
   const { userid, username, icon, buzzid, content, isVerify, deletedBuzz } =
@@ -61,9 +62,7 @@ export default function BuzzPreview(props) {
         >
           {/* Poster Icon */}
           <Box sx={{ width: "90px" }}>
-            <Avatar src={icon} sx={{ width: 50, height: 50, margin: "20px" }}>
-              {username[0]}
-            </Avatar>
+            <BuzzIcon userid={userid} username={username} icon={icon} />
           </Box>
 
           {/* Content Part */}

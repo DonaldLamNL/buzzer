@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { CheckCircle } from "@mui/icons-material";
 import serverPath from "../../ServerPath";
+import BuzzIcon from "./BuzzIcon";
 
 export default function RebuzzContent(props) {
   const navigate = useNavigate();
@@ -84,15 +85,7 @@ export default function RebuzzContent(props) {
           }}
         >
           <Box>
-            <Avatar
-              src={rebuzzContent.icon}
-              sx={{ width: 50, height: 50, margin: "20px", cursor: "pointer" }}
-              onClick={() => {
-                navigate(`/user/${rebuzzContent.userid}`);
-              }}
-            >
-              {rebuzzContent.username[0]}
-            </Avatar>
+            <BuzzIcon userid={rebuzzContent.userid} username={rebuzzContent.username} icon={rebuzzContent.icon} />
           </Box>
 
           {/* Content Part */}

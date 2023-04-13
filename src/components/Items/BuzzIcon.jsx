@@ -1,8 +1,10 @@
 import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import serverPath from '../../ServerPath';
+import { useNavigate } from 'react-router-dom';
 
 export default function BuzzIcon(paras) {
+    const navigate = useNavigate();
     const { userid, username, icon } = paras;
     const [iconDisplay, setIconDisplay] = useState(null);
 
@@ -31,7 +33,6 @@ export default function BuzzIcon(paras) {
 
 
     useEffect(() => {
-        console.log(paras)
         getIcon(icon);
     }, [icon]);
 

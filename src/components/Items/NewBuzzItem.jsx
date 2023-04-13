@@ -196,7 +196,7 @@ export default function NewBuzzItem(props) {
                 >
                     {/* Poster Icon */}
                     <Box>
-                        <BuzzIcon userid={null} username={username} icon={icon} />
+                        <BuzzIcon userid={userid} username={username} icon={icon} />
                     </Box>
 
                     {/* Content Part */}
