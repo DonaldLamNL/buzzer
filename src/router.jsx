@@ -10,6 +10,8 @@ import UserProfile from "./components/User/UserProfile";
 import EditProfile from "./components/User/EditProfile";
 import Hive from "./components/Hive";
 import { Navigate } from "react-router-dom";
+import Following from "./components/UserList/Following";
+import BuzzFollowing from "./components/BuzzFollowing/BuzzFollowing";
 
 const routerConfig = (isLogin) => {
   return [
@@ -21,6 +23,7 @@ const routerConfig = (isLogin) => {
           path: "home/",
           element: isLogin ? <Home /> : null,
         },
+
         {
           path: "buzz",
           element: isLogin ? <Buzz /> : null,
@@ -31,18 +34,23 @@ const routerConfig = (isLogin) => {
         },
       ],
     },
+    // {
+    //   path: "buzzFowllowing",
+    //   element: isLogin ? <BuzzFollowing /> : null,
+    // },
+
     {
       path: "/login",
       // element: <Login />,
-      element: isLogin ? <Navigate to="/home" /> : <Login />
+      element: isLogin ? <Navigate to="/home" /> : <Login />,
     },
     {
       path: "/signup",
-      element: isLogin ? <Navigate to="/home" /> : <Signup />
+      element: isLogin ? <Navigate to="/home" /> : <Signup />,
     },
     {
       path: "/forgotpassword",
-      element: isLogin ? <Navigate to="/home" /> : <ForgotPassword />
+      element: isLogin ? <Navigate to="/home" /> : <ForgotPassword />,
     },
     {
       path: "/resetpassword",

@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Box, CircularProgress, IconButton } from "@mui/material";
+import {
+  Box,
+  Card,
+  CircularProgress,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 
 // components
 import NewBuzzItem from "../Items/NewBuzzItem";
-import Post from "./Post";
+// import Post from "./Post";
 import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
+import Post from "../Home/Post";
 
 // Get buzzes
-export default function Home() {
+export default function BuzzFollowing() {
   const [buzzList, setBuzzList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getBuzzes = async () => {
     try {
-      fetch(`${serverPath}/buzzes/home?userid=${Cookies.get("BuzzerUser")}`)
+      fetch(`${serverPath}/buzzes/follow?userid=${Cookies.get("BuzzerUser")}`)
         .then((response) => response.json())
         .then((responseData) => {
           setBuzzList(responseData);
@@ -49,7 +55,11 @@ export default function Home() {
 
   return (
     <div>
-      <Post />
+      {/* <Post /> */}
+      <Typography align="center" marginTop={"20px"} fontSize={25}>
+        Buzzes of Your Following
+      </Typography>
+
       {!isLoaded && (
         <Box textAlign={"center"} marginTop={20}>
           <CircularProgress size={100} />
@@ -59,15 +69,8 @@ export default function Home() {
         shuffleArray(buzzList).map((post) => (
           <NewBuzzItem key={post.buzzid} {...post} />
         ))}
-      <Box textAlign={"center"}>
-        <IconButton
-          onClick={() => {
-            window.location.reload();
-          }}
-        >
-          <AutorenewIcon fontSize="large" />
-        </IconButton>
-      </Box>
+
+      {/* <LinearProgress /> */}
     </div>
   );
 }

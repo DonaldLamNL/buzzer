@@ -10,6 +10,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import NavItem from "./Items/NavItem";
 import Cookies from "js-cookie";
 import serverPath from "../ServerPath";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const Image = styled.img`
   width: 100%;
@@ -124,6 +125,13 @@ export default function Nav() {
             path="home"
             name="home"
             component={HomeRoundedIcon}
+          />
+
+          <NavItem
+            hovering={hovering}
+            path="buzzFowllowing"
+            name="follow"
+            component={BookmarkIcon}
           />
 
           <Box onClick={jumpToUserProfile}>

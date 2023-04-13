@@ -9,10 +9,11 @@ import Home from "./Home/Home";
 import BuzzSearch from "./Searching/BuzzSearch";
 import SideContent from "./Side/SideContent";
 import Buzz from "./BuzzPage/Buzz";
-import UserList from "./UserList/UserList"
-import Admin from "./UserList/Admin"
+import UserList from "./UserList/UserList";
+import Admin from "./UserList/Admin";
 import UserProfile from "./User/UserProfile";
 import NewEditProfile from "./User/NewEditProfile";
+import BuzzFollowing from "./BuzzFollowing/BuzzFollowing";
 
 const routerConfig = [
   {
@@ -61,7 +62,7 @@ const routerConfig = [
       <>
         <UserProfile />
       </>
-    )
+    ),
   },
   {
     path: "/edit",
@@ -69,7 +70,11 @@ const routerConfig = [
       <>
         <NewEditProfile />
       </>
-    )
+    ),
+  },
+  {
+    path: "/buzzFowllowing",
+    element: <BuzzFollowing />,
   },
 ];
 
