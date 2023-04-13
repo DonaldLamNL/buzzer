@@ -5,23 +5,33 @@ const { decodeUserID } = require('./commonfunct');
 const multer = require('multer');
 const upload = multer();
 
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "buzzerforbuzz@gmail.com",
+        pass: "tgusxfyqeotutbxw",
+    },
+});
+
 // Delete user
 router.post('/delete', upload.none(), async (req, res) => {
     const { userid, targetid } = req.body;
     const decodedUser = decodeUserID(userid);
 
     try {
-        // Admin Verify
-        const user = await Users.findOne({ userid: decodedUser });
+        // Admin Verification
+        const admin = await Users.findOne({ userid: decodedUser });
+        if (admin.isAdmin) {
 
-        if (user.isAdmin) {
-            // Remove targetid from all users' following and followers lists
+            // Remove target from all users' following and followers lists
             await Users.updateMany(
                 { $or: [{ following: targetid }, { followers: targetid }] },
                 { $pull: { following: targetid, followers: targetid } }
             );
 
-            // Delete userid from like and dislike arrays of all buzzes
+            // Delete target from like and dislike arrays of all buzzes
             await Buzzes.updateMany(
                 {},
                 { $pull: { like: targetid, dislike: targetid } }
@@ -33,7 +43,7 @@ router.post('/delete', upload.none(), async (req, res) => {
                 const buzz = buzzes[i];
 
                 // Delete rebuzz
-                if (buzz.rebuzz != 0) {
+                if (buzz.rebuzz != 0 && buzz.rebuzz != -1) {
                     const rebuzzPost = await Buzzes.findOne({ buzzid: buzz.rebuzz });
                     if (rebuzzPost.userid == targetid) {
                         await Buzzes.updateOne(
@@ -60,11 +70,24 @@ router.post('/delete', upload.none(), async (req, res) => {
                 }
             }
 
-            // Delete buzzes
+            // Delete buzzes and comments
             await Buzzes.deleteMany({ userid: targetid });
-            // Delete comment
             await Comments.findOneAndDelete({ userid: targetid });
-            // Delete user
+
+            // Send an email to delete user
+            {
+                // const user = await Users.findOne({ userid: targetid });
+
+                // const message = {
+                //     from: "buzzerfobuzz@gmail.com",
+                //     to: user.email,
+                //     subject: "Your buzzer account was deleted",
+                //     text: `Your account was deleted by Elon Musk, Bye Bye.`,
+                // };
+                // await transporter.sendMail(message);
+            }
+
+            // Delete target user
             await Users.findOneAndDelete({ userid: targetid });
 
             res.send({ state: true, message: "User deleted successfully." });
@@ -83,10 +106,9 @@ router.post('/deletebuzz', upload.none(), async (req, res) => {
     const decodedUser = decodeUserID(userid);
 
     try {
-        // Admin Verify
-        const user = await Users.findOne({ userid: decodedUser });
-
-        if (user.isAdmin) {
+        // Admin Verification
+        const admin = await Users.findOne({ userid: decodedUser });
+        if (admin.isAdmin) {
 
             // Delete rebuzz
             const buzzes = await Buzzes.find({});
@@ -120,13 +142,11 @@ router.post('/verify', upload.none(), async (req, res) => {
     const decodedUser = decodeUserID(userid);
 
     try {
-        // Admin Verify
-        const user = await Users.findOne({ userid: decodedUser });
-        if (user.isAdmin) {
+        // Admin Verification
+        const admin = await Users.findOne({ userid: decodedUser });
+        if (admin.isAdmin) {
 
-            // Target User
             const target = await Users.findOne({ userid: targetid });
-
             if (target) {
                 if (target.isVerify) {
                     await Users.updateOne({ userid: targetid }, { $set: { isVerify: false } });
@@ -140,7 +160,6 @@ router.post('/verify', upload.none(), async (req, res) => {
         } else {
             res.send({ state: false, message: "You do not have permission to verify users." });
         }
-
     } catch (err) {
         console.error(err);
         res.send({ state: false, message: 'Failed to delete user.' });

@@ -105,8 +105,8 @@ router.post("/forgot", async (req, res) => {
     }
     const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
     const message = {
-      from: "buzzerfobuzz@gmail.com", // Replace with your Gmail address
-      to: email, // Replace with recipient's email address
+      from: "buzzerfobuzz@gmail.com",
+      to: email,
       subject: "Your verification code",
       text: `Your verification code is ${verificationCode}. If this is not you, please ignore this email.`,
     };
@@ -133,7 +133,7 @@ router.post("/forgot/reset", async (req, res) => {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       user.password = hashedPassword;
-      user.verificationCode = null; // Clear the verification code after a successful reset
+      user.verificationCode = null;
       await user.save();
       res.json({ state: true, message: "Password reset successful." });
     } else {
@@ -150,26 +150,26 @@ router.get('/user', async (req, res) => {
   let decodedUser = decodeUserID(userid);
 
   try {
-      const user = await Users.findOne({ userid: decodedUser });
-      if(user){
-          const responseData = {
-              // username:user.username,
-              userid: user.userid,
-              username: user.username,
-              description: user.description,
-              email: user.email,
-          }
-          res.send(responseData);
-      }else{
-          res.send({ status: false, message: 'User not found' })
+    const user = await Users.findOne({ userid: decodedUser });
+    if (user) {
+      const responseData = {
+        userid: user.userid,
+        username: user.username,
+        description: user.description,
+        email: user.email,
       }
+      res.send(responseData);
+    } else {
+      res.send({ status: false, message: 'User not found' })
+    }
 
   } catch (error) {
-      console.log(error);
-      res.status(500).send('Internal Server Error');
+    console.log(error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
+// Reset password
 router.post("/reset", async (req, res) => {
   const { userid, oldPassword, password } = req.body;
   const decodedUser = decodeUserID(userid);

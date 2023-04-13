@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Buzzes, Users, Categories } = require('../databaseSchema');
+const { Buzzes, Users } = require('../databaseSchema');
 const { decodeUserID, replaceMentions } = require('./commonfunct');
 
 const multer = require('multer');
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
             content: buzz.content,
             category: buzz.category,
             numOfLike: buzz.like.length - buzz.dislike.length,
-            image: buzz.image ? buzz.image.name : null, // send the image name instead of the image data
+            image: buzz.image ? buzz.image.name : null,
             video: buzz.video ? buzz.video.name : null,
             comment: buzz.comment ? buzz.comment : null,
             commentCount: buzz.comment.length,
@@ -41,59 +41,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Image Endpoint
-router.get('/image/:imageName', async (req, res) => {
-    const { imageName } = req.params;
-
-    try {
-        const buzz = await Buzzes.findOne({ 'image.name': imageName });
-        if (buzz) {
-            res.contentType(buzz.image.contentType);
-            res.send(buzz.image.data);
-        } else {
-            res.status(404).send('Image not found');
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-// Video Endpoint
-router.get('/video/:videoName', async (req, res) => {
-    const { videoName } = req.params;
-
-    try {
-        const buzz = await Buzzes.findOne({ 'video.name': videoName });
-        if (buzz) {
-            res.contentType(buzz.video.contentType);
-            res.send(buzz.video.data);
-        } else {
-            res.status(404).send('Video not found');
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-{
-    // Update category
-    // const cat = await Categories.findOne({ name: category });
-    // if (cat) {
-    //     cat.buzz.push(newBuzzid);
-    //     await cat.save();
-    // } else {
-    //     const cat = new Categories({
-    //         name: category,
-    //         user: [decodedUser],
-    //         buzz: [newBuzzid],
-    //     });
-    //     await cat.save();
-    // }
-
-}
-
 // Posting System
 router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'video', maxCount: 1 }]), async (req, res) => {
     const { content, category, userid, rebuzz } = req.body;
@@ -101,8 +48,8 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
     const rebuzzid = isNaN(rebuzz) ? 0 : parseInt(rebuzz);
 
     try {
-        const replacedContent = await replaceMentions(content);
         // Generate new buzzid
+        const replacedContent = await replaceMentions(content);
         const highestBuzz = await Buzzes.findOne().sort({ buzzid: -1 }).exec();
         const newBuzzid = highestBuzz ? highestBuzz.buzzid + 1 : 1;
 
@@ -117,6 +64,7 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
             rebuzz: rebuzzid,
         });
 
+        // Check contains image / video
         if (req.files.image) {
             const { originalname, buffer, mimetype } = req.files.image[0];
             newBuzz.image = {
@@ -125,7 +73,6 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
                 contentType: mimetype,
             };
         }
-
         if (req.files.video) {
             console.log("video recieved~~~");
             const { originalname, buffer, mimetype } = req.files.video[0];
@@ -135,9 +82,8 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
                 contentType: mimetype,
             };
         }
-        await newBuzz.save();
 
-        console.log('success');
+        await newBuzz.save();
         res.send({ state: true, message: 'Buzz post successfully!', buzzid: newBuzzid });
     } catch (err) {
         console.error(err);
@@ -145,62 +91,15 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
     }
 });
 
-// Posting System
-// router.post('/post', upload.single('image'), async (req, res) => {
-//     const { content, category, userid, rebuzz } = req.body;
-//     const decodedUser = decodeUserID(userid);
-//     const rebuzzid = isNaN(rebuzz) ? 0 : parseInt(rebuzz);
-
-
-//     try {
-//         // Generate new buzzid
-//         const highestBuzz = await Buzzes.findOne().sort({ buzzid: -1 }).exec();
-//         const newBuzzid = highestBuzz ? highestBuzz.buzzid + 1 : 1;
-
-//         const newBuzz = new Buzzes({
-//             buzzid: newBuzzid,
-//             userid: decodedUser,
-//             content,
-//             // video,
-//             category,
-//             like: [],
-//             dislike: [],
-//             comment: [],
-//             rebuzz: rebuzzid,
-//         });
-
-//         if (req.file) {
-//             const { originalname, buffer, mimetype } = req.file;
-//             newBuzz.image = {
-//                 name: originalname,
-//                 data: buffer,
-//                 contentType: mimetype,
-//             };
-//         }
-
-//         await newBuzz.save();
-
-//         console.log('success');
-//         res.send({ state: true, message: 'Buzz post successfully!', buzzid: newBuzzid });
-//     } catch (err) {
-//         console.error(err);
-//         res.send({ state: false, message: 'Failed to post Buzz.' });
-//     }
-// });
-
 // Buzz Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
-    let decodedUser = decodeUserID(userid);
+    const decodedUser = decodeUserID(userid);
 
+    // Check category search
     const categorySearch = (keywords && keywords[0] == "*" ? true : false);
-
-    console.log("cat = ", categorySearch, keywords.substring(1))
-
     try {
-        // Search for buzzes by keywords
         let buzzes;
-
         if (categorySearch) {
             buzzes = await Buzzes.find({
                 category: keywords.substring(1)
@@ -212,6 +111,7 @@ router.get('/search', async (req, res) => {
         }
 
         const responseData = await getBuzzesList(buzzes, decodedUser);
+
         res.send(responseData);
 
     } catch (error) {
@@ -341,6 +241,42 @@ router.get('/user', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
+    }
+});
+
+// Image Endpoint
+router.get('/image/:imageName', async (req, res) => {
+    const { imageName } = req.params;
+
+    try {
+        const buzz = await Buzzes.findOne({ 'image.name': imageName });
+        if (buzz) {
+            res.contentType(buzz.image.contentType);
+            res.send(buzz.image.data);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Video Endpoint
+router.get('/video/:videoName', async (req, res) => {
+    const { videoName } = req.params;
+
+    try {
+        const buzz = await Buzzes.findOne({ 'video.name': videoName });
+        if (buzz) {
+            res.contentType(buzz.video.contentType);
+            res.send(buzz.video.data);
+        } else {
+            res.status(404).send('Video not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
