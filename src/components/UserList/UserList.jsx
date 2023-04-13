@@ -5,12 +5,8 @@ import PropTypes from 'prop-types';
 import Following from './Following'
 import Follower from './Follower'
 
-
-
-// TabPanel
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <Box
             role="tabpanel"
@@ -47,9 +43,8 @@ export default function UserList() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        window.history.pushState(null, '', `/#/userlist/irwinking123/${newValue}`);
+        window.history.pushState(null, '', `/#/userlist/${userid}/${newValue}`);
     };
-
 
     return (
         <Box sx={{ width: '90%' }}>

@@ -132,6 +132,7 @@ export default function RebuzzContent(props) {
               </Box>
 
               <Box>
+
                 <Typography
                   onClick={jumpToRebuzz}
                   sx={{
@@ -142,7 +143,15 @@ export default function RebuzzContent(props) {
                     },
                   }}
                 >
-                  {rebuzzContent.content}
+                  <Box
+                    sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
+                    dangerouslySetInnerHTML={{
+                      __html: rebuzzContent.content.replace(
+                        /%@(\w+)%/g,
+                        `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                      )
+                    }}
+                  />
                 </Typography>
               </Box>
             </Box>

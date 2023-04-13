@@ -98,7 +98,6 @@ export default function Comment(props) {
       });
   };
 
-
   const jumpToUserprofile = (uid) => {
     navigate(`/user/${uid}`);
     window.scrollTo({ top: 0, behavior: "smooth" });

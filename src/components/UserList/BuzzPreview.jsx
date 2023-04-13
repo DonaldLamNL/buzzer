@@ -89,12 +89,15 @@ export default function BuzzPreview(props) {
                 </Typography>
               </Box>
 
-              <Box>
-                <Typography
-                  sx={{ fontSize: "14px", marginRight: "90px" }}
-                  dangerouslySetInnerHTML={{ __html: content }}
-                />
-              </Box>
+              <Box
+                sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
+                dangerouslySetInnerHTML={{
+                  __html: content.replace(
+                    /%@(\w+)%/g,
+                    `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                  )
+                }}
+              />
             </Box>
           </Grid>
         </Box>
