@@ -7,6 +7,7 @@ import Follower from './Follower'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
+    
     return (
         <Box
             role="tabpanel"

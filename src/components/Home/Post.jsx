@@ -18,6 +18,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import PubSub from "pubsub-js";
 import RebuzzContent from "../Items/RebuzzContent";
 import serverPath from "../../ServerPath";
+import BuzzIcon from "../Items/BuzzIcon";
 
 export default function Post() {
   const navigate = useNavigate();
@@ -73,12 +74,12 @@ export default function Post() {
       console.log("uploaded iamge");
       formData.append("image", image);
     }
-  
+
     if (video) {
       console.log("uploaded video");
       formData.append("video", video);
     }
-    
+
     try {
       const response = await fetch(`${serverPath}/buzzes/post`, {
         method: "POST",
@@ -128,7 +129,7 @@ export default function Post() {
         setRebuzz(buzzid);
       }
     });
-  }, [rebuzz]);
+  }, [rebuzz, icon]);
 
   return (
     <>
@@ -146,9 +147,7 @@ export default function Post() {
       >
         {/* Poster Icon */}
         <Box sx={{ width: "90px" }}>
-          <Avatar sx={{ width: 50, height: 50, margin: "20px" }}>
-            {username ? username[0] : username}
-          </Avatar>
+          <BuzzIcon userid={null} username={username} icon={icon} />
         </Box>
 
         <Grid container item sx={{ flexGrow: 1 }}>

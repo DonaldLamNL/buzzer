@@ -22,6 +22,7 @@ import Comment from "../BuzzPage/Comment";
 import Cookies from "js-cookie";
 import RebuzzContent from "./RebuzzContent";
 import serverPath from "../../ServerPath";
+import BuzzIcon from "./BuzzIcon";
 
 export default function NewBuzzItem(props) {
     const navigate = useNavigate();
@@ -195,13 +196,7 @@ export default function NewBuzzItem(props) {
                 >
                     {/* Poster Icon */}
                     <Box>
-                        <Avatar
-                            src={icon}
-                            sx={{ width: 50, height: 50, margin: "20px", cursor: "pointer" }}
-                            onClick={jumpToUserprofile}
-                        >
-                            {username[0]}
-                        </Avatar>
+                        <BuzzIcon userid={null} username={username} icon={icon} />
                     </Box>
 
                     {/* Content Part */}

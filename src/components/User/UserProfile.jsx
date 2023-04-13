@@ -21,6 +21,7 @@ export default function UserProfile() {
     const [isFollow, setIsFollow] = useState(null);
     const [followersCount, setFollowersCount] = useState(null);
     const [buzzList, setBuzzList] = useState([]);
+    const [iconDisplay, setIconDisplay] = useState(null);
     const [bgImageDisplay, setBgImageDisplay] = useState(null);
 
     const handleButton = async () => {
@@ -69,23 +70,39 @@ export default function UserProfile() {
                 )}`
             );
             const data = await response.json();
-            if(data.state){
+            if (data.state) {
                 setUserInfo(data.userInfo);
                 setIsFollow(data.userInfo.isFollow);
                 setFollowersCount(data.userInfo.followersCount);
-                getImage(data.userInfo.bgimage)
+                getBgImage(data.userInfo.bgimage);
+                getIcon(data.userInfo.icon);
             }
         } catch (error) {
             console.log(error);
         }
     };
 
-    const getImage = async (imageName) => {
+    const getBgImage = async (imageName) => {
         if (imageName) {
             fetch(`${serverPath}/users/bgimage/${imageName}`)
                 .then((response) => response.blob())
                 .then((image) => {
                     setBgImageDisplay(URL.createObjectURL(image));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            setBgImageDisplay(null)
+        }
+    };
+
+    const getIcon = async (imageName) => {
+        if (imageName) {
+            fetch(`${serverPath}/users/icon/${imageName}`)
+                .then((response) => response.blob())
+                .then((image) => {
+                    setIconDisplay(URL.createObjectURL(image));
                 })
                 .catch((error) => {
                     console.log(error);
@@ -180,7 +197,7 @@ export default function UserProfile() {
                                                 marginTop: "-64px",
                                                 outline: "4px solid white",
                                             }}
-                                            src={userInfo.icon}
+                                            src={iconDisplay}
                                         >
                                             {userInfo.username
                                                 ? userInfo.username[0]

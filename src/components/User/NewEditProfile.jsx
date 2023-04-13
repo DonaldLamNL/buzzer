@@ -25,21 +25,23 @@ export default function NewEditProfile() {
     const [icon, setIcon] = useState(null);
     const [iconDisplay, setIconDisplay] = useState(null);
 
-
+    // Get user information
     const getUserInfo = async () => {
         try {
             const response = await fetch(`${serverPath}/users/userinfo?userid=${Cookies.get("BuzzerUser")}`);
             const data = await response.json();
+            console.log(data)
             setUserInfo(data.userInfo);
             setUsername(data.userInfo.username);
             setDescription(data.userInfo.description);
             getImage(data.userInfo.bgimage);
-            getIcon(data.userInfo.icon)
+            getIcon(data.userInfo.icon);
         } catch (error) {
             console.log(error);
         }
     };
 
+    // Get Background image
     const getImage = async (imageName) => {
         if (imageName) {
             fetch(`${serverPath}/users/bgimage/${imageName}`)
@@ -55,18 +57,20 @@ export default function NewEditProfile() {
         }
     };
 
+    // Get icon
     const getIcon = async (imageName) => {
         if (imageName) {
+            console.log(imageName)
             fetch(`${serverPath}/users/icon/${imageName}`)
                 .then((response) => response.blob())
                 .then((image) => {
-                    setBgImageDisplay(URL.createObjectURL(image));
+                    setIconDisplay(URL.createObjectURL(image));
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         } else {
-            setBgImageDisplay(null)
+            setIconDisplay(null)
         }
     };
 
@@ -88,10 +92,12 @@ export default function NewEditProfile() {
         } else {
             setOnExecute(true);
         }
+
+        // Update bgImage
         const formData = new FormData();
         formData.append("userid", Cookies.get("BuzzerUser"));
         formData.append("image", bgImage);
-
+        formData.append("icon", icon)
         try {
             const response = await fetch(`${serverPath}/users/bgimage`, {
                 method: "POST",
@@ -101,19 +107,7 @@ export default function NewEditProfile() {
             console.error(err);
         }
 
-        const iconData = new FormData();
-        formData.append("userid", Cookies.get("BuzzerUser"));
-        formData.append("icon", icon);
-
-        try {
-            const response = await fetch(`${serverPath}/users/icon`, {
-                method: "POST",
-                body: iconData,
-            });
-        } catch (err) {
-            console.error(err);
-        }
-
+        // Save
         try {
             const response = await fetch(`${serverPath}/users/update`, {
                 method: "POST",
@@ -227,16 +221,16 @@ export default function NewEditProfile() {
                                                 outline: "4px solid white",
                                             }}
                                             src={iconDisplay}
-                                            // onClick={() => {iconRef.current.click();}}
+                                            onClick={() => { iconRef.current.click(); }}
                                         >
-                                            {/* <input
-                                                type="file"
-                                                ref={iconRef}
-                                                onChange={handleIconUpdate}
-                                                style={{ display: 'none' }}
-                                            /> */}
                                             {userInfo.username ? userInfo.username[0] : userInfo.username}
                                         </Avatar>
+                                        <input
+                                            type="file"
+                                            ref={iconRef}
+                                            onChange={handleIconUpdate}
+                                            style={{ display: 'none' }}
+                                        />
 
                                         {/* User Info */}
                                         <Box marginTop="10px">
