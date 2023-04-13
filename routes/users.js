@@ -7,18 +7,6 @@ const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Function to generate an array of unique random integers
-function getRandomIntegers(min, max, count, exclude) {
-    const randomIntegers = new Set();
-    while (randomIntegers.size < count) {
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-        if (!exclude.includes(randomNumber)) {
-            randomIntegers.add(randomNumber);
-        }
-    }
-    return Array.from(randomIntegers);
-}
-
 // User Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
@@ -49,7 +37,7 @@ router.get('/search', async (req, res) => {
             return {
                 userid: user.userid,
                 username: user.username.toUpperCase(),
-                // icon: `https://example.com/${user.avatar}`,
+                icon: user.avatar ? user.avatar.name : null,
                 numOfFollowing: user.following.length,
                 numOfFollowers: user.followers.length,
                 follow: user.followers.includes(decodedUser),
@@ -72,7 +60,7 @@ router.get('/currentuser', async (req, res) => {
         try {
             const user = await Users.findOne({ userid: decodedUser });
             if (user) {
-                res.send({ status: true, isLogin, username: user.username, icon: user.icon, userid: decodedUser, isVerify: user.isVerify });
+                res.send({ status: true, isLogin, username: user.username, icon: user.avatar, userid: decodedUser, isVerify: user.isVerify });
             } else {
                 res.send({ status: false, message: 'User not found' });
             }
@@ -117,7 +105,7 @@ router.get('/userprofile', async (req, res) => {
                 userid,
                 username: user.username,
                 description: user.description,
-                avatar: user.avatar,
+                icon: user.avatar ? user.avatar.name : null,
                 followersCount: user.followers.length,
                 followingCount: user.following.length,
                 isVerify: user.isVerify,
@@ -158,7 +146,7 @@ router.get('/followlist', async (req, res) => {
                 responseData.push({
                     userid: target.userid,
                     username: target.username,
-                    icon: target.avatar,
+                    icon: target.avatar ? target.avatar.name : null,
                     isVerify: target.isVerify,
                     follow: currentUser.following.includes(target.userid),
                 });
@@ -175,49 +163,6 @@ router.get('/followlist', async (req, res) => {
     }
 })
 
-// Post background image
-router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (req, res) => {
-    const { userid } = req.body;
-    const decodedUser = decodeUserID(userid);
-
-    try {
-        const user = await Users.findOne({ userid: decodedUser });
-
-        if (req.files.image) {
-            const { originalname, buffer, mimetype } = req.files.image[0];
-            user.bgimage = {
-                name: Math.random(100000000) + originalname,
-                data: buffer,
-                contentType: mimetype,
-            };
-        }
-
-        await user.save();
-        res.send({ state: true, message: 'Buzz post successfully!' });
-    } catch (err) {
-        console.error(err);
-        res.send({ state: false, message: 'Failed to post Buzz.' });
-    }
-})
-
-// Image Endpoint
-router.get('/bgimage/:imageName', async (req, res) => {
-    const { imageName } = req.params;
-
-    try {
-        const user = await Users.findOne({ 'bgimage.name': imageName });
-        if (user) {
-            res.contentType(user.bgimage.contentType);
-            res.send(user.bgimage.data);
-        } else {
-            res.status(404).send('Image not found');
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 // Get User All Info
 router.get('/userinfo', async (req, res) => {
     const { userid } = req.query;
@@ -232,7 +177,7 @@ router.get('/userinfo', async (req, res) => {
                 email: user.email,
                 username: user.username,
                 description: user.description,
-                avatar: user.avatar,
+                icon: user.avatar ? user.avatar.name : null,
                 isVerify: user.isVerify,
                 bgimage: user.bgimage ? user.bgimage.name : null,
             },
@@ -265,6 +210,76 @@ router.post("/update", async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ state: false, message: "Internal Server Error" });
+    }
+});
+
+// Post background image and icon
+router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'icon', maxCount: 1 }]), async (req, res) => {
+    const { userid } = req.body;
+    const decodedUser = decodeUserID(userid);
+
+    try {
+        const user = await Users.findOne({ userid: decodedUser });
+
+        if (req.files.image) {
+            const { originalname, buffer, mimetype } = req.files.image[0];
+            user.bgimage = {
+                name: Math.random(100000000) + originalname,
+                data: buffer,
+                contentType: mimetype,
+            };
+        }
+
+        if (req.files.icon) {
+            const { originalname, buffer, mimetype } = req.files.icon[0];
+            user.avatar = {
+                name: Math.random(100000000) + originalname,
+                data: buffer,
+                contentType: mimetype,
+            };
+        }
+
+        await user.save();
+        res.send({ state: true, message: 'Background image and icon updated successfully!' });
+    } catch (err) {
+        console.error(err);
+        res.send({ state: false, message: 'Failed to update background image and icon.' });
+    }
+});
+
+// Background Image Endpoint
+router.get('/bgimage/:imageName', async (req, res) => {
+    const { imageName } = req.params;
+
+    try {
+        const user = await Users.findOne({ 'bgimage.name': imageName });
+        if (user) {
+            res.contentType(user.bgimage.contentType);
+            res.send(user.bgimage.data);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+// Icon Endpoint
+router.get('/icon/:imageName', async (req, res) => {
+    console.log('test')
+    const { imageName } = req.params;
+
+    try {
+        const user = await Users.findOne({ 'avatar.name': imageName });
+        if (user) {
+            res.contentType(user.avatar.contentType);
+            res.send(user.avatar.data);
+        } else {
+            res.status(404).send('Image not found');
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
