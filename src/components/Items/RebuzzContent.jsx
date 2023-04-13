@@ -141,7 +141,7 @@ export default function RebuzzContent(props) {
                     dangerouslySetInnerHTML={{
                       __html: rebuzzContent.content.replace(
                         /%@(\w+)%/g,
-                        `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                        `<a href="${window.location.origin}/#/user/$1">@$1</a>`
                       )
                     }}
                   />
