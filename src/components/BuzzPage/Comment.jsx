@@ -134,7 +134,6 @@ export default function Comment(props) {
             sx={{
               fontSize: "16px",
               borderRadius: "20px",
-              width: "90%",
               margin: "17px 30px",
               width: "80%",
               "&:focus": {
@@ -194,29 +193,18 @@ export default function Comment(props) {
                     <CheckCircle sx={{ color: "orange", ml: 1 }} />
                   )}{" "}
                 </Box>
-                
+
                 <Box sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}>
                   <Box
                     sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
                     dangerouslySetInnerHTML={{
                       __html: c.content.replace(
                         /%@(\w+)%/g,
-                        `<a href="http://127.0.0.1:5173/#/user/$1">@$1</a>`
+                        `<a href="${window.location.origin}/#/user/$1">@$1</a>`
                       )
                     }}
                   />
                 </Box>
-                {/* <IconButton
-                    size="large"
-                    sx={{
-                      position: "absolute",
-                      right: 10,
-                      bottom: 10,
-                    }}
-                    onClick={handleReply(c.userid)}
-                  >
-                    <ReplyIcon />
-                  </IconButton> */}
               </Box>
             </Grid>
           </Box>
