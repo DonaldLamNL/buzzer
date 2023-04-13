@@ -7,6 +7,7 @@ import serverPath from "../../ServerPath";
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Link, useNavigate } from "react-router-dom";
 import BuzzIcon from "../Items/BuzzIcon";
+import { CheckCircle } from "@mui/icons-material";
 
 export default function Comment(props) {
   const navigate = useNavigate();
@@ -189,7 +190,11 @@ export default function Comment(props) {
                   }}
                 >
                   {c.username}
+                  {c.isVerify && (
+                    <CheckCircle sx={{ color: "orange", ml: 1 }} />
+                  )}{" "}
                 </Box>
+                
                 <Box sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}>
                   <Box
                     sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
