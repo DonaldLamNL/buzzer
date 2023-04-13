@@ -23,7 +23,9 @@ import { CheckCircle } from "@mui/icons-material";
 import serverPath from "../../ServerPath";
 
 export default function UserProfile() {
-  const [isloading, setIsloading] = useState(true);
+  const [isloadingUser, setIsloadingUser] = useState(true);
+  const [isloadingBuzz, setIsloadingBuzz] = useState(true);
+
   const navigator = useNavigate();
   const inputRef = useRef(null);
   const { userid } = useParams();
@@ -87,6 +89,7 @@ export default function UserProfile() {
         setFollowersCount(data.userInfo.followersCount);
         getBgImage(data.userInfo.bgimage);
         getIcon(data.userInfo.icon);
+        setIsloadingUser(false);
       }
     } catch (error) {
       console.log(error);
@@ -132,6 +135,7 @@ export default function UserProfile() {
       .then((response) => response.json())
       .then((responseData) => {
         setBuzzList(responseData);
+        setIsloadingBuzz(false);
       })
       .catch((error) => {
         console.log(error);
@@ -141,17 +145,16 @@ export default function UserProfile() {
   useEffect(() => {
     getUserInfo();
     getBuzzes();
-    setIsloading(false);
   }, [userid, isFollow]);
 
   return (
     <>
-      {isloading && (
+      {(isloadingUser || isloadingBuzz) && (
         <Box textAlign={"center"} marginTop={20}>
           <CircularProgress size={100} />
         </Box>
       )}
-      {!isloading && userInfo && (
+      {!isloadingUser && !isloadingBuzz && userInfo && (
         <section
           style={{
             display: "block",
