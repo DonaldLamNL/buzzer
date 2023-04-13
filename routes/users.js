@@ -14,11 +14,11 @@ function getRandomIntegers(min, max, count, exclude) {
         const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
         if (!exclude.includes(randomNumber)) {
             randomIntegers.add(randomNumber);
-        }   
+        }
     }
     return Array.from(randomIntegers);
 }
-    
+
 // User Searching System
 router.get('/search', async (req, res) => {
     const { keywords, userid } = req.query;
@@ -40,10 +40,9 @@ router.get('/search', async (req, res) => {
         userList = userList.filter(user => user.userid !== decodedUser);
 
         if (keywords == '') {
-            console.log('All Recommend');
-            const decodedUserIndex = userList.findIndex(user => user.userid === decodedUser);
-            const randomIndices = getRandomIntegers(0, userList.length - 1, 10, [decodedUserIndex]);
-            userList = randomIndices.map(index => userList[index]);
+            // const decodedUserIndex = userList.findIndex(user => user.userid === decodedUser);
+            // const randomIndices = getRandomIntegers(0, userList.length - 1, 10, [decodedUserIndex]);
+            // userList = randomIndices.map(index => userList[index]);
         }
 
         responseData = userList.map(user => {
@@ -181,14 +180,13 @@ router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (
     const { userid } = req.body;
     const decodedUser = decodeUserID(userid);
 
-
     try {
         const user = await Users.findOne({ userid: decodedUser });
 
         if (req.files.image) {
             const { originalname, buffer, mimetype } = req.files.image[0];
             user.bgimage = {
-                name: originalname,
+                name: Math.random(100000000) + originalname,
                 data: buffer,
                 contentType: mimetype,
             };
@@ -205,8 +203,6 @@ router.post('/bgimage', upload.fields([{ name: 'image', maxCount: 1 }]), async (
 // Image Endpoint
 router.get('/bgimage/:imageName', async (req, res) => {
     const { imageName } = req.params;
-
-    console.log('============',imageName);
 
     try {
         const user = await Users.findOne({ 'bgimage.name': imageName });
@@ -255,22 +251,22 @@ router.post("/update", async (req, res) => {
     const decodedUser = decodeUserID(userid);
     console.log(req.body)
     try {
-      const user = await Users.findOne({ userid: decodedUser });
-      if (!user) {
-        console.log("User not found");
-        return res.status(400).json({ state: false, message: "User not found" });
-      }
-  
-      user.username = username;
-      user.description = description;
-  
-      await user.save();
-  
-      res.json({ state: true, message: "Profile updated successfully" });
+        const user = await Users.findOne({ userid: decodedUser });
+        if (!user) {
+            console.log("User not found");
+            return res.status(400).json({ state: false, message: "User not found" });
+        }
+
+        user.username = username;
+        user.description = description;
+
+        await user.save();
+
+        res.json({ state: true, message: "Profile updated successfully" });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ state: false, message: "Internal Server Error" });
+        console.log(error);
+        res.status(500).json({ state: false, message: "Internal Server Error" });
     }
-  });
+});
 
 module.exports = router;

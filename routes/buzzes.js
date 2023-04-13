@@ -68,16 +68,15 @@ router.post('/post', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'vid
         if (req.files.image) {
             const { originalname, buffer, mimetype } = req.files.image[0];
             newBuzz.image = {
-                name: originalname,
+                name: Math.random(100000000) + originalname,
                 data: buffer,
                 contentType: mimetype,
             };
         }
         if (req.files.video) {
-            console.log("video recieved~~~");
             const { originalname, buffer, mimetype } = req.files.video[0];
             newBuzz.video = {
-                name: originalname,
+                name:  Math.random(100000000) + originalname,
                 data: buffer,
                 contentType: mimetype,
             };
