@@ -1,6 +1,7 @@
 const { Users } = require('../databaseSchema');
 const jwt = require('jsonwebtoken');
 
+// Decode userid
 function decodeUserID(token) {
     try {
         const JWT_SECRET = '12345';
@@ -16,6 +17,7 @@ function decodeUserID(token) {
     }
 }
 
+// Replace the '@' content
 const replaceMentions = async (content) => {
     const regex = /@(\w+)/g;
     let replacedContent = content;

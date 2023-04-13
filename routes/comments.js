@@ -11,11 +11,10 @@ router.post('/post', upload.none(), async (req, res) => {
     const decodedUser = decodeUserID(userid);
 
     try {
+        // Generate new commentid
         const replacedContent = await replaceMentions(content);
-        console.log(replacedContent);
-        // Post a comment
         const highestComment = await Comments.findOne().sort({ commentid: -1 }).exec();
-        const newCommentid = highestComment ? highestComment.commentid + 1 : 1;  // generate new commentid
+        const newCommentid = highestComment ? highestComment.commentid + 1 : 1;
         const newComment = new Comments({
             commentid: newCommentid,
             userid: decodedUser,
