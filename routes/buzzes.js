@@ -17,8 +17,8 @@ router.get("/", async (req, res) => {
     const userLike = buzz.like.includes(decodedUser)
       ? 1
       : buzz.dislike.includes(decodedUser)
-      ? -1
-      : 0;
+        ? -1
+        : 0;
     const author = await Users.findOne({ userid: buzz.userid });
     const responseData = {
       buzzid,
@@ -201,8 +201,8 @@ const getBuzzesList = async (buzzes, decodedUser) => {
         const userLike = buzz.like.includes(decodedUser)
           ? 1
           : buzz.dislike.includes(decodedUser)
-          ? -1
-          : 0;
+            ? -1
+            : 0;
         const author = await Users.findOne({ userid: buzz.userid });
         return {
           buzzid: buzz.buzzid,
@@ -265,11 +265,10 @@ router.get("/home", async (req, res) => {
     // const user = await Users.find({ userid: decodedUser });
     const buzzes = await Buzzes.find();
     const randomElements = [];
-
     const numberOfElementsToSelect = 10;
 
     if (buzzes.length <= 10) {
-      const responseData = await getBuzzesList(buzzes, decodedUser);
+      var responseData = await getBuzzesList(buzzes, decodedUser);
     } else {
       while (randomElements.length < numberOfElementsToSelect) {
         const randomIndex = Math.floor(Math.random() * buzzes.length);
@@ -279,10 +278,8 @@ router.get("/home", async (req, res) => {
           randomElements.push(randomElement);
         }
       }
-
-      const responseData = await getBuzzesList(randomElements, decodedUser);
+      responseData = await getBuzzesList(randomElements, decodedUser);
     }
-
     res.send(responseData);
   } catch (error) {
     console.error(error);
