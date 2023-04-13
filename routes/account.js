@@ -103,7 +103,9 @@ router.post("/forgot", async (req, res) => {
       console.log("wrong email ");
       return res.status(400).json({ state: false, message: "Invalid email" });
     }
-    const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
     const message = {
       from: "buzzerfobuzz@gmail.com",
       to: email,
@@ -137,7 +139,9 @@ router.post("/forgot/reset", async (req, res) => {
       await user.save();
       res.json({ state: true, message: "Password reset successful." });
     } else {
-      res.status(400).json({ state: false, message: "Invalid verification code" });
+      res
+        .status(400)
+        .json({ state: false, message: "Invalid verification code" });
     }
   } catch (error) {
     console.error(error);
@@ -145,7 +149,7 @@ router.post("/forgot/reset", async (req, res) => {
   }
 });
 
-router.get('/user', async (req, res) => {
+router.get("/user", async (req, res) => {
   const { userid } = req.query;
   let decodedUser = decodeUserID(userid);
 
@@ -157,15 +161,14 @@ router.get('/user', async (req, res) => {
         username: user.username,
         description: user.description,
         email: user.email,
-      }
+      };
       res.send(responseData);
     } else {
-      res.send({ status: false, message: 'User not found' })
+      res.send({ status: false, message: "User not found" });
     }
-
   } catch (error) {
     console.log(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -190,7 +193,6 @@ router.post("/reset", async (req, res) => {
     user.password = hashedPassword;
     await user.save();
     res.json({ state: true, message: "Password reset successfully." });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ state: false, message: "Error resetting password" });
