@@ -17,9 +17,7 @@ export default function UserManagement() {
   const getUserList = async () => {
     try {
       fetch(
-        `${serverPath}/users/search?keywords=${""}&userid=${Cookies.get(
-          "BuzzerUser"
-        )}`
+        `${serverPath}/admin/all?userid=${Cookies.get("BuzzerUser")}`
       )
         .then((response) => response.json())
         .then((data) => {
