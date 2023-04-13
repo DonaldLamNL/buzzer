@@ -60,7 +60,14 @@ router.get('/currentuser', async (req, res) => {
         try {
             const user = await Users.findOne({ userid: decodedUser });
             if (user) {
-                res.send({ status: true, isLogin, username: user.username, icon: user.avatar, userid: decodedUser, isVerify: user.isVerify });
+                res.send({
+                    status: true,
+                    isLogin,
+                    username: user.username,
+                    icon: user.avatar ? user.avatar.name : null,
+                    userid: decodedUser,
+                    isVerify: user.isVerify
+                });
             } else {
                 res.send({ status: false, message: 'User not found' });
             }

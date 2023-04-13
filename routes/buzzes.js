@@ -20,13 +20,12 @@ router.get("/", async (req, res) => {
       ? -1
       : 0;
     const author = await Users.findOne({ userid: buzz.userid });
-
     const responseData = {
       buzzid,
       userLike,
       userid: buzz.userid,
       username: author.username,
-      icon: author.avatar ? author.avatar : null,
+      icon: author.avatar ? author.avatar.name : null,
       isVerify: author.isVerify ? author.isVerify : false,
       content: buzz.content,
       category: buzz.category,
@@ -210,7 +209,7 @@ const getBuzzesList = async (buzzes, decodedUser) => {
           userLike,
           userid: buzz.userid,
           username: author.username,
-          icon: author.avatar ? author.avatar : null,
+          icon: author.avatar ? author.avatar.name : null,
           isVerify: author.isVerify ? author.isVerify : null,
           content: buzz.content,
           category: buzz.category,
