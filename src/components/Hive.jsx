@@ -217,7 +217,7 @@ export default function Hive() {
                         {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={(data.username != undefined)?data.username:data.userid} onClick={(e) => showContent(i)} />}
                         <CardContent style={{ padding: "0" }} onClick={(e) => showContent(i)} sx={{ width: "100%" }}>
                           {(checkOnShow(i) === false) ? 
-                          <img src = "../image/bee.svg" alt="My Happy SVG" style={{width:"-webkit-fill-available"}}/>
+                          <img src = "../public/bee.svg" alt="My Happy SVG" style={{width:"-webkit-fill-available"}}/>
                           :<Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll", maxHeight: "70px"}}>{data.content}</Typography>}
                         </CardContent>
                         {(checkOnShow(i) === false) ? "" : <CardActions>
