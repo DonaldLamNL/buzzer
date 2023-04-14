@@ -31,6 +31,18 @@ export default function Hive() {
     height: "100vh",
     width: "100%",
   };
+  const [userInfo, setInfo] = useState({});
+  const inputCellCardRef = useRef(null);
+  const [cardWidth, setWidth] = useState(0);
+  const [cardHeight, setHeight] = useState(0);
+  const [dumyValue, setDum] = useState("");
+  const [value, setValue] = useState("");
+  const [showList, setShowList] = useState([]);
+  const [datalist, setDataList] = useState([{cellid:0,content:"There are no cell or have bug...",like:69,username:":(",_id:"6434e5f09bfd6db1f747169c"}]);
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
   const postCell = async (content) => {
     if(!userInfo.posted){
@@ -44,12 +56,8 @@ export default function Hive() {
         const response = await fetch(`${serverPath}/hive/post?content=${content}&userid=${Cookies.get("BuzzerUser")}`, {
           method: "POST",
         });
-  
         const responseData = await response.json();
-        console.log(responseData.message);
         if (responseData) {
-          // PubSub.publish("newBuzzPosted");
-          // navigate(`/buzz/${responseData.buzzid}`);
           getHive();
           getUserInfo()
         }
@@ -85,12 +93,9 @@ export default function Hive() {
       fetch(`${serverPath}/hive/`)
         .then((response) =>
           response.json()
-          // console.log(response.json())
         )
         .then((responseData) => {
-          // setBuzzList(responseData);
           setDataList(responseData)
-          console.log(responseData)
         })
         .catch((error) => {
           console.log(error);
@@ -118,32 +123,11 @@ export default function Hive() {
     }
   }
 
-  // const [datalist, setList] = useState("");
-  // const listItem = datalist.map((d) => <HexGridItem>{d.context}</HexGridItem>);
-  const [userInfo, setInfo] = useState({});
-
-
-  const inputCellCardRef = useRef(null);
-  const [cardWidth, setWidth] = useState(0);
-  const [cardHeight, setHeight] = useState(0);
-  const [dumyValue, setDum] = useState("");
-  const [value, setValue] = useState("");
-  const [showList, setShowList] = useState([]);
-  const [datalist, setDataList] = useState([{cellid:0,content:"There are no cell or have bug...",like:69,username:":(",_id:"6434e5f09bfd6db1f747169c"}]);
-  const [windowSize, setWindowSize] = useState([
-    window.innerWidth,
-    window.innerHeight,
-  ]);
-
   const handleChange = e => {
-    console.log(`typed => ${e.target.value}`);
     setValue(e.target.value);
-    // setList(temp);
-    // const listItem = datalist.map((d) => <HexGridItem>{d.context}</HexGridItem>);
   };
 
   const checkOnShow = (prop) => {
-    // console.log("new return");
     for (let i = 0; i < showList.length; i++) {
       if (prop == showList[i]) return true;
     }
@@ -218,7 +202,7 @@ export default function Hive() {
                       <Card className="hex-grid__content__inside" key={i}>
                         {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={(data.username != undefined)?data.username:data.userid} onClick={(e) => showContent(i)} />}
                         <CardContent style={{ padding: "0" }} onClick={(e) => showContent(i)} sx={{ width: "100%" }}>
-                          {(checkOnShow(i) === false) ? <AccountCircleIcon sx={{ fontSize: 130 }} /> : <Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll" }}>{data.content}</Typography>}
+                          {(checkOnShow(i) === false) ? <AccountCircleIcon sx={{ fontSize: 130 }} /> : <Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll", maxHeight: "70px"}}>{data.content}</Typography>}
                         </CardContent>
                         {(checkOnShow(i) === false) ? "" : <CardActions>
                           <Typography>{data.like}</Typography>
