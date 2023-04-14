@@ -33,16 +33,31 @@ export default function Hive() {
   };
   const [userInfo, setInfo] = useState({});
   const inputCellCardRef = useRef(null);
-  const [cardWidth, setWidth] = useState(0);
   const [cardHeight, setHeight] = useState(0);
   const [dumyValue, setDum] = useState("");
   const [value, setValue] = useState("");
+  const [iconDisplay, setIconDisplay] = useState(null);
   const [showList, setShowList] = useState([]);
   const [datalist, setDataList] = useState([{cellid:0,content:"There are no cell or have bug...",like:69,username:":(",_id:"6434e5f09bfd6db1f747169c"}]);
   const [windowSize, setWindowSize] = useState([
     window.innerWidth,
     window.innerHeight,
   ]);
+
+  const getIcon = async (imageName) => {
+    if (imageName) {
+        fetch(`${serverPath}/users/icon/${imageName}`)
+            .then((response) => response.blob())
+            .then((image) => {
+                setIconDisplay(URL.createObjectURL(image));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    } else {
+        setIconDisplay(null);
+    }
+};
 
   const postCell = async (content) => {
     if(!userInfo.posted){
@@ -170,7 +185,6 @@ export default function Hive() {
   }, []);
 
   useLayoutEffect(() => {
-    setWidth(inputCellCardRef.current.offsetWidth);
     setHeight(inputCellCardRef.current.offsetHeight);
   }, []);
 
@@ -202,7 +216,9 @@ export default function Hive() {
                       <Card className="hex-grid__content__inside" key={i}>
                         {(checkOnShow(i) === false) ? "" : <CardHeader titleTypographyProps={{ variant: 'subtitle2', display: 'flex', alignItems: 'center', justifyContent: 'start' }} title={(data.username != undefined)?data.username:data.userid} onClick={(e) => showContent(i)} />}
                         <CardContent style={{ padding: "0" }} onClick={(e) => showContent(i)} sx={{ width: "100%" }}>
-                          {(checkOnShow(i) === false) ? <AccountCircleIcon sx={{ fontSize: 130 }} /> : <Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll", maxHeight: "70px"}}>{data.content}</Typography>}
+                          {(checkOnShow(i) === false) ? 
+                          <img src = "../image/bee.svg" alt="My Happy SVG" style={{width:"-webkit-fill-available"}}/>
+                          :<Typography sx={{ fontSize: "1.5rem", wordWrap: "break-word", lineHeight: "0.95", overflowY: "scroll", maxHeight: "70px"}}>{data.content}</Typography>}
                         </CardContent>
                         {(checkOnShow(i) === false) ? "" : <CardActions>
                           <Typography>{data.like}</Typography>
