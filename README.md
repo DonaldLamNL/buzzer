@@ -18,7 +18,7 @@
 This file is the cliend side of Buzzer. The codes are mainly in the src folder. We used react.js as the tool for the user interface. Documents about the project are in the document folder. 
 
 ## Setup
-Please make sure the server was launched, you can change the server path in ServerPath.jsx in src folder. You can also launch the server in local. Here is the [server]((https://github.com/DonaldLamNL/buzzer/tree/server)) side of this project.
+Please make sure the server was launched, you can change the server path in ServerPath.jsx in src folder. You can also launch the server in local. Here is the [server](https://github.com/DonaldLamNL/buzzer/tree/server) side of this project.
 
 To launch this project in local, install it using `yarn`
 ```bash
