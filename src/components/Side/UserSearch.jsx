@@ -1,9 +1,10 @@
+/*
+Component Name: UserSearch.jsx
+Description: The container of user searching results
+*/
+
 import React, { useContext, useEffect, useState } from "react";
-
-// material-ui
 import { Box, width } from "@mui/system";
-
-// components
 import ProfileCardItem from "../Items/ProfileCardItem";
 import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
@@ -12,6 +13,7 @@ export default function UserSearch(props) {
   const [userList, setUserList] = useState(null);
   let input = props.input;
 
+  // Search for the users based on the input keywords from server
   const searchUser = async () => {
     try {
       fetch(
@@ -42,6 +44,7 @@ export default function UserSearch(props) {
         width: "100%",
       }}
     >
+      {/* display the searching results */}
       {input != "" && (
         <Box
           sx={{
@@ -55,6 +58,8 @@ export default function UserSearch(props) {
           {input.length > 15 ? "..." : ""}'
         </Box>
       )}
+
+      {/* if user input nothing, display the recommendation */}
       {input == "" && (
         <Box
           sx={{

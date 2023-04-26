@@ -1,3 +1,8 @@
+/*
+Component Name: NewEditProfile.jsx
+Description: The user profile interface of a specific user.
+*/
+
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,7 +21,6 @@ import {
 import { Link } from "react-router-dom";
 
 import NewBuzzItem from "../Items/NewBuzzItem";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CheckCircle } from "@mui/icons-material";
@@ -35,6 +39,7 @@ export default function UserProfile() {
     const [iconDisplay, setIconDisplay] = useState(null);
     const [bgImageDisplay, setBgImageDisplay] = useState(null);
 
+    // Follow / unfollow / edit operations
     const handleButton = async () => {
         if (userInfo.isCurrentUser) {
             navigator(`/edit`);
@@ -43,7 +48,9 @@ export default function UserProfile() {
         }
     };
 
+    // Follow / unfollow operations
     const handleFollow = async () => {
+        // Prevent continuous click
         if (isExecuting) {
             return;
         }
@@ -73,6 +80,7 @@ export default function UserProfile() {
         }
     };
 
+    // Get target user information
     const getUserInfo = async () => {
         try {
             const response = await fetch(
@@ -94,6 +102,7 @@ export default function UserProfile() {
         }
     };
 
+    // Get user background image
     const getBgImage = async (imageName) => {
         if (imageName) {
             fetch(`${serverPath}/users/bgimage/${imageName}`)
@@ -109,6 +118,7 @@ export default function UserProfile() {
         }
     };
 
+    // Get user icon
     const getIcon = async (imageName) => {
         if (imageName) {
             fetch(`${serverPath}/users/icon/${imageName}`)
@@ -124,6 +134,7 @@ export default function UserProfile() {
         }
     };
 
+    // Get the buzzes that belong to the specific user
     const getBuzzes = async () => {
         fetch(
             `${serverPath}/buzzes/user?userid=${userid}&currentid=${Cookies.get(
@@ -244,7 +255,6 @@ export default function UserProfile() {
                                         </Box>
 
                                         <Typography margin="20px 0" whiteSpace="pre-wrap">
-                                            {/* {" "} */}
                                             {userInfo.description}{" "}
                                         </Typography>
 

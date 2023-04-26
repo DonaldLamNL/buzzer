@@ -1,11 +1,12 @@
+/*
+Component Name: NewEditProfile.jsx
+Description: The user profile edit interface.
+*/
+
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Button, CssBaseline, Grid, Box, Typography, Container, Stack, IconButton, Tooltip, TextField, } from "@mui/material";
-import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import NewBuzzItem from "../Items/NewBuzzItem";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CheckCircle } from "@mui/icons-material";
 import serverPath from "../../ServerPath";
@@ -74,18 +75,21 @@ export default function NewEditProfile() {
         }
     };
 
+    // Update user background image.
     const handleBgImageUpload = async (e) => {
         const file = e.target.files[0];
         setBgImageDisplay(URL.createObjectURL(file));
         setBgImage(file)
     };
 
+    // Update user icon.
     const handleIconUpdate = async (e) => {
         const file = e.target.files[0];
         setIconDisplay(URL.createObjectURL(file));
         setIcon(file)
     };
 
+    // Update the latest user information
     const handleSave = async () => {
         if (onExecute) {
             return

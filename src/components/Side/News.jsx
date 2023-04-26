@@ -1,3 +1,8 @@
+/*
+Component Name: News.jsx
+Description: The Category UI
+*/
+
 import { Box, Card } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +12,7 @@ import serverPath from "../../ServerPath";
 export default function News() {
   const [categories, setCategories] = useState([]);
 
+  // Get all categories from server
   const getCategories = () => {
     fetch(`${serverPath}/categories`)
       .then((response) => response.json())
@@ -48,9 +54,11 @@ export default function News() {
           Categories
         </h1>
         {categories
-          .sort((a, b) => b.count - a.count) // sort categories by count in descending order
+          // sort categories by count in descending order
+          .sort((a, b) => b.count - a.count)
           .map((c) => {
             return (
+              // navigate to the buzz searching page and search by the specific category
               <Link
                 id={`${c.name}-item`}
                 key={c.name}
@@ -69,6 +77,7 @@ export default function News() {
                   textDecoration: "none",
                   color: "inherit",
                 }}
+                // the style of mouse move in and move out
                 onMouseOver={() => {
                   document.getElementById(
                     `${c.name}-item`
