@@ -15,7 +15,7 @@
 
 
 ## General info
-This file is the server side of Buzzer. The codes are mainly in the src folder. We used Node.js as the tool for the server and Mongo database for the database server. Here is the [client](https://github.com/DonaldLamNL/buzzer/tree/frontEnd) side of this project.
+This file is the server side of Buzzer. The codes are mainly in the routes folder. We used Node.js as the tool for the server and Mongo database for the database server. Here is the [client](https://github.com/DonaldLamNL/buzzer/tree/frontEnd) side of this project.
 
 ## Setup
 Clone the project from github
