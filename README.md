@@ -1,7 +1,7 @@
 # Buzzer
 - CSCI3100 Software Enigeering Group Project in the 2022-2023 2nd semester
-- Project Group: A1
 - Project Name: Buzzer
+- Project Group: A1
 - Author:
     - LAM Man Ho <1155159171@link.cuhk.edu.hk>
     - MA Yu Ying <1155157879@link.cuhk.edu.hk>
@@ -13,11 +13,14 @@
 
     With Buzzer, users can create profiles, post updates, share photos and videos, follow other users, and engage in conversations on a variety of topics. The platform features a powerful search function that allows users to discover new content and find others with similar interests.
 
+
 ## General info
 This file is the cliend side of Buzzer. The codes are mainly in the src folder. We used react.js as the tool for the user interface. Documents about the project are in the document folder. 
 
 ## Setup
-To launch this project, install it using `yarn`
+Please make sure the server was launched, you can change the server path in ServerPath.jsx in src folder. You can also launch the server in local. Here is the [server]((https://github.com/DonaldLamNL/buzzer/tree/server)) side of this project.
+
+To launch this project in local, install it using `yarn`
 ```bash
 $ yarn
 $ yarn dev
