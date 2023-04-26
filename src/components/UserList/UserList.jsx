@@ -1,3 +1,9 @@
+/*
+Component Name: UserList.jsx
+Description: The container for the follower and following interface.
+References: https://mui.com/material-ui/react-tabs/
+*/
+
 import React, { useState, useEffect } from 'react';
 import { IconButton, TextField, Box, AppBar, Tabs, Tab, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom';
@@ -7,7 +13,6 @@ import Follower from './Follower'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
     return (
         <Box
             role="tabpanel"

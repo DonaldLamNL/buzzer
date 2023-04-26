@@ -1,3 +1,8 @@
+/*
+Component Name: Nav.jsx
+Description: The global navigation.
+*/
+
 import { Box, Card, IconButton, Stack, Button } from "@mui/material";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FaceIcon from "@mui/icons-material/Face";

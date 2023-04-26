@@ -1,3 +1,8 @@
+/*
+Component Name: UserPreview.jsx
+Description: The ui for the user card in UserList container, including UserManagement, Follower and Following components.
+*/
+
 import { CheckCircle, Padding } from "@mui/icons-material";
 import { Avatar, Typography, Button } from "@mui/material";
 import { Box } from "@mui/system";
@@ -18,19 +23,22 @@ export default function UserPreview(props) {
     isVerify,
     deletedUser,
   } = props;
-  const [isExecuting, setIsExecuting] = useState(false);
+  const [isExecuting, setIsExecuting] = useState(false);  // Prevent continuous click
   const [isFollow, setIsFollow] = useState(null);
   const [isUserVerified, setIsUserVerified] = useState(null);
 
+  // Users follow/unfollow operation.
   const handleFollowButton = () => {
     handleFollow();
   };
 
+  // Navigate to the user profile page.
   const jumpToUserprofile = () => {
     navigate(`/user/${userid}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Admin deletes user operation.
   const deleteUserComfirm = async (e) => {
     const result = window.confirm(`Are you sure to delete @${userid}?`);
     if (result) {
@@ -62,6 +70,7 @@ export default function UserPreview(props) {
     }
   };
 
+  // Admin verifies user operation.
   const verifyUserComfirm = async (e) => {
     let result = null;
     if (isUserVerified) {
@@ -100,6 +109,7 @@ export default function UserPreview(props) {
     }
   };
 
+  // Send POST request to server to change the following state.
   const handleFollow = async () => {
     if (isExecuting) {
       return;
@@ -135,17 +145,17 @@ export default function UserPreview(props) {
 
   return (
     <Box>
+      {/* Container */}
       <Box
         sx={{
           display: "flex",
           width: "100%",
           position: "relative",
           justifyContent: "space-between",
-          // bgcolor: '#bfa',
           height: '80px'
         }}
       >
-        {/* Icon */}
+        {/* User Icon */}
         <Box
           sx={{ width: "70px", cursor: "pointer" }}
           onClick={jumpToUserprofile}
@@ -153,7 +163,7 @@ export default function UserPreview(props) {
           <BuzzIcon userid={userid} username={username} icon={icon} />
         </Box>
 
-        {/* Info */}
+        {/* User description */}
         <Box
           sx={{ display: "flex", flexDirection: "column", cursor: "pointer", marginLeft: "40px" }}
           onClick={jumpToUserprofile}
@@ -173,7 +183,7 @@ export default function UserPreview(props) {
           </Box>
         </Box>
 
-        {/* Button */}
+        {/* Buttons */}
         {isDelete ? (
           <Box sx={{ display: "flex" }}>
             <Box

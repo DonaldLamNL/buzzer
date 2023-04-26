@@ -1,3 +1,8 @@
+/*
+Component Name: Following.jsx
+Description: The ui of following list of a specific user.
+*/
+
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import UserPreview from "./UserPreview.jsx";
@@ -8,7 +13,8 @@ export default function Following(props) {
   const { userid } = props;
   const [UserList, setUserList] = useState([]);
 
-  const getFollowers = async () => {
+  // Get the following list from server.
+  const getFollowing = async () => {
     try {
       const response = await fetch(
         `${serverPath}/users/followlist?userid=${userid}&currentid=${Cookies.get(
@@ -23,7 +29,7 @@ export default function Following(props) {
   };
 
   useEffect(() => {
-    getFollowers();
+    getFollowing();
   }, []);
 
   return (

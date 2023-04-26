@@ -1,5 +1,10 @@
+/*
+Component Name: BuzzPreview.jsx
+Description: The ui for each buzz preview item.
+*/
+
 import { CheckCircle } from "@mui/icons-material";
-import { Avatar, Typography, Button, Card, Grid } from "@mui/material";
+import { Typography, Button, Card, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import Cookies from "js-cookie";
 import React from "react";
@@ -7,14 +12,15 @@ import serverPath from "../../ServerPath";
 import BuzzIcon from "../Items/BuzzIcon";
 
 export default function BuzzPreview(props) {
-  const { userid, username, icon, buzzid, content, isVerify, deletedBuzz } =
-    props;
+  const { userid, username, icon, buzzid, content, isVerify, deletedBuzz } = props;
 
+  // Handle delete buzz.
   const deleteBuzzConfirm = async (e) => {
     const result = window.confirm(
       `Are you sure to delete the post @${buzzid}?`
     );
     if (result) {
+      // Send POST request to server for delete buzz.
       try {
         const response = await fetch(`${serverPath}/admin/deletebuzz`, {
           method: "POST",
@@ -26,6 +32,7 @@ export default function BuzzPreview(props) {
 
         const data = await response.json();
 
+        // Call the deletedBuzz from BuzzManagement to re-render the page.
         deletedBuzz(buzzid);
 
         if (data.state) {
@@ -42,7 +49,7 @@ export default function BuzzPreview(props) {
 
   return (
     <>
-      {/* Post Block */}
+      {/* Post Container */}
       <Card
         elevation={5}
         sx={{
@@ -68,6 +75,7 @@ export default function BuzzPreview(props) {
           {/* Content Part */}
           <Grid container item sx={{ flexGrow: 1 }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
+
               {/* Poster Info */}
               <Box sx={{ height: "60px", lineHeight: "60px" }}>
                 <Typography sx={{ fontSize: "18px", display: "inline-block" }}>
@@ -88,8 +96,10 @@ export default function BuzzPreview(props) {
                 </Typography>
               </Box>
 
+              {/* Buzz Content */}
               <Box
                 sx={{ whiteSpace: "pre-wrap", marginBottom: "15px" }}
+                // Replace the @ content by HTML
                 dangerouslySetInnerHTML={{
                   __html: content.replace(
                     /%@(\w+)%/g,
@@ -110,6 +120,7 @@ export default function BuzzPreview(props) {
             right: "10px",
           }}
         >
+          {/* Delete Button */}
           <Button
             variant="contained"
             color="secondary"

@@ -1,6 +1,6 @@
 /*
-  
-
+Component Name: Main.jsx
+Description: The main content container of the webpage.
 */
 
 import React from "react";

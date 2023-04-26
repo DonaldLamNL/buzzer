@@ -1,5 +1,9 @@
+/*
+Component Name: BuzzManagement.jsx
+Description: The container for the admin buzz management interface.
+*/
+
 import { Box } from "@mui/system";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import React, { useEffect, useState } from "react";
 import BuzzPreview from "./BuzzPreview";
 import Cookies from "js-cookie";
@@ -8,10 +12,12 @@ import serverPath from "../../ServerPath";
 export default function BuzzManagement() {
   const [buzzList, setBuzzList] = useState([]);
 
+  // Render the component after a buzz is deleted in BuzzPreview.
   const deletedBuzz = (buzzId) => {
     setBuzzList(buzzList.filter((buzz) => buzz.buzzid !== buzzId));
   };
 
+  // Get the buzz list from server
   const getBuzzList = async () => {
     try {
       fetch(

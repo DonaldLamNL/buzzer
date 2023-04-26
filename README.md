@@ -2,7 +2,7 @@
 - CSCI3100 Software Enigeering Group Project in the 2022-2023 2nd semester
 - Project Name: Buzzer
 - Project Group: A1
-- Author:
+- Authors:
     - LAM Man Ho <1155159171@link.cuhk.edu.hk>
     - MA Yu Ying <1155157879@link.cuhk.edu.hk>
     - CHEUNG Ka Ho <1155158622@link.cuhk.edu.hk>

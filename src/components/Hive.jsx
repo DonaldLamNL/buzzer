@@ -1,3 +1,8 @@
+/*
+Component Name: Hive.jsx
+Description: The hive page
+*/
+
 import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import {
   HexGrid,

@@ -1,7 +1,6 @@
 /*
-  
-
-
+Component Name: App.jsx
+Description: The main component of the whole application.
 */
 
 import { Grid } from "@mui/material";
@@ -14,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import serverPath from "./ServerPath";
 
 export default function App() {
-  const [isLogin, SetIsLogin] = useState(true);
+  const [isLogin, SetIsLogin] = useState(true); // check user login state
 
   // Get the login state from server
   const getLoginState = () => {

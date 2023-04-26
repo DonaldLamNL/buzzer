@@ -1,3 +1,8 @@
+/*
+Component Name: Follower.jsx
+Description: The ui of follower list of a specific user.
+*/
+
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import UserPreview from "./UserPreview.jsx";
@@ -8,6 +13,7 @@ export default function Follower(props) {
   const { userid } = props;
   const [UserList, setUserList] = useState([]);
 
+  // Get the follower list from server.
   const getFollowers = async () => {
     try {
       const response = await fetch(

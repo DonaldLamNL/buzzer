@@ -1,3 +1,8 @@
+/*
+Component Name: UserManagement.jsx
+Description: The container for the admin user management interface.
+*/
+
 import { IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
