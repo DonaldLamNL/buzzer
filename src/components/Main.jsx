@@ -1,10 +1,11 @@
+/*
+  
+
+*/
+
 import React from "react";
 import { useRoutes } from "react-router-dom";
-
-// material-ui
 import { Grid } from "@mui/material";
-
-// components
 import Home from "./Home/Home";
 import BuzzSearch from "./Searching/BuzzSearch";
 import SideContent from "./Side/SideContent";
@@ -15,6 +16,7 @@ import UserProfile from "./User/UserProfile";
 import NewEditProfile from "./User/NewEditProfile";
 import BuzzFollowing from "./BuzzFollowing/BuzzFollowing";
 
+// The router in the Main
 const routerConfig = [
   {
     path: "/home",
@@ -80,7 +82,6 @@ const routerConfig = [
 
 export default function Main() {
   const element = useRoutes(routerConfig);
-
   return (
     <div style={{ width: "100%" }}>
       <Grid container>

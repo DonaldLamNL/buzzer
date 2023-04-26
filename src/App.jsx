@@ -1,21 +1,22 @@
-import { Grid, Fab, MenuItem, Card, Input, Paper } from "@mui/material";
+/*
+  
+
+
+*/
+
+import { Grid } from "@mui/material";
 import { useRoutes } from "react-router-dom";
 import Nav from "./components/Nav";
 import "./index.css";
 import routerConfig from "./router";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-// import * as React from "react";
 import serverPath from "./ServerPath";
-
-// import * as React from "react";
-
-import Slide from "@mui/material/Slide";
-import ChatButton from "./components/ChatButton";
 
 export default function App() {
   const [isLogin, SetIsLogin] = useState(true);
 
+  // Get the login state from server
   const getLoginState = () => {
     try {
       fetch(
@@ -30,6 +31,7 @@ export default function App() {
       console.error(err);
     }
   };
+
   useEffect(() => {
     getLoginState();
   });

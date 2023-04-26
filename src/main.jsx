@@ -7,9 +7,7 @@ import { CssBaseline } from "@mui/material";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <HashRouter>
-    {/* <React.StrictMode> */}
     <CssBaseline />
     <App />
-    {/* </React.StrictMode> */}
   </HashRouter>
 );

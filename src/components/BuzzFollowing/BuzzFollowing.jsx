@@ -9,7 +9,6 @@ import {
 
 // components
 import NewBuzzItem from "../Items/NewBuzzItem";
-// import Post from "./Post";
 import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
 import Post from "../Home/Post";
@@ -54,8 +53,7 @@ export default function BuzzFollowing() {
   }, []);
 
   return (
-    <div>
-      {/* <Post /> */}
+    <Box>
       <Typography align="center" marginTop={"20px"} fontSize={25}>
         Buzzes of Your Following
       </Typography>
@@ -69,8 +67,6 @@ export default function BuzzFollowing() {
         shuffleArray(buzzList).map((post) => (
           <NewBuzzItem key={post.buzzid} {...post} />
         ))}
-
-      {/* <LinearProgress /> */}
-    </div>
+    </Box>
   );
 }

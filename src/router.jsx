@@ -1,3 +1,6 @@
+/*
+  This file is the global control of the router
+*/
 import Main from "./components/Main";
 import Home from "./components/Home/Home";
 import Buzz from "./components/BuzzPage/Buzz";
@@ -7,11 +10,8 @@ import Signup from "./components/User/Signup";
 import ForgotPassword from "./components/User/ForgotPassword";
 import ResetPassword from "./components/User/ResetPassword";
 import UserProfile from "./components/User/UserProfile";
-import EditProfile from "./components/User/EditProfile";
 import Hive from "./components/Hive";
 import { Navigate } from "react-router-dom";
-import Following from "./components/UserList/Following";
-import BuzzFollowing from "./components/BuzzFollowing/BuzzFollowing";
 
 const routerConfig = (isLogin) => {
   return [
@@ -34,14 +34,9 @@ const routerConfig = (isLogin) => {
         },
       ],
     },
-    // {
-    //   path: "buzzFowllowing",
-    //   element: isLogin ? <BuzzFollowing /> : null,
-    // },
 
     {
       path: "/login",
-      // element: <Login />,
       element: isLogin ? <Navigate to="/home" /> : <Login />,
     },
     {
