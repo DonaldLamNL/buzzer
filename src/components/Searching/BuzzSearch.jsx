@@ -1,10 +1,11 @@
+/*
+Component Name: BuzzSearch.jsx
+Description: The container of buzz searching results
+*/
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-// material-ui
 import { Box, Typography } from "@mui/material";
-
-// components
 import NewBuzzItem from "../Items/NewBuzzItem";
 import Cookies from "js-cookie";
 import serverPath from "../../ServerPath";
@@ -14,6 +15,7 @@ export default function BuzzSearch() {
   const [buzzList, setBuzzList] = useState([]);
   const [isCatSearch, setIsCatSearch] = useState(false);
 
+  // search for the buzzes based on the user input keyword
   const searchBuzz = async () => {
     try {
       fetch(
@@ -33,6 +35,7 @@ export default function BuzzSearch() {
     }
   };
 
+  // get the searching keyword from the path
   useEffect(() => {
     searchBuzz();
     if (search[0] == "*") {
@@ -62,11 +65,13 @@ export default function BuzzSearch() {
           : ` ${search} buzzes ...`}
       </h1>
 
+      {/* If the list is empty, display "No search results found." */}
       {buzzList.length == 0 ? (
         <Typography variant="h6" align="center" mt={2}>
           No search results found.
         </Typography>
       ) : (
+        // else, display buzzes
         <>
           {isCatSearch ? (
             <Box>

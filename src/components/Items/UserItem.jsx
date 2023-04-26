@@ -1,6 +1,4 @@
 import React from 'react'
-
-// material-ui
 import { Avatar, Grid, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import CancelIcon from '@mui/icons-material/Cancel';

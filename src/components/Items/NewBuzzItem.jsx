@@ -1,3 +1,8 @@
+/*
+Component Name: NewBuzzItem.jsx
+Description: The ui of an independent buzz.
+*/
+
 import { ChatBubbleOutlineOutlined, Co2Sharp } from "@mui/icons-material";
 import {
     Avatar,
@@ -50,12 +55,13 @@ export default function NewBuzzItem(props) {
     const [buzzVideo, setBuzzVideo] = useState(null);
     const [isVideoReady, setIsVideoReady] = useState(false);
 
-
+    // navigate to the buzz page
     const toBuzz = () => {
         navigate(`/buzz/${buzzid}`);
         window.scrollTo({ top: 0 });
     };
 
+    // update the like state
     const handleLike = async () => {
         if (isExecuting) {
             return;
@@ -87,6 +93,7 @@ export default function NewBuzzItem(props) {
         }
     };
 
+    // update the like state
     const handleDislike = async () => {
         if (isExecuting) {
             console.log("hi");
@@ -119,17 +126,20 @@ export default function NewBuzzItem(props) {
         }
     };
 
+    // handle the rebuzz operation
     const handleRebuzz = () => {
         PubSub.publish("REBUZZ", buzzid);
         window.scrollTo({ top: 0 });
         navigate("/home");
     };
 
+    // navigate to user profile page
     const jumpToUserprofile = () => {
         navigate(`/user/${userid}`);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+    // get buzz image
     const getImage = async () => {
         if (image) {
             fetch(`${serverPath}/buzzes/image/${image}`)
@@ -143,6 +153,7 @@ export default function NewBuzzItem(props) {
         }
     };
 
+    // get buzz video
     const getVideo = async () => {
         if (video) {
             fetch(`${serverPath}/buzzes/video/${video}`)

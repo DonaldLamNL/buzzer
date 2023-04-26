@@ -1,3 +1,8 @@
+/*
+Component Name: RebuzzContent.jsx
+Description: The ui of rebuzz content in Post interface.
+*/
+
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -12,6 +17,7 @@ export default function RebuzzContent(props) {
   const { buzzid } = props;
   const [rebuzzContent, setRebuzzContent] = useState(null);
 
+  // request for the rebuzz content from server
   const getRebuzzContent = async () => {
     try {
       fetch(
@@ -28,6 +34,7 @@ export default function RebuzzContent(props) {
     }
   };
 
+  // navigate to buzz page
   const jumpToRebuzz = () => {
     window.scrollTo({ top: 0 });
     navigate(`/buzz/${buzzid}`);
